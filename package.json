@@ -1,0 +1,28 @@
+{
+  "name": "calculator",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "http://ahfarmer.github.io/calculator",
+  "devDependencies": {
+    "gh-pages": "^1.1.0",
+    "react-scripts": "^1.0.17"
+  },
+  "dependencies": {
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "big.js": "^5.0.3",
+    "css-loader": "^0.28.9",
+    "github-fork-ribbon-css": "^0.2.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "dev": "webpack -d --watch",
+    "build": "webpack -p"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/react-scripts/config/eslint.js"
+  }
+}
