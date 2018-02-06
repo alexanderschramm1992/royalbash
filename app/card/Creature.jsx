@@ -8,11 +8,12 @@ class Creature extends React.Component {
 
         super(props);
         this.state = {
-            id: "Creature Card",
-            name: "Lorem Ipsum Lorem Ipsum Lorem Ipsum",
-            image: "",
-            type: "Creature - Lorem Ipsum Lorem",
-            cost: "99",
+            id: props.id,
+            name: props.name,
+            image: props.image,
+            type: props.type,
+            subType: props.subType,
+            cost: props.cost,
             strength: "99",
             health: "99"
         };

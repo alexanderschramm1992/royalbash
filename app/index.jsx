@@ -6,7 +6,15 @@ import Creature from "./card/Creature.jsx";
 
 class App extends React.Component {
     render () {
-        return <Creature />;
+        return <Creature
+            id = "Creature Card"
+            name = "Lorem Ipsum Lorem Ipsum Lorem Ipsum"
+            image = ""
+            type = "Creature - Lorem Ipsum Lorem"
+            cost = "99"
+            strength = "99"
+            health = "99"
+        />;
     }
 }
 
