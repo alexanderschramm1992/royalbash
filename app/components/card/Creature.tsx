@@ -1,11 +1,24 @@
 import * as React from "react";
 
 import "./Creature.css";
-import CreatureModel from "../../model/CreatureModel";
 
-class Creature extends React.Component<CreatureModel, {}> {
+export interface CreatureModel {
 
-    render() {
+    id: string;
+    name: string;
+    image: string;
+    type: string;
+    subType: string;
+    text: string;
+    lore: string;
+    cost: number;
+    strength: number;
+    health: number
+}
+
+export class Creature extends React.Component<CreatureModel, {}> {
+
+    render(): any {
 
         return (
             <div className="creature">

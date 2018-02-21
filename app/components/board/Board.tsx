@@ -1,16 +1,16 @@
-import React from "react";
+import * as React from "react";
 
 import "./Board.css";
 
-class Board extends React.Component {
+class Board extends React.Component<{}, {}> {
 
-    constructor(props) {
+    constructor(props: any) {
 
         super(props);
         this.state = {};
     }
 
-    render() {
+    render(): any {
 
         return (
             <div className="board">
