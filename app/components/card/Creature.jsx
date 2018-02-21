@@ -8,14 +8,16 @@ class Creature extends React.Component {
 
         super(props);
         this.state = {
-            id: props.id,
-            name: props.name,
-            image: props.image,
-            type: props.type,
-            subType: props.subType,
-            cost: props.cost,
-            strength: "99",
-            health: "99"
+            id: props.creatureModel.id,
+            name: props.creatureModel.name,
+            image: props.creatureModel.image,
+            type: props.creatureModel.type,
+            subType: props.creatureModel.subType,
+            text: props.creatureModel.text,
+            lore: props.creatureModel.lore,
+            cost: props.creatureModel.cost,
+            strength: props.screatureModel.trength,
+            health: props.creatureModel.health
         };
     }
 
@@ -32,8 +34,8 @@ class Creature extends React.Component {
                 </div>
                 <div className="type">{this.state.type}</div>
                 <div className="text-wrapper">
-                    <div className="text">N/A</div>
-                    <div className="lore">N/A</div>
+                    <div className="text">{this.state.text}</div>
+                    <div className="lore">{this.state.lore}</div>
                 </div>
                 <div className="foot-wrapper">
                     <div className="strength">{this.state.strength}</div>

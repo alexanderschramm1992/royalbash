@@ -25,7 +25,7 @@ public class PlayerInstanceCanDrawAnotherCardChecker {
 
             throw new GameRuleViolationException(
                     String.format(
-                            "PlayerInstance %s cannot draw another card (%d hand cards)",
+                            "PlayerInstance %s cannot draw another card (%d hand cardModels)",
                             playerInstance.getId(),
                             playerInstance.getHandCardInstanceList().size()
                     )
