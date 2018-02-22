@@ -2,7 +2,7 @@ import * as React from "react";
 
 import "./Creature.css";
 
-export interface CreatureModelWrapper {
+export interface CreatureProps {
 
     creatureModel: CreatureModel;
     readonly scale?: number;
@@ -19,15 +19,32 @@ export interface CreatureModel {
     readonly lore?: string;
     readonly cost: number;
     strength: number;
-    health: number
+    health: number;
 }
 
-export class Creature extends React.Component<CreatureModelWrapper, {}> {
+interface CreatureState {
+
+    readonly scale: number;
+}
+
+export class Creature extends React.Component<CreatureProps, CreatureState> {
+
+    constructor(props: CreatureProps) {
+        super(props);
+
+        this.state = {
+            scale: props.scale ? props.scale : 1
+        };
+    }
 
     render(): any {
 
+        let style = {
+          fontSize: this.state.scale * 10
+        };
+
         return (
-            <div className="creature border-large" style={font-size: (this.props.scale * 10)}>
+            <div className="creature border-large" style={style}>
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">

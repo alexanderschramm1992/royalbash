@@ -3,12 +3,12 @@ import * as React from "react";
 import "./CardContainer.css";
 import {Creature, CreatureModel} from "../card/Creature";
 
-export interface CardContainerModel {
+export interface CardContainerProps {
 
     cards: CreatureModel[]
 }
 
-export class CardContainer extends React.Component<CardContainerModel, {}> {
+export class CardContainer extends React.Component<CardContainerProps, {}> {
 
     render(): any {
 
