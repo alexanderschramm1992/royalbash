@@ -1,6 +1,19 @@
 import * as React from "react";
 
 import "./Board.css";
+import CardContainer from "./CardContainer";
+import {CreatureModel} from "../card/Creature";
+
+const card: CreatureModel = {
+    id: "1",
+    name: "Lorem Ipsum",
+    image: "N/A",
+    type: "Creature",
+    text: "N/A",
+    cost: 99,
+    strength: 99,
+    health: 99
+};
 
 class Board extends React.Component<{}, {}> {
 
@@ -18,43 +31,16 @@ class Board extends React.Component<{}, {}> {
                     <div className="avatar-area">
                     </div>
                     <div className="hand-area">
-                        <div className="card-placeholder card-placeholder-0">
-                        </div>
-                        <div className="card-placeholder card-placeholder-1">
-                        </div>
-                        <div className="card-placeholder card-placeholder-2">
-                        </div>
-                        <div className="card-placeholder card-placeholder-3">
-                        </div>
-                        <div className="card-placeholder card-placeholder-4">
-                        </div>
+                        <CardContainer cards = {[card]} />
                     </div>
                     <div className="deck-area">
                     </div>
                     <div className="play-area">
                         <div className="upper-row">
-                            <div className="card-placeholder card-placeholder-0">
-                            </div>
-                            <div className="card-placeholder card-placeholder-1">
-                            </div>
-                            <div className="card-placeholder card-placeholder-2">
-                            </div>
-                            <div className="card-placeholder card-placeholder-3">
-                            </div>
-                            <div className="card-placeholder card-placeholder-4">
-                            </div>
+                            <CardContainer cards = {[card]} />
                         </div>
                         <div className="lower-row">
-                            <div className="card-placeholder card-placeholder-5">
-                            </div>
-                            <div className="card-placeholder card-placeholder-6">
-                            </div>
-                            <div className="card-placeholder card-placeholder-7">
-                            </div>
-                            <div className="card-placeholder card-placeholder-8">
-                            </div>
-                            <div className="card-placeholder card-placeholder-9">
-                            </div>
+                            <CardContainer cards = {[]} />
                         </div>
                     </div>
                     <div className="graveyard-area">
@@ -64,16 +50,7 @@ class Board extends React.Component<{}, {}> {
                     <div className="avatar-area">
                     </div>
                     <div className="hand-area">
-                        <div className="card-placeholder card-placeholder-0">
-                        </div>
-                        <div className="card-placeholder card-placeholder-1">
-                        </div>
-                        <div className="card-placeholder card-placeholder-2">
-                        </div>
-                        <div className="card-placeholder card-placeholder-3">
-                        </div>
-                        <div className="card-placeholder card-placeholder-4">
-                        </div>
+                        <CardContainer cards = {[]} />
                     </div>
                     <div className="deck-area">
                     </div>
