@@ -1,5 +1,4 @@
 .creature {
-    font-size: 10px;
     height: 40em;
     width: 25em;
     background: lightgray;
@@ -100,34 +99,4 @@
     background: antiquewhite;
 }
 
-.font-size-medium {
-    height: 100%;
-    width: 100%;
-    font-size: 1.6em;
-}
 
-.font-size-large {
-    height: 100%;
-    width: 100%;
-    font-size: 1.8em;
-}
-
-.font-size-extra-large {
-    height: 100%;
-    width: 100%;
-    font-size: 2.4em;
-}
-
-.border-large {
-    border: 0.5em solid black;
-}
-
-.border-small {
-    border: 0.2em solid black;
-}
-
-.center-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}

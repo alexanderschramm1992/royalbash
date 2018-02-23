@@ -1,0 +1,22 @@
+.card-container {
+    height: 42em;
+    width: 135em;
+    padding: 1em 0 0 1em;
+    border-radius: 1em;
+}
+
+.card-container .card-placeholder {
+    height: 40em;
+    width: 25em;
+    float: left;
+    margin-right: 1em;
+    background: lightgray;
+    border-radius: 1em;
+    position: relative;
+}
+
+.card-container .card-placeholder > div {
+    top: -0.5em;
+    left: -0.5em;
+    position: absolute;
+}

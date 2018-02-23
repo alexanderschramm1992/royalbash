@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import "./Creature.css";
+import "./../common.css";
 
 export interface CreatureProps {
 
@@ -22,29 +23,16 @@ export interface CreatureModel {
     health: number;
 }
 
-interface CreatureState {
-
-    readonly scale: number;
-}
-
-export class Creature extends React.Component<CreatureProps, CreatureState> {
-
-    constructor(props: CreatureProps) {
-        super(props);
-
-        this.state = {
-            scale: props.scale ? props.scale : 1
-        };
-    }
+export class Creature extends React.Component<CreatureProps, {}> {
 
     render(): any {
 
         let style = {
-          fontSize: this.state.scale * 10
+            fontSize: this.props.scale ? (this.props.scale * 10) + "px" : null
         };
 
         return (
-            <div className="creature border-large" style={style}>
+            <div className="creature border-large" style={this.props.scale ? style : null}>
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">
