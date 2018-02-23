@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import "./Creature.css";
-import "./../common.css";
+import "./../../common.css";
 
 export interface CreatureProps {
 

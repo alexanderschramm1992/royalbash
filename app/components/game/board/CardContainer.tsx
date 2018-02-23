@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import "./CardContainer.css";
-import "./../common.css";
+import "./../../common.css";
 
 import {Creature, CreatureModel} from "../card/Creature";
 
