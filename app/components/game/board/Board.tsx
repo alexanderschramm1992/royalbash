@@ -50,7 +50,7 @@ export class Board extends React.Component<{}, BoardState> {
 
         return (
             <div className="board" style = {style}>
-                <div className="board-head">
+                <div className="board-north">
                     <Slider
                         rangeMin={0.1}
                         rangeMax={1.5}
@@ -60,32 +60,40 @@ export class Board extends React.Component<{}, BoardState> {
                         label="Scaling"
                     />
                 </div>
-                <div className="board-side board-side-top">
-                    <div className="avatar-area">
+                <div className="board-center">
+                    <div className="board-side board-side-top">
+                        <div className="avatar-area">
+                        </div>
+                        <div className="hand-area">
+                            <CardContainer cards = {[card]} scale = {this.state.scale}/>
+                        </div>
+                        <div className="deck-area">
+                        </div>
+                        <div className="play-area">
+                            <CardContainer cards = {[card]} scale = {this.state.scale}/>
+                        </div>
+                        <div className="graveyard-area">
+                        </div>
                     </div>
-                    <div className="hand-area">
-                        <CardContainer cards = {[card]} scale = {this.state.scale}/>
-                    </div>
-                    <div className="deck-area">
-                    </div>
-                    <div className="play-area">
-                        <CardContainer cards = {[card]} scale = {this.state.scale}/>
-                    </div>
-                    <div className="graveyard-area">
+                    <div className="board-side board-side-bottom">
+                        <div className="avatar-area">
+                        </div>
+                        <div className="hand-area">
+                            <CardContainer cards = {[card]} scale = {this.state.scale}/>
+                        </div>
+                        <div className="deck-area">
+                        </div>
+                        <div className="play-area">
+                            <CardContainer cards = {[card]} scale = {this.state.scale}/>
+                        </div>
+                        <div className="graveyard-area">
+                        </div>
                     </div>
                 </div>
-                <div className="board-side board-side-bottom">
-                    <div className="avatar-area">
+                <div className="board-east">
+                    <div className="card-preview-area">
                     </div>
-                    <div className="hand-area">
-                        <CardContainer cards = {[card]} scale = {this.state.scale}/>
-                    </div>
-                    <div className="deck-area">
-                    </div>
-                    <div className="play-area">
-                        <CardContainer cards = {[card]} scale = {this.state.scale}/>
-                    </div>
-                    <div className="graveyard-area">
+                    <div className="log-area">
                     </div>
                 </div>
             </div>
