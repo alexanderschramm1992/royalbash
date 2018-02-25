@@ -16,6 +16,10 @@ public class CreatureEntity implements CardEntity {
     private UUID id;
     private String name;
     private int cost;
+    private String text;
+    private String lore;
+    private int strength;
+    private int health;
 
     @Override
     public InstanceType getCardType() {
@@ -29,6 +33,21 @@ public class CreatureEntity implements CardEntity {
                 .id(creature.getId())
                 .name(creature.getName())
                 .cost(creature.getCost())
+                .text(creature.getText())
+                .lore(creature.getLore())
+                .strength(creature.getStrength())
+                .health(creature.getHealth())
+                .build();
+    }
+
+    public static Creature fromEntity(CreatureEntity creatureEntity) {
+
+        return Creature.builder()
+                .id(creatureEntity.getId())
+                .name(creatureEntity.getName())
+                .cost(creatureEntity.getCost())
+                .strength(creatureEntity.getStrength())
+                .health(creatureEntity.getHealth())
                 .build();
     }
 }

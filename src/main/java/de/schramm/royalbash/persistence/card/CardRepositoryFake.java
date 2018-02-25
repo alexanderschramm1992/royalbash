@@ -5,16 +5,29 @@ import de.schramm.royalbash.model.InstanceType;
 import de.schramm.royalbash.model.card.Card;
 import de.schramm.royalbash.model.card.Creature;
 import de.schramm.royalbash.model.card.Weapon;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class CardRepositoryFake implements CardRepository {
 
-    private Map<UUID, CardEntity> cardEntityMap = new HashMap<>();
+    private CreatureRepository creatureRepository;
+    private WeaponRepository weaponRepository;
+
+    @Autowired
+    public CardRepositoryFake(
+            CreatureRepository creatureRepository,
+            WeaponRepository weaponRepository
+    ) {
+
+        this.creatureRepository = creatureRepository;
+        this.weaponRepository = weaponRepository;
+    }
 
     @PostConstruct
     private void init() {
@@ -25,57 +38,48 @@ public class CardRepositoryFake implements CardRepository {
     @Override
     public Set<UUID> findAllIds() {
 
-        return cardEntityMap.keySet();
+        return Stream.of(
+                creatureRepository.findAllIds(),
+                weaponRepository.findAllIds()
+        )
+        .flatMap(Collection::stream)
+        .collect(Collectors.toSet());
     }
 
     @Override
     public Set<Card> findAll() {
 
-        return cardEntityMap.keySet().stream()
-                .map(this::find)
-                .collect(Collectors.toSet());
+        return Stream.of(
+                creatureRepository.findAll(),
+                weaponRepository.findAll()
+        )
+        .flatMap(Collection::stream)
+        .collect(Collectors.toSet());
     }
 
     @Override
     public Card find(UUID id) {
 
-        CardEntity cardEntity = cardEntityMap.get(id);
-
-        if(cardEntity != null) {
-
-            if(cardEntity.getCardType() == InstanceType.Creature) {
-
-                CreatureEntity creatureEntity = (CreatureEntity) cardEntity;
-
-                return Creature.builder()
-                        .id(creatureEntity.getId())
-                        .name(creatureEntity.getName())
-                        .cost(creatureEntity.getCost())
-                        .build();
-            } else if(cardEntity.getCardType() == InstanceType.Weapon) {
-
-                WeaponEntity weaponEntity = (WeaponEntity) cardEntity;
-
-                return Weapon.builder()
-                        .id(weaponEntity.getId())
-                        .name(weaponEntity.getName())
-                        .cost(weaponEntity.getCost())
-                        .build();
-            } else {
-
-                return null;
-            }
-
-        } else {
-
-            return null;
-        }
+        return Stream.of(
+                creatureRepository.find(id),
+                weaponRepository.find(id)
+        )
+        .filter(Objects::nonNull)
+        .findFirst().orElse(null);
     }
 
     @Override
     public void saveAll(Set<Card> cardSet) {
 
-        cardSet.forEach(this::save);
+        cardSet.stream()
+                .filter(card -> card.getInstanceType() == InstanceType.Creature)
+                .map(card -> (Creature) card)
+                .forEach(creature -> creatureRepository.save(creature));
+
+        cardSet.stream()
+                .filter(card -> card.getInstanceType() == InstanceType.Weapon)
+                .map(card -> (Weapon) card)
+                .forEach(weapon -> weaponRepository.save(weapon));
     }
 
     @Override
@@ -83,10 +87,10 @@ public class CardRepositoryFake implements CardRepository {
 
         if(card.getInstanceType() == InstanceType.Creature) {
 
-            cardEntityMap.put(card.getId(), CreatureEntity.toEntity((Creature) card));
+            creatureRepository.save((Creature) card);
         } else if(card.getInstanceType() == InstanceType.Weapon) {
 
-            cardEntityMap.put(card.getId(), WeaponEntity.toEntity((Weapon) card));
+            weaponRepository.save((Weapon) card);
         }
     }
 

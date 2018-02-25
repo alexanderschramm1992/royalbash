@@ -11,11 +11,13 @@ import java.util.UUID;
 @Builder
 public class WeaponEntity implements CardEntity{
 
-    private static final InstanceType INSTANCE_TYPE = InstanceType.Creature;
+    private static final InstanceType INSTANCE_TYPE = InstanceType.Weapon;
 
     private UUID id;
     private String name;
     private int cost;
+    private int strength;
+    private int health;
 
     @Override
     public InstanceType getCardType() {
@@ -29,6 +31,17 @@ public class WeaponEntity implements CardEntity{
                 .id(weapon.getId())
                 .name(weapon.getName())
                 .cost(weapon.getCost())
+                .build();
+    }
+
+    public static Weapon fromEntity(WeaponEntity weaponEntity) {
+
+        return Weapon.builder()
+                .id(weaponEntity.id)
+                .name(weaponEntity.name)
+                .cost(weaponEntity.cost)
+                .strength(weaponEntity.strength)
+                .health(weaponEntity.health)
                 .build();
     }
 }

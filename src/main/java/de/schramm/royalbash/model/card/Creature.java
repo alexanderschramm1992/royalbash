@@ -16,6 +16,8 @@ public class Creature implements Card {
     private String name;
     private InstanceType instanceType = InstanceType.Creature;
     private int cost;
+    private String text;
+    private String lore;
     private int strength;
     private int health;
 
@@ -27,6 +29,8 @@ public class Creature implements Card {
                 .name(name)
                 .cost(cost)
                 .currentCost(cost)
+                .text(text)
+                .lore(lore)
                 .strength(strength)
                 .health(health)
                 .currentStrength(strength)

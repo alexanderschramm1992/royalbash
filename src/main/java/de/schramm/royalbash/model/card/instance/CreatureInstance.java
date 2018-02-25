@@ -18,6 +18,8 @@ public class CreatureInstance implements AttackableCanAttack, CanEquip, CardInst
     private final String name;
 
     private final int cost;
+    private final String text;
+    private final String lore;
     private final int strength;
     private final int health;
 
