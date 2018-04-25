@@ -2,8 +2,8 @@ package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.PlayerRequest;
 import de.schramm.royalbash.controller.responsemodel.PlayerExt;
-import de.schramm.royalbash.model.player.Player;
-import de.schramm.royalbash.persistence.player.PlayerRepository;
+import de.schramm.royalbash.model.player.Account;
+import de.schramm.royalbash.persistence.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +17,11 @@ import java.util.UUID;
 @RestController
 public class AccountController {
 
-    private final PlayerRepository playerRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public AccountController(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
+    public AccountController(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
     }
 
     @RequestMapping(
@@ -33,15 +33,15 @@ public class AccountController {
             @RequestBody PlayerRequest playerRequest
         ) {
 
-        Player player = playerRepository.findByCredentials(
+        Account account = accountRepository.findByCredentials(
                 playerRequest.getName(),
                 playerRequest.getEmail(),
                 playerRequest.getPasswordHash()
         );
 
-        if(player != null) {
+        if(account != null) {
 
-            return ResponseEntity.ok(PlayerExt.fromPlayer(player));
+            return ResponseEntity.ok(PlayerExt.fromPlayer(account));
         } else {
 
             return ResponseEntity.badRequest().body(PlayerExt.builder().build());
@@ -57,23 +57,23 @@ public class AccountController {
             @RequestBody PlayerRequest playerRequest
     ) {
 
-        Player playerByName = playerRepository.findByName(playerRequest.getName());
+        Account accountByName = accountRepository.findByName(playerRequest.getName());
 
-        Player playerByEmail = playerRepository.findByEmail(playerRequest.getEmail());
+        Account accountByEmail = accountRepository.findByEmail(playerRequest.getEmail());
 
-        if(playerByName != null || playerByEmail != null) {
+        if(accountByName != null || accountByEmail != null) {
 
             return ResponseEntity.badRequest().build();
         } else {
 
-            Player player = Player.builder()
+            Account account = Account.builder()
                     .id(UUID.randomUUID())
                     .name(playerRequest.getName())
                     .email(playerRequest.getEmail())
                     .passwordHash(playerRequest.getPasswordHash())
                     .build();
 
-            playerRepository.save(player);
+            accountRepository.save(account);
 
             return ResponseEntity.ok().build();
         }

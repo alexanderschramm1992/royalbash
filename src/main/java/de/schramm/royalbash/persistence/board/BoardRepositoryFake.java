@@ -3,7 +3,7 @@ package de.schramm.royalbash.persistence.board;
 import de.schramm.royalbash.model.Board;
 import de.schramm.royalbash.persistence.card.instance.CardInstanceRepository;
 import de.schramm.royalbash.persistence.deck.instance.DeckInstanceRepository;
-import de.schramm.royalbash.persistence.player.instance.PlayerInstanceRepository;
+import de.schramm.royalbash.persistence.player.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ public class BoardRepositoryFake implements BoardRepository {
 
     private final CardInstanceRepository cardInstanceRepository;
     private final DeckInstanceRepository deckInstanceRepository;
-    private final PlayerInstanceRepository playerInstanceRepository;
+    private final PlayerRepository playerRepository;
 
     private Map<UUID, BoardEntity> boardEntityMap = new HashMap<>();
 
@@ -25,11 +25,11 @@ public class BoardRepositoryFake implements BoardRepository {
     public BoardRepositoryFake(
             CardInstanceRepository cardInstanceRepository,
             DeckInstanceRepository deckInstanceRepository,
-            PlayerInstanceRepository playerInstanceRepository
+            PlayerRepository playerRepository
     ) {
         this.cardInstanceRepository = cardInstanceRepository;
         this.deckInstanceRepository = deckInstanceRepository;
-        this.playerInstanceRepository = playerInstanceRepository;
+        this.playerRepository = playerRepository;
     }
 
     @Override
@@ -42,8 +42,8 @@ public class BoardRepositoryFake implements BoardRepository {
             return Board.builder()
                     .id(boardEntity.getId())
                     .turn(boardEntity.getTurn())
-                    .playerBlueInstance(playerInstanceRepository.find(boardEntity.getPlayerBlueInstance()))
-                    .playerRedInstance(playerInstanceRepository.find(boardEntity.getPlayerRedInstance()))
+                    .playerBlueInstance(playerRepository.find(boardEntity.getPlayerBlueInstance()))
+                    .playerRedInstance(playerRepository.find(boardEntity.getPlayerRedInstance()))
                     .playerBlueDeckInstance(deckInstanceRepository.find(boardEntity.getPlayerBlueDeckInstance()))
                     .playerRedDeckInstance(deckInstanceRepository.find(boardEntity.getPlayerRedDeckInstance()))
                     .blueInstanceSet(

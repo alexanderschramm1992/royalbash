@@ -1,7 +1,7 @@
 package de.schramm.royalbash.controller.responsemodel;
 
 import de.schramm.royalbash.model.deck.Deck;
-import de.schramm.royalbash.model.player.Player;
+import de.schramm.royalbash.model.player.Account;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;
@@ -19,12 +19,12 @@ public class PlayerExt {
     @Singular("deck")
     private Set<Deck> deckSet;
 
-    public static PlayerExt fromPlayer(Player player) {
+    public static PlayerExt fromPlayer(Account account) {
 
         return PlayerExt.builder()
-                .id(player.getId())
-                .name(player.getName())
-                .deckSet(player.getDeckSet())
+                .id(account.getId())
+                .name(account.getName())
+                .deckSet(account.getDeckSet())
                 .build();
     }
 }

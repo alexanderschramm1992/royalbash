@@ -16,7 +16,7 @@ public class PlayerInstance implements AttackableCanAttack {
     private static final InstanceType instanceType = InstanceType.Player;
 
     private final UUID id;
-    private final Player player;
+    private final Account account;
 
     private int currentHealth;
 
@@ -37,7 +37,7 @@ public class PlayerInstance implements AttackableCanAttack {
     @Override
     public String getName() {
 
-        return player.getName();
+        return account.getName();
     }
 
     @Override
@@ -60,9 +60,7 @@ public class PlayerInstance implements AttackableCanAttack {
 
     public void addCardInstanceToHand(CardInstance cardInstance) {
 
-        List<CardInstance> list = new ArrayList<>();
-
-        list.addAll(handCardInstanceList);
+        List<CardInstance> list = new ArrayList<>(handCardInstanceList);
 
         list.add(cardInstance);
 
@@ -71,9 +69,7 @@ public class PlayerInstance implements AttackableCanAttack {
 
     public void removeCardInstanceFromHand(CardInstance cardInstance) {
 
-        List<CardInstance> list = new ArrayList<>();
-
-        list.addAll(handCardInstanceList);
+        List<CardInstance> list = new ArrayList<>(handCardInstanceList);
 
         list.remove(cardInstance);
 

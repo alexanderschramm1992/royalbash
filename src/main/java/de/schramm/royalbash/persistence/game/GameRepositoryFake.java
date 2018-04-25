@@ -2,7 +2,7 @@ package de.schramm.royalbash.persistence.game;
 
 import de.schramm.royalbash.model.Game;
 import de.schramm.royalbash.persistence.board.BoardRepository;
-import de.schramm.royalbash.persistence.player.PlayerRepository;
+import de.schramm.royalbash.persistence.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ public class GameRepositoryFake implements GameRepository {
     private BoardRepository boardRepository;
 
     @Autowired
-    private PlayerRepository playerRepository;
+    private AccountRepository accountRepository;
 
     private Set<GameEntity> gameSet = new HashSet<>();
 
@@ -35,8 +35,8 @@ public class GameRepositoryFake implements GameRepository {
 
             return Game.builder()
                     .id(gameEntity.getId())
-                    .playerBlue(playerRepository.find(gameEntity.getPlayerBlue()))
-                    .playerRed(playerRepository.find(gameEntity.getPlayerRed()))
+                    .accountBlue(accountRepository.find(gameEntity.getAccountBlue()))
+                    .accountRed(accountRepository.find(gameEntity.getAccountRed()))
                     .board(boardRepository.find(gameEntity.getBoard()))
                     .build();
         } else {

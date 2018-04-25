@@ -2,10 +2,10 @@ package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.PlayerRequest;
 import de.schramm.royalbash.controller.responsemodel.PlayerExt;
-import de.schramm.royalbash.model.player.Player;
+import de.schramm.royalbash.model.player.Account;
 import de.schramm.royalbash.persistence.deck.DeckRepository;
-import de.schramm.royalbash.persistence.player.PlayerRepository;
-import de.schramm.royalbash.persistence.player.PlayerRepositoryFake;
+import de.schramm.royalbash.persistence.account.AccountRepository;
+import de.schramm.royalbash.persistence.account.AccountRepositoryFake;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +15,13 @@ import java.util.UUID;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
 
-public class AccountControllerTest {
+public class AccountEntityControllerTest {
 
     private final String playerName = "testName";
-    private final String playerEmail = "test@mail.com";
+    private final String playerEmail = "text@mail.com";
     private final String playerPasswordHash = "123qwe";
 
-    private final Player player = Player.builder()
+    private final Account account = Account.builder()
             .id(UUID.randomUUID())
             .name(playerName)
             .email(playerEmail)
@@ -30,12 +30,12 @@ public class AccountControllerTest {
 
     private final DeckRepository deckRepository = mock(DeckRepository.class);
 
-    private final PlayerRepository playerRepository = new PlayerRepositoryFake(deckRepository);
+    private final AccountRepository accountRepository = new AccountRepositoryFake(deckRepository);
 
-    private final AccountController accountController = new AccountController(playerRepository);
+    private final AccountController accountController = new AccountController(accountRepository);
 
     {
-        playerRepository.save(player);
+        accountRepository.save(account);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class AccountControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity.getBody(), is(PlayerExt.fromPlayer(player)));
+        Assert.assertThat(playerExtResponseEntity.getBody(), is(PlayerExt.fromPlayer(account)));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class AccountControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity.getBody(), is(PlayerExt.fromPlayer(player)));
+        Assert.assertThat(playerExtResponseEntity.getBody(), is(PlayerExt.fromPlayer(account)));
     }
 
     @Test
@@ -87,7 +87,7 @@ public class AccountControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity.getBody(), is(PlayerExt.fromPlayer(player)));
+        Assert.assertThat(playerExtResponseEntity.getBody(), is(PlayerExt.fromPlayer(account)));
     }
 
     @Test
@@ -131,7 +131,7 @@ public class AccountControllerTest {
 
         // Given
 
-        playerRepository.delete(player.getId());
+        accountRepository.delete(account.getId());
 
         // When
 

@@ -10,7 +10,7 @@ import de.schramm.royalbash.model.deck.DeckInstance;
 import de.schramm.royalbash.model.player.PlayerInstance;
 import de.schramm.royalbash.persistence.board.BoardRepository;
 import de.schramm.royalbash.persistence.deck.instance.DeckInstanceRepository;
-import de.schramm.royalbash.persistence.player.instance.PlayerInstanceRepository;
+import de.schramm.royalbash.persistence.player.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class DrawHandler {
 
     // Repositories
     private final DeckInstanceRepository deckInstanceRepository;
-    private final PlayerInstanceRepository playerInstanceRepository;
+    private final PlayerRepository playerRepository;
     private final BoardRepository boardRepository;
 
     // Rules
@@ -32,14 +32,14 @@ public class DrawHandler {
     @Autowired
     public DrawHandler(
             DeckInstanceRepository deckInstanceRepository,
-            PlayerInstanceRepository playerInstanceRepository,
+            PlayerRepository playerRepository,
             BoardRepository boardRepository,
             RequiredDomainObjectChecker requiredDomainObjectChecker,
             PlayerInstanceCanDrawAnotherCardChecker playerInstanceCanDrawAnotherCardChecker,
             DeckInstanceOwnedByPlayerInstanceChecker deckInstanceOwnedByPlayerInstanceChecker
     ) {
         this.deckInstanceRepository = deckInstanceRepository;
-        this.playerInstanceRepository = playerInstanceRepository;
+        this.playerRepository = playerRepository;
         this.boardRepository = boardRepository;
         this.requiredDomainObjectChecker = requiredDomainObjectChecker;
         this.playerInstanceCanDrawAnotherCardChecker = playerInstanceCanDrawAnotherCardChecker;
@@ -54,7 +54,7 @@ public class DrawHandler {
 
         // Fetch domain objects
 
-        PlayerInstance playerInstance = playerInstanceRepository.find(playerInstanceId);
+        PlayerInstance playerInstance = playerRepository.find(playerInstanceId);
 
         DeckInstance deckInstance = deckInstanceRepository.find(deckInstanceId);
 
@@ -78,7 +78,7 @@ public class DrawHandler {
 
         playerInstance.addCardInstanceToHand(cardInstance);
 
-        playerInstanceRepository.save(playerInstance);
+        playerRepository.save(playerInstance);
 
         deckInstanceRepository.save(deckInstance);
 

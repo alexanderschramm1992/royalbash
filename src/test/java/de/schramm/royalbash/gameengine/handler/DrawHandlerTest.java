@@ -11,7 +11,7 @@ import de.schramm.royalbash.model.deck.DeckInstance;
 import de.schramm.royalbash.model.player.PlayerInstance;
 import de.schramm.royalbash.persistence.board.BoardRepository;
 import de.schramm.royalbash.persistence.deck.instance.DeckInstanceRepository;
-import de.schramm.royalbash.persistence.player.instance.PlayerInstanceRepository;
+import de.schramm.royalbash.persistence.player.PlayerRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -45,14 +45,14 @@ public class DrawHandlerTest {
             .playerBlueDeckInstance(deckInstance)
             .build();
 
-    private PlayerInstanceRepository playerInstanceRepository = mock(PlayerInstanceRepository.class);
+    private PlayerRepository playerRepository = mock(PlayerRepository.class);
 
     private DeckInstanceRepository deckInstanceRepository = mock(DeckInstanceRepository.class);
 
     private BoardRepository boardRepository = mock(BoardRepository.class);
 
     {
-        when(playerInstanceRepository.find(playerInstanceId)).thenReturn(playerInstance);
+        when(playerRepository.find(playerInstanceId)).thenReturn(playerInstance);
 
         when(deckInstanceRepository.find(deckInstanceId)).thenReturn(deckInstance);
 
@@ -66,7 +66,7 @@ public class DrawHandlerTest {
 
         DrawHandler drawHandler = new DrawHandler(
                 deckInstanceRepository,
-                playerInstanceRepository,
+                playerRepository,
                 boardRepository,
                 new RequiredDomainObjectChecker(),
                 new PlayerInstanceCanDrawAnotherCardChecker(8),
@@ -95,7 +95,7 @@ public class DrawHandlerTest {
 
         DrawHandler drawHandler = new DrawHandler(
                 deckInstanceRepository,
-                playerInstanceRepository,
+                playerRepository,
                 boardRepository,
                 new RequiredDomainObjectChecker(),
                 new PlayerInstanceCanDrawAnotherCardChecker(0),

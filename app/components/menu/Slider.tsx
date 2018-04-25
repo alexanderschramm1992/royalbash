@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import "./../common.css";
+import "./../common/common.css";
 import "./Slider.css";
 
 export interface SliderProps {

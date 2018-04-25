@@ -1,19 +1,19 @@
 package de.schramm.royalbash.controller;
 
+import de.schramm.royalbash.controller.requestmodel.DrawRequest;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.handler.DrawHandler;
 import de.schramm.royalbash.model.card.instance.CardInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
 @RestController
+@RequestMapping("gameloop/draw")
 public class DrawController {
 
     private final DrawHandler drawHandler;
@@ -23,27 +23,25 @@ public class DrawController {
         this.drawHandler = drawHandler;
     }
 
-    @RequestMapping(
-            value = "gameloop/draw",
-            method = RequestMethod.POST,
+    @PostMapping(
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public ResponseEntity<CardInstance> drawCard(
-            @RequestBody UUID playerInstanceId,
-            @RequestBody UUID deckInstanceId,
-            @RequestBody UUID boardId
+            @RequestBody DrawRequest requestParams
     ) {
 
         try {
 
             CardInstance cardInstance = drawHandler.drawCardInstance(
-                    playerInstanceId,
-                    deckInstanceId,
-                    boardId
+                    requestParams.getPlayerInstanceId(),
+                    requestParams.getDeckInstanceId(),
+                    requestParams.getBoardId()
             );
 
             return ResponseEntity.ok(cardInstance);
         } catch (GameEngineException e) {
+
+            System.err.println("Failed to draw card for " + requestParams);
 
             return ResponseEntity.badRequest().build();
         }

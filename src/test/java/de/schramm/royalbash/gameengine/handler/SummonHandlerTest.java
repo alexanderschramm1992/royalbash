@@ -10,7 +10,7 @@ import de.schramm.royalbash.model.card.instance.CardInstance;
 import de.schramm.royalbash.model.player.PlayerInstance;
 import de.schramm.royalbash.persistence.board.BoardRepository;
 import de.schramm.royalbash.persistence.card.instance.CardInstanceRepository;
-import de.schramm.royalbash.persistence.player.instance.PlayerInstanceRepository;
+import de.schramm.royalbash.persistence.player.PlayerRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,7 +34,7 @@ public class SummonHandlerTest {
 
     private CardInstanceRepository cardInstanceRepository = mock(CardInstanceRepository.class);
 
-    private PlayerInstanceRepository playerInstanceRepository = mock(PlayerInstanceRepository.class);
+    private PlayerRepository playerRepository = mock(PlayerRepository.class);
 
     private UUID boardId = UUID.randomUUID();
 
@@ -43,7 +43,7 @@ public class SummonHandlerTest {
 
         when(cardInstanceRepository.find(cardInstanceId)).thenReturn(cardInstance);
 
-        when(playerInstanceRepository.find(playerInstanceId)).thenReturn(playerInstance);
+        when(playerRepository.find(playerInstanceId)).thenReturn(playerInstance);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class SummonHandlerTest {
 
         SummonHandler summonHandler = new SummonHandler(
                 cardInstanceRepository,
-                playerInstanceRepository,
+                playerRepository,
                 boardRepository,
                 new RequiredDomainObjectChecker(),
                 new PlayerInstanceOnBoardChecker(),
@@ -104,7 +104,7 @@ public class SummonHandlerTest {
 
         SummonHandler summonHandler = new SummonHandler(
                 cardInstanceRepository,
-                playerInstanceRepository,
+                playerRepository,
                 boardRepository,
                 new RequiredDomainObjectChecker(),
                 new PlayerInstanceOnBoardChecker(),
@@ -131,8 +131,8 @@ public class SummonHandlerTest {
                 .clearHandCardInstanceList()
                 .build();
 
-        PlayerInstanceRepository playerInstanceRepository = mock(PlayerInstanceRepository.class);
-        when(playerInstanceRepository.find(playerInstanceId)).thenReturn(playerInstance);
+        PlayerRepository playerRepository = mock(PlayerRepository.class);
+        when(playerRepository.find(playerInstanceId)).thenReturn(playerInstance);
 
         Board board = Board.builder()
                 .id(boardId)
@@ -145,7 +145,7 @@ public class SummonHandlerTest {
 
         SummonHandler summonHandler = new SummonHandler(
                 cardInstanceRepository,
-                playerInstanceRepository,
+                playerRepository,
                 boardRepository,
                 new RequiredDomainObjectChecker(),
                 new PlayerInstanceOnBoardChecker(),

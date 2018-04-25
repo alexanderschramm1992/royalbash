@@ -1,17 +1,17 @@
-.creature {
+.card {
     height: 40em;
     width: 25em;
     background: lightgray;
     border-radius: 1em;
 }
 
-.creature .head-wrapper {
+.card .head-wrapper {
     height: 3em;
     width: 100%;
     position: relative;
 }
 
-.creature .head-wrapper .name {
+.card .head-wrapper .name {
      height: 2em;
      width: 18.3em;
      align-items: center;
@@ -21,7 +21,7 @@
      left: 0.7em;
  }
 
-.creature .head-wrapper .cost {
+.card .head-wrapper .cost {
     height: 3.6em;
     width: 3.6em;
     border-radius: 1em;
@@ -31,7 +31,7 @@
     right: 1.5em;
 }
 
-.creature .image-wrapper {
+.card .image-wrapper {
     height: 16.1em;
     width: 23.6em;
     margin: 0 0.5em 0.5em 0.5em;
@@ -39,19 +39,19 @@
     border-top-right-radius: 1em;
 }
 
-.creature .image-wrapper .image {
+.card .image-wrapper .image {
     height: 100%;
     width: 100%;
 }
 
-.creature .type {
+.card .type {
     height: 2.5em;
     width: 23.6em;
     margin-left: 0.7em;
     margin-right: 0.7em;
 }
 
-.creature .text-wrapper {
+.card .text-wrapper {
     height: 14.5em;
     width: 23.6em;
     margin: 0 0.5em 0 0.5em;
@@ -60,12 +60,12 @@
     position: relative;
 }
 
-.creature .text-wrapper .text {
+.card .text-wrapper .text {
     width: 10.5em;
     margin: 0.5em;
 }
 
-.creature .text-wrapper .lore {
+.card .text-wrapper .lore {
     width: 10.5em;
     margin: 0.5em;
     font-style: italic;
@@ -73,13 +73,13 @@
     bottom: 0;
 }
 
-.creature .foot-wrapper {
+.card .foot-wrapper {
     height: 3em;
     width: 100%;
     position: relative;
 }
 
-.creature .foot-wrapper .strength {
+.card .foot-wrapper .strength {
     height: 2.6em;
     width: 2.6em;
     border-radius: 1em;
@@ -89,7 +89,7 @@
     background: antiquewhite;
 }
 
-.creature .foot-wrapper .health {
+.card .foot-wrapper .health {
     height: 2.6em;
     width: 2.6em;
     border-radius: 1em;

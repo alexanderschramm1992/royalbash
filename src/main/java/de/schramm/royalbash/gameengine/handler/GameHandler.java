@@ -6,7 +6,7 @@ import de.schramm.royalbash.gameengine.rule.DeckOwnedByPlayerChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.Board;
 import de.schramm.royalbash.model.Game;
-import de.schramm.royalbash.model.player.Player;
+import de.schramm.royalbash.model.player.Account;
 import de.schramm.royalbash.model.Turn;
 import de.schramm.royalbash.model.card.Card;
 import de.schramm.royalbash.model.card.instance.CardInstance;
@@ -14,7 +14,7 @@ import de.schramm.royalbash.model.deck.Deck;
 import de.schramm.royalbash.model.deck.DeckInstance;
 import de.schramm.royalbash.persistence.deck.DeckRepository;
 import de.schramm.royalbash.persistence.game.GameRepository;
-import de.schramm.royalbash.persistence.player.PlayerRepository;
+import de.schramm.royalbash.persistence.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class GameHandler {
 
     // Repositories
     private final GameRepository gameRepository;
-    private final PlayerRepository playerRepository;
+    private final AccountRepository accountRepository;
     private final DeckRepository deckRepository;
 
     // Rules
@@ -37,13 +37,13 @@ public class GameHandler {
     @Autowired
     public GameHandler(
             GameRepository gameRepository,
-            PlayerRepository playerRepository,
+            AccountRepository accountRepository,
             DeckRepository deckRepository,
             RequiredDomainObjectChecker requiredDomainObjectChecker,
             DeckOwnedByPlayerChecker deckOwnedByPlayerChecker
     ) {
         this.gameRepository = gameRepository;
-        this.playerRepository = playerRepository;
+        this.accountRepository = accountRepository;
         this.deckRepository = deckRepository;
         this.requiredDomainObjectChecker = requiredDomainObjectChecker;
         this.deckOwnedByPlayerChecker = deckOwnedByPlayerChecker;
@@ -75,9 +75,9 @@ public class GameHandler {
 
         // Fetch domain objects
 
-        Player playerBlue = playerRepository.find(playerBlueId);
+        Account accountBlue = accountRepository.find(playerBlueId);
 
-        Player playerRed = playerRepository.find(playerRedId);
+        Account accountRed = accountRepository.find(playerRedId);
 
         Deck playerBlueDeck = deckRepository.find(playerBlueDeckId);
 
@@ -86,20 +86,20 @@ public class GameHandler {
         // Apply rules
 
         requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(
-                playerBlue,
-                playerRed,
+                accountBlue,
+                accountRed,
                 playerBlueDeck,
                 playerRedDeck
         );
 
         deckOwnedByPlayerChecker.checkIfDeckIsOwnedByPlayer(
                 playerBlueDeck,
-                playerBlue
+                accountBlue
         );
 
         deckOwnedByPlayerChecker.checkIfDeckIsOwnedByPlayer(
                 playerRedDeck,
-                playerRed
+                accountRed
         );
 
         // Save new domain objects
@@ -138,8 +138,8 @@ public class GameHandler {
 
         Game game = Game.builder()
                 .id(UUID.randomUUID())
-                .playerBlue(playerBlue)
-                .playerRed(playerRed)
+                .accountBlue(accountBlue)
+                .accountRed(accountRed)
                 .board(board)
                 .build();
 

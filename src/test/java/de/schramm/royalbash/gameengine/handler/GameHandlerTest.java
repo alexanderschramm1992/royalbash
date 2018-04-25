@@ -6,10 +6,10 @@ import de.schramm.royalbash.gameengine.rule.DeckOwnedByPlayerChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.Game;
 import de.schramm.royalbash.model.deck.Deck;
-import de.schramm.royalbash.model.player.Player;
+import de.schramm.royalbash.model.player.Account;
 import de.schramm.royalbash.persistence.deck.DeckRepository;
 import de.schramm.royalbash.persistence.game.GameRepository;
-import de.schramm.royalbash.persistence.player.PlayerRepository;
+import de.schramm.royalbash.persistence.account.AccountRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,7 +37,7 @@ public class GameHandlerTest {
             .build();
 
     private UUID playerBlueId = UUID.randomUUID();
-    private Player playerBlue = Player.builder()
+    private Account accountBlue = Account.builder()
             .id(playerBlueId)
             .name("TestBlue")
             .email("")
@@ -46,7 +46,7 @@ public class GameHandlerTest {
             .build();
 
     private UUID playerRedId = UUID.randomUUID();
-    private Player playerRed = Player.builder()
+    private Account accountRed = Account.builder()
             .id(playerRedId)
             .name("TestRed")
             .email("")
@@ -70,15 +70,15 @@ public class GameHandlerTest {
 
         // given
 
-        PlayerRepository playerRepository = mock(PlayerRepository.class);
-        when(playerRepository.find(playerBlueId)).thenReturn(playerBlue);
-        when(playerRepository.find(playerRedId)).thenReturn(playerRed);
+        AccountRepository accountRepository = mock(AccountRepository.class);
+        when(accountRepository.find(playerBlueId)).thenReturn(accountBlue);
+        when(accountRepository.find(playerRedId)).thenReturn(accountRed);
 
         GameRepository gameRepository = mock(GameRepository.class);
 
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
-                playerRepository,
+                accountRepository,
                 deckRepository,
                 requiredDomainObjectChecker,
                 deckOwnedByPlayerChecker
@@ -95,9 +95,9 @@ public class GameHandlerTest {
 
         // then
 
-        Assert.assertThat(game.getPlayerBlue(), is(playerBlue));
+        Assert.assertThat(game.getAccountBlue(), is(accountBlue));
 
-        Assert.assertThat(game.getPlayerRed(), is(playerRed));
+        Assert.assertThat(game.getAccountRed(), is(accountRed));
     }
 
     @Test(expected = DomainObjectDoesNotExistException.class)
@@ -105,15 +105,15 @@ public class GameHandlerTest {
 
         // given
 
-        PlayerRepository playerRepository = mock(PlayerRepository.class);
-        when(playerRepository.find(playerBlueId)).thenReturn(playerBlue);
-        when(playerRepository.find(playerRedId)).thenReturn(null);
+        AccountRepository accountRepository = mock(AccountRepository.class);
+        when(accountRepository.find(playerBlueId)).thenReturn(accountBlue);
+        when(accountRepository.find(playerRedId)).thenReturn(null);
 
         GameRepository gameRepository = mock(GameRepository.class);
 
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
-                playerRepository,
+                accountRepository,
                 deckRepository,
                 requiredDomainObjectChecker,
                 deckOwnedByPlayerChecker
@@ -134,14 +134,14 @@ public class GameHandlerTest {
 
         // given
 
-        PlayerRepository playerRepository = mock(PlayerRepository.class);
-        when(playerRepository.find(any())).thenReturn(null);
+        AccountRepository accountRepository = mock(AccountRepository.class);
+        when(accountRepository.find(any())).thenReturn(null);
 
         GameRepository gameRepository = mock(GameRepository.class);
 
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
-                playerRepository,
+                accountRepository,
                 deckRepository,
                 requiredDomainObjectChecker,
                 deckOwnedByPlayerChecker
@@ -171,7 +171,7 @@ public class GameHandlerTest {
 
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
-                mock(PlayerRepository.class),
+                mock(AccountRepository.class),
                 deckRepository,
                 requiredDomainObjectChecker,
                 deckOwnedByPlayerChecker
@@ -192,7 +192,7 @@ public class GameHandlerTest {
 
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
-                mock(PlayerRepository.class),
+                mock(AccountRepository.class),
                 deckRepository,
                 requiredDomainObjectChecker,
                 deckOwnedByPlayerChecker
@@ -217,7 +217,7 @@ public class GameHandlerTest {
 
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
-                mock(PlayerRepository.class),
+                mock(AccountRepository.class),
                 deckRepository,
                 requiredDomainObjectChecker,
                 deckOwnedByPlayerChecker
@@ -242,7 +242,7 @@ public class GameHandlerTest {
 
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
-                mock(PlayerRepository.class),
+                mock(AccountRepository.class),
                 deckRepository,
                 requiredDomainObjectChecker,
                 deckOwnedByPlayerChecker

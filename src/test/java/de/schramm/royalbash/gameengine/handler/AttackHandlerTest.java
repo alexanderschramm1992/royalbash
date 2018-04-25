@@ -12,7 +12,7 @@ import de.schramm.royalbash.model.card.instance.CreatureInstance;
 import de.schramm.royalbash.model.player.PlayerInstance;
 import de.schramm.royalbash.persistence.board.BoardRepository;
 import de.schramm.royalbash.persistence.card.instance.CardInstanceRepository;
-import de.schramm.royalbash.persistence.player.instance.PlayerInstanceRepository;
+import de.schramm.royalbash.persistence.player.PlayerRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,7 +33,7 @@ public class AttackHandlerTest {
     private final PlayerInstance playerRedInstance = PlayerInstance.builder()
             .id(playerRedInstanceId)
             .build();
-    private final PlayerInstanceRepository playerInstanceRepository = mock(PlayerInstanceRepository.class);
+    private final PlayerRepository playerRepository = mock(PlayerRepository.class);
     private final Turn turn = Turn.builder()
             .playerInstanceId(playerBlueInstanceId)
             .turnCounter(0)
@@ -41,7 +41,7 @@ public class AttackHandlerTest {
     private final UUID creatureInstanceId1 = UUID.randomUUID();
     private final CreatureInstance creatureInstance1 = CreatureInstance.builder()
             .id(creatureInstanceId1)
-            .name("Creature 1")
+            .name("Card 1")
             .cost(2)
             .currentCost(2)
             .health(2)
@@ -53,7 +53,7 @@ public class AttackHandlerTest {
     private final UUID creatureInstanceId2 = UUID.randomUUID();
     private final CreatureInstance creatureInstance2 = CreatureInstance.builder()
             .id(creatureInstanceId2)
-            .name("Creature 2")
+            .name("Card 2")
             .cost(1)
             .currentCost(1)
             .health(1)
@@ -65,7 +65,7 @@ public class AttackHandlerTest {
     private final UUID creatureInstanceId3 = UUID.randomUUID();
     private final CreatureInstance creatureInstance3 = CreatureInstance.builder()
             .id(creatureInstanceId3)
-            .name("Creature 3")
+            .name("Card 3")
             .cost(1)
             .currentCost(1)
             .health(1)
@@ -78,8 +78,8 @@ public class AttackHandlerTest {
     private final CardInstanceRepository cardInstanceRepository = mock(CardInstanceRepository.class);
 
     {
-        when(playerInstanceRepository.find(playerBlueInstanceId)).thenReturn(playerBlueInstance);
-        when(playerInstanceRepository.find(playerRedInstanceId)).thenReturn(playerRedInstance);
+        when(playerRepository.find(playerBlueInstanceId)).thenReturn(playerBlueInstance);
+        when(playerRepository.find(playerRedInstanceId)).thenReturn(playerRedInstance);
 
         when(cardInstanceRepository.find(creatureInstanceId1)).thenReturn(creatureInstance1);
         when(cardInstanceRepository.find(creatureInstanceId2)).thenReturn(creatureInstance2);

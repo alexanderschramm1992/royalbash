@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import Board from "./components/game/board/Board";
+import BoardContainer from "./components/game/board/BoardContainer";
 
 ReactDOM.render(
     <div>
-      <Board />
+      <BoardContainer/>
     </div>
     ,
     document.getElementById("app")

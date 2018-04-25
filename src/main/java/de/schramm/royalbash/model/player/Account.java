@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class Player {
+public class Account {
 
     private UUID id;
     private String name;

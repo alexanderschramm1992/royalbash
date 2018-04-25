@@ -9,7 +9,7 @@ import de.schramm.royalbash.model.card.instance.CardInstance;
 import de.schramm.royalbash.model.player.PlayerInstance;
 import de.schramm.royalbash.persistence.board.BoardRepository;
 import de.schramm.royalbash.persistence.card.instance.CardInstanceRepository;
-import de.schramm.royalbash.persistence.player.instance.PlayerInstanceRepository;
+import de.schramm.royalbash.persistence.player.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class SummonHandler {
 
     // Repositories
     private final CardInstanceRepository cardInstanceRepository;
-    private final PlayerInstanceRepository playerInstanceRepository;
+    private final PlayerRepository playerRepository;
     private final BoardRepository boardRepository;
 
     // Rules
@@ -31,14 +31,14 @@ public class SummonHandler {
     @Autowired
     public SummonHandler(
             CardInstanceRepository cardInstanceRepository,
-            PlayerInstanceRepository playerInstanceRepository,
+            PlayerRepository playerRepository,
             BoardRepository boardRepository,
             RequiredDomainObjectChecker requiredDomainObjectChecker,
             PlayerInstanceOnBoardChecker playerInstanceOnBoardChecker,
             PlayerInstanceHasCardInHandChecker playerInstanceHasCardInHandChecker
     ) {
         this.cardInstanceRepository = cardInstanceRepository;
-        this.playerInstanceRepository = playerInstanceRepository;
+        this.playerRepository = playerRepository;
         this.boardRepository = boardRepository;
         this.requiredDomainObjectChecker = requiredDomainObjectChecker;
         this.playerInstanceOnBoardChecker = playerInstanceOnBoardChecker;
@@ -54,7 +54,7 @@ public class SummonHandler {
         // Fetch domain objects
 
         Board board = boardRepository.find(boardId);
-        PlayerInstance playerInstance = playerInstanceRepository.find(playerInstanceId);
+        PlayerInstance playerInstance = playerRepository.find(playerInstanceId);
         CardInstance cardInstance = cardInstanceRepository.find(cardInstanceId);
 
         // Apply rules
@@ -83,7 +83,7 @@ public class SummonHandler {
         // Save changes
 
         boardRepository.save(board);
-        playerInstanceRepository.save(playerInstance);
+        playerRepository.save(playerInstance);
         cardInstanceRepository.save(cardInstance);
 
         // Return updated Board

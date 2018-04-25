@@ -1,0 +1,18 @@
+.board {
+
+}
+
+.board-north {
+
+    width: 100%;
+}
+
+.board-center {
+
+    float: left;
+}
+
+.board-east {
+
+    float: left;
+}

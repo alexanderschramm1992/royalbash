@@ -1,6 +1,6 @@
 package de.schramm.royalbash.model;
 
-import de.schramm.royalbash.model.player.Player;
+import de.schramm.royalbash.model.player.Account;
 import lombok.Builder;
 import lombok.Value;
 
@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Game {
 
     private UUID id;
-    private Player playerRed;
-    private Player playerBlue;
+    private Account accountRed;
+    private Account accountBlue;
     private Board board;
 }

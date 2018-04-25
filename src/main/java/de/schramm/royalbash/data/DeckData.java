@@ -1,7 +1,5 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.model.card.Creature;
-import de.schramm.royalbash.model.card.Weapon;
 import de.schramm.royalbash.model.deck.Deck;
 
 import java.util.Arrays;

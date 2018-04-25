@@ -1,15 +1,17 @@
 import * as React from "react";
 
-import "./Creature.css";
-import "./../../common.css";
+import "./Card.css";
+import "./../../common/common.css";
+import EventBus from "../../../events/EventBus";
+import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
 
-export interface CreatureProps {
+export interface CardProps {
 
-    creatureModel: CreatureModel;
-    readonly scale?: number;
+    cardModel: CardModel;
+    readonly eventBus: EventBus<MouseOnCardEvent>;
 }
 
-export interface CreatureModel {
+export interface CardModel {
 
     readonly id: string;
     readonly name: string;
@@ -23,58 +25,68 @@ export interface CreatureModel {
     health: number;
 }
 
-export class Creature extends React.Component<CreatureProps, {}> {
+export class Card extends React.Component<CardProps, {}> {
+
+    constructor(props: CardProps) {
+
+        super(props);
+        this.handleMouseOver = this.handleMouseOver.bind(this);
+    }
+
+    private handleMouseOver(): void {
+
+        this.props.eventBus.fireEvent(new MouseOnCardEvent(this.props.cardModel));
+    }
 
     render(): any {
 
-        let style = {
-            fontSize: this.props.scale ? (this.props.scale * 10) + "px" : null
-        };
-
         return (
-            <div className="creature border-large" style={this.props.scale ? style : null}>
+            <div
+                className="card border-large"
+                onMouseEnter={this.handleMouseOver}
+            >
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">
-                            {this.props.creatureModel.name}
+                            {this.props.cardModel.name}
                         </div>
                     </div>
                     <div className="cost border-small">
                         <div className="font-size-extra-large center-text">
-                            {this.props.creatureModel.cost}
+                            {this.props.cardModel.cost}
                         </div>
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img className="image" src={this.props.creatureModel.image} alt={this.props.creatureModel.name}/>
+                    <img className="image" src={this.props.cardModel.image} alt={this.props.cardModel.name}/>
                 </div>
                 <div className="type">
                     <div className="font-size-medium">
-                        {this.props.creatureModel.type}
-                        {this.props.creatureModel.subType && " - " + this.props.creatureModel.subType}
+                        {this.props.cardModel.type}
+                        {this.props.cardModel.subType && " - " + this.props.cardModel.subType}
                     </div>
                 </div>
                 <div className="text-wrapper border-small">
                     <div className="text">
                         <div className="font-size-medium">
-                            {this.props.creatureModel.text}
+                            {this.props.cardModel.text}
                         </div>
                     </div>
                     <div className="lore">
                         <div className="font-size-medium">
-                            {this.props.creatureModel.lore && this.props.creatureModel.lore}
+                            {this.props.cardModel.lore && this.props.cardModel.lore}
                         </div>
                     </div>
                 </div>
                 <div className="foot-wrapper">
                     <div className="strength border-small">
                         <div className="font-size-large center-text">
-                            {this.props.creatureModel.strength}
+                            {this.props.cardModel.strength}
                         </div>
                     </div>
                     <div className="health border-small">
                         <div className="font-size-large center-text">
-                            {this.props.creatureModel.health}
+                            {this.props.cardModel.health}
                         </div>
                     </div>
                 </div>
@@ -83,4 +95,4 @@ export class Creature extends React.Component<CreatureProps, {}> {
     }
 }
 
-export default Creature;
+export default Card;
