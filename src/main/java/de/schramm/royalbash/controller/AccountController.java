@@ -1,8 +1,8 @@
 package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.PlayerRequest;
-import de.schramm.royalbash.controller.responsemodel.PlayerExt;
-import de.schramm.royalbash.model.player.Account;
+import de.schramm.royalbash.controller.responsemodel.AccountExt;
+import de.schramm.royalbash.model.Account;
 import de.schramm.royalbash.persistence.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,7 +29,7 @@ public class AccountController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<PlayerExt> login(
+    public ResponseEntity<AccountExt> login(
             @RequestBody PlayerRequest playerRequest
         ) {
 
@@ -41,10 +41,10 @@ public class AccountController {
 
         if(account != null) {
 
-            return ResponseEntity.ok(PlayerExt.fromPlayer(account));
+            return ResponseEntity.ok(AccountExt.fromAccount(account));
         } else {
 
-            return ResponseEntity.badRequest().body(PlayerExt.builder().build());
+            return ResponseEntity.badRequest().body(AccountExt.builder().build());
         }
     }
 

@@ -1,9 +1,9 @@
 package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.PlayerRequest;
-import de.schramm.royalbash.controller.responsemodel.PlayerExt;
-import de.schramm.royalbash.model.player.Account;
-import de.schramm.royalbash.persistence.deck.DeckRepository;
+import de.schramm.royalbash.controller.responsemodel.AccountExt;
+import de.schramm.royalbash.model.Account;
+import de.schramm.royalbash.persistence.blueprint.BlueprintRepository;
 import de.schramm.royalbash.persistence.account.AccountRepository;
 import de.schramm.royalbash.persistence.account.AccountRepositoryFake;
 import org.junit.Assert;
@@ -28,9 +28,9 @@ public class AccountEntityControllerTest {
             .passwordHash(playerPasswordHash)
             .build();
 
-    private final DeckRepository deckRepository = mock(DeckRepository.class);
+    private final BlueprintRepository blueprintRepository = mock(BlueprintRepository.class);
 
-    private final AccountRepository accountRepository = new AccountRepositoryFake(deckRepository);
+    private final AccountRepository accountRepository = new AccountRepositoryFake(blueprintRepository);
 
     private final AccountController accountController = new AccountController(accountRepository);
 
@@ -43,7 +43,7 @@ public class AccountEntityControllerTest {
 
         // When
 
-        ResponseEntity<PlayerExt> playerExtResponseEntity = accountController.login(
+        ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
                 PlayerRequest.builder()
                         .name(playerName)
                         .email(playerEmail)
@@ -53,7 +53,7 @@ public class AccountEntityControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity.getBody(), is(PlayerExt.fromPlayer(account)));
+        Assert.assertThat(playerExtResponseEntity.getBody(), is(AccountExt.fromAccount(account)));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class AccountEntityControllerTest {
 
         // When
 
-        ResponseEntity<PlayerExt> playerExtResponseEntity = accountController.login(
+        ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
                 PlayerRequest.builder()
                         .name(playerName)
                         .passwordHash(playerPasswordHash)
@@ -70,7 +70,7 @@ public class AccountEntityControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity.getBody(), is(PlayerExt.fromPlayer(account)));
+        Assert.assertThat(playerExtResponseEntity.getBody(), is(AccountExt.fromAccount(account)));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class AccountEntityControllerTest {
 
         // When
 
-        ResponseEntity<PlayerExt> playerExtResponseEntity = accountController.login(
+        ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
                 PlayerRequest.builder()
                         .email(playerEmail)
                         .passwordHash(playerPasswordHash)
@@ -87,7 +87,7 @@ public class AccountEntityControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity.getBody(), is(PlayerExt.fromPlayer(account)));
+        Assert.assertThat(playerExtResponseEntity.getBody(), is(AccountExt.fromAccount(account)));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class AccountEntityControllerTest {
 
         // When
 
-        ResponseEntity<PlayerExt> playerExtResponseEntity = accountController.login(
+        ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
                 PlayerRequest.builder()
                         .name(playerName)
                         .email(playerEmail)
@@ -105,7 +105,7 @@ public class AccountEntityControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity, is(ResponseEntity.badRequest().body(PlayerExt.builder().build())));
+        Assert.assertThat(playerExtResponseEntity, is(ResponseEntity.badRequest().body(AccountExt.builder().build())));
     }
 
     @Test
@@ -113,7 +113,7 @@ public class AccountEntityControllerTest {
 
         // When
 
-        ResponseEntity<PlayerExt> playerExtResponseEntity = accountController.login(
+        ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
                 PlayerRequest.builder()
                         .name("otherName")
                         .email("otherEmail")
@@ -123,7 +123,7 @@ public class AccountEntityControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity, is(ResponseEntity.badRequest().body(PlayerExt.builder().build())));
+        Assert.assertThat(playerExtResponseEntity, is(ResponseEntity.badRequest().body(AccountExt.builder().build())));
     }
 
     @Test

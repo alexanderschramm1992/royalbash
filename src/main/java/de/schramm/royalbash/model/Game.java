@@ -1,6 +1,5 @@
 package de.schramm.royalbash.model;
 
-import de.schramm.royalbash.model.player.Account;
 import lombok.Builder;
 import lombok.Value;
 

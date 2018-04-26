@@ -1,15 +1,14 @@
 package de.schramm.royalbash.gameengine.handler;
 
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.rule.InstanceCanAttackBeAttackedChecker;
-import de.schramm.royalbash.gameengine.rule.InstanceOwnedByPlayerInstanceOnBoardChecker;
-import de.schramm.royalbash.gameengine.rule.InstancesOwnedByOpposingPlayerInstancesChecker;
+import de.schramm.royalbash.gameengine.rule.SumoningCanAttackBeAttackedChecker;
+import de.schramm.royalbash.gameengine.rule.SummoningOwnedByPlayerOnBoardChecker;
+import de.schramm.royalbash.gameengine.rule.SummoningsOwnedByOpposingPlayersChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.Board;
-import de.schramm.royalbash.model.card.instance.AttackableCanAttack;
-import de.schramm.royalbash.model.card.instance.CardInstance;
+import de.schramm.royalbash.model.Summoning;
 import de.schramm.royalbash.persistence.board.BoardRepository;
-import de.schramm.royalbash.persistence.card.instance.CardInstanceRepository;
+import de.schramm.royalbash.persistence.summoning.SummoningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,99 +19,88 @@ public class AttackHandler {
 
     // Repositories
     private final BoardRepository boardRepository;
-    private final CardInstanceRepository cardInstanceRepository;
+    private final SummoningRepository summoningRepository;
 
     //Rules
     private final RequiredDomainObjectChecker requiredDomainObjectChecker;
-    private final InstanceCanAttackBeAttackedChecker instanceCanAttackBeAttackedChecker;
-    private final InstanceOwnedByPlayerInstanceOnBoardChecker instanceOwnedByPlayerInstanceOnBoardChecker;
-    private final InstancesOwnedByOpposingPlayerInstancesChecker instancesOwnedByOpposingPlayerInstancesChecker;
+    private final SumoningCanAttackBeAttackedChecker sumoningCanAttackBeAttackedChecker;
+    private final SummoningOwnedByPlayerOnBoardChecker summoningOwnedByPlayerOnBoardChecker;
+    private final SummoningsOwnedByOpposingPlayersChecker summoningsOwnedByOpposingPlayersChecker;
 
     @Autowired
     public AttackHandler(
             BoardRepository boardRepository,
-            CardInstanceRepository cardInstanceRepository,
+            SummoningRepository summoningRepository,
             RequiredDomainObjectChecker requiredDomainObjectChecker,
-            InstanceCanAttackBeAttackedChecker instanceCanAttackBeAttackedChecker,
-            InstanceOwnedByPlayerInstanceOnBoardChecker instanceOwnedByPlayerInstanceOnBoardChecker,
-            InstancesOwnedByOpposingPlayerInstancesChecker instancesOwnedByOpposingPlayerInstancesChecker
+            SumoningCanAttackBeAttackedChecker sumoningCanAttackBeAttackedChecker,
+            SummoningOwnedByPlayerOnBoardChecker summoningOwnedByPlayerOnBoardChecker,
+            SummoningsOwnedByOpposingPlayersChecker summoningsOwnedByOpposingPlayersChecker
     ) {
         this.boardRepository = boardRepository;
-        this.cardInstanceRepository = cardInstanceRepository;
+        this.summoningRepository = summoningRepository;
         this.requiredDomainObjectChecker = requiredDomainObjectChecker;
-        this.instanceCanAttackBeAttackedChecker = instanceCanAttackBeAttackedChecker;
-        this.instanceOwnedByPlayerInstanceOnBoardChecker = instanceOwnedByPlayerInstanceOnBoardChecker;
-        this.instancesOwnedByOpposingPlayerInstancesChecker = instancesOwnedByOpposingPlayerInstancesChecker;
+        this.sumoningCanAttackBeAttackedChecker = sumoningCanAttackBeAttackedChecker;
+        this.summoningOwnedByPlayerOnBoardChecker = summoningOwnedByPlayerOnBoardChecker;
+        this.summoningsOwnedByOpposingPlayersChecker = summoningsOwnedByOpposingPlayersChecker;
     }
 
     public Board attackCardInstance(
             UUID boardId,
-            UUID attackingInstanceId,
-            UUID attackedInstanceId
+            UUID attackingSummoningId,
+            UUID attackedSumoningId
     ) throws GameEngineException {
 
         // Fetch domain objects
 
         Board board = boardRepository.find(boardId);
-        CardInstance attackingInstance = cardInstanceRepository.find(attackingInstanceId);
-        CardInstance attackedInstance = cardInstanceRepository.find(attackedInstanceId);
+        Summoning attackingSummoning = summoningRepository.find(attackingSummoningId);
+        Summoning attackedSummoning = summoningRepository.find(attackedSumoningId);
 
         // Apply rules
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(
+        requiredDomainObjectChecker.check(
                 board,
-                attackingInstance,
-                attackedInstance
+                attackingSummoning,
+                attackedSummoning
         );
-
-        instanceCanAttackBeAttackedChecker.checkIfInstanceCanAttack(
-                attackingInstance
+        sumoningCanAttackBeAttackedChecker.checkIfInstanceCanAttack(
+                attackingSummoning
         );
-
-        instanceCanAttackBeAttackedChecker.checkIfInstanceIsAttackable(
-                attackedInstance
+        sumoningCanAttackBeAttackedChecker.checkIfInstanceIsAttackable(
+                attackedSummoning
         );
-
-        instanceOwnedByPlayerInstanceOnBoardChecker.checkIfInstanceIsOwnedByPlayerInstanceOnBoard(
+        summoningOwnedByPlayerOnBoardChecker.check(
                 board,
-                attackingInstance,
-                attackedInstance
+                attackingSummoning,
+                attackedSummoning
         );
-
-        instancesOwnedByOpposingPlayerInstancesChecker.checkIfInstancesOwnedByOpposingPlayerInstances(
+        summoningsOwnedByOpposingPlayersChecker.check(
                 board,
-                attackingInstance,
-                attackedInstance
+                attackingSummoning,
+                attackedSummoning
         );
 
         // Commit attack
 
-        AttackableCanAttack attacker = (AttackableCanAttack) attackingInstance;
+        attackedSummoning.receiveDamage(attackingSummoning);
+        attackingSummoning.receiveDamage(attackedSummoning);
 
-        AttackableCanAttack defender = (AttackableCanAttack) attackedInstance;
+        if (attackedSummoning.isDead()) {
 
-        defender.receiveDamage(attacker);
-
-        attacker.receiveDamage(defender);
-
-        if (defender.isDead()) {
-
-            board.buryInstance(defender);
-
-            cardInstanceRepository.delete(defender.getId());
+            board.bury(attackedSummoning);
+            summoningRepository.delete(attackedSummoning.getId());
         } else {
 
-            cardInstanceRepository.save(defender);
+            summoningRepository.save(attackedSummoning);
         }
 
-        if (attacker.isDead()) {
+        if (attackingSummoning.isDead()) {
 
-            board.buryInstance(attacker);
-
-            cardInstanceRepository.delete(attacker.getId());
+            board.bury(attackingSummoning);
+            summoningRepository.delete(attackingSummoning.getId());
         } else {
 
-            cardInstanceRepository.save(attacker);
+            summoningRepository.save(attackingSummoning);
         }
 
         boardRepository.save(board);

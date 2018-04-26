@@ -4,7 +4,7 @@ import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistExcepti
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.Board;
 import de.schramm.royalbash.model.Turn;
-import de.schramm.royalbash.model.player.PlayerInstance;
+import de.schramm.royalbash.model.Player;
 import de.schramm.royalbash.persistence.board.BoardRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -76,26 +76,26 @@ public class TurnHandlerTest {
         // given
 
         UUID playerInstanceId1 = UUID.randomUUID();
-        PlayerInstance playerInstance1 = PlayerInstance.builder()
+        Player player1 = Player.builder()
                 .id(playerInstanceId1)
                 .build();
 
         UUID playerInstanceId2 = UUID.randomUUID();
-        PlayerInstance playerInstance2 = PlayerInstance.builder()
+        Player player2 = Player.builder()
                 .id(playerInstanceId2)
                 .build();
 
         Turn turn = Turn.builder()
-                .turnCounter(0)
-                .playerInstanceId(playerInstanceId1)
+                .counter(0)
+                .player(player1)
                 .build();
 
         UUID boardId = UUID.randomUUID();
         Board board = Board.builder()
                 .id(boardId)
                 .turn(turn)
-                .playerBlueInstance(playerInstance1)
-                .playerRedInstance(playerInstance2)
+                .playerBlue(player1)
+                .playerRed(player2)
                 .build();
 
         BoardRepository boardRepository = mock(BoardRepository.class);
@@ -112,9 +112,9 @@ public class TurnHandlerTest {
 
         // then
 
-        Assert.assertThat(turn.getTurnCounter(), is(1));
+        Assert.assertThat(turn.getCounter(), is(1));
 
-        Assert.assertThat(turn.getPlayerInstanceId(), is(playerInstanceId2));
+        Assert.assertThat(turn.getPlayer(), is(player2));
     }
 
     @Test(expected = DomainObjectDoesNotExistException.class)

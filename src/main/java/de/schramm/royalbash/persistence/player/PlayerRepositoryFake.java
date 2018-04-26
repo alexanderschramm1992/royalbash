@@ -1,8 +1,10 @@
 package de.schramm.royalbash.persistence.player;
 
-import de.schramm.royalbash.model.player.PlayerInstance;
-import de.schramm.royalbash.persistence.card.instance.CardInstanceRepository;
+import de.schramm.royalbash.model.Player;
+import de.schramm.royalbash.persistence.card.CardRepository;
+import de.schramm.royalbash.persistence.summoning.SummoningRepository;
 import de.schramm.royalbash.persistence.account.AccountRepository;
+import de.schramm.royalbash.persistence.deck.DeckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,31 +19,41 @@ public class PlayerRepositoryFake implements PlayerRepository {
     private Map<UUID, PlayerEntity> playerInstanceEntityMap = new HashMap<>();
 
     private final AccountRepository accountRepository;
-
-    private final CardInstanceRepository cardInstanceRepository;
+    private final DeckRepository deckRepository;
+    private final CardRepository cardRepository;
+    private final SummoningRepository summoningRepository;
 
     @Autowired
     public PlayerRepositoryFake(
             AccountRepository accountRepository,
-            CardInstanceRepository cardInstanceRepository
+            DeckRepository deckRepository,
+            CardRepository cardRepository,
+            SummoningRepository summoningRepository
     ) {
         this.accountRepository = accountRepository;
-        this.cardInstanceRepository = cardInstanceRepository;
+        this.deckRepository = deckRepository;
+        this.cardRepository = cardRepository;
+        this.summoningRepository = summoningRepository;
     }
 
     @Override
-    public PlayerInstance find(UUID id) {
+    public Player find(UUID id) {
 
         PlayerEntity playerEntity = playerInstanceEntityMap.get(id);
 
         if(playerEntity != null) {
 
-            return PlayerInstance.builder()
+            return Player.builder()
                     .id(playerEntity.getId())
-                    .account(accountRepository.find(playerEntity.getPlayer()))
-                    .currentHealth(playerEntity.getCurrentHealth())
-                    .handCardInstanceList(playerEntity.getHandCardInstanceList().stream()
-                            .map(cardInstanceRepository::find)
+                    .account(accountRepository.find(playerEntity.getAccount()))
+                    .deck(deckRepository.find(playerEntity.getDeck()))
+                    .health(playerEntity.getHealth())
+                    .cards(playerEntity.getCards().stream()
+                            .map(cardRepository::find)
+                            .collect(Collectors.toList())
+                    )
+                    .summonings(playerEntity.getSummonings().stream()
+                            .map(summoningRepository::find)
                             .collect(Collectors.toList())
                     ).build();
         } else {
@@ -51,9 +63,9 @@ public class PlayerRepositoryFake implements PlayerRepository {
     }
 
     @Override
-    public void save(PlayerInstance playerInstance) {
+    public void save(Player player) {
 
-        playerInstanceEntityMap.put(playerInstance.getId(), PlayerEntity.toEntity(playerInstance));
+        playerInstanceEntityMap.put(player.getId(), PlayerEntity.toEntity(player));
     }
 
     @Override

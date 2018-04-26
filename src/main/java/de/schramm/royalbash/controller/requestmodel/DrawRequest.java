@@ -9,7 +9,7 @@ import java.util.UUID;
 @Builder
 public class DrawRequest {
 
-    private UUID playerInstanceId;
-    private UUID deckInstanceId;
+    private UUID playerId;
+    private UUID deckId;
     private UUID boardId;
 }

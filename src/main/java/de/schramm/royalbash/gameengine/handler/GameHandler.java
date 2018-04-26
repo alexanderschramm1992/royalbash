@@ -2,25 +2,18 @@ package de.schramm.royalbash.gameengine.handler;
 
 import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.rule.DeckOwnedByPlayerChecker;
+import de.schramm.royalbash.gameengine.rule.BlueprintOwnedByAccountChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
-import de.schramm.royalbash.model.Board;
-import de.schramm.royalbash.model.Game;
-import de.schramm.royalbash.model.player.Account;
-import de.schramm.royalbash.model.Turn;
-import de.schramm.royalbash.model.card.Card;
-import de.schramm.royalbash.model.card.instance.CardInstance;
-import de.schramm.royalbash.model.deck.Deck;
-import de.schramm.royalbash.model.deck.DeckInstance;
-import de.schramm.royalbash.persistence.deck.DeckRepository;
-import de.schramm.royalbash.persistence.game.GameRepository;
+import de.schramm.royalbash.model.*;
+import de.schramm.royalbash.model.Blueprint;
+import de.schramm.royalbash.model.Deck;
 import de.schramm.royalbash.persistence.account.AccountRepository;
+import de.schramm.royalbash.persistence.blueprint.BlueprintRepository;
+import de.schramm.royalbash.persistence.game.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 public class GameHandler {
@@ -28,25 +21,25 @@ public class GameHandler {
     // Repositories
     private final GameRepository gameRepository;
     private final AccountRepository accountRepository;
-    private final DeckRepository deckRepository;
+    private final BlueprintRepository blueprintRepository;
 
     // Rules
     private final RequiredDomainObjectChecker requiredDomainObjectChecker;
-    private final DeckOwnedByPlayerChecker deckOwnedByPlayerChecker;
+    private final BlueprintOwnedByAccountChecker blueprintOwnedByAccountChecker;
 
     @Autowired
     public GameHandler(
             GameRepository gameRepository,
             AccountRepository accountRepository,
-            DeckRepository deckRepository,
+            BlueprintRepository blueprintRepository,
             RequiredDomainObjectChecker requiredDomainObjectChecker,
-            DeckOwnedByPlayerChecker deckOwnedByPlayerChecker
+            BlueprintOwnedByAccountChecker blueprintOwnedByAccountChecker
     ) {
         this.gameRepository = gameRepository;
         this.accountRepository = accountRepository;
-        this.deckRepository = deckRepository;
+        this.blueprintRepository = blueprintRepository;
         this.requiredDomainObjectChecker = requiredDomainObjectChecker;
-        this.deckOwnedByPlayerChecker = deckOwnedByPlayerChecker;
+        this.blueprintOwnedByAccountChecker = blueprintOwnedByAccountChecker;
     }
 
     public Game getGame(
@@ -59,7 +52,7 @@ public class GameHandler {
 
         // Apply rules
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(game);
+        requiredDomainObjectChecker.check(game);
 
         // Return game
 
@@ -69,70 +62,61 @@ public class GameHandler {
     public Game startGame(
             UUID playerBlueId,
             UUID playerRedId,
-            UUID playerBlueDeckId,
-            UUID playerRedDeckId
+            UUID blueBlueprintId,
+            UUID redBlueprintId
     ) throws GameEngineException {
 
         // Fetch domain objects
 
         Account accountBlue = accountRepository.find(playerBlueId);
-
         Account accountRed = accountRepository.find(playerRedId);
-
-        Deck playerBlueDeck = deckRepository.find(playerBlueDeckId);
-
-        Deck playerRedDeck = deckRepository.find(playerRedDeckId);
+        Blueprint blueprintBlue = blueprintRepository.find(blueBlueprintId);
+        Blueprint blueprintRed = blueprintRepository.find(redBlueprintId);
 
         // Apply rules
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(
+        requiredDomainObjectChecker.check(
                 accountBlue,
                 accountRed,
-                playerBlueDeck,
-                playerRedDeck
+                blueprintBlue,
+                blueprintRed
         );
-
-        deckOwnedByPlayerChecker.checkIfDeckIsOwnedByPlayer(
-                playerBlueDeck,
+        blueprintOwnedByAccountChecker.check(
+                blueprintBlue,
                 accountBlue
         );
-
-        deckOwnedByPlayerChecker.checkIfDeckIsOwnedByPlayer(
-                playerRedDeck,
+        blueprintOwnedByAccountChecker.check(
+                blueprintRed,
                 accountRed
         );
 
         // Save new domain objects
 
+        Deck deckBlue = Deck.fromBlueprint(blueprintBlue, UUID.randomUUID());
+        Deck deckRed = Deck.fromBlueprint(blueprintRed, UUID.randomUUID());
+
+        Player playerBlue = Player.builder()
+                .id(UUID.randomUUID())
+                .account(accountBlue)
+                .clearCards()
+                .deck(deckBlue)
+                .build();
+        Player playerRed = Player.builder()
+                .id(UUID.randomUUID())
+                .account(accountRed)
+                .clearCards()
+                .deck(deckRed)
+                .build();
+
         Turn turn = Turn.builder()
-                .turnCounter(0)
-                .playerInstanceId(playerBlueId)
-                .build();
-
-        List<CardInstance> playerBlueDeckInstanceCardInstanceList = playerBlueDeck.getCardList().stream()
-                .map(Card::toInstance)
-                .collect(Collectors.toList());
-
-        DeckInstance playerBlueDeckInstance = DeckInstance.builder()
-                .id(UUID.randomUUID())
-                .cardInstanceList(playerBlueDeckInstanceCardInstanceList)
-                .build();
-
-        List<CardInstance> playerRedDeckInstanceCardInstanceList = playerRedDeck.getCardList().stream()
-                .map(Card::toInstance)
-                .collect(Collectors.toList());
-
-        DeckInstance playerRedDeckInstance = DeckInstance.builder()
-                .id(UUID.randomUUID())
-                .cardInstanceList(playerRedDeckInstanceCardInstanceList)
+                .counter(0)
+                .player(playerBlue)
                 .build();
 
         Board board = Board.builder()
                 .id(UUID.randomUUID())
-                .clearBlueInstanceSet()
-                .clearRedInstanceSet()
-                .playerBlueDeckInstance(playerBlueDeckInstance)
-                .playerRedDeckInstance(playerRedDeckInstance)
+                .playerBlue(playerBlue)
+                .playerRed(playerRed)
                 .turn(turn)
                 .build();
 
@@ -160,7 +144,7 @@ public class GameHandler {
 
         // Apply rule
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(game);
+        requiredDomainObjectChecker.check(game);
 
         // Delete Game
 

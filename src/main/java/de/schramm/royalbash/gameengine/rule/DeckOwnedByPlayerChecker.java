@@ -1,28 +1,28 @@
 package de.schramm.royalbash.gameengine.rule;
 
 import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
-import de.schramm.royalbash.model.deck.Deck;
-import de.schramm.royalbash.model.player.Account;
+import de.schramm.royalbash.model.Deck;
+import de.schramm.royalbash.model.Player;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DeckOwnedByPlayerChecker {
 
-    public void checkIfDeckIsOwnedByPlayer(
+    public void check(
             Deck deck,
-            Account account
+            Player player
     ) throws GameRuleViolationException {
 
-        if(account.getDeckSet().contains(deck)) {
+        if(player.getDeck().equals(deck)) {
 
-            //do nothing
+            // do nothing
         } else {
 
             throw new GameRuleViolationException(
                     String.format(
-                            "Account %s does not own Deck %s",
-                            account.getId(),
-                            deck.getId()
+                            "Deck %s is not owned by Player %s",
+                            deck.getId(),
+                            player.getId()
                     )
             );
         }

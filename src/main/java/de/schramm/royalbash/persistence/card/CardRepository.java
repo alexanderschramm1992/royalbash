@@ -1,8 +1,6 @@
 package de.schramm.royalbash.persistence.card;
 
-import de.schramm.royalbash.model.card.Card;
-import de.schramm.royalbash.model.card.Creature;
-import de.schramm.royalbash.model.card.Weapon;
+import de.schramm.royalbash.model.Card;
 import de.schramm.royalbash.persistence.GenericRepository;
 
 import java.util.Set;

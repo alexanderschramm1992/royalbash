@@ -1,8 +1,8 @@
 package de.schramm.royalbash.persistence.account;
 
-import de.schramm.royalbash.data.PlayerData;
-import de.schramm.royalbash.model.player.Account;
-import de.schramm.royalbash.persistence.deck.DeckRepository;
+import de.schramm.royalbash.data.AccountData;
+import de.schramm.royalbash.model.Account;
+import de.schramm.royalbash.persistence.blueprint.BlueprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,19 +13,19 @@ import java.util.stream.Collectors;
 @Component
 public class AccountRepositoryFake implements AccountRepository {
 
-    private final DeckRepository deckRepository;
+    private final BlueprintRepository blueprintRepository;
 
     private Map<UUID, AccountEntity> playerEntityMap = new HashMap<>();
 
     @Autowired
-    public AccountRepositoryFake(DeckRepository deckRepository) {
-        this.deckRepository = deckRepository;
+    public AccountRepositoryFake(BlueprintRepository blueprintRepository) {
+        this.blueprintRepository = blueprintRepository;
     }
 
     @PostConstruct
     private void init() {
 
-        saveAll(PlayerData.getPlayerSet());
+        saveAll(AccountData.getPlayerSet());
     }
 
     @Override
@@ -40,8 +40,8 @@ public class AccountRepositoryFake implements AccountRepository {
                     .name(accountEntity.getName())
                     .email(accountEntity.getEmail())
                     .passwordHash(accountEntity.getPasswordHash())
-                    .deckSet(accountEntity.getDeckSet().stream()
-                            .map(deckRepository::find)
+                    .blueprints(accountEntity.getBlueprints().stream()
+                            .map(blueprintRepository::find)
                             .collect(Collectors.toSet())
                     ).build();
         } else {
@@ -69,13 +69,7 @@ public class AccountRepositoryFake implements AccountRepository {
                 .map(Map.Entry::getKey)
                 .findFirst();
 
-        if (uuidOptional.isPresent()) {
-
-            return find(uuidOptional.get());
-        } else {
-
-            return null;
-        }
+        return uuidOptional.map(this::find).orElse(null);
     }
 
     @Override
@@ -86,13 +80,7 @@ public class AccountRepositoryFake implements AccountRepository {
                 .map(Map.Entry::getKey)
                 .findFirst();
 
-        if (uuidOptional.isPresent()) {
-
-            return find(uuidOptional.get());
-        } else {
-
-            return null;
-        }
+        return uuidOptional.map(this::find).orElse(null);
     }
 
     @Override
@@ -103,13 +91,7 @@ public class AccountRepositoryFake implements AccountRepository {
                 .map(Map.Entry::getKey)
                 .findFirst();
 
-        if (uuidOptional.isPresent()) {
-
-            return find(uuidOptional.get());
-        } else {
-
-            return null;
-        }
+        return uuidOptional.map(this::find).orElse(null);
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Arrays;
 @Component
 public class RequiredDomainObjectChecker {
 
-    public void checkIfRequiredDomainObjectsExist(
+    public void check(
             Object... domainObjects
     ) throws DomainObjectDoesNotExistException {
 

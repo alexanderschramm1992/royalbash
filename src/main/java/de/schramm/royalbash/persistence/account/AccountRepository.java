@@ -1,6 +1,6 @@
 package de.schramm.royalbash.persistence.account;
 
-import de.schramm.royalbash.model.player.Account;
+import de.schramm.royalbash.model.Account;
 import de.schramm.royalbash.persistence.GenericRepository;
 
 public interface AccountRepository extends GenericRepository<Account> {

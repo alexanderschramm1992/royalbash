@@ -1,7 +1,7 @@
 package de.schramm.royalbash.persistence.account;
 
-import de.schramm.royalbash.model.deck.Deck;
-import de.schramm.royalbash.model.player.Account;
+import de.schramm.royalbash.model.Blueprint;
+import de.schramm.royalbash.model.Account;
 import lombok.Builder;
 import lombok.Value;
 
@@ -17,7 +17,7 @@ public class AccountEntity {
     private String name;
     private String email;
     private String passwordHash;
-    private Set<UUID> deckSet;
+    private Set<UUID> blueprints;
 
     public static AccountEntity toEntity(Account account) {
 
@@ -26,8 +26,8 @@ public class AccountEntity {
                 .name(account.getName())
                 .email(account.getEmail())
                 .passwordHash(account.getPasswordHash())
-                .deckSet(account.getDeckSet().stream()
-                        .map(Deck::getId)
+                .blueprints(account.getBlueprints().stream()
+                        .map(Blueprint::getId)
                         .collect(Collectors.toSet())
                 ).build();
     }

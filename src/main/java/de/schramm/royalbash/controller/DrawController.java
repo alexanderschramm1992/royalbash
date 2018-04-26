@@ -3,7 +3,7 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.requestmodel.DrawRequest;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.handler.DrawHandler;
-import de.schramm.royalbash.model.card.instance.CardInstance;
+import de.schramm.royalbash.model.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,19 +26,19 @@ public class DrawController {
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<CardInstance> drawCard(
+    public ResponseEntity<Card> drawCard(
             @RequestBody DrawRequest requestParams
     ) {
 
         try {
 
-            CardInstance cardInstance = drawHandler.drawCardInstance(
-                    requestParams.getPlayerInstanceId(),
-                    requestParams.getDeckInstanceId(),
+            Card card = drawHandler.drawCard(
+                    requestParams.getPlayerId(),
+                    requestParams.getDeckId(),
                     requestParams.getBoardId()
             );
 
-            return ResponseEntity.ok(cardInstance);
+            return ResponseEntity.ok(card);
         } catch (GameEngineException e) {
 
             System.err.println("Failed to draw card for " + requestParams);

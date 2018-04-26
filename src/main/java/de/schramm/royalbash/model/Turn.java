@@ -3,28 +3,29 @@ package de.schramm.royalbash.model;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.UUID;
-
 @Builder
 @Getter
 public class Turn {
 
-    private int turnCounter;
-    private UUID playerInstanceId;
+    private int counter;
+    private Player player;
 
     public void increaseTurnCounter() {
 
-        turnCounter++;
+        counter++;
     }
 
-    public void swapPlayerInstance(Board board) {
+    public void swapPlayer(Board board) {
 
-        if (playerInstanceId.equals(board.getPlayerBlueInstance().getId())) {
+        if (player.equals(board.getPlayerBlue())) {
 
-            playerInstanceId = board.getPlayerRedInstance().getId();
-        } else if (playerInstanceId.equals(board.getPlayerRedInstance().getId())) {
+            player = board.getPlayerRed();
+        } else if (player.equals(board.getPlayerRed())) {
 
-            playerInstanceId = board.getPlayerBlueInstance().getId();
+            player = board.getPlayerBlue();
+        } else {
+
+            // ToDo: Handle error
         }
     }
 }

@@ -2,12 +2,12 @@ package de.schramm.royalbash.gameengine.handler;
 
 import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.rule.DeckOwnedByPlayerChecker;
+import de.schramm.royalbash.gameengine.rule.BlueprintOwnedByAccountChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.Game;
-import de.schramm.royalbash.model.deck.Deck;
-import de.schramm.royalbash.model.player.Account;
-import de.schramm.royalbash.persistence.deck.DeckRepository;
+import de.schramm.royalbash.model.Blueprint;
+import de.schramm.royalbash.model.Account;
+import de.schramm.royalbash.persistence.blueprint.BlueprintRepository;
 import de.schramm.royalbash.persistence.game.GameRepository;
 import de.schramm.royalbash.persistence.account.AccountRepository;
 import org.junit.Assert;
@@ -25,15 +25,13 @@ public class GameHandlerTest {
     private UUID gameId = UUID.randomUUID();
 
     private UUID playerBlueDeckId = UUID.randomUUID();
-    private Deck playerBlueDeck = Deck.builder()
+    private Blueprint playerBlueBlueprint = Blueprint.builder()
             .id(playerBlueDeckId)
-            .clearCardList()
             .build();
 
     private UUID playerRedDeckId = UUID.randomUUID();
-    private Deck playerRedDeck = Deck.builder()
+    private Blueprint playerRedBlueprint = Blueprint.builder()
             .id(playerRedDeckId)
-            .clearCardList()
             .build();
 
     private UUID playerBlueId = UUID.randomUUID();
@@ -42,7 +40,7 @@ public class GameHandlerTest {
             .name("TestBlue")
             .email("")
             .passwordHash("")
-            .deck(playerBlueDeck)
+            .blueprint(playerBlueBlueprint)
             .build();
 
     private UUID playerRedId = UUID.randomUUID();
@@ -51,18 +49,18 @@ public class GameHandlerTest {
             .name("TestRed")
             .email("")
             .passwordHash("")
-            .deck(playerRedDeck)
+            .blueprint(playerRedBlueprint)
             .build();
 
-    private DeckRepository deckRepository = mock(DeckRepository.class);
+    private BlueprintRepository blueprintRepository = mock(BlueprintRepository.class);
 
     private RequiredDomainObjectChecker requiredDomainObjectChecker = new RequiredDomainObjectChecker();
 
-    private DeckOwnedByPlayerChecker deckOwnedByPlayerChecker = new DeckOwnedByPlayerChecker();
+    private BlueprintOwnedByAccountChecker blueprintOwnedByAccountChecker = new BlueprintOwnedByAccountChecker();
 
     {
-        when(deckRepository.find(playerBlueDeckId)).thenReturn(playerBlueDeck);
-        when(deckRepository.find(playerRedDeckId)).thenReturn(playerRedDeck);
+        when(blueprintRepository.find(playerBlueDeckId)).thenReturn(playerBlueBlueprint);
+        when(blueprintRepository.find(playerRedDeckId)).thenReturn(playerRedBlueprint);
     }
 
     @Test
@@ -79,9 +77,9 @@ public class GameHandlerTest {
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
                 accountRepository,
-                deckRepository,
+                blueprintRepository,
                 requiredDomainObjectChecker,
-                deckOwnedByPlayerChecker
+                blueprintOwnedByAccountChecker
         );
 
         // when
@@ -114,9 +112,9 @@ public class GameHandlerTest {
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
                 accountRepository,
-                deckRepository,
+                blueprintRepository,
                 requiredDomainObjectChecker,
-                deckOwnedByPlayerChecker
+                blueprintOwnedByAccountChecker
         );
 
         // when
@@ -142,9 +140,9 @@ public class GameHandlerTest {
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
                 accountRepository,
-                deckRepository,
+                blueprintRepository,
                 requiredDomainObjectChecker,
-                deckOwnedByPlayerChecker
+                blueprintOwnedByAccountChecker
         );
 
         // when
@@ -172,9 +170,9 @@ public class GameHandlerTest {
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
                 mock(AccountRepository.class),
-                deckRepository,
+                blueprintRepository,
                 requiredDomainObjectChecker,
-                deckOwnedByPlayerChecker
+                blueprintOwnedByAccountChecker
         );
 
         // When
@@ -193,9 +191,9 @@ public class GameHandlerTest {
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
                 mock(AccountRepository.class),
-                deckRepository,
+                blueprintRepository,
                 requiredDomainObjectChecker,
-                deckOwnedByPlayerChecker
+                blueprintOwnedByAccountChecker
         );
 
         // When
@@ -218,9 +216,9 @@ public class GameHandlerTest {
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
                 mock(AccountRepository.class),
-                deckRepository,
+                blueprintRepository,
                 requiredDomainObjectChecker,
-                deckOwnedByPlayerChecker
+                blueprintOwnedByAccountChecker
         );
 
         // when
@@ -243,9 +241,9 @@ public class GameHandlerTest {
         GameHandler gameHandler = new GameHandler(
                 gameRepository,
                 mock(AccountRepository.class),
-                deckRepository,
+                blueprintRepository,
                 requiredDomainObjectChecker,
-                deckOwnedByPlayerChecker
+                blueprintOwnedByAccountChecker
         );
 
         // when

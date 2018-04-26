@@ -2,14 +2,15 @@ package de.schramm.royalbash.gameengine.handler;
 
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
-import de.schramm.royalbash.gameengine.rule.PlayerInstanceHasCardInHandChecker;
-import de.schramm.royalbash.gameengine.rule.PlayerInstanceOnBoardChecker;
+import de.schramm.royalbash.gameengine.rule.PlayerHasCardInHandChecker;
+import de.schramm.royalbash.gameengine.rule.PlayerOnBoardChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.Board;
-import de.schramm.royalbash.model.card.instance.CardInstance;
-import de.schramm.royalbash.model.player.PlayerInstance;
+import de.schramm.royalbash.model.Card;
+import de.schramm.royalbash.model.Player;
+import de.schramm.royalbash.model.Summoning;
 import de.schramm.royalbash.persistence.board.BoardRepository;
-import de.schramm.royalbash.persistence.card.instance.CardInstanceRepository;
+import de.schramm.royalbash.persistence.card.CardRepository;
 import de.schramm.royalbash.persistence.player.PlayerRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,27 +24,26 @@ import static org.mockito.Mockito.when;
 
 public class SummonHandlerTest {
 
-    private UUID cardInstanceId = UUID.randomUUID();
-    private CardInstance cardInstance = mock(CardInstance.class);
-
-    private UUID playerInstanceId = UUID.randomUUID();
-    private PlayerInstance playerInstance = PlayerInstance.builder()
-            .id(playerInstanceId)
-            .handCardInstance(cardInstance)
+    private UUID cardId = UUID.randomUUID();
+    private Card card = Card.builder()
+            .id(cardId)
             .build();
 
-    private CardInstanceRepository cardInstanceRepository = mock(CardInstanceRepository.class);
+    private UUID playerId = UUID.randomUUID();
+    private Player player = Player.builder()
+            .id(playerId)
+            .card(card)
+            .build();
+
+    private CardRepository cardRepository = mock(CardRepository.class);
 
     private PlayerRepository playerRepository = mock(PlayerRepository.class);
 
     private UUID boardId = UUID.randomUUID();
 
     {
-        when(cardInstance.getId()).thenReturn(cardInstanceId);
-
-        when(cardInstanceRepository.find(cardInstanceId)).thenReturn(cardInstance);
-
-        when(playerRepository.find(playerInstanceId)).thenReturn(playerInstance);
+        when(cardRepository.find(cardId)).thenReturn(card);
+        when(playerRepository.find(playerId)).thenReturn(player);
     }
 
     @Test
@@ -54,37 +54,35 @@ public class SummonHandlerTest {
 
         Board board = Board.builder()
                 .id(boardId)
-                .playerBlueInstance(playerInstance)
-                .playerRedInstance(PlayerInstance.builder().build())
+                .playerBlue(player)
+                .playerRed(Player.builder().build())
                 .build();
 
         BoardRepository boardRepository = mock(BoardRepository.class);
         when(boardRepository.find(boardId)).thenReturn(board);
 
         SummonHandler summonHandler = new SummonHandler(
-                cardInstanceRepository,
+                cardRepository,
                 playerRepository,
                 boardRepository,
                 new RequiredDomainObjectChecker(),
-                new PlayerInstanceOnBoardChecker(),
-                new PlayerInstanceHasCardInHandChecker()
+                new PlayerOnBoardChecker(),
+                new PlayerHasCardInHandChecker()
         );
 
         // when
 
-        Board retrievedBoard = summonHandler.summonInstance(
+        Board retrievedBoard = summonHandler.summon(
                 boardId,
-                playerInstanceId,
-                cardInstanceId
+                playerId,
+                cardId
         );
 
         // then
 
-        Assert.assertThat(retrievedBoard.getBlueInstanceSet(), hasSize(1));
-
-        CardInstance cardInstance = retrievedBoard.getBlueInstanceSet().iterator().next();
-
-        Assert.assertThat(cardInstance, is(this.cardInstance));
+        Assert.assertThat(retrievedBoard.getPlayerBlue().getSummonings(), hasSize(1));
+        Summoning summoning = retrievedBoard.getPlayerBlue().getSummonings().iterator().next();
+        Assert.assertThat(summoning.getCard(), is(this.card));
     }
 
     @Test(expected = GameRuleViolationException.class)
@@ -95,28 +93,28 @@ public class SummonHandlerTest {
 
         Board board = Board.builder()
                 .id(boardId)
-                .playerBlueInstance(PlayerInstance.builder().build())
-                .playerRedInstance(PlayerInstance.builder().build())
+                .playerBlue(Player.builder().build())
+                .playerRed(Player.builder().build())
                 .build();
 
         BoardRepository boardRepository = mock(BoardRepository.class);
         when(boardRepository.find(boardId)).thenReturn(board);
 
         SummonHandler summonHandler = new SummonHandler(
-                cardInstanceRepository,
+                cardRepository,
                 playerRepository,
                 boardRepository,
                 new RequiredDomainObjectChecker(),
-                new PlayerInstanceOnBoardChecker(),
-                new PlayerInstanceHasCardInHandChecker()
+                new PlayerOnBoardChecker(),
+                new PlayerHasCardInHandChecker()
         );
 
         // when
 
-        summonHandler.summonInstance(
+        summonHandler.summon(
                 boardId,
-                playerInstanceId,
-                cardInstanceId
+                playerId,
+                cardId
         );
     }
 
@@ -126,38 +124,37 @@ public class SummonHandlerTest {
 
         // given
 
-        PlayerInstance playerInstance = PlayerInstance.builder()
-                .id(playerInstanceId)
-                .clearHandCardInstanceList()
+        Player player = Player.builder()
+                .id(playerId)
                 .build();
 
         PlayerRepository playerRepository = mock(PlayerRepository.class);
-        when(playerRepository.find(playerInstanceId)).thenReturn(playerInstance);
+        when(playerRepository.find(playerId)).thenReturn(player);
 
         Board board = Board.builder()
                 .id(boardId)
-                .playerBlueInstance(playerInstance)
-                .playerRedInstance(PlayerInstance.builder().build())
+                .playerBlue(player)
+                .playerRed(Player.builder().build())
                 .build();
 
         BoardRepository boardRepository = mock(BoardRepository.class);
         when(boardRepository.find(boardId)).thenReturn(board);
 
         SummonHandler summonHandler = new SummonHandler(
-                cardInstanceRepository,
+                cardRepository,
                 playerRepository,
                 boardRepository,
                 new RequiredDomainObjectChecker(),
-                new PlayerInstanceOnBoardChecker(),
-                new PlayerInstanceHasCardInHandChecker()
+                new PlayerOnBoardChecker(),
+                new PlayerHasCardInHandChecker()
         );
 
         // when
 
-        summonHandler.summonInstance(
+        summonHandler.summon(
                 boardId,
-                playerInstanceId,
-                cardInstanceId
+                playerId,
+                cardId
         );
     }
 }

@@ -36,7 +36,7 @@ public class TurnHandler {
 
         // Apply rule
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(board);
+        requiredDomainObjectChecker.check(board);
 
         // Fetch nested domain object
 
@@ -44,7 +44,7 @@ public class TurnHandler {
 
         // Apply rule again
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(turn);
+        requiredDomainObjectChecker.check(turn);
 
         // Return Board
 
@@ -59,7 +59,7 @@ public class TurnHandler {
 
         // Apply rule
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(board);
+        requiredDomainObjectChecker.check(board);
 
         // Fetch nested domain object
 
@@ -67,11 +67,11 @@ public class TurnHandler {
 
         // Apply rule again
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(turn);
+        requiredDomainObjectChecker.check(turn);
 
-        // Increase Turn counter and swap active PlayerInstance
+        // Increase Turn counter and swapPlayer active Player
 
         board.getTurn().increaseTurnCounter();
-        board.getTurn().swapPlayerInstance(board);
+        board.getTurn().swapPlayer(board);
     }
 }

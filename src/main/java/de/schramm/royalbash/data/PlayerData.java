@@ -1,31 +1,37 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.model.player.Account;
+import de.schramm.royalbash.model.Player;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import static de.schramm.royalbash.data.AccountData.ACCOUNT_1;
+import static de.schramm.royalbash.data.AccountData.ACCOUNT_2;
+
 public class PlayerData {
 
-    public static Set<Account> getPlayerSet() {
+    public static final Player PLAYER_1 = Player.builder()
+            .id(UUID.fromString("8dbc6953-e25e-49f0-a298-7a0ea721de6c"))
+            .health(20)
+            .account(ACCOUNT_1)
+            .clearCards()
+            .clearSummonings()
+            .build();
+
+    public static final Player PLAYER_2 = Player.builder()
+            .id(UUID.fromString("736cb270-c73c-4257-b49f-d71d9b4cb59b"))
+            .health(20)
+            .account(ACCOUNT_2)
+            .clearCards()
+            .clearSummonings()
+            .build();
+
+    public static Set<Player> getPlayerSet() {
 
         return new HashSet<>(
-                Arrays.asList(
-                        Account.builder()
-                                .id(UUID.fromString("934d46da-041e-4c02-8115-497c04eaaccf"))
-                                .name("Account Blue")
-                                .email("player.blue@royalbash.de")
-                                .passwordHash("123qwe")
-                                .build(),
-                        Account.builder()
-                                .id(UUID.fromString("74d41ee9-804a-4840-8c17-8ec4cd2ef16c"))
-                                .name("Account Red")
-                                .email("player.red@royalbash.de")
-                                .passwordHash("qwe123")
-                                .build()
-                )
+                Arrays.asList(PLAYER_1, PLAYER_2)
         );
     }
 }

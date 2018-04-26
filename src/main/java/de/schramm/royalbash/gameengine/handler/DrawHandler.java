@@ -1,15 +1,15 @@
 package de.schramm.royalbash.gameengine.handler;
 
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.rule.DeckInstanceOwnedByPlayerInstanceChecker;
-import de.schramm.royalbash.gameengine.rule.PlayerInstanceCanDrawAnotherCardChecker;
+import de.schramm.royalbash.gameengine.rule.DeckOwnedByPlayerChecker;
+import de.schramm.royalbash.gameengine.rule.PlayerCanDrawAnotherCardChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.Board;
-import de.schramm.royalbash.model.card.instance.CardInstance;
-import de.schramm.royalbash.model.deck.DeckInstance;
-import de.schramm.royalbash.model.player.PlayerInstance;
+import de.schramm.royalbash.model.Card;
+import de.schramm.royalbash.model.Deck;
+import de.schramm.royalbash.model.Player;
 import de.schramm.royalbash.persistence.board.BoardRepository;
-import de.schramm.royalbash.persistence.deck.instance.DeckInstanceRepository;
+import de.schramm.royalbash.persistence.deck.DeckRepository;
 import de.schramm.royalbash.persistence.player.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,70 +20,62 @@ import java.util.UUID;
 public class DrawHandler {
 
     // Repositories
-    private final DeckInstanceRepository deckInstanceRepository;
+    private final DeckRepository deckRepository;
     private final PlayerRepository playerRepository;
     private final BoardRepository boardRepository;
 
     // Rules
     private final RequiredDomainObjectChecker requiredDomainObjectChecker;
-    private final PlayerInstanceCanDrawAnotherCardChecker playerInstanceCanDrawAnotherCardChecker;
-    private final DeckInstanceOwnedByPlayerInstanceChecker deckInstanceOwnedByPlayerInstanceChecker;
+    private final PlayerCanDrawAnotherCardChecker playerCanDrawAnotherCardChecker;
+    private final DeckOwnedByPlayerChecker deckOwnedByPlayerChecker;
 
     @Autowired
     public DrawHandler(
-            DeckInstanceRepository deckInstanceRepository,
+            DeckRepository deckRepository,
             PlayerRepository playerRepository,
             BoardRepository boardRepository,
             RequiredDomainObjectChecker requiredDomainObjectChecker,
-            PlayerInstanceCanDrawAnotherCardChecker playerInstanceCanDrawAnotherCardChecker,
-            DeckInstanceOwnedByPlayerInstanceChecker deckInstanceOwnedByPlayerInstanceChecker
+            PlayerCanDrawAnotherCardChecker playerCanDrawAnotherCardChecker,
+            DeckOwnedByPlayerChecker deckOwnedByPlayerChecker
     ) {
-        this.deckInstanceRepository = deckInstanceRepository;
+        this.deckRepository = deckRepository;
         this.playerRepository = playerRepository;
         this.boardRepository = boardRepository;
         this.requiredDomainObjectChecker = requiredDomainObjectChecker;
-        this.playerInstanceCanDrawAnotherCardChecker = playerInstanceCanDrawAnotherCardChecker;
-        this.deckInstanceOwnedByPlayerInstanceChecker = deckInstanceOwnedByPlayerInstanceChecker;
+        this.playerCanDrawAnotherCardChecker = playerCanDrawAnotherCardChecker;
+        this.deckOwnedByPlayerChecker = deckOwnedByPlayerChecker;
     }
 
-    public CardInstance drawCardInstance(
-            UUID playerInstanceId,
-            UUID deckInstanceId,
+    public Card drawCard(
+            UUID playerId,
+            UUID deckId,
             UUID boardId
     ) throws GameEngineException {
 
         // Fetch domain objects
 
-        PlayerInstance playerInstance = playerRepository.find(playerInstanceId);
-
-        DeckInstance deckInstance = deckInstanceRepository.find(deckInstanceId);
-
+        Player player = playerRepository.find(playerId);
+        Deck deck = deckRepository.find(deckId);
         Board board = boardRepository.find(boardId);
 
         // Apply rules
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(playerInstance, deckInstance, board);
-
-        playerInstanceCanDrawAnotherCardChecker.checkIfPlayerInstanceCanDrawAnotherCard(playerInstance);
-
-        deckInstanceOwnedByPlayerInstanceChecker.checkIfDeckInstanceIsOwnedByPlayerInstance(
-                deckInstance,
-                playerInstance,
-                board
+        requiredDomainObjectChecker.check(player, deck, board);
+        playerCanDrawAnotherCardChecker.checkIfPlayerInstanceCanDrawAnotherCard(player);
+        deckOwnedByPlayerChecker.check(
+                deck,
+                player
         );
 
-        // Draw Card and put it in hand of PlayerInstance
+        // Draw Card and put it in hand of Player
 
-        CardInstance cardInstance = deckInstance.drawCard();
-
-        playerInstance.addCardInstanceToHand(cardInstance);
-
-        playerRepository.save(playerInstance);
-
-        deckInstanceRepository.save(deckInstance);
+        Card card = deck.drawCard();
+        player.addCard(card);
+        playerRepository.save(player);
+        deckRepository.save(deck);
 
         // Return Card
 
-        return cardInstance;
+        return card;
     }
 }

@@ -93,7 +93,7 @@ public class BoardController {
 
         try {
 
-            Board board = summonHandler.summonInstance(
+            Board board = summonHandler.summon(
                     boardId,
                     playerInstanceId,
                     cardId

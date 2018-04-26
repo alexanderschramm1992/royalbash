@@ -1,14 +1,15 @@
 package de.schramm.royalbash.gameengine.handler;
 
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.rule.PlayerInstanceHasCardInHandChecker;
-import de.schramm.royalbash.gameengine.rule.PlayerInstanceOnBoardChecker;
+import de.schramm.royalbash.gameengine.rule.PlayerHasCardInHandChecker;
+import de.schramm.royalbash.gameengine.rule.PlayerOnBoardChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.Board;
-import de.schramm.royalbash.model.card.instance.CardInstance;
-import de.schramm.royalbash.model.player.PlayerInstance;
+import de.schramm.royalbash.model.Card;
+import de.schramm.royalbash.model.Player;
+import de.schramm.royalbash.model.Summoning;
 import de.schramm.royalbash.persistence.board.BoardRepository;
-import de.schramm.royalbash.persistence.card.instance.CardInstanceRepository;
+import de.schramm.royalbash.persistence.card.CardRepository;
 import de.schramm.royalbash.persistence.player.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,72 +20,71 @@ import java.util.UUID;
 public class SummonHandler {
 
     // Repositories
-    private final CardInstanceRepository cardInstanceRepository;
+    private final CardRepository cardRepository;
     private final PlayerRepository playerRepository;
     private final BoardRepository boardRepository;
 
     // Rules
     private final RequiredDomainObjectChecker requiredDomainObjectChecker;
-    private final PlayerInstanceOnBoardChecker playerInstanceOnBoardChecker;
-    private final PlayerInstanceHasCardInHandChecker playerInstanceHasCardInHandChecker;
+    private final PlayerOnBoardChecker playerOnBoardChecker;
+    private final PlayerHasCardInHandChecker playerHasCardInHandChecker;
 
     @Autowired
     public SummonHandler(
-            CardInstanceRepository cardInstanceRepository,
+            CardRepository cardRepository,
             PlayerRepository playerRepository,
             BoardRepository boardRepository,
             RequiredDomainObjectChecker requiredDomainObjectChecker,
-            PlayerInstanceOnBoardChecker playerInstanceOnBoardChecker,
-            PlayerInstanceHasCardInHandChecker playerInstanceHasCardInHandChecker
+            PlayerOnBoardChecker playerOnBoardChecker,
+            PlayerHasCardInHandChecker playerHasCardInHandChecker
     ) {
-        this.cardInstanceRepository = cardInstanceRepository;
+        this.cardRepository = cardRepository;
         this.playerRepository = playerRepository;
         this.boardRepository = boardRepository;
         this.requiredDomainObjectChecker = requiredDomainObjectChecker;
-        this.playerInstanceOnBoardChecker = playerInstanceOnBoardChecker;
-        this.playerInstanceHasCardInHandChecker = playerInstanceHasCardInHandChecker;
+        this.playerOnBoardChecker = playerOnBoardChecker;
+        this.playerHasCardInHandChecker = playerHasCardInHandChecker;
     }
 
-    public Board summonInstance(
+    public Board summon(
             UUID boardId,
-            UUID playerInstanceId,
-            UUID cardInstanceId
+            UUID playerId,
+            UUID cardId
     ) throws GameEngineException {
 
         // Fetch domain objects
 
         Board board = boardRepository.find(boardId);
-        PlayerInstance playerInstance = playerRepository.find(playerInstanceId);
-        CardInstance cardInstance = cardInstanceRepository.find(cardInstanceId);
+        Player player = playerRepository.find(playerId);
+        Card card = cardRepository.find(cardId);
 
         // Apply rules
 
-        requiredDomainObjectChecker.checkIfRequiredDomainObjectsExist(
+        requiredDomainObjectChecker.check(
                 board,
-                playerInstance,
-                cardInstance
+                player,
+                card
         );
-
-        playerInstanceOnBoardChecker.checkIfPlayerInstanceBelongsToBoard(
-                playerInstance,
+        playerOnBoardChecker.check(
+                player,
                 board
         );
-
-        playerInstanceHasCardInHandChecker.checkIfPlayerInstanceHasCardInHand(
-                playerInstance,
-                cardInstance
+        playerHasCardInHandChecker.check(
+                player,
+                card
         );
 
         // Summon Instance
 
-        playerInstance.removeCardInstanceFromHand(cardInstance);
-        board.summonInstance(playerInstance.getId(), cardInstance);
+        player.removeCard(card);
+        Summoning summoning = Summoning.fromCard(card, UUID.randomUUID());
+        player.summon(summoning);
 
         // Save changes
 
         boardRepository.save(board);
-        playerRepository.save(playerInstance);
-        cardInstanceRepository.save(cardInstance);
+        playerRepository.save(player);
+        cardRepository.save(card);
 
         // Return updated Board
 
