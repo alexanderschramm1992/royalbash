@@ -1,10 +1,12 @@
 package de.schramm.royalbash.persistence.deck;
 
+import de.schramm.royalbash.data.DeckData;
 import de.schramm.royalbash.model.Deck;
 import de.schramm.royalbash.persistence.card.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -16,6 +18,12 @@ public class DeckRepositoryFake implements DeckRepository {
     private final CardRepository cardRepository;
 
     private Set<DeckEntity> deckEntities = new HashSet<>();
+
+    @PostConstruct
+    private void init() {
+
+        DeckData.getDeckSet().forEach(this::save);
+    }
 
     @Autowired
     public DeckRepositoryFake(CardRepository cardRepository) {
@@ -49,6 +57,8 @@ public class DeckRepositoryFake implements DeckRepository {
     public void delete(UUID id) {
 
         Deck deck = find(id);
-        deckEntities.remove(DeckEntity.toEntity(deck));
+        if (deck != null) {
+            deckEntities.remove(DeckEntity.toEntity(deck));
+        }
     }
 }

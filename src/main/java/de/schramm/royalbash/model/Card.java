@@ -11,6 +11,9 @@ public class Card {
 
     private UUID id;
     private String name;
+    private String image;
+    private String type;
+    private String text;
     private int cost;
     private int strength;
     private int health;

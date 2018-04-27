@@ -5,6 +5,9 @@ import de.schramm.royalbash.model.Turn;
 
 import java.util.*;
 
+import static de.schramm.royalbash.data.PlayerData.PLAYER_1;
+import static de.schramm.royalbash.data.PlayerData.PLAYER_2;
+
 public class BoardData {
 
     public static Set<Board> getBoardSet() {
@@ -16,8 +19,11 @@ public class BoardData {
                                 .turn(
                                         Turn.builder()
                                                 .counter(1)
+                                                .player(PLAYER_1)
                                                 .build()
                                 )
+                                .playerBlue(PLAYER_1)
+                                .playerRed(PLAYER_2)
                                 .build()
                 )
         );

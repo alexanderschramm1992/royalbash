@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 abstract class GenericCallPOST {
 
@@ -6,12 +6,8 @@ abstract class GenericCallPOST {
         url: string,
         headers: { [header: string]: string; },
         body: any,
-        success: (data: any) => any
+        success: (data: any) => void
     ): void {
-
-        console.dir(url);
-        console.dir(headers);
-        console.dir(body);
 
         axios.post(
             url,
@@ -19,7 +15,8 @@ abstract class GenericCallPOST {
             {
                 headers: headers
             }
-        ).then((response) => {
+        ).then((response: AxiosResponse): void => {
+            console.dir(response);
             success(response.data);
         });
     }

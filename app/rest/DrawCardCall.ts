@@ -5,9 +5,7 @@ import CardDrawnEvent from "../events/CardDrawnEvent";
 
 export interface DrawCardCallParameters {
 
-    readonly playerInstanceId: string,
-    readonly deckInstanceId: string,
-    readonly boardId: string
+    readonly playerId: string
 }
 
 class DrawCardCall extends GenericCallPOST{
@@ -29,23 +27,19 @@ class DrawCardCall extends GenericCallPOST{
                     "Content-Type": "application/json; charset=utf-8"
                 },
                 {
-                    "playerInstanceId": this.callParameters.playerInstanceId,
-                    "deckInstanceId": this.callParameters.deckInstanceId,
-                    "boardId": this.callParameters.boardId
+                    "playerId": this.callParameters.playerId
                 },
-                function(data){
-
-                    let json = JSON.parse(data);
+                (data: CardModel): void => {
 
                     resolve({
-                        id: json.id,
+                        id: data.id,
                         image: "",
                         type: "",
                         text: "",
-                        name: json.name,
-                        cost: json.cost,
-                        strength: json.strength,
-                        health: json.health
+                        name: data.name,
+                        cost: data.cost,
+                        strength: data.strength,
+                        health: data.health
                     });
                 }
             );

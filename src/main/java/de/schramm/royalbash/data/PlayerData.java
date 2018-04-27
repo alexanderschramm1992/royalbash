@@ -9,6 +9,8 @@ import java.util.UUID;
 
 import static de.schramm.royalbash.data.AccountData.ACCOUNT_1;
 import static de.schramm.royalbash.data.AccountData.ACCOUNT_2;
+import static de.schramm.royalbash.data.DeckData.DECK_1;
+import static de.schramm.royalbash.data.DeckData.DECK_2;
 
 public class PlayerData {
 
@@ -16,16 +18,14 @@ public class PlayerData {
             .id(UUID.fromString("8dbc6953-e25e-49f0-a298-7a0ea721de6c"))
             .health(20)
             .account(ACCOUNT_1)
-            .clearCards()
-            .clearSummonings()
+            .deck(DECK_1)
             .build();
 
     public static final Player PLAYER_2 = Player.builder()
             .id(UUID.fromString("736cb270-c73c-4257-b49f-d71d9b4cb59b"))
             .health(20)
             .account(ACCOUNT_2)
-            .clearCards()
-            .clearSummonings()
+            .deck(DECK_2)
             .build();
 
     public static Set<Player> getPlayerSet() {

@@ -33,15 +33,14 @@ public class DrawController {
         try {
 
             Card card = drawHandler.drawCard(
-                    requestParams.getPlayerId(),
-                    requestParams.getDeckId(),
-                    requestParams.getBoardId()
+                    requestParams.getPlayerId()
             );
 
             return ResponseEntity.ok(card);
         } catch (GameEngineException e) {
 
             System.err.println("Failed to draw card for " + requestParams);
+            e.printStackTrace();
 
             return ResponseEntity.badRequest().build();
         }

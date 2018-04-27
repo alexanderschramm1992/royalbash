@@ -1,5 +1,6 @@
 package de.schramm.royalbash.persistence.player;
 
+import de.schramm.royalbash.data.PlayerData;
 import de.schramm.royalbash.model.Player;
 import de.schramm.royalbash.persistence.card.CardRepository;
 import de.schramm.royalbash.persistence.summoning.SummoningRepository;
@@ -8,6 +9,7 @@ import de.schramm.royalbash.persistence.deck.DeckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -17,6 +19,12 @@ import java.util.stream.Collectors;
 public class PlayerRepositoryFake implements PlayerRepository {
 
     private Map<UUID, PlayerEntity> playerInstanceEntityMap = new HashMap<>();
+
+    @PostConstruct
+    private void init() {
+
+        PlayerData.getPlayerSet().forEach(this::save);
+    }
 
     private final AccountRepository accountRepository;
     private final DeckRepository deckRepository;

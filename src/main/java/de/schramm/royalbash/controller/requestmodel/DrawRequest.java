@@ -10,6 +10,4 @@ import java.util.UUID;
 public class DrawRequest {
 
     private UUID playerId;
-    private UUID deckId;
-    private UUID boardId;
 }

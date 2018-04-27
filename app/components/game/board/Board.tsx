@@ -46,9 +46,7 @@ export class Board extends React.Component<{}, BoardState> {
             cardDrawnEventBus: cardDrawnEventBus,
             drawCardCall: new DrawCardCall(
                 {
-                    playerInstanceId: "c31a66c7-2f76-4e81-a922-835272833967",
-                    deckInstanceId: "c31a66c7-2f76-4e81-a922-835272833967",
-                    boardId: "c31a66c7-2f76-4e81-a922-835272833967"
+                    playerId: "8dbc6953-e25e-49f0-a298-7a0ea721de6c"
                 },
                 cardDrawnEventBus)
         };

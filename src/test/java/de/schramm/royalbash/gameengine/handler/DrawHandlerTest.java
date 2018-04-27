@@ -2,7 +2,6 @@ package de.schramm.royalbash.gameengine.handler;
 
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
-import de.schramm.royalbash.gameengine.rule.DeckOwnedByPlayerChecker;
 import de.schramm.royalbash.gameengine.rule.PlayerCanDrawAnotherCardChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.*;
@@ -23,15 +22,15 @@ public class DrawHandlerTest {
 
     private Card card = Card.builder().build();
 
-    private UUID deckInstanceId = UUID.randomUUID();
+    private UUID deckId = UUID.randomUUID();
     private Deck deck = Deck.builder()
-            .id(deckInstanceId)
+            .id(deckId)
             .card(card)
             .build();
 
-    private UUID playerInstanceId = UUID.randomUUID();
+    private UUID playerId = UUID.randomUUID();
     private Player player = Player.builder()
-            .id(playerInstanceId)
+            .id(playerId)
             .deck(deck)
             .build();
 
@@ -46,8 +45,8 @@ public class DrawHandlerTest {
     private BoardRepository boardRepository = mock(BoardRepository.class);
 
     {
-        when(playerRepository.find(playerInstanceId)).thenReturn(player);
-        when(deckRepository.find(deckInstanceId)).thenReturn(deck);
+        when(playerRepository.find(playerId)).thenReturn(player);
+        when(deckRepository.find(deckId)).thenReturn(deck);
         when(boardRepository.find(boardId)).thenReturn(board);
     }
 
@@ -57,20 +56,15 @@ public class DrawHandlerTest {
         // given
 
         DrawHandler drawHandler = new DrawHandler(
-                deckRepository,
                 playerRepository,
-                boardRepository,
                 new RequiredDomainObjectChecker(),
-                new PlayerCanDrawAnotherCardChecker(8),
-                new DeckOwnedByPlayerChecker()
+                new PlayerCanDrawAnotherCardChecker(8)
         );
 
         // when
 
         Card drawnCard = drawHandler.drawCard(
-                playerInstanceId,
-                deckInstanceId,
-                boardId
+                playerId
         );
 
         // then
@@ -86,20 +80,15 @@ public class DrawHandlerTest {
         // given
 
         DrawHandler drawHandler = new DrawHandler(
-                deckRepository,
                 playerRepository,
-                boardRepository,
                 new RequiredDomainObjectChecker(),
-                new PlayerCanDrawAnotherCardChecker(0),
-                new DeckOwnedByPlayerChecker()
+                new PlayerCanDrawAnotherCardChecker(0)
         );
 
         // when
 
         drawHandler.drawCard(
-                playerInstanceId,
-                deckInstanceId,
-                boardId
+                playerId
         );
     }
 }
