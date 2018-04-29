@@ -30,7 +30,10 @@ export class Deck extends React.Component<HandProps, HandState> {
 
         return (
             <div className="hand">
-                <CardContainer cards={this.state.cards} eventBus={this.props.mouseOnCardEventBus}/>
+                <CardContainer
+                  cards={this.state.cards}
+                  eventBus={this.props.mouseOnCardEventBus}
+                />
             </div>
         );
     }

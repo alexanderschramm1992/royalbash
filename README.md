@@ -1,11 +1,16 @@
 # Royal Bash
 
+## Prerequisites
+ * Maven has to be installed on the machine
+ * NPM has to be installed on the machine
+ * Suggested IDE is IntelliJ for backend and Atom for frontend
+
 ## Getting started
  * Run `mvn clean install -U` to download dependencies of the backend
  * Run `npm install` to download dependencies of the frontend
  * Run `npm run dev` to compile and pack the frontend (keeps running)
  * Right click `/src/main/java/de.schramm.royalbash/ServerApplication` and select _Run_
- 
-## Endpoints 
+
+## Endpoints
  * In your browser, navigate to [localhost:8080](localhost:8080) to find the app
  * In your browser, navigate to [localhost:8080/api](localhost:8080/api) to find the backend API documentation
