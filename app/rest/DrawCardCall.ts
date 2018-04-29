@@ -29,19 +29,7 @@ class DrawCardCall extends GenericCallPOST{
                 {
                     "playerId": this.callParameters.playerId
                 },
-                (data: CardModel): void => {
-
-                    resolve({
-                        id: data.id,
-                        image: "",
-                        type: "",
-                        text: "",
-                        name: data.name,
-                        cost: data.cost,
-                        strength: data.strength,
-                        health: data.health
-                    });
-                }
+                (data: CardModel): void => {resolve(data);}
             );
         }).then((value) => {
 
