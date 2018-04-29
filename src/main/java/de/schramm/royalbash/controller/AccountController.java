@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller;
 
-import de.schramm.royalbash.controller.requestmodel.PlayerRequest;
+import de.schramm.royalbash.controller.requestmodel.AccountRequest;
 import de.schramm.royalbash.controller.responsemodel.AccountExt;
 import de.schramm.royalbash.model.Account;
 import de.schramm.royalbash.persistence.account.AccountRepository;
@@ -30,13 +30,13 @@ public class AccountController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public ResponseEntity<AccountExt> login(
-            @RequestBody PlayerRequest playerRequest
+            @RequestBody AccountRequest accountRequest
         ) {
 
         Account account = accountRepository.findByCredentials(
-                playerRequest.getName(),
-                playerRequest.getEmail(),
-                playerRequest.getPasswordHash()
+                accountRequest.getName(),
+                accountRequest.getEmail(),
+                accountRequest.getPasswordHash()
         );
 
         if(account != null) {
@@ -54,12 +54,12 @@ public class AccountController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public ResponseEntity register(
-            @RequestBody PlayerRequest playerRequest
+            @RequestBody AccountRequest accountRequest
     ) {
 
-        Account accountByName = accountRepository.findByName(playerRequest.getName());
+        Account accountByName = accountRepository.findByName(accountRequest.getName());
 
-        Account accountByEmail = accountRepository.findByEmail(playerRequest.getEmail());
+        Account accountByEmail = accountRepository.findByEmail(accountRequest.getEmail());
 
         if(accountByName != null || accountByEmail != null) {
 
@@ -68,9 +68,9 @@ public class AccountController {
 
             Account account = Account.builder()
                     .id(UUID.randomUUID())
-                    .name(playerRequest.getName())
-                    .email(playerRequest.getEmail())
-                    .passwordHash(playerRequest.getPasswordHash())
+                    .name(accountRequest.getName())
+                    .email(accountRequest.getEmail())
+                    .passwordHash(accountRequest.getPasswordHash())
                     .build();
 
             accountRepository.save(account);

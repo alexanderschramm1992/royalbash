@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller;
 
-import de.schramm.royalbash.controller.requestmodel.PlayerRequest;
+import de.schramm.royalbash.controller.requestmodel.AccountRequest;
 import de.schramm.royalbash.controller.responsemodel.AccountExt;
 import de.schramm.royalbash.model.Account;
 import de.schramm.royalbash.persistence.blueprint.BlueprintRepository;
@@ -44,7 +44,7 @@ public class AccountEntityControllerTest {
         // When
 
         ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
-                PlayerRequest.builder()
+                AccountRequest.builder()
                         .name(playerName)
                         .email(playerEmail)
                         .passwordHash(playerPasswordHash)
@@ -62,7 +62,7 @@ public class AccountEntityControllerTest {
         // When
 
         ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
-                PlayerRequest.builder()
+                AccountRequest.builder()
                         .name(playerName)
                         .passwordHash(playerPasswordHash)
                         .build()
@@ -79,7 +79,7 @@ public class AccountEntityControllerTest {
         // When
 
         ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
-                PlayerRequest.builder()
+                AccountRequest.builder()
                         .email(playerEmail)
                         .passwordHash(playerPasswordHash)
                         .build()
@@ -96,7 +96,7 @@ public class AccountEntityControllerTest {
         // When
 
         ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
-                PlayerRequest.builder()
+                AccountRequest.builder()
                         .name(playerName)
                         .email(playerEmail)
                         .passwordHash("qwe123")
@@ -114,7 +114,7 @@ public class AccountEntityControllerTest {
         // When
 
         ResponseEntity<AccountExt> playerExtResponseEntity = accountController.login(
-                PlayerRequest.builder()
+                AccountRequest.builder()
                         .name("otherName")
                         .email("otherEmail")
                         .passwordHash("qwe123")
@@ -136,7 +136,7 @@ public class AccountEntityControllerTest {
         // When
 
         ResponseEntity responseEntity = accountController.register(
-                PlayerRequest.builder()
+                AccountRequest.builder()
                         .name(playerName)
                         .email(playerEmail)
                         .passwordHash(playerPasswordHash)
@@ -154,7 +154,7 @@ public class AccountEntityControllerTest {
         // When
 
         ResponseEntity responseEntity = accountController.register(
-                PlayerRequest.builder()
+                AccountRequest.builder()
                         .name(playerName)
                         .email(playerEmail)
                         .passwordHash(playerPasswordHash)

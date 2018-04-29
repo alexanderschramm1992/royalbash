@@ -1,10 +1,11 @@
 # Royal Bash
 
 ## Prerequisites
- * Java JDK 8 has to be installed on the machine
- * Maven has to be installed on the machine
- * NPM has to be installed on the machine
- * Suggested IDE is IntelliJ for backend and Atom for frontend
+ * [Java JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) has to be installed on the machine
+ * [Maven](https://maven.apache.org/download.cgi) has to be installed on the machine
+ * [NPM](https://nodejs.org/en/) has to be installed on the machine
+ * [Lombok](https://projectlombok.org/setup/overview) is installed in your backend IDE
+ * Suggested IDE is [IntelliJ](https://www.jetbrains.com/idea/download/#section=windows) for backend and [Atom](https://atom.io/) for frontend
 
 ## Getting started
  * Run `mvn clean install -U` to download dependencies of the backend
