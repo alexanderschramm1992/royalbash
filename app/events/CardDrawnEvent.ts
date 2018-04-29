@@ -3,20 +3,20 @@ import {CardModel} from "../components/game/card/Card";
 
 class CardDrawnEvent extends Event {
 
-    private readonly _creatureModel: CardModel;
+    private readonly _cardModel: CardModel;
 
     constructor(
-        creatureModel: CardModel
+        cardModel: CardModel
     ) {
 
         super();
 
-        this._creatureModel = creatureModel;
+        this._cardModel = cardModel;
     }
 
-    public get creatureModel(): CardModel {
+    public get cardModel(): CardModel {
 
-        return this._creatureModel;
+        return this._cardModel;
     }
 }
 

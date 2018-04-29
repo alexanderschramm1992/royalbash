@@ -14,5 +14,5 @@
  * Right click `/src/main/java/de.schramm.royalbash/ServerApplication` and select _Run_
 
 ## Endpoints
- * In your browser, navigate to [localhost:8080](localhost:8080) to find the app
- * In your browser, navigate to [localhost:8080/api](localhost:8080/api) to find the backend API documentation
+ * In your browser, navigate to [localhost:8080](http://localhost:8080) to find the app
+ * In your browser, navigate to [localhost:8080/api](http://localhost:8080/api) to find the backend API documentation
