@@ -1,6 +1,7 @@
 # Royal Bash
 
 ## Prerequisites
+ * Java JDK 8 has to be installed on the machine
  * Maven has to be installed on the machine
  * NPM has to be installed on the machine
  * Suggested IDE is IntelliJ for backend and Atom for frontend
