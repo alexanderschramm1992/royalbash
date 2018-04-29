@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller;
 
-import de.schramm.royalbash.model.card.Card;
+import de.schramm.royalbash.model.Card;
 import de.schramm.royalbash.persistence.card.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
