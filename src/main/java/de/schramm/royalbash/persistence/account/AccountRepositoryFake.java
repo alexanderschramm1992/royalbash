@@ -57,19 +57,41 @@ public class AccountRepositoryFake implements AccountRepository {
             String passwordHash
     ) {
 
-        if(name.length() <= 0 && email.length() <= 0) {
+        if (name == null) {
 
-            return null;
+            return findByCredentialsAndEmail(email, passwordHash);
+        } else {
+
+            return findByCredentialsAndName(name, passwordHash);
         }
+    }
 
-        Optional<UUID> uuidOptional = playerEntityMap.entrySet().stream()
-                .filter(entry -> name.length() <= 0 || entry.getValue().getName().equals(name))
-                .filter(entry -> email.length() <= 0 || entry.getValue().getEmail().equals(email))
+    private Account findByCredentialsAndName(
+            String name,
+            String passwordHash
+    ) {
+
+        return playerEntityMap.entrySet().stream()
+                .filter(entry -> entry.getValue().getName().equals(name))
                 .filter(entry -> entry.getValue().getPasswordHash().equals(passwordHash))
                 .map(Map.Entry::getKey)
-                .findFirst();
+                .map(this::find)
+                .findFirst()
+                .orElse(null);
+    }
 
-        return uuidOptional.map(this::find).orElse(null);
+    private Account findByCredentialsAndEmail(
+            String email,
+            String passwordHash
+    ) {
+
+        return playerEntityMap.entrySet().stream()
+                .filter(entry -> entry.getValue().getEmail().equals(email))
+                .filter(entry -> entry.getValue().getPasswordHash().equals(passwordHash))
+                .map(Map.Entry::getKey)
+                .map(this::find)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
