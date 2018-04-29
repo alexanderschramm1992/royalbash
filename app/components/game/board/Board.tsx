@@ -11,6 +11,7 @@ import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
 import CardPreview from "./../card/CardPreview";
 import CardDrawnEvent from "../../../events/CardDrawnEvent";
 import Deck from "./Deck";
+import Hand from "./Hand";
 import DrawCardCall from "../../../rest/DrawCardCall";
 
 const card: CardModel = {
@@ -68,12 +69,12 @@ export class Board extends React.Component<{}, BoardState> {
         };
 
         return (
-            <div className="board" style = {style}>
+            <div className="board" style={style}>
                 <div className="board-north">
                     <Slider
-                        rangeMin={0.1}
-                        rangeMax={1.5}
-                        step={0.1}
+                        rangeMin={0.5}
+                        rangeMax={5.0}
+                        step={0.2}
                         startValue={this.state.scale}
                         onValueChange={this.changeScale}
                         label="Scaling"
@@ -84,18 +85,10 @@ export class Board extends React.Component<{}, BoardState> {
                         <div className="avatar-area">
                         </div>
                         <div className="hand-area">
-                            <CardContainer
-                                cards = {[card]}
-                                eventBus={this.state.mouseOnCardEventBus}
-                            />
                         </div>
                         <div className="deck-area">
                         </div>
                         <div className="play-area">
-                            <CardContainer
-                                cards = {[card]}
-                                eventBus={this.state.mouseOnCardEventBus}
-                            />
                         </div>
                         <div className="graveyard-area">
                         </div>
@@ -104,9 +97,9 @@ export class Board extends React.Component<{}, BoardState> {
                         <div className="avatar-area">
                         </div>
                         <div className="hand-area">
-                            <CardContainer
-                                cards = {[card]}
-                                eventBus={this.state.mouseOnCardEventBus}
+                            <Hand
+                                cardDrawnEventBus={this.state.cardDrawnEventBus}
+                                mouseOnCardEventBus={this.state.mouseOnCardEventBus}
                             />
                         </div>
                         <div className="deck-area">
@@ -116,7 +109,7 @@ export class Board extends React.Component<{}, BoardState> {
                         </div>
                         <div className="play-area">
                             <CardContainer
-                                cards = {[card]}
+                                cards={[card]}
                                 eventBus={this.state.mouseOnCardEventBus}
                             />
                         </div>
@@ -128,7 +121,7 @@ export class Board extends React.Component<{}, BoardState> {
                     <div className="card-preview-area">
                         <CardPreview
                             eventBus={this.state.mouseOnCardEventBus}
-                            scale = {this.state.scale}
+                            scale={this.state.scale}
                         />
                     </div>
                     <div className="log-area">
