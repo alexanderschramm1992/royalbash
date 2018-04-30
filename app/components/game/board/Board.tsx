@@ -42,7 +42,7 @@ export class Board extends React.Component<{}, BoardState> {
         let cardDrawnEventBus = new EventBus<CardDrawnEvent>();
 
         this.state = {
-            scale: 1,
+            scale: 5,
             mouseOnCardEventBus: mouseOnCardEventBus,
             cardDrawnEventBus: cardDrawnEventBus,
             drawCardCall: new DrawCardCall(
@@ -72,9 +72,9 @@ export class Board extends React.Component<{}, BoardState> {
             <div className="board" style={style}>
                 <div className="board-north">
                     <Slider
-                        rangeMin={0.5}
-                        rangeMax={5.0}
-                        step={0.2}
+                        rangeMin={3}
+                        rangeMax={8}
+                        step={0.5}
                         startValue={this.state.scale}
                         onValueChange={this.changeScale}
                         label="Scaling"
