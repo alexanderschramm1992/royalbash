@@ -5,7 +5,7 @@
  * [Maven](https://maven.apache.org/download.cgi) has to be installed on the machine
  * [NPM](https://nodejs.org/en/) has to be installed on the machine
  * [Lombok](https://projectlombok.org/setup/overview) is installed in your backend IDE
- * Suggested IDE is [IntelliJ](https://www.jetbrains.com/idea/download/#section=windows) for backend and [Atom](https://atom.io/) for frontend
+ * Suggested IDE is [IntelliJ](https://www.jetbrains.com/idea/download/#section=windows) for backend and [VS Code](https://code.visualstudio.com/) for frontend
 
 ## Getting started
  * Run `mvn clean install -U` to download dependencies of the backend
