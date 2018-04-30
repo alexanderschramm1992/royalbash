@@ -39,8 +39,7 @@ public class DrawController {
             return ResponseEntity.ok(card);
         } catch (GameEngineException e) {
 
-            System.err.println("Failed to draw card for " + requestParams);
-            e.printStackTrace();
+            System.err.println("Failed to draw card due to: " + e.getMessage());
 
             return ResponseEntity.badRequest().build();
         }

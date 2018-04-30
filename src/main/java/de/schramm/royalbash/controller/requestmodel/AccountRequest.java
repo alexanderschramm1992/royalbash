@@ -10,11 +10,4 @@ public class AccountRequest {
     private String name;
     private String email;
     private String passwordHash;
-
-    public static class PlayerRequestBuilder {
-
-        private String name = "";
-        private String email = "";
-        private String passwordHash = "";
-    }
 }
