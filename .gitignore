@@ -17,6 +17,8 @@
 .recommenders
 .settings
 .springBeans
+.sts4-cache
+.vscode
 /target
 /code
 MANIFEST.MF
