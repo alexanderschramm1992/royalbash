@@ -12,11 +12,18 @@ export class CardMini extends React.Component<CardProps, {}> {
 
         super(props);
         this.handleMouseOver = this.handleMouseOver.bind(this);
+        this.handleDrag = this.handleDrag.bind(this);
     }
 
-    private handleMouseOver(): void {
+    handleMouseOver(): void {
 
         this.props.eventBus.fireEvent(new MouseOnCardEvent(this.props.cardModel));
+    }
+
+    handleDrag(event: any): void {
+
+        event.dataTransfer.setData("cardModel", this.props.cardModel);
+        console.dir(event);
     }
 
     render(): any {
@@ -24,6 +31,7 @@ export class CardMini extends React.Component<CardProps, {}> {
         return (
             <div
                 draggable={true}
+                onDragStart={this.handleDrag}
                 className="card-mini border-large"
                 onMouseEnter={this.handleMouseOver}
             >

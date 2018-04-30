@@ -12,14 +12,14 @@
 }
 
 .card .head-wrapper .name {
-     height: 4em;
-     width: 18.3em;
-     align-items: center;
-     display: flex;
-     position: absolute;
-     top: 0.5em;
-     left: 0.7em;
- }
+    height: 4em;
+    width: 18.3em;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    top: 0.5em;
+    left: 0.7em;
+}
 
 .card .head-wrapper .cost {
     height: 3.6em;
