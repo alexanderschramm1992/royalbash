@@ -64,7 +64,7 @@ public class BoardController {
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity endTurn(
+    public ResponseEntity<Boolean> endTurn(
             @RequestBody UUID boardId
     ) {
 

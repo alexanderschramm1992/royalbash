@@ -62,7 +62,7 @@ public class GameController {
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity endGame(
+    public ResponseEntity<Boolean> endGame(
             @RequestBody UUID gameId
     ) {
 
