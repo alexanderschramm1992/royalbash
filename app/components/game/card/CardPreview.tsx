@@ -37,8 +37,12 @@ export class CardPreview
 
     render(): any {
 
+        let style = {
+            fontSize: this.props.scale + "px"
+        };
+
         return (
-            <div className="card-preview">
+            <div className="card-preview" style={style}>
                 {this.state &&
                     <Creature
                         cardModel={this.state.creatureModel}

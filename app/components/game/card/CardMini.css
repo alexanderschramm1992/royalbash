@@ -1,17 +1,17 @@
-.card {
-    height: 42em;
+.card-mini {
+    height: 25em;
     width: 25em;
     background: lightgray;
     border-radius: 1em;
 }
 
-.card .head-wrapper {
+.card-mini .head-wrapper {
     height: 5em;
     width: 100%;
     position: relative;
 }
 
-.card .head-wrapper .name {
+.card-mini .head-wrapper .name {
      height: 4em;
      width: 18.3em;
      align-items: center;
@@ -21,7 +21,7 @@
      left: 0.7em;
  }
 
-.card .head-wrapper .cost {
+.card-mini .head-wrapper .cost {
     height: 3.6em;
     width: 3.6em;
     border-radius: 1em;
@@ -31,7 +31,7 @@
     right: 1.5em;
 }
 
-.card .image-wrapper {
+.card-mini .image-wrapper {
     height: 16.1em;
     width: 23.6em;
     margin: 0 0.5em 0.5em 0.5em;
@@ -39,47 +39,18 @@
     border-top-right-radius: 1em;
 }
 
-.card .image-wrapper .image {
+.card-mini .image-wrapper .image {
     height: 100%;
     width: 100%;
 }
 
-.card .type {
-    height: 2.5em;
-    width: 23.6em;
-    margin-left: 0.7em;
-    margin-right: 0.7em;
-}
-
-.card .text-wrapper {
-    height: 14.5em;
-    width: 23.6em;
-    margin: 0 0.5em 0 0.5em;
-    border-top-left-radius: 1em;
-    border-bottom-right-radius: 1em;
-    position: relative;
-}
-
-.card .text-wrapper .text {
-    width: 10.5em;
-    margin: 0.5em;
-}
-
-.card .text-wrapper .lore {
-    width: 10.5em;
-    margin: 0.5em;
-    font-style: italic;
-    position: absolute;
-    bottom: 0;
-}
-
-.card .foot-wrapper {
+.card-mini .foot-wrapper {
     height: 3em;
     width: 100%;
     position: relative;
 }
 
-.card .foot-wrapper .strength {
+.card-mini .foot-wrapper .strength {
     height: 2.6em;
     width: 2.6em;
     border-radius: 1em;
@@ -89,7 +60,7 @@
     background: antiquewhite;
 }
 
-.card .foot-wrapper .health {
+.card-mini .foot-wrapper .health {
     height: 2.6em;
     width: 2.6em;
     border-radius: 1em;

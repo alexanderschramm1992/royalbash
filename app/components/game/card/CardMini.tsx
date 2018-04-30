@@ -1,31 +1,12 @@
 import * as React from "react";
 
-import "./Card.css";
+import "./CardMini.css";
 import "./../../common/common.css";
+import {CardProps} from "./Card";
 import EventBus from "../../../events/EventBus";
 import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
 
-export interface CardProps {
-
-    cardModel: CardModel;
-    readonly eventBus: EventBus<MouseOnCardEvent>;
-}
-
-export interface CardModel {
-
-    readonly id: string;
-    readonly name: string;
-    readonly image: string;
-    readonly type: string;
-    readonly subType?: string;
-    readonly text: string;
-    readonly lore?: string;
-    readonly cost: number;
-    strength: number;
-    health: number;
-}
-
-export class Card extends React.Component<CardProps, {}> {
+export class CardMini extends React.Component<CardProps, {}> {
 
     constructor(props: CardProps) {
 
@@ -43,7 +24,7 @@ export class Card extends React.Component<CardProps, {}> {
         return (
             <div
                 draggable={true}
-                className="card border-large"
+                className="card-mini border-large"
                 onMouseEnter={this.handleMouseOver}
             >
                 <div className="head-wrapper">
@@ -60,24 +41,6 @@ export class Card extends React.Component<CardProps, {}> {
                 </div>
                 <div className="image-wrapper border-small">
                     <img className="image" src={this.props.cardModel.image} alt={this.props.cardModel.name}/>
-                </div>
-                <div className="type">
-                    <div className="font-size-medium">
-                        {this.props.cardModel.type}
-                        {this.props.cardModel.subType && " - " + this.props.cardModel.subType}
-                    </div>
-                </div>
-                <div className="text-wrapper border-small">
-                    <div className="text">
-                        <div className="font-size-medium">
-                            {this.props.cardModel.text}
-                        </div>
-                    </div>
-                    <div className="lore">
-                        <div className="font-size-medium">
-                            {this.props.cardModel.lore && this.props.cardModel.lore}
-                        </div>
-                    </div>
                 </div>
                 <div className="foot-wrapper">
                     <div className="strength border-small">
@@ -96,4 +59,4 @@ export class Card extends React.Component<CardProps, {}> {
     }
 }
 
-export default Card;
+export default CardMini;

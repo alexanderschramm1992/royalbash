@@ -3,7 +3,7 @@ import * as React from "react";
 import "./../../common/common.css";
 import "./Board.css";
 
-import CardContainer from "./../card/CardContainer";
+import CardMiniContainer from "./../card/CardMiniContainer";
 import {CardModel} from "../card/Card";
 import Slider from "../../menu/Slider";
 import EventBus from "../../../events/EventBus";
@@ -16,7 +16,7 @@ import DrawCardCall from "../../../rest/DrawCardCall";
 
 const card: CardModel = {
     id: "1",
-    name: "Lorem Ipsum",
+    name: "Lorem Ipsum Lorem Ipsum Lorem Ipsum",
     image: "N/A",
     type: "Card",
     text: "N/A",
@@ -108,7 +108,7 @@ export class Board extends React.Component<{}, BoardState> {
                             />
                         </div>
                         <div className="play-area">
-                            <CardContainer
+                            <CardMiniContainer
                                 cards={[card]}
                                 eventBus={this.state.mouseOnCardEventBus}
                             />
@@ -121,7 +121,7 @@ export class Board extends React.Component<{}, BoardState> {
                     <div className="card-preview-area">
                         <CardPreview
                             eventBus={this.state.mouseOnCardEventBus}
-                            scale={this.state.scale}
+                            scale={this.state.scale * 1.5}
                         />
                     </div>
                     <div className="log-area">

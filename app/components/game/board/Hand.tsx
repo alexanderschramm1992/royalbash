@@ -1,5 +1,5 @@
 import * as React from "react";
-import CardContainer from "../card/CardContainer";
+import CardContainer from "../card/CardMiniContainer";
 import EventBus from "../../../events/EventBus";
 import Observer from "../../../events/Observer";
 import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
