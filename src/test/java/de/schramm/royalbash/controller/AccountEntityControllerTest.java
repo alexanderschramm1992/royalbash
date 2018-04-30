@@ -4,6 +4,7 @@ import de.schramm.royalbash.controller.requestmodel.AccountRequest;
 import de.schramm.royalbash.controller.responsemodel.AccountExt;
 import de.schramm.royalbash.model.Account;
 import de.schramm.royalbash.persistence.blueprint.BlueprintRepository;
+import lombok.val;
 import de.schramm.royalbash.persistence.account.AccountRepository;
 import de.schramm.royalbash.persistence.account.AccountRepositoryFake;
 import org.junit.Assert;
@@ -135,7 +136,7 @@ public class AccountEntityControllerTest {
 
         // When
 
-        ResponseEntity responseEntity = accountController.register(
+        val responseEntity = accountController.register(
                 AccountRequest.builder()
                         .name(playerName)
                         .email(playerEmail)
@@ -153,7 +154,7 @@ public class AccountEntityControllerTest {
 
         // When
 
-        ResponseEntity responseEntity = accountController.register(
+        val responseEntity = accountController.register(
                 AccountRequest.builder()
                         .name(playerName)
                         .email(playerEmail)

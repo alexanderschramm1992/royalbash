@@ -53,7 +53,7 @@ public class AccountController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity register(
+    public ResponseEntity<Boolean> register(
             @RequestBody AccountRequest accountRequest
     ) {
 
