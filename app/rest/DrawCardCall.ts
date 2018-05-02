@@ -1,39 +1,40 @@
-import GenericCallPOST from "./GenericCallPOST";
 import {CardModel} from "../components/game/card/Card";
 import EventBus from "../events/EventBus";
 import CardDrawnEvent from "../events/CardDrawnEvent";
+import store from "../Store";
+import axios, {AxiosResponse} from "axios";
+import DrawCardAcceptedAction from "../actions/DrawCardAcceptedAction";
+import DrawCardDeclinedAction from "../actions/DrawCardDeclinedAction";
 
-export interface DrawCardCallParameters {
+class DrawCardCall {
 
-    readonly playerId: string
-}
+    constructor () {
 
-class DrawCardCall extends GenericCallPOST{
+        store.subscribe(() => {
+            if(store.getState().drawCardIssued) {
 
-    constructor (
-        private callParameters: DrawCardCallParameters,
-        private eventBus: EventBus<CardDrawnEvent>
-    ) {
-        super();
-    }
+                axios.post(
+                    "gameloop/draw",
+                    {
+                        "playerId": store.getState().playerId
+                    },
+                    {
+                        headers: {
+                            "Content-Type": "application/json; charset=utf-8"
+                        }
+                    },
+                ).then((response: AxiosResponse): void => {
 
-    public call(): void {
+                    store.dispatch(new DrawCardAcceptedAction(
+                        response.data.cardId
+                    ));                    
+                }).catch((reason: string) => {
 
-        new Promise<CardModel>((resolve) => {
-
-            super.call(
-                "gameloop/draw",
-                {
-                    "Content-Type": "application/json; charset=utf-8"
-                },
-                {
-                    "playerId": this.callParameters.playerId
-                },
-                (data: CardModel): void => {resolve(data);}
-            );
-        }).then((value) => {
-
-            this.eventBus.fireEvent(new CardDrawnEvent(value));
+                    store.dispatch(new DrawCardDeclinedAction(
+                        reason
+                    ));
+                });
+            }
         });
     }
 }

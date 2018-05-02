@@ -45,11 +45,7 @@ export class Board extends React.Component<{}, BoardState> {
             scale: 5,
             mouseOnCardEventBus: mouseOnCardEventBus,
             cardDrawnEventBus: cardDrawnEventBus,
-            drawCardCall: new DrawCardCall(
-                {
-                    playerId: "8dbc6953-e25e-49f0-a298-7a0ea721de6c"
-                },
-                cardDrawnEventBus)
+            drawCardCall: new DrawCardCall()
         };
 
         this.changeScale = this.changeScale.bind(this);

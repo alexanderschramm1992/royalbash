@@ -18,7 +18,6 @@ import org.junit.Test;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -72,7 +71,7 @@ public class SummonHandlerTest {
 
         // when
 
-        Board retrievedBoard = summonHandler.summon(
+        Summoning summoning = summonHandler.summon(
                 boardId,
                 playerId,
                 cardId
@@ -80,8 +79,6 @@ public class SummonHandlerTest {
 
         // then
 
-        Assert.assertThat(retrievedBoard.getPlayerBlue().getSummonings(), hasSize(1));
-        Summoning summoning = retrievedBoard.getPlayerBlue().getSummonings().iterator().next();
         Assert.assertThat(summoning.getCard(), is(this.card));
     }
 

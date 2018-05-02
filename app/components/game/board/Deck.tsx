@@ -2,7 +2,10 @@ import * as React from "react";
 
 import "./../../common/common.css";
 import "./Deck.css";
-import DrawCardCall from "../../../rest/DrawCardCall";
+
+import DrawCardCall from "./../../../rest/DrawCardCall";
+import store from "./../../../Store";
+import DrawCardIssuedAction from "../../../actions/DrawCardIssuedAction";
 
 export interface DeckProps {
 
@@ -29,7 +32,11 @@ export class Deck extends React.Component<DeckProps, DeckState> {
 
     handleCardDraw(): void {
 
-        this.state.drawCardCall.call();
+        store.dispatch(
+            new DrawCardIssuedAction(
+                store.getState().playerId
+            )
+        );
     }
 
     render(): any {
