@@ -2,7 +2,6 @@ package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.handler.AttackHandler;
-import de.schramm.royalbash.gameengine.handler.SummonHandler;
 import de.schramm.royalbash.gameengine.handler.TurnHandler;
 import de.schramm.royalbash.model.Board;
 import de.schramm.royalbash.model.Turn;
@@ -19,20 +18,15 @@ import java.util.UUID;
 @RestController
 public class BoardController {
 
-    private final SummonHandler summonHandler;
-
     private final AttackHandler attackHandler;
-
     private final TurnHandler turnHandler;
 
     @Autowired
     public BoardController(
-            SummonHandler summonHandler,
             AttackHandler attackHandler,
             TurnHandler turnHandler
     ) {
 
-        this.summonHandler = summonHandler;
         this.attackHandler = attackHandler;
         this.turnHandler = turnHandler;
     }
@@ -73,33 +67,6 @@ public class BoardController {
             turnHandler.endTurn(boardId);
 
             return ResponseEntity.ok().build();
-        } catch (GameEngineException exception) {
-
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @RequestMapping(
-            value = "gameloop/summoninstance",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE
-    )
-    public ResponseEntity<Board> summonInstance(
-            @RequestBody UUID boardId,
-            @RequestBody UUID playerInstanceId,
-            @RequestBody UUID cardId
-    ) {
-
-        try {
-
-            Board board = summonHandler.summon(
-                    boardId,
-                    playerInstanceId,
-                    cardId
-            );
-
-            return ResponseEntity.ok(board);
         } catch (GameEngineException exception) {
 
             return ResponseEntity.badRequest().build();

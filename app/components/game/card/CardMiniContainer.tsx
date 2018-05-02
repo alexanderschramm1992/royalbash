@@ -29,7 +29,10 @@ export class CardMiniContainer extends React.Component<CardMiniContainerProps, {
         event.preventDefault();
         let cardModel = event.dataTransfer.getData("cardModel") as CardModel;
         console.dir(event);
+        console.dir(cardModel);
+        console.dir(event.dataTransfer.getData("test"));
         this.props.cards.push(cardModel);
+        console.dir(this.props.cards);
     }
 
     handleDragOver(event: any): void {

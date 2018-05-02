@@ -22,7 +22,9 @@ export class CardMini extends React.Component<CardProps, {}> {
 
     handleDrag(event: any): void {
 
-        event.dataTransfer.setData("cardModel", this.props.cardModel);
+        event.dataTransfer.setData("boardId", this.props.cardModel);
+        event.dataTransfer.setData("playerInstanceId", "test123");
+        event.dataTransfer.setData("cardId", this.props.cardModel.id);
         console.dir(event);
     }
 
