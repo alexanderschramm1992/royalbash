@@ -1,21 +1,8 @@
 import { DRAW_CARD_ISSUED, DRAW_CARD_ACCEPTED, DRAW_CARD_DECLINED } from "../actions/ActionTypes";
-import DrawCardIssuedAction from "../actions/DrawCardIssuedAction";
-import DrawCardAcceptedAction from "../actions/DrawCardAcceptedAction";
-import DrawCardDeclinedAction from "../actions/DrawCardDeclinedAction";
-import { Reducer } from "redux";
-import { StateModel, initialState } from "../Store";
+import {AnyAction, Reducer} from "redux";
+import { StateModel } from "../Store";
 
-type ActionTypes = DrawCardIssuedAction | DrawCardAcceptedAction | DrawCardDeclinedAction;
-
-const handleDrawCard: Reducer<StateModel, ActionTypes> = (state, action): any => {
-
-    console.log(state);
-    console.log(initialState());
-    if (!state) {
-
-        state = initialState();
-        console.log(state);
-    }
+const handleDrawCard: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 
     switch (action.type) {
         case DRAW_CARD_ISSUED:
@@ -42,10 +29,10 @@ const handleDrawCard: Reducer<StateModel, ActionTypes> = (state, action): any =>
             return {
                 ...state,
                 drawCardIssued: false
-            }
+            };
         default:
             return state;
     }
-}
+};
 
 export default handleDrawCard;

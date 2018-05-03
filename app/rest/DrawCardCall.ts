@@ -1,16 +1,16 @@
-import {CardModel} from "../components/game/card/Card";
-import EventBus from "../events/EventBus";
-import CardDrawnEvent from "../events/CardDrawnEvent";
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
-import DrawCardAcceptedAction from "../actions/DrawCardAcceptedAction";
-import DrawCardDeclinedAction from "../actions/DrawCardDeclinedAction";
+import { DrawCardAcceptedActionFactory } from "../actions/DrawCardAcceptedAction";
+import { DrawCardDeclinedActionFactory } from "../actions/DrawCardDeclinedAction";
 
 class DrawCardCall {
 
     constructor () {
 
         store.subscribe(() => {
+
+            console.log("DrawCardCall notified by Redux");
+
             if(store.getState().drawCardIssued) {
 
                 axios.post(
@@ -25,14 +25,18 @@ class DrawCardCall {
                     },
                 ).then((response: AxiosResponse): void => {
 
-                    store.dispatch(new DrawCardAcceptedAction(
-                        response.data.cardId
-                    ));                    
+                    store.dispatch(
+                        DrawCardAcceptedActionFactory.getInstance(
+                            response.data.cardId
+                        )
+                    );
                 }).catch((reason: string) => {
 
-                    store.dispatch(new DrawCardDeclinedAction(
-                        reason
-                    ));
+                    store.dispatch(
+                        DrawCardDeclinedActionFactory.getInstance(
+                            reason
+                        )
+                    );
                 });
             }
         });

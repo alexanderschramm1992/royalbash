@@ -5,7 +5,7 @@ import "./Deck.css";
 
 import DrawCardCall from "./../../../rest/DrawCardCall";
 import store from "./../../../Store";
-import DrawCardIssuedAction from "../../../actions/DrawCardIssuedAction";
+import { DrawCardIssuedActionFactory } from "../../../actions/DrawCardIssuedAction";
 
 export interface DeckProps {
 
@@ -33,10 +33,11 @@ export class Deck extends React.Component<DeckProps, DeckState> {
     handleCardDraw(): void {
 
         store.dispatch(
-            new DrawCardIssuedAction(
+            DrawCardIssuedActionFactory.getInstance(
                 store.getState().playerId
             )
         );
+        console.log(store.getState());
     }
 
     render(): any {
