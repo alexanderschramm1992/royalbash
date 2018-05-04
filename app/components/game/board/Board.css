@@ -2,17 +2,61 @@
 
 }
 
-.board-north {
+.board .north {
 
     width: 100%;
 }
 
-.board-center {
+.board .west {
 
     float: left;
 }
 
-.board-east {
+.board .center {
+
+    width: 167em;
+    float: left;
+}
+
+.board .center .player-area {
+
+    padding: 1em;
+}
+
+.board .center .player-area .graveyard-area {
 
     float: left;
+}
+
+.board .center .player-area .deck-area {
+
+    float: left;
+}
+
+.board .center .player-area .hand-area {
+
+    float: left;
+}
+
+.board .center .play-area {
+
+    padding: 1em;
+}
+
+.board .center:after {
+
+    content:" ";
+    clear:both;
+    display:block;
+    height:0;
+    overflow:hidden
+}
+
+.board .east {
+
+    float: left;
+}
+
+.board .south {
+
 }

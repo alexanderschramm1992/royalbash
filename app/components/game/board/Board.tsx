@@ -66,7 +66,7 @@ export class Board extends React.Component<{}, BoardState> {
 
         return (
             <div className="board" style={style}>
-                <div className="board-north">
+                <div className="north">
                     <Slider
                         rangeMin={3}
                         rangeMax={8}
@@ -76,42 +76,39 @@ export class Board extends React.Component<{}, BoardState> {
                         label="Scaling"
                     />
                 </div>
-                <div className="board-center">
-                    <div className="board-side board-side-top">
-                        <div className="avatar-area">
+                <div className="west"></div>
+                <div className="center">
+                    <div className="player-area player-area-remote border-large border-radius">
+                        <div className="graveyard-area graveyard-area-remote"></div>
+                        <div className="deck-area deck-area-remote"></div>
+                        <div className="hand-area hand-area-remote"></div>
+                    </div>
+                    <div className="play-area border-large border-radius">
+                        <div className="remote-summoning-area">
+                            <CardMiniContainer cards={[card]}/>
                         </div>
-                        <div className="hand-area">
-                        </div>
-                        <div className="deck-area">
-                        </div>
-                        <div className="play-area">
-                        </div>
-                        <div className="graveyard-area">
+                        <hr></hr>
+                        <div className="summoning-area">
+                            <CardMiniContainer cards={[card]}/>
                         </div>
                     </div>
-                    <div className="board-side board-side-bottom">
-                        <div className="avatar-area">
+                    <div className="player-area border-large border-radius">
+                        <div className="graveyard-area"></div>
+                        <div className="deck-area">
+                            <Deck/>
                         </div>
                         <div className="hand-area">
                             <Hand/>
                         </div>
-                        <div className="deck-area">
-                            <Deck/>
-                        </div>
-                        <div className="play-area">
-                            <CardMiniContainer cards={[card]}/>
-                        </div>
-                        <div className="graveyard-area">
-                        </div>
                     </div>
                 </div>
-                <div className="board-east">
+                <div className="east">
                     <div className="card-preview-area">
                         <CardPreview scale={this.state.scale * 1.5}/>
                     </div>
-                    <div className="log-area">
-                    </div>
+                    <div className="log-area"></div>
                 </div>
+                <div className="south"></div>
             </div>
         );
     }

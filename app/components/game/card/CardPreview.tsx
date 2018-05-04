@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import "./../../common/common.css";
-import {default as Creature, CardModel} from "../card/Card";
+import "./CardPreview.css";
+import Card, {CardModel} from "../card/Card";
 import store, {findCardModelById} from "../../../Store";
 
 export interface CardPreviewProps {
@@ -44,9 +45,9 @@ export class CardPreview extends React.Component<CardPreviewProps, CardPreviewSt
         };
 
         return (
-            <div className="card-preview" style={style}>
+            <div className="card-preview border-large border-radius" style={style}>
                 {this.state.cardOnPreview &&
-                    <Creature
+                    <Card
                         cardModel={this.state.cardOnPreview}
                     />
                 }

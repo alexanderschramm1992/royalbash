@@ -30,6 +30,10 @@
     border: 0.2em solid black;
 }
 
+.border-radius {
+    border-radius: 1em;
+}
+
 .center-text {
     display: flex;
     align-items: center;

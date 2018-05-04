@@ -40,7 +40,7 @@ export class Card extends React.Component<CardProps, {}> {
         return (
             <div
                 draggable={true}
-                className="card border-large"
+                className="card border-large border-radius"
                 onMouseEnter={this.handleMouseOver}
             >
                 <div className="head-wrapper">
