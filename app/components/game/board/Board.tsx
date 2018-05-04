@@ -15,14 +15,14 @@ import Hand from "./Hand";
 import DrawCardCall from "../../../rest/DrawCardCall";
 
 const card: CardModel = {
-    id: "1",
-    name: "Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+    id: "5d10c3a2-78e5-4463-85e0-57e279cac82c",
+    name: "Veteran Knight",
     image: "N/A",
-    type: "Card",
+    type: "Knight",
     text: "N/A",
-    cost: 99,
-    strength: 99,
-    health: 99
+    cost: 4,
+    strength: 3,
+    health: 4
 };
 
 interface BoardState {
@@ -93,21 +93,13 @@ export class Board extends React.Component<{}, BoardState> {
                         <div className="avatar-area">
                         </div>
                         <div className="hand-area">
-                            <Hand
-                                cardDrawnEventBus={this.state.cardDrawnEventBus}
-                                mouseOnCardEventBus={this.state.mouseOnCardEventBus}
-                            />
+                            <Hand/>
                         </div>
                         <div className="deck-area">
-                            <Deck
-                                drawCardCall={this.state.drawCardCall}
-                            />
+                            <Deck/>
                         </div>
                         <div className="play-area">
-                            <CardMiniContainer
-                                cards={[card]}
-                                eventBus={this.state.mouseOnCardEventBus}
-                            />
+                            <CardMiniContainer cards={[card]}/>
                         </div>
                         <div className="graveyard-area">
                         </div>
@@ -115,10 +107,7 @@ export class Board extends React.Component<{}, BoardState> {
                 </div>
                 <div className="board-east">
                     <div className="card-preview-area">
-                        <CardPreview
-                            eventBus={this.state.mouseOnCardEventBus}
-                            scale={this.state.scale * 1.5}
-                        />
+                        <CardPreview scale={this.state.scale * 1.5}/>
                     </div>
                     <div className="log-area">
                     </div>

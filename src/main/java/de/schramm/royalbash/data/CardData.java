@@ -22,6 +22,7 @@ public class CardData {
             .id(UUID.fromString("5d10c3a2-78e5-4463-85e0-57e279cac82c"))
             .name("Veteran Knight")
             .type("Knight")
+            .text("")
             .cost(4)
             .strength(3)
             .health(4)

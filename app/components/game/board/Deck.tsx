@@ -3,29 +3,29 @@ import * as React from "react";
 import "./../../common/common.css";
 import "./Deck.css";
 
-import DrawCardCall from "./../../../rest/DrawCardCall";
 import store from "./../../../Store";
 import { DrawCardIssuedActionFactory } from "../../../actions/DrawCardIssuedAction";
 
-export interface DeckProps {
+interface DeckState {
 
-    readonly drawCardCall: DrawCardCall;
+    showSpinner: boolean;
 }
 
-export interface DeckState {
+export class Deck extends React.Component<{}, DeckState> {
 
-    readonly drawCardCall: DrawCardCall;
-}
-
-export class Deck extends React.Component<DeckProps, DeckState> {
-
-
-    constructor(props: DeckProps) {
+    constructor(props: any) {
         super(props);
 
         this.state = {
-            drawCardCall: props.drawCardCall
+            showSpinner: false
         };
+
+        store.subscribe((): void => {
+
+            this.setState({
+                showSpinner: store.getState().drawCardIssued
+            });
+        });
 
         this.handleCardDraw = this.handleCardDraw.bind(this);
     }
@@ -37,7 +37,6 @@ export class Deck extends React.Component<DeckProps, DeckState> {
                 store.getState().playerId
             )
         );
-        console.log(store.getState());
     }
 
     render(): any {
@@ -45,10 +44,11 @@ export class Deck extends React.Component<DeckProps, DeckState> {
         return (
             <div className="deck">
                 <div className="stack" onClick={this.handleCardDraw}>
-
+                    <i className="spinner fa fa-cog fa-spin"></i>
                 </div>
             </div>
         );
     }
 }
+
 export default Deck;

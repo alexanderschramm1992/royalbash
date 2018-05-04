@@ -2,37 +2,39 @@ import * as React from "react";
 
 import "./../../common/common.css";
 import {default as Creature, CardModel} from "../card/Card";
-import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
-import EventBus from "../../../events/EventBus";
-import Observer from "../../../events/Observer";
+import store, {findCardModelById} from "../../../Store";
 
 export interface CardPreviewProps {
 
-    eventBus: EventBus<MouseOnCardEvent>
     scale: number;
 }
 
 interface CardPreviewState {
 
-    creatureModel?: CardModel;
+    cardOnPreview?: CardModel;
 }
 
-export class CardPreview
-    extends React.Component<CardPreviewProps, CardPreviewState>
-    implements Observer<MouseOnCardEvent>
-{
+export class CardPreview extends React.Component<CardPreviewProps, CardPreviewState>{
 
     constructor(props: CardPreviewProps) {
 
         super(props);
-        props.eventBus.subscribe(this);
-    }
 
-    notify(event: MouseOnCardEvent): void {
+        this.state = {
+            cardOnPreview: null
+        };
 
-        this.setState({
-            creatureModel: event.creatureModel
-        })
+        store.subscribe((): void => {
+
+            let cardOnPreview =
+                store.getState().cardOnPreview ? findCardModelById(store.getState().cardOnPreview) : null;
+
+            console.log(cardOnPreview);
+
+            this.setState({
+                cardOnPreview: cardOnPreview
+            });
+        });
     }
 
     render(): any {
@@ -43,10 +45,9 @@ export class CardPreview
 
         return (
             <div className="card-preview" style={style}>
-                {this.state &&
+                {this.state.cardOnPreview &&
                     <Creature
-                        cardModel={this.state.creatureModel}
-                        eventBus={this.props.eventBus}
+                        cardModel={this.state.cardOnPreview}
                     />
                 }
             </div>

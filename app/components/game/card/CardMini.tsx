@@ -3,8 +3,8 @@ import * as React from "react";
 import "./CardMini.css";
 import "./../../common/common.css";
 import {CardProps} from "./Card";
-import EventBus from "../../../events/EventBus";
-import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
+import store from "../../../Store";
+import {MouseOnCardActionFactory} from "../../../actions/MouseOnCardAction";
 
 export class CardMini extends React.Component<CardProps, {}> {
 
@@ -12,12 +12,18 @@ export class CardMini extends React.Component<CardProps, {}> {
 
         super(props);
         this.handleMouseOver = this.handleMouseOver.bind(this);
+        this.handleMouseOut = this.handleMouseOut.bind(this);
         this.handleDrag = this.handleDrag.bind(this);
     }
 
     handleMouseOver(): void {
 
-        this.props.eventBus.fireEvent(new MouseOnCardEvent(this.props.cardModel));
+        store.dispatch(MouseOnCardActionFactory.getInstance(this.props.cardModel.id));
+    }
+
+    handleMouseOut(): void {
+
+        //store.dispatch(MouseOffCardActionFactory.getInstance());
     }
 
     handleDrag(event: any): void {
@@ -35,7 +41,8 @@ export class CardMini extends React.Component<CardProps, {}> {
                 draggable={true}
                 onDragStart={this.handleDrag}
                 className="card-mini border-large"
-                onMouseEnter={this.handleMouseOver}
+                onMouseOver={this.handleMouseOver}
+                onMouseOut={this.handleMouseOut}
             >
                 <div className="head-wrapper">
                     <div className="name">

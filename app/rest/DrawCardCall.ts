@@ -7,9 +7,7 @@ class DrawCardCall {
 
     constructor () {
 
-        store.subscribe(() => {
-
-            console.log("DrawCardCall notified by Redux");
+        store.subscribe((): void => {
 
             if(store.getState().drawCardIssued) {
 
@@ -27,7 +25,7 @@ class DrawCardCall {
 
                     store.dispatch(
                         DrawCardAcceptedActionFactory.getInstance(
-                            response.data.cardId
+                            response.data
                         )
                     );
                 }).catch((reason: string) => {

@@ -2,13 +2,10 @@ import * as React from "react";
 
 import "./Card.css";
 import "./../../common/common.css";
-import EventBus from "../../../events/EventBus";
-import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
 
 export interface CardProps {
 
     cardModel: CardModel;
-    readonly eventBus: EventBus<MouseOnCardEvent>;
 }
 
 export interface CardModel {
@@ -35,7 +32,7 @@ export class Card extends React.Component<CardProps, {}> {
 
     private handleMouseOver(): void {
 
-        this.props.eventBus.fireEvent(new MouseOnCardEvent(this.props.cardModel));
+        //this.props.eventBus.fireEvent(new MouseOnCardEvent(this.props.cardModel));
     }
 
     render(): any {

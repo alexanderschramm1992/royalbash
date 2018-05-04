@@ -8,3 +8,7 @@
     background: lightgray;
     border-radius: 1em;
 }
+
+.deck .stack .spinner{
+    font-size: 15em;
+}
