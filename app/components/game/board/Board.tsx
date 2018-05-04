@@ -76,37 +76,44 @@ export class Board extends React.Component<{}, BoardState> {
                         label="Scaling"
                     />
                 </div>
-                <div className="west"></div>
-                <div className="center">
-                    <div className="player-area player-area-remote border-large border-radius">
-                        <div className="graveyard-area graveyard-area-remote"></div>
-                        <div className="deck-area deck-area-remote"></div>
-                        <div className="hand-area hand-area-remote"></div>
-                    </div>
-                    <div className="play-area border-large border-radius">
-                        <div className="remote-summoning-area">
-                            <CardMiniContainer cards={[card]}/>
+                <div className="inline-wrapper">
+                    <div className="west"></div>
+                    <div className="center">
+                        <div className="player-area player-area-remote border-large border-radius">
+                            <div className="graveyard-area graveyard-area-remote"></div>
+                            <div className="deck-area deck-area-remote"></div>
+                            <div className="hand-area hand-area-remote"></div>
                         </div>
-                        <hr></hr>
-                        <div className="summoning-area">
-                            <CardMiniContainer cards={[card]}/>
+                        <div className="play-area border-large border-radius">
+                            <div className="remote-summoning-area">
+                                <CardMiniContainer
+                                    size={7}
+                                    cards={[card]}
+                                />
+                            </div>
+                            <div className="summoning-area">
+                                <CardMiniContainer
+                                    size={7}
+                                    cards={[card]}
+                                />
+                            </div>
+                        </div>
+                        <div className="player-area border-large border-radius">
+                            <div className="graveyard-area"></div>
+                            <div className="deck-area">
+                                <Deck/>
+                            </div>
+                            <div className="hand-area">
+                                <Hand/>
+                            </div>
                         </div>
                     </div>
-                    <div className="player-area border-large border-radius">
-                        <div className="graveyard-area"></div>
-                        <div className="deck-area">
-                            <Deck/>
+                    <div className="east">
+                        <div className="card-preview-area">
+                            <CardPreview scale={this.state.scale * 1.5}/>
                         </div>
-                        <div className="hand-area">
-                            <Hand/>
-                        </div>
+                        <div className="log-area"></div>
                     </div>
-                </div>
-                <div className="east">
-                    <div className="card-preview-area">
-                        <CardPreview scale={this.state.scale * 1.5}/>
-                    </div>
-                    <div className="log-area"></div>
                 </div>
                 <div className="south"></div>
             </div>

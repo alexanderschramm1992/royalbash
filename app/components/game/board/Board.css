@@ -5,42 +5,63 @@
 .board .north {
 
     width: 100%;
+    margin-bottom: 1em;
+}
+
+.board .inline-wrapper {
+
+    white-space: nowrap;
+    margin-bottom: 1em;
 }
 
 .board .west {
 
-    float: left;
+    display: inline-block;
 }
 
 .board .center {
 
-    width: 167em;
-    float: left;
+    width: 194em;
+    display: inline-block;
 }
 
 .board .center .player-area {
 
+    height: 40em;
     padding: 1em;
+    white-space: nowrap;
+}
+
+.board .center .player-area.player-area-remote {
+
+    margin-bottom: 1em;
 }
 
 .board .center .player-area .graveyard-area {
 
-    float: left;
+    display: inline-block;
 }
 
 .board .center .player-area .deck-area {
 
-    float: left;
+    display: inline-block;
 }
 
 .board .center .player-area .hand-area {
 
-    float: left;
+    margin-left: 1em;
+    display: inline-block;
 }
 
 .board .center .play-area {
 
     padding: 1em;
+    margin-bottom: 1em;
+}
+
+.board .center .play-area .remote-summoning-area {
+
+    margin-bottom: 1em;
 }
 
 .board .center:after {
@@ -54,7 +75,7 @@
 
 .board .east {
 
-    float: left;
+    display: inline-block;
 }
 
 .board .south {

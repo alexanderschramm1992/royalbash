@@ -34,7 +34,8 @@ export class Deck extends React.Component<{}, HandState> {
         return (
             <div className="hand">
                 <CardContainer
-                  cards={this.state.cards}
+                    size={5}
+                    cards={this.state.cards}
                 />
             </div>
         );

@@ -8,6 +8,7 @@ import {CardModel} from "./Card";
 
 export interface CardMiniContainerProps {
 
+    size: number;
     cards: CardModel[];
 }
 
@@ -40,37 +41,25 @@ export class CardMiniContainer extends React.Component<CardMiniContainerProps, {
 
     render(): any {
 
-        return (
-            <div className="card-container border-large">
-                <div 
-                    className="card-placeholder card-placeholder-0 border-large" 
-                    onDragOver={this.handleDragOver} 
+        let cardPlaceholders = [];
+        for (let i = 0; i < this.props.size; i++) {
+
+            cardPlaceholders.push(
+                <div
+                    className={"card-placeholder card-placeholder-" + i + " border-large"}
+                    onDragOver={this.handleDragOver}
                     onDrop={this.handleDrop}
                 >
-                    {this.props.cards[0] &&
-                        <CardMini cardModel= {this.props.cards[0]} />
+                    {this.props.cards[i] &&
+                    <CardMini cardModel= {this.props.cards[i]} />
                     }
                 </div>
-                <div className="card-placeholder card-placeholder-1 border-large">
-                    {this.props.cards[1] &&
-                        <CardMini cardModel= {this.props.cards[1]} />
-                    }
-                </div>
-                <div className="card-placeholder card-placeholder-2 border-large">
-                    {this.props.cards[2] &&
-                        <CardMini cardModel= {this.props.cards[2]} />
-                    }
-                </div>
-                <div className="card-placeholder card-placeholder-3 border-large">
-                    {this.props.cards[3] &&
-                        <CardMini cardModel= {this.props.cards[3]} />
-                    }
-                </div>
-                <div className="card-placeholder card-placeholder-4 border-large">
-                    {this.props.cards[4] &&
-                        <CardMini cardModel= {this.props.cards[4]} />
-                    }
-                </div>
+            );
+        }
+
+        return (
+            <div className="card-container border-large">
+                {cardPlaceholders}
             </div>
         );
     }

@@ -1,18 +1,18 @@
 .card-container {
     height: 27em;
-    width: 135em;
     padding: 1em 0 0 1em;
     border-radius: 1em;
+    white-space: nowrap;
 }
 
 .card-container .card-placeholder {
     height: 25em;
     width: 25em;
-    float: left;
     margin-right: 1em;
     background: lightgray;
     border-radius: 1em;
     position: relative;
+    display: inline-block;
 }
 
 .card-container .card-placeholder > div {
