@@ -1,6 +1,10 @@
-.card-preview {
+.card-preview-wrapper {
 
-    margin-left: 1em;
+    margin: 1em;
+}
+
+.card-preview-wrapper .card-preview {
+
     padding: 1em;
     height: 43em;
     width: 26em;

@@ -1,15 +1,19 @@
 .board {
 
+    padding: 1em;
 }
 
 .board .north {
 
-    width: 100%;
+    width: 263em;
+    padding: 1em;
     margin-bottom: 1em;
 }
 
 .board .inline-wrapper {
 
+    width: 266em;
+    height: 150em;
     white-space: nowrap;
     margin-bottom: 1em;
 }
@@ -21,8 +25,10 @@
 
 .board .center {
 
-    width: 194em;
+    width: 218em;
+    height: 150em;
     display: inline-block;
+    overflow: hidden;
 }
 
 .board .center .player-area {
@@ -42,8 +48,15 @@
     display: inline-block;
 }
 
-.board .center .player-area .deck-area {
+.board .center .player-area .summoning-deck-area {
 
+    margin-left: 1em;
+    display: inline-block;
+}
+
+.board .center .player-area .resources-deck-area {
+
+    margin-left: 1em;
     display: inline-block;
 }
 
@@ -75,6 +88,9 @@
 
 .board .east {
 
+    width: 46em;
+    height: 149em;
+    margin-left: 1em;
     display: inline-block;
 }
 

@@ -65,8 +65,8 @@ export class Board extends React.Component<{}, BoardState> {
         };
 
         return (
-            <div className="board" style={style}>
-                <div className="north">
+            <div className="board border-large border-radius" style={style}>
+                <div className="north border-large border-radius">
                     <Slider
                         rangeMin={3}
                         rangeMax={8}
@@ -81,7 +81,7 @@ export class Board extends React.Component<{}, BoardState> {
                     <div className="center">
                         <div className="player-area player-area-remote border-large border-radius">
                             <div className="graveyard-area graveyard-area-remote"></div>
-                            <div className="deck-area deck-area-remote"></div>
+                            <div className="summoning-deck-area deck-area-remote"></div>
                             <div className="hand-area hand-area-remote"></div>
                         </div>
                         <div className="play-area border-large border-radius">
@@ -99,8 +99,13 @@ export class Board extends React.Component<{}, BoardState> {
                             </div>
                         </div>
                         <div className="player-area border-large border-radius">
-                            <div className="graveyard-area"></div>
-                            <div className="deck-area">
+                            <div className="graveyard-area">
+                                <Deck/>
+                            </div>
+                            <div className="summoning-deck-area">
+                                <Deck/>
+                            </div>
+                            <div className="resources-deck-area">
                                 <Deck/>
                             </div>
                             <div className="hand-area">
@@ -108,7 +113,7 @@ export class Board extends React.Component<{}, BoardState> {
                             </div>
                         </div>
                     </div>
-                    <div className="east">
+                    <div className="east border-large border-radius">
                         <div className="card-preview-area">
                             <CardPreview scale={this.state.scale * 1.5}/>
                         </div>

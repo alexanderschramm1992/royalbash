@@ -45,12 +45,14 @@ export class CardPreview extends React.Component<CardPreviewProps, CardPreviewSt
         };
 
         return (
-            <div className="card-preview border-large border-radius" style={style}>
-                {this.state.cardOnPreview &&
-                    <Card
-                        cardModel={this.state.cardOnPreview}
-                    />
-                }
+            <div className="card-preview-wrapper">
+                <div className="card-preview border-large border-radius" style={style}>
+                    {this.state.cardOnPreview &&
+                        <Card
+                            cardModel={this.state.cardOnPreview}
+                        />
+                    }
+                </div>
             </div>
         );
     }
