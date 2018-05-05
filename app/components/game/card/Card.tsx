@@ -18,6 +18,9 @@ export interface CardModel {
     readonly text: string;
     readonly lore?: string;
     readonly cost: number;
+    readonly costRations?: number;
+    readonly costMaterial?: number;
+    readonly costBlessing?: number;
     strength: number;
     health: number;
 }
@@ -27,12 +30,6 @@ export class Card extends React.Component<CardProps, {}> {
     constructor(props: CardProps) {
 
         super(props);
-        this.handleMouseOver = this.handleMouseOver.bind(this);
-    }
-
-    private handleMouseOver(): void {
-
-        //this.props.eventBus.fireEvent(new MouseOnCardEvent(this.props.cardModel));
     }
 
     render(): any {
@@ -41,7 +38,6 @@ export class Card extends React.Component<CardProps, {}> {
             <div
                 draggable={true}
                 className="card border-large border-radius"
-                onMouseEnter={this.handleMouseOver}
             >
                 <div className="head-wrapper">
                     <div className="name">
@@ -49,9 +45,21 @@ export class Card extends React.Component<CardProps, {}> {
                             {this.props.cardModel.name}
                         </div>
                     </div>
-                    <div className="cost border-small">
-                        <div className="font-size-extra-large center-text">
-                            {this.props.cardModel.cost}
+                    <div className="cost-wrapper border-small">
+                        <div className="cost cost-rations border-small">
+                            <div className="font-size-extra-large center-text">
+                                {this.props.cardModel.costRations? this.props.cardModel.costRations : 99}
+                            </div>
+                        </div>
+                        <div className="cost cost-material border-small">
+                            <div className="font-size-extra-large center-text">
+                                {this.props.cardModel.costMaterial? this.props.cardModel.costMaterial : 99}
+                            </div>
+                        </div>
+                        <div className="cost cost-blessing border-small">
+                            <div className="font-size-extra-large center-text">
+                                {this.props.cardModel.costBlessing? this.props.cardModel.costBlessing : 99}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,14 +85,16 @@ export class Card extends React.Component<CardProps, {}> {
                     </div>
                 </div>
                 <div className="foot-wrapper">
-                    <div className="strength border-small">
-                        <div className="font-size-large center-text">
-                            {this.props.cardModel.strength}
+                    <div className="stats-wrapper border-small">
+                        <div className="strength border-small">
+                            <div className="font-size-large center-text">
+                                {this.props.cardModel.strength}
+                            </div>
                         </div>
-                    </div>
-                    <div className="health border-small">
-                        <div className="font-size-large center-text">
-                            {this.props.cardModel.health}
+                        <div className="health border-small">
+                            <div className="font-size-large center-text">
+                                {this.props.cardModel.health}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -46,6 +46,7 @@ export class CardMiniContainer extends React.Component<CardMiniContainerProps, {
 
             cardPlaceholders.push(
                 <div
+                    key={i}
                     className={"card-placeholder card-placeholder-" + i + " border-large"}
                     onDragOver={this.handleDragOver}
                     onDrop={this.handleDrop}

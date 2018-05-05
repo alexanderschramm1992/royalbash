@@ -8,7 +8,7 @@ import {CardModel} from "../card/Card";
 import Slider from "../../menu/Slider";
 import EventBus from "../../../events/EventBus";
 import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
-import CardPreview from "./../card/CardPreview";
+import DetailView from "./../card/DetailView";
 import CardDrawnEvent from "../../../events/CardDrawnEvent";
 import Deck from "./Deck";
 import Hand from "./Hand";
@@ -115,12 +115,12 @@ export class Board extends React.Component<{}, BoardState> {
                     </div>
                     <div className="east border-large border-radius">
                         <div className="card-preview-area">
-                            <CardPreview scale={this.state.scale * 1.5}/>
+                            <DetailView scale={this.state.scale * 1.5}/>
                         </div>
                         <div className="log-area"></div>
                     </div>
                 </div>
-                <div className="south"></div>
+                <div className="south border-large border-radius"></div>
             </div>
         );
     }

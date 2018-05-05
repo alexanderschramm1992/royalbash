@@ -1,23 +1,23 @@
 import * as React from "react";
 
 import "./../../common/common.css";
-import "./CardPreview.css";
+import "./DetailView.css";
 import Card, {CardModel} from "../card/Card";
 import store, {findCardModelById} from "../../../Store";
 
-export interface CardPreviewProps {
+export interface DetailViewProps {
 
     scale: number;
 }
 
-interface CardPreviewState {
+interface DetailViewState {
 
     cardOnPreview?: CardModel;
 }
 
-export class CardPreview extends React.Component<CardPreviewProps, CardPreviewState>{
+export class DetailView extends React.Component<DetailViewProps, DetailViewState>{
 
-    constructor(props: CardPreviewProps) {
+    constructor(props: DetailViewProps) {
 
         super(props);
 
@@ -45,8 +45,8 @@ export class CardPreview extends React.Component<CardPreviewProps, CardPreviewSt
         };
 
         return (
-            <div className="card-preview-wrapper">
-                <div className="card-preview border-large border-radius" style={style}>
+            <div className="detail-view-wrapper">
+                <div className="detail-view border-large border-radius" style={style}>
                     {this.state.cardOnPreview &&
                         <Card
                             cardModel={this.state.cardOnPreview}
@@ -58,4 +58,4 @@ export class CardPreview extends React.Component<CardPreviewProps, CardPreviewSt
     }
 }
 
-export default CardPreview;
+export default DetailView;

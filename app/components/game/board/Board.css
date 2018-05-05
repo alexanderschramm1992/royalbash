@@ -1,5 +1,6 @@
 .board {
 
+    width: 266em;
     padding: 1em;
 }
 
@@ -96,4 +97,5 @@
 
 .board .south {
 
+    height: 5em;
 }
