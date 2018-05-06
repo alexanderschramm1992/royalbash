@@ -1,4 +1,4 @@
-.card-mini {
+.summoning {
     --card-background: linear-gradient(to bottom, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);;
     --cost-background: antiquewhite;
     --cost-rations-background: linear-gradient(to bottom, #f8ffe8 0%,#e3f5ab 33%,#b7df2d 100%);
@@ -10,30 +10,29 @@
     --stats-health-background: linear-gradient(to bottom, #c5deea 0%,#8abbd7 31%,#066dab 100%);
 }
 
-.card-mini {
-    height: 25em;
+.summoning {
+    height: 42em;
     width: 25em;
     background: var(--card-background);
-    border-radius: 1em;
 }
 
-.card-mini .head-wrapper {
+.summoning .head-wrapper {
     height: 5em;
     width: 100%;
     position: relative;
 }
 
-.card-mini .head-wrapper .name {
-     height: 4em;
-     width: 18.3em;
-     align-items: center;
-     display: flex;
-     position: absolute;
-     top: 0.5em;
-     left: 0.7em;
- }
+.summoning .head-wrapper .name {
+    height: 4em;
+    width: 18.3em;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    top: 0.5em;
+    left: 0.7em;
+}
 
- .card-mini .head-wrapper .cost-wrapper {
+.summoning .head-wrapper .cost-wrapper {
     border-bottom-left-radius: 1em;
     position: absolute;
     top: -0.2em;
@@ -42,7 +41,7 @@
     background:  var(--cost-background);
 }
 
-.card-mini .head-wrapper .cost-wrapper .cost {
+.summoning .head-wrapper .cost-wrapper .cost {
     height: 3.6em;
     width: 3.6em;
     border-radius: 1em;
@@ -50,19 +49,19 @@
     background: antiquewhite;
 }
 
-.card-mini .head-wrapper .cost-wrapper .cost-rations {
+.summoning .head-wrapper .cost-wrapper .cost-rations {
     background: var(--cost-rations-background);
 }
 
-.card-mini .head-wrapper .cost-wrapper .cost-material {
+.summoning .head-wrapper .cost-wrapper .cost-material {
     background: var(--cost-material-background);
 }
 
-.card-mini .head-wrapper .cost-wrapper .cost-blessing {
+.summoning .head-wrapper .cost-wrapper .cost-blessing {
     background: var(--cost-blessing-background);
 }
 
-.card-mini .image-wrapper {
+.summoning .image-wrapper {
     height: 16.1em;
     width: 23.6em;
     margin: 0 0.5em 0.5em 0.5em;
@@ -70,27 +69,57 @@
     border-top-right-radius: 1em;
 }
 
-.card-mini .image-wrapper .image {
+.summoning .image-wrapper .image {
     height: 100%;
     width: 100%;
 }
 
-.card-mini .foot-wrapper {
+.summoning .type {
+    height: 2.5em;
+    width: 23.6em;
+    margin-left: 0.7em;
+    margin-right: 0.7em;
+}
+
+.summoning .text-wrapper {
+    height: 14.5em;
+    width: 23.6em;
+    margin: 0 0.5em 0 0.5em;
+    border-top-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    position: relative;
+    background: var(--text-background);
+}
+
+.summoning .text-wrapper .text {
+    width: 10.5em;
+    margin: 0.5em;
+}
+
+.summoning .text-wrapper .lore {
+    width: 10.5em;
+    margin: 0.5em;
+    font-style: italic;
+    position: absolute;
+    bottom: 0;
+}
+
+.summoning .foot-wrapper {
     height: 3em;
     width: 100%;
     position: relative;
 }
 
-.card-mini .foot-wrapper .stats-wrapper {
+.summoning .foot-wrapper .stats-wrapper {
     border-top-left-radius: 1em;
     position: absolute;
-    bottom: -0.2em;
+    bottom: 0.2em;
     right: -0.2em;
     padding: 0.5em;
     background: var(--stats-background);
 }
 
-.card-mini .foot-wrapper .strength {
+.summoning .foot-wrapper .strength {
     height: 2.6em;
     width: 2.6em;
     border-radius: 1em;
@@ -99,7 +128,7 @@
     margin-right: 0.5em;
 }
 
-.card-mini .foot-wrapper .health {
+.summoning .foot-wrapper .health {
     height: 2.6em;
     width: 2.6em;
     border-radius: 1em;

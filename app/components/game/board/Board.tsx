@@ -17,7 +17,7 @@ import DrawCardCall from "../../../rest/DrawCardCall";
 const card: CardModel = {
     id: "5d10c3a2-78e5-4463-85e0-57e279cac82c",
     name: "Veteran Knight",
-    image: "N/A",
+    image: "/img/veteran_knight.jpg",
     type: "Knight",
     text: "N/A",
     cost: 4,

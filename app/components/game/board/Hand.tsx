@@ -22,8 +22,6 @@ export class Deck extends React.Component<{}, HandState> {
             this.setState({
                 cards: store.getState().hand.map(findCardModelById)
             });
-
-            console.log(this.state.cards);
         });
     }
 
