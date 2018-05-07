@@ -1,0 +1,22 @@
+.summoning-mini-container {
+    height: 27em;
+    padding: 1em 0 0 1em;
+    border-radius: 1em;
+    white-space: nowrap;
+}
+
+.summoning-mini-container .summoning-mini-placeholder {
+    height: 25em;
+    width: 25em;
+    margin-right: 1em;
+    background: lightgray;
+    border-radius: 1em;
+    position: relative;
+    display: inline-block;
+}
+
+.summoning-mini-container .summoning-mini-placeholder > div {
+    top: -0.5em;
+    left: -0.5em;
+    position: absolute;
+}

@@ -1,0 +1,108 @@
+.summoning-mini {
+    --card-background: linear-gradient(to bottom, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);;
+    --cost-background: antiquewhite;
+    --cost-rations-background: linear-gradient(to bottom, #f8ffe8 0%,#e3f5ab 33%,#b7df2d 100%);
+    --cost-material-background: linear-gradient(to bottom, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
+    --cost-blessing-background: linear-gradient(to bottom, #ebe9f9 0%,#d8d0ef 50%,#cec7ec 51%,#c1bfea 100%);
+    --text-background: antiquewhite;
+    --stats-background: linear-gradient(to bottom, #cedce7 0%,#596a72 100%);
+    --stats-strength-background: linear-gradient(to bottom, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%);
+    --stats-health-background: linear-gradient(to bottom, #c5deea 0%,#8abbd7 31%,#066dab 100%);
+}
+
+.summoning-mini {
+    height: 25em;
+    width: 25em;
+    background: var(--card-background);
+    border-radius: 1em;
+}
+
+.summoning-mini .head-wrapper {
+    height: 5em;
+    width: 100%;
+    position: relative;
+}
+
+.summoning-mini .head-wrapper .name {
+    height: 4em;
+    width: 18.3em;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    top: 0.5em;
+    left: 0.7em;
+}
+
+.summoning-mini .head-wrapper .cost-wrapper {
+    border-bottom-left-radius: 1em;
+    position: absolute;
+    top: -0.2em;
+    right: -0.2em;
+    padding: 0.5em 0.5em 0 0.5em;
+    background:  var(--cost-background);
+}
+
+.summoning-mini .head-wrapper .cost-wrapper .cost {
+    height: 3.6em;
+    width: 3.6em;
+    border-radius: 1em;
+    margin-bottom: 0.5em;
+    background: antiquewhite;
+}
+
+.summoning-mini .head-wrapper .cost-wrapper .cost-rations {
+    background: var(--cost-rations-background);
+}
+
+.summoning-mini .head-wrapper .cost-wrapper .cost-material {
+    background: var(--cost-material-background);
+}
+
+.summoning-mini .head-wrapper .cost-wrapper .cost-blessing {
+    background: var(--cost-blessing-background);
+}
+
+.summoning-mini .image-wrapper {
+    height: 16.1em;
+    width: 23.6em;
+    margin: 0 0.5em 0.5em 0.5em;
+    border-bottom-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+.summoning-mini .image-wrapper .image {
+    height: 100%;
+    width: 100%;
+}
+
+.summoning-mini .foot-wrapper {
+    height: 3em;
+    width: 100%;
+    position: relative;
+}
+
+.summoning-mini .foot-wrapper .stats-wrapper {
+    border-top-left-radius: 1em;
+    position: absolute;
+    bottom: -0.2em;
+    right: -0.2em;
+    padding: 0.5em;
+    background: var(--stats-background);
+}
+
+.summoning-mini .foot-wrapper .strength {
+    height: 2.6em;
+    width: 2.6em;
+    border-radius: 1em;
+    background: var(--stats-strength-background);
+    display: inline-block;
+    margin-right: 0.5em;
+}
+
+.summoning-mini .foot-wrapper .health {
+    height: 2.6em;
+    width: 2.6em;
+    border-radius: 1em;
+    background: var(--stats-health-background);
+    display: inline-block;
+}

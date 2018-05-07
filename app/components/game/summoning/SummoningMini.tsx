@@ -1,41 +1,47 @@
 import * as React from "react";
 
-import "./Summoning.css";
+import "./SummoningMini.css";
 import "./../../common/common.css";
+import {SummoningProps} from "./Summoning";
 
-import { CardModel } from "./Card";
-
-export interface SummoningProps {
-
-    summoningModel: SummoningModel;
-}
-
-export interface SummoningModel {
-
-    readonly id: string;
-    readonly card: CardModel;
-    currentStreangth: number;
-    currentHealth: number;
-}
-
-export class Card extends React.Component<SummoningProps, {}> {
+export class SummoningMini extends React.Component<SummoningProps, {}> {
 
     constructor(props: SummoningProps) {
 
         super(props);
     }
 
+    handleMouseOver(): void {
+
+        //store.dispatch(MouseOnCardActionFactory.getInstance(this.props.cardModel.id));
+    }
+
+    handleMouseOut(): void {
+
+        //store.dispatch(MouseOffCardActionFactory.getInstance());
+    }
+
+    handleDrag(event: any): void {
+
+        //event.dataTransfer.setData("boardId", this.props.cardModel);
+        //event.dataTransfer.setData("playerInstanceId", "test123");
+        //event.dataTransfer.setData("cardId", this.props.cardModel.id);
+        console.dir(event);
+    }
+
     render(): any {
 
         return (
             <div
+                className="summoning-mini border-large"
                 draggable={true}
-                className="summoning border-large border-radius"
+                onDragStart={this.handleDrag}
+                onMouseOver={this.handleMouseOver}
+                onMouseOut={this.handleMouseOut}
             >
                 <div className="head-wrapper">
                     <div className="name">
-                        <div className="fon
-                        t-size-large">
+                        <div className="font-size-large">
                             {this.props.summoningModel.card.name}
                         </div>
                     </div>
@@ -60,34 +66,16 @@ export class Card extends React.Component<SummoningProps, {}> {
                 <div className="image-wrapper border-small">
                     <img className="image" src={this.props.summoningModel.card.image} alt={this.props.summoningModel.card.name}/>
                 </div>
-                <div className="type">
-                    <div className="font-size-medium">
-                        {this.props.summoningModel.card.type}
-                        {this.props.summoningModel.card.subType && " - " + this.props.summoningModel.card.subType}
-                    </div>
-                </div>
-                <div className="text-wrapper border-small">
-                    <div className="text">
-                        <div className="font-size-medium">
-                            {this.props.summoningModel.card.text}
-                        </div>
-                    </div>
-                    <div className="lore">
-                        <div className="font-size-medium">
-                            {this.props.summoningModel.card.lore && this.props.summoningModel.card.lore}
-                        </div>
-                    </div>
-                </div>
                 <div className="foot-wrapper">
                     <div className="stats-wrapper border-small">
                         <div className="strength border-small">
                             <div className="font-size-large center-text">
-                                {this.props.summoningModel.card.strength}
+                                {this.props.summoningModel.currentStrength}
                             </div>
                         </div>
                         <div className="health border-small">
                             <div className="font-size-large center-text">
-                                {this.props.summoningModel.card.health}
+                                {this.props.summoningModel.currentHealth}
                             </div>
                         </div>
                     </div>
@@ -97,4 +85,4 @@ export class Card extends React.Component<SummoningProps, {}> {
     }
 }
 
-export default Card;
+export default SummoningMini;
