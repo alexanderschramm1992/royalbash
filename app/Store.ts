@@ -1,6 +1,7 @@
 import { createStore, Store } from "redux";
 import combinedReducers from "./reducers/CombinedReducer";
 import { CardModel } from "./components/game/card/Card";
+import { SummoningModel } from "./components/game/summoning/Summoning";
 
 export interface StateModel {
 
@@ -9,8 +10,10 @@ export interface StateModel {
     hand: Array<string>;
 
     cardOnPreview: string;
+    summoningOnPreview: string;
 
     cardModels: Array<CardModel>;
+    summoningModels: Array<SummoningModel>;
 }
 
 export const store: Store<StateModel> = createStore(
@@ -24,6 +27,15 @@ export function findCardModelById(id: string): CardModel {
     return store.getState().cardModels.filter(
         (cardModel: CardModel): boolean => {
             return cardModel.id == id;
+        }
+    )[0];
+}
+
+export function findSummoningModelById(id: string): SummoningModel {
+    
+    return store.getState().summoningModels.filter(
+        (summoningModel: SummoningModel): boolean => {
+            return summoningModel.id == id;
         }
     )[0];
 }

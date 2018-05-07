@@ -34,8 +34,7 @@ export class Card extends React.Component<SummoningProps, {}> {
             >
                 <div className="head-wrapper">
                     <div className="name">
-                        <div className="fon
-                        t-size-large">
+                        <div className="font-size-large">
                             {this.props.summoningModel.card.name}
                         </div>
                     </div>

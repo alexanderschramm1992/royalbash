@@ -3,22 +3,28 @@ import * as React from "react";
 import "./SummoningMini.css";
 import "./../../common/common.css";
 import {SummoningProps} from "./Summoning";
+import store from "../../../Store";
+import {MouseOnSummoningActionFactory} from "../../../actions/MouseOnSummoningAction";
+import {MouseOffSummoningActionFactory} from "../../../actions/MouseOffSummoningAction";
 
 export class SummoningMini extends React.Component<SummoningProps, {}> {
 
     constructor(props: SummoningProps) {
 
         super(props);
+        this.handleMouseOver = this.handleMouseOver.bind(this);
+        this.handleMouseOut = this.handleMouseOut.bind(this);
+        this.handleDrag = this.handleDrag.bind(this);
     }
 
     handleMouseOver(): void {
 
-        //store.dispatch(MouseOnCardActionFactory.getInstance(this.props.cardModel.id));
+        store.dispatch(MouseOnSummoningActionFactory.getInstance(this.props.summoningModel.id));
     }
 
     handleMouseOut(): void {
 
-        //store.dispatch(MouseOffCardActionFactory.getInstance());
+        store.dispatch(MouseOffSummoningActionFactory.getInstance());
     }
 
     handleDrag(event: any): void {

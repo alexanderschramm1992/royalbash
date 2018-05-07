@@ -1,9 +1,10 @@
 import * as React from "react";
 
-import "./../../common/common.css";
+import "./../common/common.css";
 import "./DetailView.css";
-import Card, {CardModel} from "../card/Card";
-import store, {findCardModelById} from "../../../Store";
+import Card, {CardModel} from "./card/Card";
+import Summoning, {SummoningModel} from "./summoning/Summoning";
+import store, {findCardModelById, findSummoningModelById} from "../../Store";
 
 export interface DetailViewProps {
 
@@ -13,6 +14,7 @@ export interface DetailViewProps {
 interface DetailViewState {
 
     cardOnPreview?: CardModel;
+    summoningOnPreview?: SummoningModel;
 }
 
 export class DetailView extends React.Component<DetailViewProps, DetailViewState>{
@@ -29,11 +31,19 @@ export class DetailView extends React.Component<DetailViewProps, DetailViewState
 
             let cardOnPreview =
                 store.getState().cardOnPreview ? findCardModelById(store.getState().cardOnPreview) : null;
+            let summoningOnPreview = 
+                store.getState().summoningOnPreview ? findSummoningModelById(store.getState().summoningOnPreview) : null;
 
-            console.log(cardOnPreview);
+            console.dir("Card on Preview")
+            console.dir(cardOnPreview);
+            console.dir(store.getState().cardOnPreview);
+            console.dir("Summoning on Preview");
+            console.dir(summoningOnPreview);
+            console.dir(store.getState().summoningOnPreview);
 
             this.setState({
-                cardOnPreview: cardOnPreview
+                cardOnPreview: cardOnPreview,
+                summoningOnPreview: summoningOnPreview
             });
         });
     }
@@ -50,6 +60,11 @@ export class DetailView extends React.Component<DetailViewProps, DetailViewState
                     {this.state.cardOnPreview &&
                         <Card
                             cardModel={this.state.cardOnPreview}
+                        />
+                    }
+                    {this.state.summoningOnPreview &&
+                        <Summoning
+                            summoningModel={this.state.summoningOnPreview}
                         />
                     }
                 </div>

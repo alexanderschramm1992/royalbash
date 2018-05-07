@@ -25,8 +25,6 @@ export class Deck extends React.Component<{}, HandState> {
         });
     }
 
-
-
     render(): any {
 
         return (

@@ -8,11 +8,13 @@ import {CardModel} from "../card/Card";
 import Slider from "../../menu/Slider";
 import EventBus from "../../../events/EventBus";
 import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
-import DetailView from "./../card/DetailView";
+import DetailView from "../DetailView";
 import CardDrawnEvent from "../../../events/CardDrawnEvent";
 import Deck from "./Deck";
 import Hand from "./Hand";
 import DrawCardCall from "../../../rest/DrawCardCall";
+import {SummoningModel} from "../summoning/Summoning";
+import { SummoningMiniContainer } from "../summoning/SummoningMiniContainer";
 
 const card: CardModel = {
     id: "5d10c3a2-78e5-4463-85e0-57e279cac82c",
@@ -24,6 +26,13 @@ const card: CardModel = {
     strength: 3,
     health: 4
 };
+
+const summoning: SummoningModel = {
+    id: "49b20e63-9b09-4c3c-b1b2-b3337e72d1c4",
+    card: card,
+    currentStrength: card.strength,
+    currentHealth: card.health
+}
 
 interface BoardState {
 
@@ -86,15 +95,15 @@ export class Board extends React.Component<{}, BoardState> {
                         </div>
                         <div className="play-area border-large border-radius">
                             <div className="remote-summoning-area">
-                                <CardMiniContainer
+                                <SummoningMiniContainer
                                     size={7}
-                                    cards={[card]}
+                                    summonings={[summoning]}
                                 />
                             </div>
                             <div className="summoning-area">
-                                <CardMiniContainer
+                                <SummoningMiniContainer
                                     size={7}
-                                    cards={[card]}
+                                    summonings={[summoning]}
                                 />
                             </div>
                         </div>
