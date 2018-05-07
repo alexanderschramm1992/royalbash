@@ -3,8 +3,8 @@
 }
 
 .deck .stack{
-    height: 40em;
-    width: 25em;
+    height: 10em;
+    width: 40em;
     background: lightgray;
     border-radius: 1em;
 }

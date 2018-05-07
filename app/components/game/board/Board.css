@@ -49,19 +49,23 @@
     display: inline-block;
 }
 
-.board .center .player-area .summoning-deck-area {
-
-    margin-left: 1em;
-    display: inline-block;
-}
-
-.board .center .player-area .resources-deck-area {
-
-    margin-left: 1em;
-    display: inline-block;
-}
-
 .board .center .player-area .hand-area {
+
+    margin-left: 1em;
+    display: inline-block;
+}
+
+.board .center .player-area .deck-area-wrapper {
+
+    padding: 1em;
+}
+
+.board .center .player-area .deck-area-wrapper .summoning-deck-area {
+
+    display: inline-block;
+}
+
+.board .center .player-area .deck-area-wrapper .resources-deck-area {
 
     margin-left: 1em;
     display: inline-block;

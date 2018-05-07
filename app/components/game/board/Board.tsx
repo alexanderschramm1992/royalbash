@@ -89,8 +89,9 @@ export class Board extends React.Component<{}, BoardState> {
                     <div className="west"></div>
                     <div className="center">
                         <div className="player-area player-area-remote border-large border-radius">
+                            <div className="summoning-deck-area summoning-deck-area-remote"></div>
+                            <div className="ressources-deck-area ressources-deck-area-remote"></div>
                             <div className="graveyard-area graveyard-area-remote"></div>
-                            <div className="summoning-deck-area deck-area-remote"></div>
                             <div className="hand-area hand-area-remote"></div>
                         </div>
                         <div className="play-area border-large border-radius">
@@ -111,14 +112,16 @@ export class Board extends React.Component<{}, BoardState> {
                             <div className="graveyard-area">
                                 <Deck/>
                             </div>
-                            <div className="summoning-deck-area">
-                                <Deck/>
-                            </div>
-                            <div className="resources-deck-area">
-                                <Deck/>
-                            </div>
                             <div className="hand-area">
                                 <Hand/>
+                            </div>
+                            <div className="deck-area-wrapper">
+                                <div className="summoning-deck-area">
+                                    <Deck/>
+                                </div>
+                                <div className="resources-deck-area">
+                                    <Deck/>
+                                </div>
                             </div>
                         </div>
                     </div>
