@@ -11,6 +11,9 @@ export interface StateModel {
 
     cardOnPreview: string;
     summoningOnPreview: string;
+    
+    cardDragged: string;
+    dropCardIssued: boolean;
 
     cardModels: Array<CardModel>;
     summoningModels: Array<SummoningModel>;

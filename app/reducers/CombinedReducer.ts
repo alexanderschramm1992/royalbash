@@ -3,6 +3,7 @@ import { StateModel } from "../Store";
 import handleDrawCard from "./DrawCardHandler";
 import handleMouseOnCard from "./MouseOnCardHandler";
 import handleMouseOnSummoning from "./MouseOnSummoningHandler";
+import handleDragAndDrop from "./DragAndDropHandler";
 
 const initialState: StateModel =  {
     playerId: "8dbc6953-e25e-49f0-a298-7a0ea721de6c",
@@ -11,6 +12,9 @@ const initialState: StateModel =  {
 
     cardOnPreview: null,
     summoningOnPreview: null,
+
+    cardDragged: null,
+    dropCardIssued: false,
 
     cardModels: [
         {
@@ -49,6 +53,7 @@ export const combinedReducers: Reducer<StateModel, AnyAction> =
         state = handleDrawCard(state, action);
         state = handleMouseOnCard(state, action);
         state = handleMouseOnSummoning(state, action);
+        state = handleDragAndDrop(state, action);
         return state;
     };
 
