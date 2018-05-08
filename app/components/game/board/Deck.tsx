@@ -41,14 +41,14 @@ export class Deck extends React.Component<{}, DeckState> {
 
     render(): any {
 
-        let style = {
+        let style: React.CSSProperties = {
             visibility: this.state.showSpinner? "block" : "hidden"
         };
 
         return (
             <div className="deck">
                 <div className="stack" onClick={this.handleCardDraw}>
-                    <i className="spinner fa fa-cog fa-spin" style={style}></i>
+                    <i className="spinner fa fa-cog fa-spin" style={{style}}></i>
                 </div>
             </div>
         );
