@@ -2,6 +2,7 @@ import store from "../Store";
 import axios, {AxiosResponse} from "axios";
 import {SummoningAcceptedActionFactory} from "../actions/SummoningAcceptedAction";
 import {DrawCardDeclinedActionFactory} from "../actions/DrawCardDeclinedAction";
+import { Game } from "../model/Game";
 
 class SummonCardCall {
 
@@ -25,13 +26,8 @@ class SummonCardCall {
                     },
                 ).then((response: AxiosResponse): void => {
 
-                    let data: {summoningId: string, targetId: string} = response.data;
-
                     store.dispatch(
-                        SummoningAcceptedActionFactory.getInstance(
-                            data.summoningId,
-                            data.targetId
-                        )
+                        SummoningAcceptedActionFactory.getInstance(response.data)
                     );
                 }).catch((reason: string) => {
 

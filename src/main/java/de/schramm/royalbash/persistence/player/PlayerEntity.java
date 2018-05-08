@@ -2,7 +2,6 @@ package de.schramm.royalbash.persistence.player;
 
 import de.schramm.royalbash.model.Card;
 import de.schramm.royalbash.model.Player;
-import de.schramm.royalbash.model.Summoning;
 import de.schramm.royalbash.model.Target;
 import lombok.Builder;
 import lombok.Singular;
@@ -31,7 +30,7 @@ public class PlayerEntity {
 
         return PlayerEntity.builder()
                 .id(player.getId())
-                .account(player.getAccount().getId())
+                .account(player.getAccountId())
                 .deck(player.getDeck().getId())
                 .health(player.getHealth())
                 .cards(player.getCards().stream()

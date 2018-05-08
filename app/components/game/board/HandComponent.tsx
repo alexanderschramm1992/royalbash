@@ -1,17 +1,20 @@
 import * as React from "react";
-import store, {findCardModelById} from "../../../Store";
+
+import "./../../common/common.css";
+import "./HandComponent.css";
+import store, {getPlayer} from "../../../Store";
 import CardContainer from "../card/CardMiniContainer";
-import {CardModel} from "../card/Card";
+import {Card} from "../../../model/Game";
 
 export interface HandState {
 
-    cards: CardModel[];
+    cards: Card[];
 }
 
-export class Deck extends React.Component<{}, HandState> {
+export class HandComponent extends React.Component<{}, HandState> {
 
-    constructor() {
-        super({});
+    constructor(props: any) {
+        super(props);
 
         this.state = {
             cards: []
@@ -20,7 +23,7 @@ export class Deck extends React.Component<{}, HandState> {
         store.subscribe((): void => {
 
             this.setState({
-                cards: store.getState().hand.map(findCardModelById)
+                cards: getPlayer().cards
             });
         });
     }
@@ -38,4 +41,4 @@ export class Deck extends React.Component<{}, HandState> {
     }
 }
 
-export default Deck;
+export default HandComponent;

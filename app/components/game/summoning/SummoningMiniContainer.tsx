@@ -3,20 +3,27 @@ import * as React from "react";
 import "./SummoningMiniContainer.css";
 import "./../../common/common.css";
 
-import {SummoningModel} from "./Summoning";
+import {Summoning} from "../../../model/Game";
 import SummoningMini from "./SummoningMini";
 
 export interface SummoningMiniContainerProps {
 
-    size: number;
-    summonings: SummoningModel[];
+    readonly size: number;
 }
 
-export class SummoningMiniContainer extends React.Component<SummoningMiniContainerProps, {}> {
+interface SummoningMiniContainerState {
+
+    summonings: Summoning[];
+}
+
+export class SummoningMiniContainer extends React.Component<SummoningMiniContainerProps, SummoningMiniContainerState> {
 
     constructor(props: SummoningMiniContainerProps) {
         super(props);
 
+        this.state = {
+            summonings: []
+        }
     }
 
     handleDrop(event: any): any {
@@ -43,8 +50,8 @@ export class SummoningMiniContainer extends React.Component<SummoningMiniContain
                     onDragOver={this.handleDragOver}
                     onDrop={this.handleDrop}
                 >
-                    {this.props.summonings[i] &&
-                    <SummoningMini summoningModel = {this.props.summonings[i]} />
+                    {this.state.summonings[i] &&
+                    <SummoningMini summoning = {this.state.summonings[i]} />
                     }
                 </div>
             );

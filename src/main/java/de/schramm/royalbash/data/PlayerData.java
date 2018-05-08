@@ -17,14 +17,14 @@ public class PlayerData {
     public static final Player PLAYER_1 = Player.builder()
             .id(UUID.fromString("8dbc6953-e25e-49f0-a298-7a0ea721de6c"))
             .health(20)
-            .account(ACCOUNT_1)
+            .accountId(ACCOUNT_1.getId())
             .deck(DECK_1)
             .build();
 
     public static final Player PLAYER_2 = Player.builder()
             .id(UUID.fromString("736cb270-c73c-4257-b49f-d71d9b4cb59b"))
             .health(20)
-            .account(ACCOUNT_2)
+            .accountId(ACCOUNT_2.getId())
             .deck(DECK_2)
             .build();
 

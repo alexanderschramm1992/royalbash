@@ -47,7 +47,7 @@ public class SummonHandler {
         this.playerHasCardInHandChecker = playerHasCardInHandChecker;
     }
 
-    public Summoning summon(
+    public Game summon(
             UUID gameId,
             UUID playerId,
             UUID cardId,
@@ -90,6 +90,6 @@ public class SummonHandler {
 
         // Return updated Board
 
-        return summoning;
+        return gameRepository.find(gameId);
     }
 }

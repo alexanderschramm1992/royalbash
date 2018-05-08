@@ -25,7 +25,7 @@ const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateMo
         case SUMMONING_ISSUED:
 
             let summoningIssuedAction = action as SummoningIssuedAction;
-            console.log("Summoning card " + summoningIssuedAction.cardId + " issued on target " + summoningIssuedAction.targetId);
+            console.log("Summoning issued");
             return {
                 ...state,
                 summonCardIssued: true
@@ -33,7 +33,7 @@ const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateMo
         case SUMMONING_ACCEPTED:
 
             let summoningAcceptedAction = action as SummoningAcceptedAction;
-            console.log("Summoning " + summoningAcceptedAction.summoningId + " accepted on target " + summoningAcceptedAction.targetId);
+            console.log("Summoning accepted");
             return {
                 ...state,
                 // ToDo: Add state

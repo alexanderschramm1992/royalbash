@@ -21,7 +21,7 @@ public class Summoning implements AttackableCanAttack {
         return Summoning.builder()
                 .id(id)
                 .card(card)
-                .currentCost(card.getCost())
+                .currentCost(card.getCostRations())
                 .currentHealth(card.getHealth())
                 .currentStrength(card.getStrength())
                 .build();

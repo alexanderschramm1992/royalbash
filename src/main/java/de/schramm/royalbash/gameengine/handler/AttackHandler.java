@@ -105,6 +105,6 @@ public class AttackHandler {
 
         gameRepository.save(game);
 
-        return game;
+        return gameRepository.find(gameId);
     }
 }

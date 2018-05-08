@@ -9,15 +9,12 @@ import de.schramm.royalbash.model.*;
 import de.schramm.royalbash.persistence.game.GameRepository;
 import de.schramm.royalbash.persistence.summoning.SummoningRepository;
 import de.schramm.royalbash.persistence.player.PlayerRepository;
-import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Matchers.isNull;
-import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -37,7 +34,7 @@ public class AttackHandlerTest {
     private final PlayerRepository playerRepository = mock(PlayerRepository.class);
 
     private final Turn turn = Turn.builder()
-            .player(playerBlue)
+            .playerId(playerBlue.getId())
             .counter(0)
             .build();
 
@@ -45,7 +42,7 @@ public class AttackHandlerTest {
     private final Card card1 = Card.builder()
             .id(card1Id)
             .name("Card 1")
-            .cost(2)
+            .costRations(2)
             .health(2)
             .strength(2)
             .build();
@@ -63,7 +60,7 @@ public class AttackHandlerTest {
     private final Card card2 = Card.builder()
             .id(card2Id)
             .name("Card 2")
-            .cost(1)
+            .costRations(1)
             .health(1)
             .strength(2)
             .build();
@@ -81,7 +78,7 @@ public class AttackHandlerTest {
     private final Card card3 = Card.builder()
             .id(card3Id)
             .name("Card 3")
-            .cost(1)
+            .costRations(1)
             .health(1)
             .strength(1)
             .build();

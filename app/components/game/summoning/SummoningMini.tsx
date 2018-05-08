@@ -2,7 +2,7 @@ import * as React from "react";
 
 import "./SummoningMini.css";
 import "./../../common/common.css";
-import {SummoningProps} from "./Summoning";
+import {SummoningProps} from "./SummoningComponent";
 import store from "../../../Store";
 import {MouseOnSummoningActionFactory} from "../../../actions/MouseOnSummoningAction";
 import {MouseOffSummoningActionFactory} from "../../../actions/MouseOffSummoningAction";
@@ -19,7 +19,7 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
 
     handleMouseOver(): void {
 
-        store.dispatch(MouseOnSummoningActionFactory.getInstance(this.props.summoningModel.id));
+        store.dispatch(MouseOnSummoningActionFactory.getInstance(this.props.summoning.id));
     }
 
     handleMouseOut(): void {
@@ -48,40 +48,40 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">
-                            {this.props.summoningModel.card.name}
+                            {this.props.summoning.card.name}
                         </div>
                     </div>
                     <div className="cost-wrapper border-small">
                         <div className="cost cost-rations border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoningModel.card.costRations? this.props.summoningModel.card.costRations : 99}
+                                {this.props.summoning.card.costRations? this.props.summoning.card.costRations : 99}
                             </div>
                         </div>
                         <div className="cost cost-material border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoningModel.card.costMaterial? this.props.summoningModel.card.costMaterial : 99}
+                                {this.props.summoning.card.costMaterial? this.props.summoning.card.costMaterial : 99}
                             </div>
                         </div>
                         <div className="cost cost-blessing border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoningModel.card.costBlessing? this.props.summoningModel.card.costBlessing : 99}
+                                {this.props.summoning.card.costBlessing? this.props.summoning.card.costBlessing : 99}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img className="image" src={this.props.summoningModel.card.image} alt={this.props.summoningModel.card.name}/>
+                    <img className="image" src={this.props.summoning.card.image} alt={this.props.summoning.card.name}/>
                 </div>
                 <div className="foot-wrapper">
                     <div className="stats-wrapper border-small">
                         <div className="strength border-small">
                             <div className="font-size-large center-text">
-                                {this.props.summoningModel.currentStrength}
+                                {this.props.summoning.currentStrength}
                             </div>
                         </div>
                         <div className="health border-small">
                             <div className="font-size-large center-text">
-                                {this.props.summoningModel.currentHealth}
+                                {this.props.summoning.currentHealth}
                             </div>
                         </div>
                     </div>

@@ -4,56 +4,27 @@ import "./../../common/common.css";
 import "./Board.css";
 
 import CardMiniContainer from "./../card/CardMiniContainer";
-import {CardModel} from "../card/Card";
 import Slider from "../../menu/Slider";
-import EventBus from "../../../events/EventBus";
-import MouseOnCardEvent from "../../../events/MouseOnCardEvent";
 import DetailView from "../DetailView";
-import CardDrawnEvent from "../../../events/CardDrawnEvent";
-import Deck from "./Deck";
-import Hand from "./Hand";
+import DeckComponent from "./DeckComponent";
+import HandComponent from "./HandComponent";
 import DrawCardCall from "../../../rest/DrawCardCall";
-import {SummoningModel} from "../summoning/Summoning";
 import { SummoningMiniContainer } from "../summoning/SummoningMiniContainer";
-
-const card: CardModel = {
-    id: "5d10c3a2-78e5-4463-85e0-57e279cac82c",
-    name: "Veteran Knight",
-    image: "/img/veteran_knight.jpg",
-    type: "Knight",
-    text: "N/A",
-    cost: 4,
-    strength: 3,
-    health: 4
-};
-
-const summoning: SummoningModel = {
-    id: "49b20e63-9b09-4c3c-b1b2-b3337e72d1c4",
-    card: card,
-    currentStrength: card.strength,
-    currentHealth: card.health
-}
+import {Card, Summoning} from "../../../model/Game";
 
 interface BoardState {
 
     readonly scale: number;
-    readonly mouseOnCardEventBus: EventBus<MouseOnCardEvent>;
-    readonly cardDrawnEventBus: EventBus<CardDrawnEvent>;
     readonly drawCardCall: DrawCardCall;
 }
 
-export class Board extends React.Component<{}, BoardState> {
+export class BoardComponent extends React.Component<{}, BoardState> {
 
     constructor(props: any) {
         super(props);
 
-        let mouseOnCardEventBus = new EventBus<MouseOnCardEvent>();
-        let cardDrawnEventBus = new EventBus<CardDrawnEvent>();
-
         this.state = {
             scale: 5,
-            mouseOnCardEventBus: mouseOnCardEventBus,
-            cardDrawnEventBus: cardDrawnEventBus,
             drawCardCall: new DrawCardCall()
         };
 
@@ -98,29 +69,27 @@ export class Board extends React.Component<{}, BoardState> {
                             <div className="remote-summoning-area">
                                 <SummoningMiniContainer
                                     size={7}
-                                    summonings={[summoning]}
                                 />
                             </div>
                             <div className="summoning-area">
                                 <SummoningMiniContainer
                                     size={7}
-                                    summonings={[summoning]}
                                 />
                             </div>
                         </div>
                         <div className="player-area border-large border-radius">
                             <div className="graveyard-area">
-                                <Deck/>
+                                <DeckComponent/>
                             </div>
                             <div className="hand-area">
-                                <Hand/>
+                                <HandComponent/>
                             </div>
                             <div className="deck-area-wrapper">
                                 <div className="summoning-deck-area">
-                                    <Deck/>
+                                    <DeckComponent/>
                                 </div>
                                 <div className="resources-deck-area">
-                                    <Deck/>
+                                    <DeckComponent/>
                                 </div>
                             </div>
                         </div>
@@ -138,4 +107,4 @@ export class Board extends React.Component<{}, BoardState> {
     }
 }
 
-export default Board;
+export default BoardComponent;

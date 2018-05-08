@@ -1,13 +1,14 @@
 import { createStore, Store } from "redux";
 import combinedReducers from "./reducers/CombinedReducer";
-import { CardModel } from "./components/game/card/Card";
-import { SummoningModel } from "./components/game/summoning/Summoning";
+import { Game, Player, Card, Summoning } from "./model/Game";
 
 export interface StateModel {
 
     playerId: string;
+
+    game: Game;
+
     drawCardIssued: boolean;
-    hand: Array<string>;
 
     cardOnPreview: string;
     summoningOnPreview: string;
@@ -15,9 +16,6 @@ export interface StateModel {
     cardToBeSummoned: string;
     summoningTarget: string;
     summonCardIssued: boolean;
-
-    cardModels: Array<CardModel>;
-    summoningModels: Array<SummoningModel>;
 }
 
 export const store: Store<StateModel> = createStore(
@@ -26,22 +24,31 @@ export const store: Store<StateModel> = createStore(
         (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-export function findCardModelById(id: string): CardModel {
+export function getPlayer(): Player {
 
-    return store.getState().cardModels.filter(
-        (cardModel: CardModel): boolean => {
-            return cardModel.id == id;
-        }
-    )[0];
+    let playerId = store.getState().playerId;
+
+    if (store.getState().game.board.playerBlue.id == playerId) {
+
+        return store.getState().game.board.playerBlue;
+    } else {
+     
+        return store.getState().game.board.playerBlue;
+    }
 }
 
-export function findSummoningModelById(id: string): SummoningModel {
+export function findCardById(id: string): Card {
+
+    return store.getState().game.board.playerBlue.cards.find((card) => {return card.id == id})
+}
+
+export function findSummoningById(id: string): Summoning {
+
+    let playerBlueSummonings = store.getState().game.board.playerBlue.targets.map((target) => {return target.summoning});
+    let playerRedSummonings = store.getState().game.board.playerRed.targets.map((target) => {return target.summoning});
+    let summonings = playerBlueSummonings.concat(playerRedSummonings);
     
-    return store.getState().summoningModels.filter(
-        (summoningModel: SummoningModel): boolean => {
-            return summoningModel.id == id;
-        }
-    )[0];
+    return summonings.find((summoning) => {return summoning.id == id});
 }
 
 export default store;

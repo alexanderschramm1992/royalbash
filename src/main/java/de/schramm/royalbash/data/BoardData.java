@@ -19,7 +19,7 @@ public class BoardData {
                                 .turn(
                                         Turn.builder()
                                                 .counter(1)
-                                                .player(PLAYER_1)
+                                                .playerId(PLAYER_1.getId())
                                                 .build()
                                 )
                                 .playerBlue(PLAYER_1)

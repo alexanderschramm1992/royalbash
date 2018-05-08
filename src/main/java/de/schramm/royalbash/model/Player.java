@@ -11,7 +11,7 @@ import java.util.*;
 public class Player implements AttackableCanAttack {
 
     private final UUID id;
-    private final Account account;
+    private final UUID accountId;
     private final Deck deck;
 
     private int health;

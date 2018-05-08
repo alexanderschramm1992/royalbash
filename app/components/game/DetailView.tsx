@@ -2,9 +2,10 @@ import * as React from "react";
 
 import "./../common/common.css";
 import "./DetailView.css";
-import Card, {CardModel} from "./card/Card";
-import Summoning, {SummoningModel} from "./summoning/Summoning";
-import store, {findCardModelById, findSummoningModelById} from "../../Store";
+import CardComponent from "./card/CardComponent";
+import SummoningComponent from "./summoning/SummoningComponent";
+import {Card, Summoning} from "../../model/Game";
+import store, {findCardById, findSummoningById} from "../../Store";
 
 export interface DetailViewProps {
 
@@ -13,8 +14,8 @@ export interface DetailViewProps {
 
 interface DetailViewState {
 
-    cardOnPreview?: CardModel;
-    summoningOnPreview?: SummoningModel;
+    cardOnPreview?: Card;
+    summoningOnPreview?: Summoning;
 }
 
 export class DetailView extends React.Component<DetailViewProps, DetailViewState>{
@@ -30,16 +31,9 @@ export class DetailView extends React.Component<DetailViewProps, DetailViewState
         store.subscribe((): void => {
 
             let cardOnPreview =
-                store.getState().cardOnPreview ? findCardModelById(store.getState().cardOnPreview) : null;
+                store.getState().cardOnPreview ? findCardById(store.getState().cardOnPreview) : null;
             let summoningOnPreview = 
-                store.getState().summoningOnPreview ? findSummoningModelById(store.getState().summoningOnPreview) : null;
-
-            console.dir("Card on Preview")
-            console.dir(cardOnPreview);
-            console.dir(store.getState().cardOnPreview);
-            console.dir("Summoning on Preview");
-            console.dir(summoningOnPreview);
-            console.dir(store.getState().summoningOnPreview);
+                store.getState().summoningOnPreview ? findSummoningById(store.getState().summoningOnPreview) : null;
 
             this.setState({
                 cardOnPreview: cardOnPreview,
@@ -58,13 +52,13 @@ export class DetailView extends React.Component<DetailViewProps, DetailViewState
             <div className="detail-view-wrapper">
                 <div className="detail-view border-large border-radius" style={style}>
                     {this.state.cardOnPreview &&
-                        <Card
-                            cardModel={this.state.cardOnPreview}
+                        <CardComponent
+                            card={this.state.cardOnPreview}
                         />
                     }
                     {this.state.summoningOnPreview &&
-                        <Summoning
-                            summoningModel={this.state.summoningOnPreview}
+                        <SummoningComponent
+                            summoning={this.state.summoningOnPreview}
                         />
                     }
                 </div>

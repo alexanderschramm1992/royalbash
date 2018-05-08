@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import "./../../common/common.css";
-import "./Deck.css";
+import "./DeckComponent.css";
 
 import store from "./../../../Store";
 import { DrawCardIssuedActionFactory } from "../../../actions/DrawCardIssuedAction";

@@ -3,7 +3,6 @@ package de.schramm.royalbash.persistence.player;
 import de.schramm.royalbash.data.PlayerData;
 import de.schramm.royalbash.model.Player;
 import de.schramm.royalbash.persistence.card.CardRepository;
-import de.schramm.royalbash.persistence.account.AccountRepository;
 import de.schramm.royalbash.persistence.deck.DeckRepository;
 import de.schramm.royalbash.persistence.target.TargetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +25,16 @@ public class PlayerRepositoryFake implements PlayerRepository {
         PlayerData.getPlayerSet().forEach(this::save);
     }
 
-    private final AccountRepository accountRepository;
     private final DeckRepository deckRepository;
     private final CardRepository cardRepository;
     private final TargetRepository targetRepository;
 
     @Autowired
     public PlayerRepositoryFake(
-            AccountRepository accountRepository,
             DeckRepository deckRepository,
             CardRepository cardRepository,
             TargetRepository targetRepository
     ) {
-        this.accountRepository = accountRepository;
         this.deckRepository = deckRepository;
         this.cardRepository = cardRepository;
         this.targetRepository = targetRepository;
@@ -53,7 +49,7 @@ public class PlayerRepositoryFake implements PlayerRepository {
 
             return Player.builder()
                     .id(playerEntity.getId())
-                    .account(accountRepository.find(playerEntity.getAccount()))
+                    .accountId(playerEntity.getAccount())
                     .deck(deckRepository.find(playerEntity.getDeck()))
                     .health(playerEntity.getHealth())
                     .cards(playerEntity.getCards().stream()

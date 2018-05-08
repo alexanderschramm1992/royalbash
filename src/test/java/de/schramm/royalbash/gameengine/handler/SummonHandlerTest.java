@@ -81,7 +81,7 @@ public class SummonHandlerTest {
 
         // when
 
-        Summoning summoning = summonHandler.summon(
+        Game result = summonHandler.summon(
                 gameId,
                 playerId,
                 cardId,
@@ -90,7 +90,10 @@ public class SummonHandlerTest {
 
         // then
 
-        Assert.assertThat(summoning.getCard(), is(this.card));
+        Assert.assertThat(
+                result.getBoard().getPlayerBlue().getTargets().iterator().next().getSummoning().getCard(),
+                is(this.card)
+        );
     }
 
     @Test(expected = GameRuleViolationException.class)

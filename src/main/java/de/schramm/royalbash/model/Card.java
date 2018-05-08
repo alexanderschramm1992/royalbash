@@ -13,8 +13,12 @@ public class Card {
     private String name;
     private String image;
     private String type;
+    private String subType;
     private String text;
-    private int cost;
+    private String lore;
+    private int costRations;
+    private int costMaterial;
+    private int costBlessing;
     private int strength;
     private int health;
 
@@ -23,7 +27,7 @@ public class Card {
         return Summoning.builder()
                 .id(id)
                 .card(this)
-                .currentCost(cost)
+                .currentCost(costRations)
                 .currentStrength(strength)
                 .currentHealth(health)
                 .build();

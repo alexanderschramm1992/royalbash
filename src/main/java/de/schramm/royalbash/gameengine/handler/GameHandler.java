@@ -60,16 +60,16 @@ public class GameHandler {
     }
 
     public Game startGame(
-            UUID playerBlueId,
-            UUID playerRedId,
+            UUID accountBlueId,
+            UUID accountRedId,
             UUID blueBlueprintId,
             UUID redBlueprintId
     ) throws GameEngineException {
 
         // Fetch domain objects
 
-        Account accountBlue = accountRepository.find(playerBlueId);
-        Account accountRed = accountRepository.find(playerRedId);
+        Account accountBlue = accountRepository.find(accountBlueId);
+        Account accountRed = accountRepository.find(accountRedId);
         Blueprint blueprintBlue = blueprintRepository.find(blueBlueprintId);
         Blueprint blueprintRed = blueprintRepository.find(redBlueprintId);
 
@@ -95,22 +95,24 @@ public class GameHandler {
         Deck deckBlue = Deck.fromBlueprint(blueprintBlue, UUID.randomUUID());
         Deck deckRed = Deck.fromBlueprint(blueprintRed, UUID.randomUUID());
 
+        UUID playerBlueId = UUID.randomUUID();
+
         Player playerBlue = Player.builder()
-                .id(UUID.randomUUID())
-                .account(accountBlue)
+                .id(playerBlueId)
+                .accountId(accountBlue.getId())
                 .clearCards()
                 .deck(deckBlue)
                 .build();
         Player playerRed = Player.builder()
                 .id(UUID.randomUUID())
-                .account(accountRed)
+                .accountId(accountRed.getId())
                 .clearCards()
                 .deck(deckRed)
                 .build();
 
         Turn turn = Turn.builder()
                 .counter(0)
-                .player(playerBlue)
+                .playerId(playerBlueId)
                 .build();
 
         Board board = Board.builder()

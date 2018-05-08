@@ -3,12 +3,14 @@ package de.schramm.royalbash.model;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.UUID;
+
 @Builder
 @Getter
 public class Turn {
 
     private int counter;
-    private Player player;
+    private UUID playerId;
 
     public void increaseTurnCounter() {
 
@@ -17,12 +19,12 @@ public class Turn {
 
     public void swapPlayer(Board board) {
 
-        if (player.equals(board.getPlayerBlue())) {
+        if (playerId.equals(board.getPlayerBlue().getId())) {
 
-            player = board.getPlayerRed();
-        } else if (player.equals(board.getPlayerRed())) {
+            playerId = board.getPlayerRed().getId();
+        } else if (playerId.equals(board.getPlayerRed().getId())) {
 
-            player = board.getPlayerBlue();
+            playerId = board.getPlayerBlue().getId();
         } else {
 
             // ToDo: Handle error

@@ -1,21 +1,20 @@
 import {SUMMONING_ACCEPTED} from "./ActionTypes";
 import {Action} from "redux";
+import { Game } from "../model/Game";
 
 interface SummoningAcceptedAction extends Action<SUMMONING_ACCEPTED>{
 
     readonly type: SUMMONING_ACCEPTED;
-    readonly summoningId: string;
-    readonly targetId: string,
+    readonly game: Game
 }
 
 export class SummoningAcceptedActionFactory {
 
-    public static getInstance(summoningId: string, targetId: string): SummoningAcceptedAction {
+    public static getInstance(game: Game): SummoningAcceptedAction {
 
         return {
             type: SUMMONING_ACCEPTED,
-            summoningId: summoningId,
-            targetId: targetId
+            game: game
         }
     }
 }

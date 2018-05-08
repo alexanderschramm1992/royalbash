@@ -87,7 +87,7 @@ public class TurnHandlerTest {
 
         Turn turn = Turn.builder()
                 .counter(0)
-                .player(player1)
+                .playerId(player1.getId())
                 .build();
 
         UUID boardId = UUID.randomUUID();
@@ -114,7 +114,7 @@ public class TurnHandlerTest {
 
         Assert.assertThat(turn.getCounter(), is(1));
 
-        Assert.assertThat(turn.getPlayer(), is(player2));
+        Assert.assertThat(turn.getPlayerId(), is(player2));
     }
 
     @Test(expected = DomainObjectDoesNotExistException.class)
