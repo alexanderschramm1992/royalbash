@@ -5,13 +5,11 @@ import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
 import de.schramm.royalbash.gameengine.rule.PlayerHasCardInHandChecker;
 import de.schramm.royalbash.gameengine.rule.PlayerOnBoardChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
-import de.schramm.royalbash.model.Board;
-import de.schramm.royalbash.model.Card;
-import de.schramm.royalbash.model.Player;
-import de.schramm.royalbash.model.Summoning;
-import de.schramm.royalbash.persistence.board.BoardRepository;
+import de.schramm.royalbash.model.*;
 import de.schramm.royalbash.persistence.card.CardRepository;
+import de.schramm.royalbash.persistence.game.GameRepository;
 import de.schramm.royalbash.persistence.player.PlayerRepository;
+import de.schramm.royalbash.persistence.target.TargetRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,15 +32,23 @@ public class SummonHandlerTest {
             .card(card)
             .build();
 
+    private UUID targetId = UUID.randomUUID();
+    private Target target = Target.builder()
+            .id(targetId)
+            .build();
+
     private CardRepository cardRepository = mock(CardRepository.class);
 
     private PlayerRepository playerRepository = mock(PlayerRepository.class);
 
-    private UUID boardId = UUID.randomUUID();
+    private TargetRepository targetRepository = mock(TargetRepository.class);
+
+    private UUID gameId = UUID.randomUUID();
 
     {
         when(cardRepository.find(cardId)).thenReturn(card);
         when(playerRepository.find(playerId)).thenReturn(player);
+        when(targetRepository.find(targetId)).thenReturn(target);
     }
 
     @Test
@@ -52,18 +58,22 @@ public class SummonHandlerTest {
         // given
 
         Board board = Board.builder()
-                .id(boardId)
                 .playerBlue(player)
                 .playerRed(Player.builder().build())
                 .build();
 
-        BoardRepository boardRepository = mock(BoardRepository.class);
-        when(boardRepository.find(boardId)).thenReturn(board);
+        Game game = Game.builder()
+                .board(board)
+                .build();
+
+        GameRepository gameRepository = mock(GameRepository.class);
+        when(gameRepository.find(gameId)).thenReturn(game);
 
         SummonHandler summonHandler = new SummonHandler(
+                gameRepository,
                 cardRepository,
                 playerRepository,
-                boardRepository,
+                targetRepository,
                 new RequiredDomainObjectChecker(),
                 new PlayerOnBoardChecker(),
                 new PlayerHasCardInHandChecker()
@@ -72,9 +82,10 @@ public class SummonHandlerTest {
         // when
 
         Summoning summoning = summonHandler.summon(
-                boardId,
+                gameId,
                 playerId,
-                cardId
+                cardId,
+                targetId
         );
 
         // then
@@ -89,18 +100,23 @@ public class SummonHandlerTest {
         // given
 
         Board board = Board.builder()
-                .id(boardId)
+                .id(gameId)
                 .playerBlue(Player.builder().build())
                 .playerRed(Player.builder().build())
                 .build();
 
-        BoardRepository boardRepository = mock(BoardRepository.class);
-        when(boardRepository.find(boardId)).thenReturn(board);
+        Game game = Game.builder()
+                .board(board)
+                .build();
+
+        GameRepository gameRepository = mock(GameRepository.class);
+        when(gameRepository.find(gameId)).thenReturn(game);
 
         SummonHandler summonHandler = new SummonHandler(
+                gameRepository,
                 cardRepository,
                 playerRepository,
-                boardRepository,
+                targetRepository,
                 new RequiredDomainObjectChecker(),
                 new PlayerOnBoardChecker(),
                 new PlayerHasCardInHandChecker()
@@ -109,9 +125,10 @@ public class SummonHandlerTest {
         // when
 
         summonHandler.summon(
-                boardId,
+                gameId,
                 playerId,
-                cardId
+                cardId,
+                targetId
         );
     }
 
@@ -129,18 +146,23 @@ public class SummonHandlerTest {
         when(playerRepository.find(playerId)).thenReturn(player);
 
         Board board = Board.builder()
-                .id(boardId)
+                .id(gameId)
                 .playerBlue(player)
                 .playerRed(Player.builder().build())
                 .build();
 
-        BoardRepository boardRepository = mock(BoardRepository.class);
-        when(boardRepository.find(boardId)).thenReturn(board);
+        Game game = Game.builder()
+                .board(board)
+                .build();
+
+        GameRepository gameRepository = mock(GameRepository.class);
+        when(gameRepository.find(gameId)).thenReturn(game);
 
         SummonHandler summonHandler = new SummonHandler(
+                gameRepository,
                 cardRepository,
                 playerRepository,
-                boardRepository,
+                targetRepository,
                 new RequiredDomainObjectChecker(),
                 new PlayerOnBoardChecker(),
                 new PlayerHasCardInHandChecker()
@@ -149,9 +171,10 @@ public class SummonHandlerTest {
         // when
 
         summonHandler.summon(
-                boardId,
+                gameId,
                 playerId,
-                cardId
+                cardId,
+                targetId
         );
     }
 }

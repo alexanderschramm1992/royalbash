@@ -1,9 +1,10 @@
 package de.schramm.royalbash.controller;
 
+import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.handler.AttackHandler;
 import de.schramm.royalbash.gameengine.handler.TurnHandler;
-import de.schramm.royalbash.model.Board;
+import de.schramm.royalbash.model.Game;
 import de.schramm.royalbash.model.Turn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -79,7 +80,7 @@ public class BoardController {
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<Board> attackInstance(
+    public ResponseEntity<StateResponse> attackInstance(
             @RequestBody UUID boardId,
             @RequestBody UUID attackingInstanceId,
             @RequestBody UUID attackedInstanceId
@@ -87,16 +88,18 @@ public class BoardController {
 
         try {
 
-            Board board = attackHandler.attackCardInstance(
+            Game game = attackHandler.attackSummoning(
                     boardId,
                     attackingInstanceId,
                     attackedInstanceId
             );
 
-            return ResponseEntity.ok(board);
+            return ResponseEntity.ok(StateResponse.fromGame(game));
         } catch (GameEngineException exception) {
 
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity
+                    .status(400)
+                    .body(StateResponse.fromError(exception.getMessage()));
         }
     }
 }

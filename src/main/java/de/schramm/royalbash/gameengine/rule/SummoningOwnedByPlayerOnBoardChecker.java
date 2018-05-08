@@ -3,6 +3,7 @@ package de.schramm.royalbash.gameengine.rule;
 import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
 import de.schramm.royalbash.model.Board;
 import de.schramm.royalbash.model.Summoning;
+import de.schramm.royalbash.model.Target;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -21,10 +22,11 @@ public class SummoningOwnedByPlayerOnBoardChecker {
     ) throws GameRuleViolationException {
 
         Set<Summoning> summoningsOnBoard = Stream.of(
-                board.getPlayerBlue().getSummonings(),
-                board.getPlayerRed().getSummonings()
+                board.getPlayerBlue().getTargets(),
+                board.getPlayerRed().getTargets()
         )
                 .flatMap(Collection::stream)
+                .map(Target::getSummoning)
                 .collect(Collectors.toSet());
 
         Set<UUID> summoningsNotOnBoard = Arrays.stream(summonings)

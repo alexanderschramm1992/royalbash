@@ -3,9 +3,9 @@ package de.schramm.royalbash.persistence.player;
 import de.schramm.royalbash.data.PlayerData;
 import de.schramm.royalbash.model.Player;
 import de.schramm.royalbash.persistence.card.CardRepository;
-import de.schramm.royalbash.persistence.summoning.SummoningRepository;
 import de.schramm.royalbash.persistence.account.AccountRepository;
 import de.schramm.royalbash.persistence.deck.DeckRepository;
+import de.schramm.royalbash.persistence.target.TargetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,19 +29,19 @@ public class PlayerRepositoryFake implements PlayerRepository {
     private final AccountRepository accountRepository;
     private final DeckRepository deckRepository;
     private final CardRepository cardRepository;
-    private final SummoningRepository summoningRepository;
+    private final TargetRepository targetRepository;
 
     @Autowired
     public PlayerRepositoryFake(
             AccountRepository accountRepository,
             DeckRepository deckRepository,
             CardRepository cardRepository,
-            SummoningRepository summoningRepository
+            TargetRepository targetRepository
     ) {
         this.accountRepository = accountRepository;
         this.deckRepository = deckRepository;
         this.cardRepository = cardRepository;
-        this.summoningRepository = summoningRepository;
+        this.targetRepository = targetRepository;
     }
 
     @Override
@@ -60,8 +60,8 @@ public class PlayerRepositoryFake implements PlayerRepository {
                             .map(cardRepository::find)
                             .collect(Collectors.toList())
                     )
-                    .summonings(playerEntity.getSummonings().stream()
-                            .map(summoningRepository::find)
+                    .targets(playerEntity.getTargets().stream()
+                            .map(targetRepository::find)
                             .collect(Collectors.toList())
                     ).build();
         } else {

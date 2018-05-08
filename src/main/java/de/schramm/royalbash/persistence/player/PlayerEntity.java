@@ -3,6 +3,7 @@ package de.schramm.royalbash.persistence.player;
 import de.schramm.royalbash.model.Card;
 import de.schramm.royalbash.model.Player;
 import de.schramm.royalbash.model.Summoning;
+import de.schramm.royalbash.model.Target;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;
@@ -23,8 +24,8 @@ public class PlayerEntity {
     @Singular("card")
     private List<UUID> cards;
 
-    @Singular("summoning")
-    private List<UUID> summonings;
+    @Singular("target")
+    private List<UUID> targets;
 
     static PlayerEntity toEntity(Player player) {
 
@@ -37,8 +38,8 @@ public class PlayerEntity {
                         .map(Card::getId)
                         .collect(Collectors.toList())
                 )
-                .summonings(player.getSummonings().stream()
-                        .map(Summoning::getId)
+                .targets(player.getTargets().stream()
+                        .map(Target::getId)
                         .collect(Collectors.toList())
                 ).build();
     }
