@@ -16,3 +16,6 @@
 ## Endpoints
  * In your browser, navigate to [localhost:8080](http://localhost:8080) to find the app
  * In your browser, navigate to [localhost:8080/api](http://localhost:8080/api) to find the backend API documentation
+
+## Pipeline
+CircleCI Status: [![CircleCI](https://circleci.com/gh/alexanderschramm1992/royalbash.svg?style=svg)](https://circleci.com/gh/alexanderschramm1992/royalbash)
