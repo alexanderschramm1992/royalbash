@@ -11,6 +11,8 @@ class DrawCardCall {
 
             if(store.getState().drawCardIssued) {
 
+                console.log("PlayerId: " + store.getState().playerId);
+
                 axios.post(
                     "gameloop/draw",
                     {
