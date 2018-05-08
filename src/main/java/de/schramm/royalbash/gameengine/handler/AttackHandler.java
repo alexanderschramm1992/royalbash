@@ -5,9 +5,9 @@ import de.schramm.royalbash.gameengine.rule.SumoningCanAttackBeAttackedChecker;
 import de.schramm.royalbash.gameengine.rule.SummoningOwnedByPlayerOnBoardChecker;
 import de.schramm.royalbash.gameengine.rule.SummoningsOwnedByOpposingPlayersChecker;
 import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
-import de.schramm.royalbash.model.Board;
+import de.schramm.royalbash.model.Game;
 import de.schramm.royalbash.model.Summoning;
-import de.schramm.royalbash.persistence.board.BoardRepository;
+import de.schramm.royalbash.persistence.game.GameRepository;
 import de.schramm.royalbash.persistence.summoning.SummoningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import java.util.UUID;
 public class AttackHandler {
 
     // Repositories
-    private final BoardRepository boardRepository;
+    private final GameRepository gameRepository;
     private final SummoningRepository summoningRepository;
 
     //Rules
@@ -29,14 +29,14 @@ public class AttackHandler {
 
     @Autowired
     public AttackHandler(
-            BoardRepository boardRepository,
+            GameRepository gameRepository,
             SummoningRepository summoningRepository,
             RequiredDomainObjectChecker requiredDomainObjectChecker,
             SumoningCanAttackBeAttackedChecker sumoningCanAttackBeAttackedChecker,
             SummoningOwnedByPlayerOnBoardChecker summoningOwnedByPlayerOnBoardChecker,
             SummoningsOwnedByOpposingPlayersChecker summoningsOwnedByOpposingPlayersChecker
     ) {
-        this.boardRepository = boardRepository;
+        this.gameRepository = gameRepository;
         this.summoningRepository = summoningRepository;
         this.requiredDomainObjectChecker = requiredDomainObjectChecker;
         this.sumoningCanAttackBeAttackedChecker = sumoningCanAttackBeAttackedChecker;
@@ -44,22 +44,22 @@ public class AttackHandler {
         this.summoningsOwnedByOpposingPlayersChecker = summoningsOwnedByOpposingPlayersChecker;
     }
 
-    public Board attackCardInstance(
-            UUID boardId,
+    public Game attackSummoning(
+            UUID gameId,
             UUID attackingSummoningId,
-            UUID attackedSumoningId
+            UUID attackedSummoningId
     ) throws GameEngineException {
 
         // Fetch domain objects
 
-        Board board = boardRepository.find(boardId);
+        Game game = gameRepository.find(gameId);
         Summoning attackingSummoning = summoningRepository.find(attackingSummoningId);
-        Summoning attackedSummoning = summoningRepository.find(attackedSumoningId);
+        Summoning attackedSummoning = summoningRepository.find(attackedSummoningId);
 
         // Apply rules
 
         requiredDomainObjectChecker.check(
-                board,
+                game,
                 attackingSummoning,
                 attackedSummoning
         );
@@ -70,12 +70,12 @@ public class AttackHandler {
                 attackedSummoning
         );
         summoningOwnedByPlayerOnBoardChecker.check(
-                board,
+                game.getBoard(),
                 attackingSummoning,
                 attackedSummoning
         );
         summoningsOwnedByOpposingPlayersChecker.check(
-                board,
+                game.getBoard(),
                 attackingSummoning,
                 attackedSummoning
         );
@@ -87,7 +87,7 @@ public class AttackHandler {
 
         if (attackedSummoning.isDead()) {
 
-            board.bury(attackedSummoning);
+            game.getBoard().bury(attackedSummoning);
             summoningRepository.delete(attackedSummoning.getId());
         } else {
 
@@ -96,17 +96,15 @@ public class AttackHandler {
 
         if (attackingSummoning.isDead()) {
 
-            board.bury(attackingSummoning);
+            game.getBoard().bury(attackingSummoning);
             summoningRepository.delete(attackingSummoning.getId());
         } else {
 
             summoningRepository.save(attackingSummoning);
         }
 
-        boardRepository.save(board);
+        gameRepository.save(game);
 
-        // Return updated Board
-
-        return board;
+        return game;
     }
 }

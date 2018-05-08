@@ -1,5 +1,6 @@
 package de.schramm.royalbash.controller;
 
+import de.schramm.royalbash.controller.requestmodel.SummonRequest;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.handler.SummonHandler;
 import de.schramm.royalbash.model.Summoning;
@@ -24,27 +25,28 @@ public class SummonController {
     }
 
     @RequestMapping(
-            value = "gameloop/summoninstance",
+            value = "gameloop/summon",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public ResponseEntity<Summoning> summonInstance(
-            @RequestBody UUID boardId,
-            @RequestBody UUID playerInstanceId,
-            @RequestBody UUID cardId
-    ) {
+            @RequestBody SummonRequest requestParams
+            ) {
 
         try {
 
             return ResponseEntity.ok(
                 summonHandler.summon(
-                    boardId,
-                    playerInstanceId,
-                    cardId
+                    requestParams.getGameId(),
+                    requestParams.getPlayerId(),
+                    requestParams.getCardId(),
+                    requestParams.getTargetId()
                 )
             );
-        } catch (GameEngineException exception) {
+        } catch (GameEngineException e) {
+
+            System.err.println("Failed to summon card due to: " + e.getMessage());
 
             return ResponseEntity.badRequest().build();
         }

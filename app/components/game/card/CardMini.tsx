@@ -5,6 +5,7 @@ import "./../../common/common.css";
 import {CardProps} from "./Card";
 import store from "../../../Store";
 import {MouseOnCardActionFactory} from "../../../actions/MouseOnCardAction";
+import {MouseOffCardActionFactory} from "../../../actions/MouseOffCardAction";
 
 export class CardMini extends React.Component<CardProps, {}> {
 
@@ -23,7 +24,7 @@ export class CardMini extends React.Component<CardProps, {}> {
 
     handleMouseOut(): void {
 
-        //store.dispatch(MouseOffCardActionFactory.getInstance());
+        store.dispatch(MouseOffCardActionFactory.getInstance());
     }
 
     handleDrag(event: any): void {

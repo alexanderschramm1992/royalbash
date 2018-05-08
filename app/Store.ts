@@ -11,6 +11,10 @@ export interface StateModel {
 
     cardOnPreview: string;
     summoningOnPreview: string;
+    
+    cardToBeSummoned: string;
+    summoningTarget: string;
+    summonCardIssued: boolean;
 
     cardModels: Array<CardModel>;
     summoningModels: Array<SummoningModel>;

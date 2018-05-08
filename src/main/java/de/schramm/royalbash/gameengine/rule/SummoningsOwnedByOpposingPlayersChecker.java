@@ -3,9 +3,11 @@ package de.schramm.royalbash.gameengine.rule;
 import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
 import de.schramm.royalbash.model.Board;
 import de.schramm.royalbash.model.Summoning;
+import de.schramm.royalbash.model.Target;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class SummoningsOwnedByOpposingPlayersChecker {
@@ -16,8 +18,18 @@ public class SummoningsOwnedByOpposingPlayersChecker {
             Summoning summoning2
     ) throws GameRuleViolationException {
 
-        List<Summoning> playerBlueSummonings = board.getPlayerBlue().getSummonings();
-        List<Summoning> playerRedSummonings = board.getPlayerRed().getSummonings();
+        List<Summoning> playerBlueSummonings = board
+                .getPlayerBlue()
+                .getTargets()
+                .stream()
+                .map(Target::getSummoning)
+                .collect(Collectors.toList());
+        List<Summoning> playerRedSummonings = board
+                .getPlayerRed()
+                .getTargets()
+                .stream()
+                .map(Target::getSummoning)
+                .collect(Collectors.toList());
 
         if (playerBlueSummonings.contains(summoning1) && playerRedSummonings.contains(summoning2)) {
 

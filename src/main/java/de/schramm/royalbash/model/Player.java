@@ -19,8 +19,8 @@ public class Player implements AttackableCanAttack {
     @Singular("card")
     private List<Card> cards;
 
-    @Singular("summoning")
-    private List<Summoning> summonings;
+    @Singular("target")
+    private List<Target> targets;
 
     @Override
     public int getCurrentStrength() {
@@ -57,21 +57,25 @@ public class Player implements AttackableCanAttack {
         cards = list;
     }
 
-    public void summon(Summoning summoning) {
+    public void summon(Summoning summoning, Target target) {
 
-        List<Summoning> list = new ArrayList<>(summonings);
-
-        list.add(summoning);
-
-        summonings = list;
+        targets.stream()
+                .filter(element -> element.equals(target))
+                .forEach(element -> element.summon(summoning));
     }
 
     public void bury(Summoning summoning) {
 
-        List<Summoning> list = new ArrayList<>(summonings);
+        targets.stream()
+                .filter(target -> summoning.equals(target.getSummoning()))
+                .forEach(target -> target.bury(summoning));
+    }
 
-        list.remove(summoning);
+    public Target getTarget(UUID targetId) {
 
-        summonings = list;
+        return targets.stream()
+                .filter(target -> target.getId().equals(targetId))
+                .findFirst()
+                .orElse(null);
     }
 }
