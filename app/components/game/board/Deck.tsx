@@ -42,7 +42,7 @@ export class Deck extends React.Component<{}, DeckState> {
     render(): any {
 
         let style: React.CSSProperties = {
-            visibility: this.state.showSpinner? "block" : "hidden"
+            visibility: this.state.showSpinner? "visible" : "hidden"
         };
 
         return (
