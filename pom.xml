@@ -103,7 +103,6 @@
 					<addResources>true</addResources>
 				</configuration>
 			</plugin>
-			<!--
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
@@ -129,11 +128,11 @@
 					<execution>
 						<id>webpack build</id>
 						<goals>
-							<goal>webpack</goal>
+							<goal>npm</goal>
 						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
-							<arguments>-d</arguments>
+							<arguments>run package</arguments>
 						</configuration>
 					</execution>
 				</executions>
@@ -141,7 +140,6 @@
 					<nodeVersion>v8.11.1</nodeVersion>
 				</configuration>
 			</plugin>
-			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
