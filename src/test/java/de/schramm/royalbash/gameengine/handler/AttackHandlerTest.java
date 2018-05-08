@@ -9,12 +9,15 @@ import de.schramm.royalbash.model.*;
 import de.schramm.royalbash.persistence.game.GameRepository;
 import de.schramm.royalbash.persistence.summoning.SummoningRepository;
 import de.schramm.royalbash.persistence.player.PlayerRepository;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Matchers.isNull;
+import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -153,8 +156,14 @@ public class AttackHandlerTest {
 
         // then
 
-        Assert.assertThat(result.getBoard().getPlayerBlue().getTargets(), hasSize(1));
-        Assert.assertThat(result.getBoard().getPlayerRed().getTargets(), hasSize(0));
+        Assert.assertThat(
+                result.getBoard().getPlayerBlue().getTargets().iterator().next().getSummoning(),
+                is(not(nullValue()))
+        );
+        Assert.assertThat(
+                result.getBoard().getPlayerRed().getTargets().iterator().next().getSummoning(),
+                is(nullValue())
+        );
         Summoning summoningSet = result.getBoard().getPlayerBlue().getTargets().iterator().next().getSummoning();
         Assert.assertThat(summoningSet, is(summoning1));
         Assert.assertThat(summoning1.getCurrentHealth(), is(1));
@@ -210,10 +219,16 @@ public class AttackHandlerTest {
 
         // then
 
-        Assert.assertThat(result.getBoard().getPlayerBlue().getTargets(), hasSize(0));
-        Assert.assertThat(result.getBoard().getPlayerRed().getTargets(), hasSize(1));
-        Summoning summoningSet = result.getBoard().getPlayerRed().getTargets().iterator().next().getSummoning();
-        Assert.assertThat(summoningSet, is(summoning1));
+        Assert.assertThat(
+                result.getBoard().getPlayerBlue().getTargets().iterator().next().getSummoning(),
+                is(nullValue())
+        );
+        Assert.assertThat(
+                result.getBoard().getPlayerRed().getTargets().iterator().next().getSummoning(),
+                is(not(nullValue()))
+        );
+        Summoning summoning = result.getBoard().getPlayerRed().getTargets().iterator().next().getSummoning();
+        Assert.assertThat(summoning, is(summoning1));
         Assert.assertThat(summoning1.getCurrentHealth(), is(1));
     }
 
@@ -266,7 +281,13 @@ public class AttackHandlerTest {
 
         // then
 
-        Assert.assertThat(result.getBoard().getPlayerBlue().getTargets(), hasSize(0));
-        Assert.assertThat(result.getBoard().getPlayerRed().getTargets(), hasSize(0));
+        Assert.assertThat(
+                result.getBoard().getPlayerBlue().getTargets().iterator().next().getSummoning(),
+                is(nullValue())
+        );
+        Assert.assertThat(
+                result.getBoard().getPlayerRed().getTargets().iterator().next().getSummoning(),
+                is(nullValue())
+        );
     }
 }
