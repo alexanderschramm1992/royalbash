@@ -9,12 +9,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class GameFinder {
+public class GameManager {
 
     private final GameRepository repository;
 
     @Autowired
-    public GameFinder(GameRepository repository) {
+    public GameManager(GameRepository repository) {
         this.repository = repository;
     }
 
@@ -30,5 +30,10 @@ public class GameFinder {
                         )
                 )
         );
+    }
+
+    public void saveGame(Game game) {
+
+        repository.save(game);
     }
 }

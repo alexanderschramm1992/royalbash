@@ -5,6 +5,7 @@ import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.handler.SummonHandler;
 import de.schramm.royalbash.model.Game;
+import de.schramm.royalbash.persistence.game.GameManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SummonController {
 
+    private final GameManager gameManager;
     private final SummonHandler summonHandler;
 
     @Autowired
-    public SummonController(SummonHandler summonHandler) {
+    public SummonController(
+            GameManager gameManager,
+            SummonHandler summonHandler
+    ) {
+        this.gameManager = gameManager;
         this.summonHandler = summonHandler;
     }
 
@@ -35,11 +41,12 @@ public class SummonController {
 
         try {
 
-            Game game = summonHandler.summon(
-                    requestParams.getGameId(),
-                    requestParams.getPlayerId(),
-                    requestParams.getCardId(),
-                    requestParams.getTargetId()
+            Game game = gameManager.findGame(requestParams.getGameId());
+            game = summonHandler.summon(
+                    game,
+                    game.findPlayer(requestParams.getPlayerId()),
+                    game.findHandCard(requestParams.getCardId()),
+                    game.findTarget(requestParams.getTargetId())
             );
 
             return ResponseEntity.ok(StateResponse.fromGame(game));

@@ -9,5 +9,6 @@ import java.util.UUID;
 @Builder
 public class DrawRequest {
 
+    private UUID gameId;
     private UUID playerId;
 }

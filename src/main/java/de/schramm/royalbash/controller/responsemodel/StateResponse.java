@@ -22,8 +22,8 @@ public class StateResponse {
 
         return StateResponse.builder()
                 .id(game.getId())
-                .accountRed(game.getAccountRed().getId())
-                .accountBlue(game.getAccountBlue().getId())
+                .accountRed(game.getAccountRed())
+                .accountBlue(game.getAccountBlue())
                 .build();
     }
 

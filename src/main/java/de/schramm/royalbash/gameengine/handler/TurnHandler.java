@@ -1,77 +1,19 @@
 package de.schramm.royalbash.gameengine.handler;
 
-import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
-import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
-import de.schramm.royalbash.model.Board;
+import de.schramm.royalbash.model.Game;
 import de.schramm.royalbash.model.Turn;
-import de.schramm.royalbash.persistence.board.BoardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 @Component
 public class TurnHandler {
 
-    // Repositories
-    private final BoardRepository boardRepository;
+    public Game endTurn(Game game) {
 
-    // Rules
-    private final RequiredDomainObjectChecker requiredDomainObjectChecker;
+        Turn turn = game.getBoard().getTurn();
 
-    @Autowired
-    public TurnHandler(
-            BoardRepository boardRepository,
-            RequiredDomainObjectChecker requiredDomainObjectChecker
-    ) {
-        this.boardRepository = boardRepository;
-        this.requiredDomainObjectChecker = requiredDomainObjectChecker;
-    }
+        turn.increaseTurnCounter();
+        turn.swapPlayer(game.getBoard());
 
-    public Turn getTurn(UUID boardId) throws DomainObjectDoesNotExistException {
-
-        // Fetch domain object
-
-        Board board = boardRepository.find(boardId);
-
-        // Apply rule
-
-        requiredDomainObjectChecker.check(board);
-
-        // Fetch nested domain object
-
-        Turn turn = board.getTurn();
-
-        // Apply rule again
-
-        requiredDomainObjectChecker.check(turn);
-
-        // Return Board
-
-        return turn;
-    }
-
-    public void endTurn(UUID boardId) throws DomainObjectDoesNotExistException {
-
-        // Fetch domain object
-
-        Board board = boardRepository.find(boardId);
-
-        // Apply rule
-
-        requiredDomainObjectChecker.check(board);
-
-        // Fetch nested domain object
-
-        Turn turn = board.getTurn();
-
-        // Apply rule again
-
-        requiredDomainObjectChecker.check(turn);
-
-        // Increase Turn counter and swapPlayer active Player
-
-        board.getTurn().increaseTurnCounter();
-        board.getTurn().swapPlayer(board);
+        return game;
     }
 }

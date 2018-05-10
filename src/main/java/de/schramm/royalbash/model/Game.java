@@ -4,6 +4,7 @@ import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistExcepti
 import lombok.Builder;
 import lombok.Value;
 import lombok.val;
+import org.springframework.data.annotation.Id;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import java.util.stream.Stream;
 @Builder
 public class Game {
 
+    @Id
     private UUID id;
     private UUID accountRed;
     private UUID accountBlue;
