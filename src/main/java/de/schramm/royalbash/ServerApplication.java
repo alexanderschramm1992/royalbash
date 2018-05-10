@@ -12,6 +12,7 @@ public class ServerApplication {
     public static final Logger logger = LogManager.getLogger(ServerApplication.class);
 
     public static void main(String[] args) {
+
         org.springframework.boot.SpringApplication.run(ServerApplication.class, args);
     }
 }
