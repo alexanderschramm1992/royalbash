@@ -1,7 +1,9 @@
 package de.schramm.royalbash.persistence.game;
 
 import de.schramm.royalbash.model.Game;
-import de.schramm.royalbash.persistence.GenericRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface GameRepository extends GenericRepository<Game> {
+import java.util.UUID;
+
+public interface GameRepository extends CrudRepository<Game, UUID> {
 }

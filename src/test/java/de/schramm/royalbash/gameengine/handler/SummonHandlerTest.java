@@ -52,7 +52,7 @@ public class SummonHandlerTest {
     }
 
     @Test
-    public void summon_Instance_existing_Board_existing_PlayerInstance_existing_Card_in_hand()
+    public void summon_with_existing_Board_existing_Player_existing_Card_in_hand()
             throws GameEngineException {
 
         // given
