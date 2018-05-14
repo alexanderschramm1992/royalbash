@@ -21,13 +21,13 @@ public class PlayerCanDrawAnotherCardChecker {
             Player player
     ) throws GameRuleViolationException {
 
-        if (player.getCards().size() >= maxHandCards) {
+        if (player.getHand().getCards().size() >= maxHandCards) {
 
             throw new GameRuleViolationException(
                     String.format(
                             "Player %s cannot draw another card (%d hand cards)",
                             player.getId(),
-                            player.getCards().size()
+                            player.getHand().getCards().size()
                     )
             );
         }

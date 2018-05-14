@@ -26,13 +26,18 @@ export interface Player {
     readonly accountId: string,
     readonly deck: Deck,
     readonly health: number,
-    readonly cards: Array<Card>,
+    readonly hand: Hand,
     readonly targets: Array<Target>
 }
 
 export interface Deck {
 
     readonly id: string,
+    readonly cards: Array<Card>
+}
+
+export interface Hand {
+
     readonly cards: Array<Card>
 }
 

@@ -41,7 +41,7 @@ public class SummonHandler {
                 card
         );
 
-        player.removeCard(card);
+        player.getHand().removeCard(card);
         Summoning summoning = Summoning.fromCard(card, UUID.randomUUID());
         player.summon(summoning, target);
 

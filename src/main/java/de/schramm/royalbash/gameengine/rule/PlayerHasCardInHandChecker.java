@@ -13,7 +13,7 @@ public class PlayerHasCardInHandChecker {
             Card card
     ) throws GameRuleViolationException {
 
-        if (!player.getCards().contains(card)) {
+        if (!player.getHand().getCards().contains(card)) {
 
             throw new GameRuleViolationException(
                     String.format(

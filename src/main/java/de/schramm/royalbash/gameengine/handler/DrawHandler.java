@@ -28,7 +28,7 @@ public class DrawHandler {
         playerCanDrawAnotherCardChecker.checkIfPlayerInstanceCanDrawAnotherCard(player);
 
         Card card = player.getDeck().drawCard();
-        player.addCard(card);
+        player.getHand().addCard(card);
 
         return game;
     }

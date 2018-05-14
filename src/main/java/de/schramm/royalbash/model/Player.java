@@ -18,29 +18,10 @@ public class Player {
 
     private int health;
 
-    @Singular("card")
-    private List<Card> cards;
+    private Hand hand;
 
     @Singular("target")
     private List<Target> targets;
-
-    public void addCard(Card card) {
-
-        List<Card> list = new ArrayList<>(cards);
-
-        list.add(card);
-
-        cards = list;
-    }
-
-    public void removeCard(Card card) {
-
-        List<Card> list = new ArrayList<>(cards);
-
-        list.remove(card);
-
-        cards = list;
-    }
 
     public void summon(Summoning summoning, Target target) {
 

@@ -23,7 +23,7 @@ export class HandComponent extends React.Component<{}, HandState> {
         store.subscribe((): void => {
 
             this.setState({
-                cards: getPlayer().cards
+                cards: getPlayer().hand.cards
             });
         });
     }

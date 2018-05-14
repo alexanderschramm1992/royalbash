@@ -43,7 +43,7 @@ export function getPlayer(): Player {
 
 export function findCardById(id: string): Card {
 
-    return store.getState().game.board.playerBlue.cards.find((card) => {return card.id == id})
+    return store.getState().game.board.playerBlue.hand.cards.find((card) => {return card.id == id})
 }
 
 export function findSummoningById(id: string): Summoning {

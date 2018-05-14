@@ -9,10 +9,10 @@ import java.util.UUID;
 
 import static de.schramm.royalbash.data.AccountData.ACCOUNT_1;
 import static de.schramm.royalbash.data.AccountData.ACCOUNT_2;
-import static de.schramm.royalbash.data.CardData.VETERAN_KNIGHT;
-import static de.schramm.royalbash.data.CardData.YOUTHFUL_KNIGHT;
 import static de.schramm.royalbash.data.DeckData.DECK_1;
 import static de.schramm.royalbash.data.DeckData.DECK_2;
+import static de.schramm.royalbash.data.HandData.HAND_1;
+import static de.schramm.royalbash.data.HandData.HAND_2;
 
 public class PlayerData {
 
@@ -21,8 +21,7 @@ public class PlayerData {
             .health(20)
             .accountId(ACCOUNT_1.getId())
             .deck(DECK_1)
-            .card(YOUTHFUL_KNIGHT)
-            .card(VETERAN_KNIGHT)
+            .hand(HAND_1)
             .build();
 
     public static final Player PLAYER_2 = Player.builder()
@@ -30,13 +29,6 @@ public class PlayerData {
             .health(20)
             .accountId(ACCOUNT_2.getId())
             .deck(DECK_2)
-            .card(YOUTHFUL_KNIGHT)
+            .hand(HAND_2)
             .build();
-
-    public static Set<Player> getPlayerSet() {
-
-        return new HashSet<>(
-                Arrays.asList(PLAYER_1, PLAYER_2)
-        );
-    }
 }
