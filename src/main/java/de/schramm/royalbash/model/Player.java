@@ -8,7 +8,7 @@ import java.util.*;
 
 @Builder
 @Getter
-public class Player implements AttackableCanAttack {
+public class Player {
 
     private final UUID id;
     private final UUID accountId;
@@ -21,23 +21,6 @@ public class Player implements AttackableCanAttack {
 
     @Singular("target")
     private List<Target> targets;
-
-    @Override
-    public int getCurrentStrength() {
-        return 0; // Players have no attack damage
-    }
-
-    @Override
-    public boolean isDead() {
-
-        return health <= 0;
-    }
-
-    @Override
-    public void receiveDamage(AttackableCanAttack attackingInstance) {
-
-        health -= attackingInstance.getCurrentStrength();
-    }
 
     public void addCard(Card card) {
 

@@ -20,16 +20,23 @@ public class GameManager {
 
     public Game findGame(UUID gameId) throws DomainObjectDoesNotExistException {
 
-        return Optional.of(
-                repository.findOne(gameId)
-        ).orElseThrow(
-                () -> new DomainObjectDoesNotExistException(
-                        String.format(
-                                "Game %s not found",
-                                gameId
-                        )
-                )
-        );
+        try{
+
+            Game game = repository.findOne(gameId);
+            if (game == null) {
+
+                throw new IllegalArgumentException();
+            }
+            return game;
+        } catch (Exception e) {
+
+            throw new DomainObjectDoesNotExistException(
+                    String.format(
+                            "Game %s not found",
+                            gameId
+                    )
+            );
+        }
     }
 
     public void saveGame(Game game) {

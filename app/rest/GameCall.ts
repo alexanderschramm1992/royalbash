@@ -3,19 +3,18 @@ import axios, {AxiosResponse} from "axios";
 import { DrawCardAcceptedActionFactory } from "../actions/DrawCardAcceptedAction";
 import { DrawCardDeclinedActionFactory } from "../actions/DrawCardDeclinedAction";
 
-class DrawCardCall {
+class GameCall {
 
     constructor () {
 
         store.subscribe((): void => {
 
-            if(store.getState().drawCardIssued) {
+            if(store.getState().loadGameIssued) {
 
                 axios.post(
                     "gameloop/draw",
                     {
-                        "gameId": store.getState().game.id,
-                        "playerId": store.getState().playerId
+                        "gameId": "6d5864f4-5fb1-4615-bf6a-07a1211ef6d3",
                     },
                     {
                         headers: {
@@ -40,4 +39,4 @@ class DrawCardCall {
     }
 }
 
-export default DrawCardCall;
+export default GameCall;

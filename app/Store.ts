@@ -8,6 +8,8 @@ export interface StateModel {
 
     game: Game;
 
+    loadGameIssued: boolean;
+
     drawCardIssued: boolean;
 
     cardOnPreview: string;

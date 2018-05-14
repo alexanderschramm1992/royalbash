@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Builder
 @Getter
-public class Summoning implements AttackableCanAttack {
+public class Summoning {
 
     private final UUID id;
     private final Card card;
@@ -27,15 +27,13 @@ public class Summoning implements AttackableCanAttack {
                 .build();
     }
 
-    @Override
-    public boolean isDead() {
+    public void setCurrentHealth(int newHealth) {
 
-        return currentHealth <= 0;
+        this.currentHealth = newHealth;
     }
 
-    @Override
-    public void receiveDamage(AttackableCanAttack attacker) {
+    public void reduceCurrentHealth(int amount) {
 
-        currentHealth -= attacker.getCurrentStrength();
+        this.currentHealth -= amount;
     }
 }

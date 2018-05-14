@@ -9,6 +9,8 @@ const initialState: StateModel =  {
 
     playerId: "8dbc6953-e25e-49f0-a298-7a0ea721de6c",
 
+    loadGameIssued: true,
+
     drawCardIssued: false,
 
     cardOnPreview: null,

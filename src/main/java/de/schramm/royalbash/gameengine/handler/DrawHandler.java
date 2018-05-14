@@ -2,7 +2,6 @@ package de.schramm.royalbash.gameengine.handler;
 
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.rule.PlayerCanDrawAnotherCardChecker;
-import de.schramm.royalbash.gameengine.rule.RequiredDomainObjectChecker;
 import de.schramm.royalbash.model.Card;
 import de.schramm.royalbash.model.Game;
 import de.schramm.royalbash.model.Player;

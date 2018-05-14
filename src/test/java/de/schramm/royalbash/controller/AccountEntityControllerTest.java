@@ -166,4 +166,10 @@ public class AccountEntityControllerTest {
 
         Assert.assertThat(responseEntity, is(ResponseEntity.badRequest().build()));
     }
+
+    @Test
+    public void testDatabase() {
+
+        System.out.println(accountRepository.findByName(playerName));
+    }
 }
