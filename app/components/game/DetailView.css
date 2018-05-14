@@ -1,11 +1,10 @@
 .detail-view-wrapper {
-
-    margin: 1em;
+	margin: 1em;
 }
 
 .detail-view-wrapper .detail-view {
-
-    padding: 1em;
-    height: 43em;
-    width: 26em;
+	position: absolute;
+	height: 43em;
+	width: 26em;
+	padding: 1em;
 }
