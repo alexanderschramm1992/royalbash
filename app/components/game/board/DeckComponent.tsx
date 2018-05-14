@@ -3,17 +3,29 @@ import * as React from "react";
 import "./../../common/common.css";
 import "./DeckComponent.css";
 
-import store from "./../../../Store";
+import store from "../../../Store";
 import { DrawCardIssuedActionFactory } from "../../../actions/DrawCardIssuedAction";
+
+
+export enum DeckComponentType {
+
+    SUMMONING_DECK,
+    RESOUCRES_DECK
+}
+
+export interface DeckComponentProps {
+
+    readonly type: DeckComponentType;
+}
 
 interface DeckState {
 
     showSpinner: boolean;
 }
 
-export class Deck extends React.Component<{}, DeckState> {
+export class DeckComponent extends React.Component<DeckComponentProps, DeckState> {
 
-    constructor(props: any) {
+    constructor(props: DeckComponentProps) {
         super(props);
 
         this.state = {
@@ -41,18 +53,23 @@ export class Deck extends React.Component<{}, DeckState> {
 
     render(): any {
 
+        let imageClass = this.props.type == DeckComponentType.SUMMONING_DECK? "summoning-deck" : "resource-deck";
+
         let style: React.CSSProperties = {
             visibility: this.state.showSpinner? "visible" : "hidden"
         };
 
         return (
             <div className="deck">
-                <div className="stack" onClick={this.handleCardDraw}>
-                    <i className="spinner fa fa-cog fa-spin" style={style}></i>
+                <div
+                    className={"stack border-large border-radius " + imageClass}
+                    onClick={this.handleCardDraw}
+                >
+                    <i className="spinner fa fa-cog fa-spin" style={style}/>
                 </div>
             </div>
         );
     }
 }
 
-export default Deck;
+export default DeckComponent;

@@ -5,7 +5,7 @@ import "./Board.css";
 
 import Slider from "../../menu/Slider";
 import DetailView from "../DetailView";
-import DeckComponent from "./DeckComponent";
+import DeckComponent, {DeckComponentType} from "./DeckComponent";
 import HandComponent from "./HandComponent";
 import DrawCardCall from "../../../rest/DrawCardCall";
 import { SummoningMiniContainer } from "../summoning/SummoningMiniContainer";
@@ -83,18 +83,18 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                             </div>
                         </div>
                         <div className="player-area border-large border-radius">
-                            <div className="graveyard-area">
-                                <DeckComponent/>
-                            </div>
                             <div className="hand-area">
                                 <HandComponent/>
                             </div>
-                            <div className="deck-area-wrapper">
+                            <div className="stack-area-wrapper">
                                 <div className="summoning-deck-area">
-                                    <DeckComponent/>
+                                    <DeckComponent type={DeckComponentType.SUMMONING_DECK}/>
                                 </div>
                                 <div className="resources-deck-area">
-                                    <DeckComponent/>
+                                    <DeckComponent type={DeckComponentType.RESOUCRES_DECK}/>
+                                </div>
+                                <div className="graveyard-area">
+                                    <DeckComponent type={DeckComponentType.RESOUCRES_DECK}/>
                                 </div>
                             </div>
                         </div>

@@ -3,10 +3,9 @@
 }
 
 .deck .stack{
-    height: 10em;
-    width: 40em;
+    height: 9em;
+    width: 44em;
     background: lightgray;
-    border-radius: 1em;
 }
 
 .deck .stack .spinner{

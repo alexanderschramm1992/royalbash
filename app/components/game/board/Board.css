@@ -44,10 +44,6 @@
     margin-bottom: 1em;
 }
 
-.board .center .player-area .graveyard-area {
-
-    display: inline-block;
-}
 
 .board .center .player-area .hand-area {
 
@@ -55,17 +51,23 @@
     display: inline-block;
 }
 
-.board .center .player-area .deck-area-wrapper {
+.board .center .player-area .stack-area-wrapper {
 
     padding: 1em;
 }
 
-.board .center .player-area .deck-area-wrapper .summoning-deck-area {
+.board .center .player-area .stack-area-wrapper .summoning-deck-area {
 
     display: inline-block;
 }
 
-.board .center .player-area .deck-area-wrapper .resources-deck-area {
+.board .center .player-area .stack-area-wrapper .resources-deck-area {
+
+    margin-left: 1em;
+    display: inline-block;
+}
+
+.board .center .player-area .stack-area-wrapper .graveyard-area {
 
     margin-left: 1em;
     display: inline-block;
