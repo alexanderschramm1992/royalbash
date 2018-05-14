@@ -1,18 +1,15 @@
 .board {
-
     width: 266em;
     padding: 1em;
 }
 
 .board .north {
-
     width: 263em;
     padding: 1em;
     margin-bottom: 1em;
 }
 
 .board .inline-wrapper {
-
     width: 266em;
     height: 150em;
     white-space: nowrap;
@@ -20,12 +17,10 @@
 }
 
 .board .west {
-
     display: inline-block;
 }
 
 .board .center {
-
     width: 218em;
     height: 150em;
     display: inline-block;
@@ -33,68 +28,59 @@
 }
 
 .board .center .player-area {
-
     height: 40em;
     padding: 1em;
     white-space: nowrap;
+    width: 215em;
 }
 
 .board .center .player-area.player-area-remote {
-
     margin-bottom: 1em;
 }
 
-
 .board .center .player-area .hand-area {
-
     margin-left: 1em;
     display: inline-block;
 }
 
 .board .center .player-area .stack-area-wrapper {
-
     padding: 1em;
+    display: flex;
 }
 
 .board .center .player-area .stack-area-wrapper .summoning-deck-area {
-
     display: inline-block;
 }
 
 .board .center .player-area .stack-area-wrapper .resources-deck-area {
-
     margin-left: 1em;
     display: inline-block;
 }
 
 .board .center .player-area .stack-area-wrapper .graveyard-area {
-
     margin-left: 1em;
     display: inline-block;
 }
 
 .board .center .play-area {
-
     padding: 1em;
     margin-bottom: 1em;
+    width: 215em;
 }
 
 .board .center .play-area .remote-summoning-area {
-
     margin-bottom: 1em;
 }
 
 .board .center:after {
-
-    content:" ";
-    clear:both;
-    display:block;
-    height:0;
-    overflow:hidden
+    content: " ";
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden
 }
 
 .board .east {
-
     width: 46em;
     height: 149em;
     margin-left: 1em;
@@ -102,6 +88,5 @@
 }
 
 .board .south {
-
     height: 5em;
 }
