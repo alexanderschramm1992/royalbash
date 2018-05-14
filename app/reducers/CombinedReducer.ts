@@ -4,23 +4,17 @@ import handleDrawCard from "./DrawCardHandler";
 import handleMouseOnCard from "./MouseOnCardHandler";
 import handleMouseOnSummoning from "./MouseOnSummoningHandler";
 import handleSummoning from "./SummoningHandler";
+import handleLoadGame from "./LoadGameHandler";
 
 const initialState: StateModel =  {
 
     playerId: "8dbc6953-e25e-49f0-a298-7a0ea721de6c",
 
-    loadGameIssued: true,
+    loadGameIssued: false,
 
     drawCardIssued: false,
 
-    cardOnPreview: null,
-    summoningOnPreview: null,
-
-    cardToBeSummoned: null,
-    summoningTarget: null,
     summonCardIssued: false,
-
-    game: null
 };
 
 export const combinedReducers: Reducer<StateModel, AnyAction> =
@@ -30,6 +24,7 @@ export const combinedReducers: Reducer<StateModel, AnyAction> =
         state = handleMouseOnCard(state, action);
         state = handleMouseOnSummoning(state, action);
         state = handleSummoning(state, action);
+        state = handleLoadGame(state, action);
         return state;
     };
 

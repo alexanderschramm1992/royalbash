@@ -2,11 +2,13 @@ package de.schramm.royalbash.model;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.UUID;
 
 @Builder
 @Getter
+@ToString
 public class Board {
 
     private final UUID id;

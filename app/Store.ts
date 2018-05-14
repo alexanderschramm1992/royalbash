@@ -1,22 +1,24 @@
 import { createStore, Store } from "redux";
 import combinedReducers from "./reducers/CombinedReducer";
 import { Game, Player, Card, Summoning } from "./model/Game";
+import {LoadGameIssuedActionFactory} from "./actions/LoadGameIssuedAction";
 
 export interface StateModel {
 
-    playerId: string;
+    playerId?: string;
 
-    game: Game;
+    game?: Game;
 
+    gameId?: string;
     loadGameIssued: boolean;
 
     drawCardIssued: boolean;
 
-    cardOnPreview: string;
-    summoningOnPreview: string;
+    cardOnPreview?: string;
+    summoningOnPreview?: string;
     
-    cardToBeSummoned: string;
-    summoningTarget: string;
+    cardToBeSummoned?: string;
+    summoningTarget?: string;
     summonCardIssued: boolean;
 }
 

@@ -9,6 +9,8 @@ import java.util.UUID;
 
 import static de.schramm.royalbash.data.AccountData.ACCOUNT_1;
 import static de.schramm.royalbash.data.AccountData.ACCOUNT_2;
+import static de.schramm.royalbash.data.CardData.VETERAN_KNIGHT;
+import static de.schramm.royalbash.data.CardData.YOUTHFUL_KNIGHT;
 import static de.schramm.royalbash.data.DeckData.DECK_1;
 import static de.schramm.royalbash.data.DeckData.DECK_2;
 
@@ -19,6 +21,8 @@ public class PlayerData {
             .health(20)
             .accountId(ACCOUNT_1.getId())
             .deck(DECK_1)
+            .card(YOUTHFUL_KNIGHT)
+            .card(VETERAN_KNIGHT)
             .build();
 
     public static final Player PLAYER_2 = Player.builder()
@@ -26,6 +30,7 @@ public class PlayerData {
             .health(20)
             .accountId(ACCOUNT_2.getId())
             .deck(DECK_2)
+            .card(YOUTHFUL_KNIGHT)
             .build();
 
     public static Set<Player> getPlayerSet() {

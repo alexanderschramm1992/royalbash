@@ -3,6 +3,7 @@ package de.schramm.royalbash.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @Getter
 @Builder
+@ToString
 public class Deck {
 
     private UUID id;

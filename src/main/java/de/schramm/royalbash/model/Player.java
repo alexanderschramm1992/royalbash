@@ -3,11 +3,13 @@ package de.schramm.royalbash.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
+import lombok.ToString;
 
 import java.util.*;
 
 @Builder
 @Getter
+@ToString
 public class Player {
 
     private final UUID id;

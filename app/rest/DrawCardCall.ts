@@ -25,7 +25,7 @@ class DrawCardCall {
                 ).then((response: AxiosResponse): void => {
 
                     store.dispatch(
-                        DrawCardAcceptedActionFactory.getInstance(response.data)
+                        DrawCardAcceptedActionFactory.getInstance(response.data.game)
                     );
                 }).catch((reason: string) => {
 

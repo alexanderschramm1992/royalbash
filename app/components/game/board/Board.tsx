@@ -3,19 +3,21 @@ import * as React from "react";
 import "./../../common/common.css";
 import "./Board.css";
 
-import CardMiniContainer from "./../card/CardMiniContainer";
 import Slider from "../../menu/Slider";
 import DetailView from "../DetailView";
 import DeckComponent from "./DeckComponent";
 import HandComponent from "./HandComponent";
 import DrawCardCall from "../../../rest/DrawCardCall";
 import { SummoningMiniContainer } from "../summoning/SummoningMiniContainer";
-import {Card, Summoning} from "../../../model/Game";
+import store from "../../../Store";
+import {LoadGameIssuedActionFactory} from "../../../actions/LoadGameIssuedAction";
+import LoadGameCall from "../../../rest/LoadGameCall";
 
 interface BoardState {
 
     readonly scale: number;
     readonly drawCardCall: DrawCardCall;
+    readonly loadGameCall: LoadGameCall;
 }
 
 export class BoardComponent extends React.Component<{}, BoardState> {
@@ -25,8 +27,11 @@ export class BoardComponent extends React.Component<{}, BoardState> {
 
         this.state = {
             scale: 5,
-            drawCardCall: new DrawCardCall()
+            drawCardCall: new DrawCardCall(),
+            loadGameCall: new LoadGameCall()
         };
+
+        store.dispatch(LoadGameIssuedActionFactory.getInstance("6d5864f4-5fb1-4615-bf6a-07a1211ef6d3"));
 
         this.changeScale = this.changeScale.bind(this);
     }
