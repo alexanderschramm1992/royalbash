@@ -7,6 +7,7 @@ import Slider from "../../menu/Slider";
 import DetailView from "../DetailView";
 import DeckComponent, {DeckComponentType} from "./DeckComponent";
 import HandComponent from "./HandComponent";
+import GraveyardComponent from "./GraveyardComponent";
 import DrawCardCall from "../../../rest/DrawCardCall";
 import { SummoningMiniContainer } from "../summoning/SummoningMiniContainer";
 import store from "../../../Store";
@@ -94,7 +95,7 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                                     <DeckComponent type={DeckComponentType.RESOUCRES_DECK}/>
                                 </div>
                                 <div className="graveyard-area">
-                                    <DeckComponent type={DeckComponentType.RESOUCRES_DECK}/>
+                                    <GraveyardComponent />
                                 </div>
                             </div>
                         </div>

@@ -23,7 +23,6 @@ class LoadGameCall {
                     },
                 ).then((response: AxiosResponse): void => {
 
-                    console.dir(response.data.game);
                     store.dispatch(
                         LoadGameAcceptedActionFactory.getInstance(response.data.game)
                     );
