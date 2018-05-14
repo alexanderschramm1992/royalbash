@@ -48,29 +48,29 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">
-                            {this.props.summoning.card.name}
+                            {this.props.summoning.summoningCard.name}
                         </div>
                     </div>
                     <div className="cost-wrapper border-small">
                         <div className="cost cost-rations border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoning.card.costRations? this.props.summoning.card.costRations : 99}
+                                {this.props.summoning.summoningCard.costRations? this.props.summoning.summoningCard.costRations : 99}
                             </div>
                         </div>
                         <div className="cost cost-material border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoning.card.costMaterial? this.props.summoning.card.costMaterial : 99}
+                                {this.props.summoning.summoningCard.costMaterial? this.props.summoning.summoningCard.costMaterial : 99}
                             </div>
                         </div>
                         <div className="cost cost-blessing border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoning.card.costBlessing? this.props.summoning.card.costBlessing : 99}
+                                {this.props.summoning.summoningCard.costBlessing? this.props.summoning.summoningCard.costBlessing : 99}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img className="image" src={this.props.summoning.card.image} alt={this.props.summoning.card.name}/>
+                    <img className="image" src={this.props.summoning.summoningCard.image} alt={this.props.summoning.summoningCard.name}/>
                 </div>
                 <div className="foot-wrapper">
                     <div className="stats-wrapper border-small">

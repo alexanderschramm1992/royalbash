@@ -20,7 +20,7 @@ public class PlayerData {
             .id(UUID.fromString("8dbc6953-e25e-49f0-a298-7a0ea721de6c"))
             .health(20)
             .accountId(ACCOUNT_1.getId())
-            .deck(DECK_1)
+            .summoningDeck(DECK_1)
             .hand(HAND_1)
             .build();
 
@@ -28,7 +28,7 @@ public class PlayerData {
             .id(UUID.fromString("736cb270-c73c-4257-b49f-d71d9b4cb59b"))
             .health(20)
             .accountId(ACCOUNT_2.getId())
-            .deck(DECK_2)
+            .summoningDeck(DECK_2)
             .hand(HAND_2)
             .build();
 }

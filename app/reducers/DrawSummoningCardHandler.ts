@@ -1,39 +1,39 @@
 import { DRAW_CARD_ISSUED, DRAW_CARD_ACCEPTED, DRAW_CARD_DECLINED } from "../actions/ActionTypes";
 import {AnyAction, Reducer} from "redux";
 import { StateModel } from "../Store";
-import DrawCardAcceptedAction from "../actions/DrawCardAcceptedAction";
-import DrawCardDeclinedAction from "../actions/DrawCardDeclinedAction";
+import DrawCardAcceptedAction from "../actions/DrawSummoningCardAcceptedAction";
+import DrawCardDeclinedAction from "../actions/DrawSummoningCardDeclinedAction";
 
-const handleDrawCard: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
+const handleDrawSummoningCard: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 
     switch (action.type) {
         case DRAW_CARD_ISSUED:
 
-            console.log("Draw Card issued");
+            console.log("Draw Summoning Card issued");
             return {
                 ...state, 
-                drawCardIssued: true
+                drawSummoningCardIssued: true
             };
         case DRAW_CARD_ACCEPTED:
 
-            console.log("Draw Card accepted");
+            console.log("Draw Summoning Card accepted");
             let drawCardAcceptedAction = action as DrawCardAcceptedAction;
             return {
                 ...state,
-                drawCardIssued: false,
+                drawSummoningCardIssued: false,
                 game: drawCardAcceptedAction.game
             };
         case DRAW_CARD_DECLINED:
 
         let drawCardDeclinedAction = action as DrawCardDeclinedAction;
-            console.log("Draw Card declined because: " + drawCardDeclinedAction.reason);
+            console.log("Draw Summoning Card declined because: " + drawCardDeclinedAction.reason);
             return {
                 ...state,
-                drawCardIssued: false
+                drawSummoningCardIssued: false
             };
         default:
             return state;
     }
 };
 
-export default handleDrawCard;
+export default handleDrawSummoningCard;

@@ -1,6 +1,5 @@
 package de.schramm.royalbash.model;
 
-import de.schramm.royalbash.model.Card;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,7 +10,7 @@ import java.util.UUID;
 public class Equipment {
 
     private final UUID id;
-    private final Card weapon;
+    private final SummoningCard weapon;
 
     private int currentCost;
     private int currentHealth;

@@ -27,7 +27,7 @@ public class SummonHandler {
     public Game summon(
             Game game,
             Player player,
-            Card card,
+            SummoningCard summoningCard,
             Target target
     ) throws GameEngineException {
 
@@ -38,11 +38,11 @@ public class SummonHandler {
 
         playerHasCardInHandChecker.check(
                 player,
-                card
+                summoningCard
         );
 
-        player.getHand().removeCard(card);
-        Summoning summoning = Summoning.fromCard(card, UUID.randomUUID());
+        player.getHand().removeCard(summoningCard);
+        Summoning summoning = Summoning.fromCard(summoningCard, UUID.randomUUID());
         player.summon(summoning, target);
 
         return game;

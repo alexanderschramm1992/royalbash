@@ -14,11 +14,12 @@ public class Player {
 
     private final UUID id;
     private final UUID accountId;
-    private final Deck deck;
+    private final Deck summoningDeck;
+    private final Deck resourcesDeck;
+    private final Hand hand;
+    private final Graveyard graveyard;
 
     private int health;
-
-    private Hand hand;
 
     @Singular("target")
     private List<Target> targets;

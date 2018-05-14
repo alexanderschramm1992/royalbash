@@ -36,12 +36,12 @@ public class Game {
         }
     }
 
-    public Card findHandCard(UUID cardId) throws DomainObjectDoesNotExistException {
+    public SummoningCard findHandCard(UUID cardId) throws DomainObjectDoesNotExistException {
 
         try {
 
-            val playerRedCards = board.getPlayerRed().getHand().getCards();
-            val playerBlueCards = board.getPlayerBlue().getHand().getCards();
+            val playerRedCards = board.getPlayerRed().getHand().getSummoningCards();
+            val playerBlueCards = board.getPlayerBlue().getHand().getSummoningCards();
 
             return Stream.of(playerRedCards, playerBlueCards)
                     .flatMap(Collection::stream)
@@ -52,7 +52,7 @@ public class Game {
 
             throw new DomainObjectDoesNotExistException(
                     String.format(
-                            "Hand Card %s does not exist",
+                            "Hand SummoningCard %s does not exist",
                             cardId
                     )
             );

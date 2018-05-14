@@ -2,9 +2,9 @@ package de.schramm.royalbash.data;
 
 import de.schramm.royalbash.model.Hand;
 
-import static de.schramm.royalbash.data.CardData.EAGER_RECRUIT;
-import static de.schramm.royalbash.data.CardData.VETERAN_KNIGHT;
-import static de.schramm.royalbash.data.CardData.YOUTHFUL_KNIGHT;
+import static de.schramm.royalbash.data.SummoningCardData.EAGER_RECRUIT;
+import static de.schramm.royalbash.data.SummoningCardData.VETERAN_KNIGHT;
+import static de.schramm.royalbash.data.SummoningCardData.YOUTHFUL_KNIGHT;
 
 public class HandData {
 

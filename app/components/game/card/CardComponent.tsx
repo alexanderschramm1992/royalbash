@@ -3,11 +3,11 @@ import * as React from "react";
 import "./CardComponent.css";
 import "./../../common/common.css";
 
-import {Card} from "../../../model/Game";
+import {SummoningCard} from "../../../model/Game";
 
 export interface CardProps {
 
-    card: Card;
+    summoningCard: SummoningCard;
 }
 
 export interface CardModel {
@@ -44,45 +44,45 @@ export class CardComponent extends React.Component<CardProps, {}> {
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">
-                            {this.props.card.name}
+                            {this.props.summoningCard.name}
                         </div>
                     </div>
                     <div className="cost-wrapper border-small">
                         <div className="cost cost-rations border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.card.costRations? this.props.card.costRations : 99}
+                                {this.props.summoningCard.costRations? this.props.summoningCard.costRations : 99}
                             </div>
                         </div>
                         <div className="cost cost-material border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.card.costMaterial? this.props.card.costMaterial : 99}
+                                {this.props.summoningCard.costMaterial? this.props.summoningCard.costMaterial : 99}
                             </div>
                         </div>
                         <div className="cost cost-blessing border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.card.costBlessing? this.props.card.costBlessing : 99}
+                                {this.props.summoningCard.costBlessing? this.props.summoningCard.costBlessing : 99}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img className="image" src={this.props.card.image} alt={this.props.card.name}/>
+                    <img className="image" src={this.props.summoningCard.image} alt={this.props.summoningCard.name}/>
                 </div>
                 <div className="type">
                     <div className="font-size-medium">
-                        {this.props.card.type}
-                        {this.props.card.subType && " - " + this.props.card.subType}
+                        {this.props.summoningCard.type}
+                        {this.props.summoningCard.subType && " - " + this.props.summoningCard.subType}
                     </div>
                 </div>
                 <div className="text-wrapper border-small">
                     <div className="text">
                         <div className="font-size-medium">
-                            {this.props.card.text}
+                            {this.props.summoningCard.text}
                         </div>
                     </div>
                     <div className="lore">
                         <div className="font-size-medium">
-                            {this.props.card.lore && this.props.card.lore}
+                            {this.props.summoningCard.lore && this.props.summoningCard.lore}
                         </div>
                     </div>
                 </div>
@@ -90,12 +90,12 @@ export class CardComponent extends React.Component<CardProps, {}> {
                     <div className="stats-wrapper border-small">
                         <div className="strength border-small">
                             <div className="font-size-large center-text">
-                                {this.props.card.strength}
+                                {this.props.summoningCard.strength}
                             </div>
                         </div>
                         <div className="health border-small">
                             <div className="font-size-large center-text">
-                                {this.props.card.health}
+                                {this.props.summoningCard.health}
                             </div>
                         </div>
                     </div>

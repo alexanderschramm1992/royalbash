@@ -19,7 +19,7 @@ export class CardMini extends React.Component<CardProps, {}> {
 
     handleMouseOver(): void {
 
-        store.dispatch(MouseOnCardActionFactory.getInstance(this.props.card.id));
+        store.dispatch(MouseOnCardActionFactory.getInstance(this.props.summoningCard.id));
     }
 
     handleMouseOut(): void {
@@ -29,9 +29,9 @@ export class CardMini extends React.Component<CardProps, {}> {
 
     handleDrag(event: any): void {
 
-        event.dataTransfer.setData("boardId", this.props.card);
+        event.dataTransfer.setData("boardId", this.props.summoningCard);
         event.dataTransfer.setData("playerInstanceId", "test123");
-        event.dataTransfer.setData("cardId", this.props.card.id);
+        event.dataTransfer.setData("cardId", this.props.summoningCard.id);
         console.dir(event);
     }
 
@@ -48,40 +48,40 @@ export class CardMini extends React.Component<CardProps, {}> {
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">
-                            {this.props.card.name}
+                            {this.props.summoningCard.name}
                         </div>
                     </div>
                     <div className="cost-wrapper border-small">
                         <div className="cost cost-rations border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.card.costRations? this.props.card.costRations : 99}
+                                {this.props.summoningCard.costRations? this.props.summoningCard.costRations : 99}
                             </div>
                         </div>
                         <div className="cost cost-material border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.card.costMaterial? this.props.card.costMaterial : 99}
+                                {this.props.summoningCard.costMaterial? this.props.summoningCard.costMaterial : 99}
                             </div>
                         </div>
                         <div className="cost cost-blessing border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.card.costBlessing? this.props.card.costBlessing : 99}
+                                {this.props.summoningCard.costBlessing? this.props.summoningCard.costBlessing : 99}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img className="image" src={this.props.card.image} alt={this.props.card.name}/>
+                    <img className="image" src={this.props.summoningCard.image} alt={this.props.summoningCard.name}/>
                 </div>
                 <div className="foot-wrapper">
                     <div className="stats-wrapper border-small">
                         <div className="strength border-small">
                             <div className="font-size-large center-text">
-                                {this.props.card.strength}
+                                {this.props.summoningCard.strength}
                             </div>
                         </div>
                         <div className="health border-small">
                             <div className="font-size-large center-text">
-                                {this.props.card.health}
+                                {this.props.summoningCard.health}
                             </div>
                         </div>
                     </div>

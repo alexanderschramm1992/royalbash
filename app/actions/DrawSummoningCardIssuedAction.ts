@@ -1,15 +1,15 @@
 import { DRAW_CARD_ISSUED } from "./ActionTypes";
 import { Action } from "redux";
 
-interface DrawCardIssuedAction extends Action<DRAW_CARD_ISSUED>{
+interface DrawSummoningCardIssuedAction extends Action<DRAW_CARD_ISSUED>{
 
     readonly type: DRAW_CARD_ISSUED;
     readonly playerId: string;
 }
 
-export class DrawCardIssuedActionFactory{
+export class DrawSummoningCardIssuedActionFactory{
 
-    public static getInstance(playerId: string): DrawCardIssuedAction {
+    public static getInstance(playerId: string): DrawSummoningCardIssuedAction {
 
         return {
             type: DRAW_CARD_ISSUED,
@@ -18,4 +18,4 @@ export class DrawCardIssuedActionFactory{
     }
 }
 
-export default DrawCardIssuedAction;
+export default DrawSummoningCardIssuedAction;

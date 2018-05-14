@@ -3,6 +3,7 @@ package de.schramm.royalbash.model;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;
+import org.springframework.data.annotation.Id;
 
 import java.util.Set;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Builder
 public class Account {
 
+    @Id
     private UUID id;
     private String name;
     private String email;

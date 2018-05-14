@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class Card {
+public class SummoningCard {
 
     private UUID id;
     private String name;
@@ -26,7 +26,7 @@ public class Card {
 
         return Summoning.builder()
                 .id(id)
-                .card(this)
+                .summoningCard(this)
                 .currentCost(costRations)
                 .currentStrength(strength)
                 .currentHealth(health)

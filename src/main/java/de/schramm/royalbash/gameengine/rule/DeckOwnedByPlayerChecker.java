@@ -13,7 +13,7 @@ public class DeckOwnedByPlayerChecker {
             Player player
     ) throws GameRuleViolationException {
 
-        if(player.getDeck().equals(deck)) {
+        if(player.getSummoningDeck().equals(deck)) {
 
             // do nothing
         } else {

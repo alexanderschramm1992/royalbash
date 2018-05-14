@@ -17,32 +17,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
 @RestController
-@RequestMapping("gameloop/draw")
-public class DrawController {
+@RequestMapping("gameloop/drawSummoningCard")
+public class DrawSummoningCardController {
 
     private final GameManager gameManager;
-    private final DrawHandler drawHandler;
+    private final DrawHandler drawSummoningCardHandler;
 
     @Autowired
-    public DrawController(
+    public DrawSummoningCardController(
             GameManager gameManager,
-            DrawHandler drawHandler
+            DrawHandler drawSummoningCardHandler
     ) {
         this.gameManager = gameManager;
-        this.drawHandler = drawHandler;
+        this.drawSummoningCardHandler = drawSummoningCardHandler;
     }
 
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<StateResponse> drawCard(
+    public ResponseEntity<StateResponse> draw(
             @RequestBody DrawRequest requestParams
     ) {
 
         try {
 
             Game game = gameManager.findGame(requestParams.getGameId());
-            game = drawHandler.drawCard(
+            game = drawSummoningCardHandler.draw(
                     game,
                     game.findPlayer(requestParams.getPlayerId())
             );
@@ -50,7 +50,7 @@ public class DrawController {
             return ResponseEntity.ok(StateResponse.fromGame(game));
         } catch (GameEngineException e) {
 
-            log.warn("Failed to draw card due to: " + e.getMessage());
+            log.warn("Failed to draw Summoning Card due to: " + e.getMessage());
 
             return ResponseEntity.badRequest().body(
                     StateResponse.builder()

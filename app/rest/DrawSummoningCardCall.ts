@@ -1,7 +1,7 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
-import { DrawCardAcceptedActionFactory } from "../actions/DrawCardAcceptedAction";
-import { DrawCardDeclinedActionFactory } from "../actions/DrawCardDeclinedAction";
+import { DrawSummoningCardAcceptedActionFactory } from "../actions/DrawSummoningCardAcceptedAction";
+import { DrawSummoningCardDeclinedActionFactory } from "../actions/DrawSummoningCardDeclinedAction";
 
 class DrawCardCall {
 
@@ -9,10 +9,10 @@ class DrawCardCall {
 
         store.subscribe((): void => {
 
-            if(store.getState().drawCardIssued) {
+            if(store.getState().drawSummoningCardIssued) {
 
                 axios.post(
-                    "gameloop/draw",
+                    "gameloop/drawSummoningCard",
                     {
                         "gameId": store.getState().game.id,
                         "playerId": store.getState().playerId
@@ -25,12 +25,12 @@ class DrawCardCall {
                 ).then((response: AxiosResponse): void => {
 
                     store.dispatch(
-                        DrawCardAcceptedActionFactory.getInstance(response.data.game)
+                        DrawSummoningCardAcceptedActionFactory.getInstance(response.data.game)
                     );
                 }).catch((reason: string) => {
 
                     store.dispatch(
-                        DrawCardDeclinedActionFactory.getInstance(
+                        DrawSummoningCardDeclinedActionFactory.getInstance(
                             reason
                         )
                     );

@@ -8,7 +8,7 @@ import DetailView from "../DetailView";
 import DeckComponent, {DeckComponentType} from "./DeckComponent";
 import HandComponent from "./HandComponent";
 import GraveyardComponent from "./GraveyardComponent";
-import DrawCardCall from "../../../rest/DrawCardCall";
+import DrawSummoningCardCall from "../../../rest/DrawSummoningCardCall";
 import { SummoningMiniContainer } from "../summoning/SummoningMiniContainer";
 import store from "../../../Store";
 import {LoadGameIssuedActionFactory} from "../../../actions/LoadGameIssuedAction";
@@ -17,7 +17,7 @@ import LoadGameCall from "../../../rest/LoadGameCall";
 interface BoardState {
 
     readonly scale: number;
-    readonly drawCardCall: DrawCardCall;
+    readonly drawCardCall: DrawSummoningCardCall;
     readonly loadGameCall: LoadGameCall;
 }
 
@@ -28,7 +28,7 @@ export class BoardComponent extends React.Component<{}, BoardState> {
 
         this.state = {
             scale: 5,
-            drawCardCall: new DrawCardCall(),
+            drawCardCall: new DrawSummoningCardCall(),
             loadGameCall: new LoadGameCall()
         };
 
@@ -101,7 +101,7 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                         </div>
                     </div>
                     <div className="east border-large border-radius">
-                        <div className="card-preview-area">
+                        <div className="summoningCard-preview-area">
                             <DetailView scale={this.state.scale * 1.5}/>
                         </div>
                         <div className="log-area"></div>

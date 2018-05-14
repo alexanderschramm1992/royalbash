@@ -19,12 +19,21 @@ public class AccountExt {
     @Singular("blueprint")
     private Set<Blueprint> blueprints;
 
+    private String reason;
+
     public static AccountExt fromAccount(Account account) {
 
         return AccountExt.builder()
                 .id(account.getId())
                 .name(account.getName())
                 .blueprints(account.getBlueprints())
+                .build();
+    }
+
+    public static AccountExt fromError(String reason) {
+
+        return AccountExt.builder()
+                .reason(reason)
                 .build();
     }
 }

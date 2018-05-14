@@ -3,12 +3,12 @@ import * as React from "react";
 import "./../../common/common.css";
 import "./HandComponent.css";
 import store, {getPlayer} from "../../../Store";
-import CardContainer from "../card/CardMiniContainer";
-import {Card} from "../../../model/Game";
+import CardMiniContainer from "../card/CardMiniContainer";
+import {SummoningCard} from "../../../model/Game";
 
 export interface HandState {
 
-    cards: Card[];
+    summoningCards: SummoningCard[];
 }
 
 export class HandComponent extends React.Component<{}, HandState> {
@@ -17,13 +17,13 @@ export class HandComponent extends React.Component<{}, HandState> {
         super(props);
 
         this.state = {
-            cards: []
+            summoningCards: []
         };
 
         store.subscribe((): void => {
 
             this.setState({
-                cards: getPlayer().hand.cards
+                summoningCards: getPlayer().hand.summoningCards
             });
         });
     }
@@ -32,9 +32,9 @@ export class HandComponent extends React.Component<{}, HandState> {
 
         return (
             <div className="hand">
-                <CardContainer
+                <CardMiniContainer
                     size={5}
-                    cards={this.state.cards}
+                    summonongCards={this.state.summoningCards}
                 />
             </div>
         );

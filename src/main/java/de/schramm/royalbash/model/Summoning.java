@@ -10,20 +10,20 @@ import java.util.UUID;
 public class Summoning {
 
     private final UUID id;
-    private final Card card;
+    private final SummoningCard summoningCard;
 
     private int currentCost;
     private int currentHealth;
     private int currentStrength;
 
-    public static Summoning fromCard(Card card, UUID id) {
+    public static Summoning fromCard(SummoningCard summoningCard, UUID id) {
 
         return Summoning.builder()
                 .id(id)
-                .card(card)
-                .currentCost(card.getCostRations())
-                .currentHealth(card.getHealth())
-                .currentStrength(card.getStrength())
+                .summoningCard(summoningCard)
+                .currentCost(summoningCard.getCostRations())
+                .currentHealth(summoningCard.getHealth())
+                .currentStrength(summoningCard.getStrength())
                 .build();
     }
 

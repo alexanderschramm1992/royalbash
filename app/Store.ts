@@ -1,6 +1,6 @@
 import { createStore, Store } from "redux";
 import combinedReducers from "./reducers/CombinedReducer";
-import { Game, Player, Card, Summoning } from "./model/Game";
+import { Game, Player, SummoningCard, Summoning } from "./model/Game";
 import {LoadGameIssuedActionFactory} from "./actions/LoadGameIssuedAction";
 
 export interface StateModel {
@@ -12,7 +12,7 @@ export interface StateModel {
     gameId?: string;
     loadGameIssued: boolean;
 
-    drawCardIssued: boolean;
+    drawSummoningCardIssued: boolean;
 
     cardOnPreview?: string;
     summoningOnPreview?: string;
@@ -41,9 +41,9 @@ export function getPlayer(): Player {
     }
 }
 
-export function findCardById(id: string): Card {
+export function findCardById(id: string): SummoningCard {
 
-    return store.getState().game.board.playerBlue.hand.cards.find((card) => {return card.id == id})
+    return store.getState().game.board.playerBlue.hand.summoningCards.find((summoningCard) => {return summoningCard.id == id})
 }
 
 export function findSummoningById(id: string): Summoning {

@@ -1,15 +1,15 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.model.Card;
+import de.schramm.royalbash.model.SummoningCard;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class CardData {
+public class SummoningCardData {
 
-    public static final Card YOUTHFUL_KNIGHT = Card.builder()
+    public static final SummoningCard YOUTHFUL_KNIGHT = SummoningCard.builder()
             .id(UUID.fromString("c31a66c7-2f76-4e81-a922-835272833967"))
             .name("Youthful Knight")
             .image("/img/youthful_knight.jpg")
@@ -22,7 +22,7 @@ public class CardData {
             .health(2)
             .build();
 
-    public static final Card VETERAN_KNIGHT = Card.builder()
+    public static final SummoningCard VETERAN_KNIGHT = SummoningCard.builder()
             .id(UUID.fromString("5d10c3a2-78e5-4463-85e0-57e279cac82c"))
             .name("Veteran Knight")
             .image("/img/veteran_knight.jpg")
@@ -36,7 +36,7 @@ public class CardData {
             .health(4)
             .build();
 
-    public static final Card EAGER_RECRUIT = Card.builder()
+    public static final SummoningCard EAGER_RECRUIT = SummoningCard.builder()
             .id(UUID.fromString("fafd0e46-f4ee-4406-b540-b049c26d5f77"))
             .name("Eager Recruit")
             .type("Creature")
@@ -48,7 +48,7 @@ public class CardData {
             .health(1)
             .build();
 
-    public static Set<Card> getCardSet() {
+    public static Set<SummoningCard> getCardSet() {
 
         return new HashSet<>(
                 Arrays.asList(

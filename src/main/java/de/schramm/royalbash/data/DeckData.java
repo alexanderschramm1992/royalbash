@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static de.schramm.royalbash.data.CardData.VETERAN_KNIGHT;
-import static de.schramm.royalbash.data.CardData.YOUTHFUL_KNIGHT;
+import static de.schramm.royalbash.data.SummoningCardData.VETERAN_KNIGHT;
+import static de.schramm.royalbash.data.SummoningCardData.YOUTHFUL_KNIGHT;
 
 public class DeckData {
 

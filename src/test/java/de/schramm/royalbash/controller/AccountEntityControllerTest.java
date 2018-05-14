@@ -3,39 +3,45 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.requestmodel.AccountRequest;
 import de.schramm.royalbash.controller.responsemodel.AccountExt;
 import de.schramm.royalbash.model.Account;
-import de.schramm.royalbash.persistence.blueprint.BlueprintRepository;
 import lombok.val;
 import de.schramm.royalbash.persistence.account.AccountRepository;
-import de.schramm.royalbash.persistence.account.AccountRepositoryFake;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.mock;
 
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class AccountEntityControllerTest {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private AccountController accountController;
 
     private final String playerName = "testName";
     private final String playerEmail = "text@mail.com";
     private final String playerPasswordHash = "123qwe";
 
     private final Account account = Account.builder()
-            .id(UUID.randomUUID())
+            .id(UUID.fromString("e6db794c-d2b7-47e0-86cb-c4a13aeeea6f"))
             .name(playerName)
             .email(playerEmail)
             .passwordHash(playerPasswordHash)
             .build();
 
-    private final BlueprintRepository blueprintRepository = mock(BlueprintRepository.class);
-
-    private final AccountRepository accountRepository = new AccountRepositoryFake(blueprintRepository);
-
-    private final AccountController accountController = new AccountController(accountRepository);
-
-    {
+    @Before
+    public void initializeRepository() {
+        accountRepository.deleteAll();
         accountRepository.save(account);
     }
 
@@ -106,7 +112,10 @@ public class AccountEntityControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity, is(ResponseEntity.badRequest().body(AccountExt.builder().build())));
+        Assert.assertThat(
+                playerExtResponseEntity,
+                is(ResponseEntity.badRequest().body(AccountExt.builder().reason("Wrong password").build()))
+        );
     }
 
     @Test
@@ -124,7 +133,10 @@ public class AccountEntityControllerTest {
 
         // Then
 
-        Assert.assertThat(playerExtResponseEntity, is(ResponseEntity.badRequest().body(AccountExt.builder().build())));
+        Assert.assertThat(
+                playerExtResponseEntity,
+                is(ResponseEntity.badRequest().body(AccountExt.builder().reason("Account cannot be found").build()))
+        );
     }
 
     @Test

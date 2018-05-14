@@ -1,6 +1,6 @@
 import {AnyAction, Reducer} from "redux";
 import {StateModel} from "../Store";
-import handleDrawCard from "./DrawCardHandler";
+import handleDrawSummoningCard from "./DrawSummoningCardHandler";
 import handleMouseOnCard from "./MouseOnCardHandler";
 import handleMouseOnSummoning from "./MouseOnSummoningHandler";
 import handleSummoning from "./SummoningHandler";
@@ -12,7 +12,7 @@ const initialState: StateModel =  {
 
     loadGameIssued: false,
 
-    drawCardIssued: false,
+    drawSummoningCardIssued: false,
 
     summonCardIssued: false,
 };
@@ -20,7 +20,7 @@ const initialState: StateModel =  {
 export const combinedReducers: Reducer<StateModel, AnyAction> =
     (state = initialState, action): StateModel => {
 
-        state = handleDrawCard(state, action);
+        state = handleDrawSummoningCard(state, action);
         state = handleMouseOnCard(state, action);
         state = handleMouseOnSummoning(state, action);
         state = handleSummoning(state, action);

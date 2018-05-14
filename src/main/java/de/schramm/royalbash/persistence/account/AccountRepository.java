@@ -1,15 +1,11 @@
 package de.schramm.royalbash.persistence.account;
 
 import de.schramm.royalbash.model.Account;
-import de.schramm.royalbash.persistence.GenericRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface AccountRepository extends GenericRepository<Account> {
+import java.util.UUID;
 
-    Account findByCredentials(
-            String playername,
-            String email,
-            String passwordHash
-    );
+public interface AccountRepository extends MongoRepository<Account, UUID> {
 
     Account findByName(String name);
 

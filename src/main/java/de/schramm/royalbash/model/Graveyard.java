@@ -3,16 +3,14 @@ package de.schramm.royalbash.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
+import lombok.ToString;
 
 import java.util.List;
-import java.util.UUID;
 
-@Getter
 @Builder
-public class Blueprint {
-
-    private final UUID id;
-    private String name;
+@Getter
+@ToString
+public class Graveyard {
 
     @Singular("card")
     private List<SummoningCard> summoningCards;

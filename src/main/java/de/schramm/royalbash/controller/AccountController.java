@@ -30,21 +30,35 @@ public class AccountController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public ResponseEntity<AccountExt> login(
-            @RequestBody AccountRequest accountRequest
+            @RequestBody AccountRequest request
         ) {
 
-        Account account = accountRepository.findByCredentials(
-                accountRequest.getName(),
-                accountRequest.getEmail(),
-                accountRequest.getPasswordHash()
-        );
+        try {
+            Account account;
+            if (request.getName() != null) {
 
-        if(account != null) {
+                account = accountRepository.findByName(request.getName());
+            } else {
 
-            return ResponseEntity.ok(AccountExt.fromAccount(account));
-        } else {
+                account = accountRepository.findByEmail(request.getEmail());
+            }
 
-            return ResponseEntity.badRequest().body(AccountExt.builder().build());
+            if (account != null) {
+
+                if (account.getPasswordHash().equals(request.getPasswordHash())) {
+
+                    return ResponseEntity.ok(AccountExt.fromAccount(account));
+                } else {
+
+                    throw new IllegalArgumentException("Wrong password");
+                }
+            } else {
+
+                throw new IllegalArgumentException("Account cannot be found");
+            }
+        } catch(IllegalArgumentException e) {
+
+            return ResponseEntity.badRequest().body(AccountExt.fromError(e.getMessage()));
         }
     }
 

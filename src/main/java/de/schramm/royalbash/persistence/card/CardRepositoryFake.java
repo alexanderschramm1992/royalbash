@@ -1,7 +1,7 @@
 package de.schramm.royalbash.persistence.card;
 
-import de.schramm.royalbash.data.CardData;
-import de.schramm.royalbash.model.Card;
+import de.schramm.royalbash.data.SummoningCardData;
+import de.schramm.royalbash.model.SummoningCard;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 @Component
 public class CardRepositoryFake implements CardRepository {
 
-    private Map<UUID, Card> cardMap = new HashMap<>();
+    private Map<UUID, SummoningCard> cardMap = new HashMap<>();
 
     @PostConstruct
     private void init() {
 
-        saveAll(CardData.getCardSet());
+        saveAll(SummoningCardData.getCardSet());
     }
 
     @Override
@@ -26,7 +26,7 @@ public class CardRepositoryFake implements CardRepository {
     }
 
     @Override
-    public Set<Card> findAll() {
+    public Set<SummoningCard> findAll() {
 
         return cardMap.keySet().stream()
                 .map(this::find)
@@ -34,21 +34,21 @@ public class CardRepositoryFake implements CardRepository {
     }
 
     @Override
-    public Card find(UUID id) {
+    public SummoningCard find(UUID id) {
 
         return cardMap.get(id);
     }
 
     @Override
-    public void saveAll(Set<Card> cardSet) {
+    public void saveAll(Set<SummoningCard> summoningCardSet) {
 
-        cardSet.forEach(this::save);
+        summoningCardSet.forEach(this::save);
     }
 
     @Override
-    public void save(Card card) {
+    public void save(SummoningCard summoningCard) {
 
-        cardMap.put(card.getId(), card);
+        cardMap.put(summoningCard.getId(), summoningCard);
     }
 
     @Override

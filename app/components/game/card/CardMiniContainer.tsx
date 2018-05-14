@@ -4,12 +4,12 @@ import "./CardMiniContainer.css";
 import "./../../common/common.css";
 
 import CardMini from "./CardMini";
-import {Card} from "../../../model/Game";
+import {SummoningCard} from "../../../model/Game";
 
 export interface CardMiniContainerProps {
 
     size: number;
-    cards: Card[];
+    summonongCards: SummoningCard[];
 }
 
 export class CardMiniContainer extends React.Component<CardMiniContainerProps, {}> {
@@ -25,12 +25,8 @@ export class CardMiniContainer extends React.Component<CardMiniContainerProps, {
 
         console.log("We are handeling the drop, bitches!");
         event.preventDefault();
-        let card = event.dataTransfer.getData("cardModel") as Card;
-        console.dir(event);
-        console.dir(card);
-        console.dir(event.dataTransfer.getData("test"));
-        this.props.cards.push(card);
-        console.dir(this.props.cards);
+        let summoningCard = event.dataTransfer.getData("cardModel") as SummoningCard;
+        this.props.summonongCards.push(summoningCard);
     }
 
     handleDragOver(event: any): void {
@@ -51,8 +47,8 @@ export class CardMiniContainer extends React.Component<CardMiniContainerProps, {
                     onDragOver={this.handleDragOver}
                     onDrop={this.handleDrop}
                 >
-                    {this.props.cards[i] &&
-                    <CardMini card= {this.props.cards[i]} />
+                    {this.props.summonongCards[i] &&
+                    <CardMini summoningCard= {this.props.summonongCards[i]} />
                     }
                 </div>
             );

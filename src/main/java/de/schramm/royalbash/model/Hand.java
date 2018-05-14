@@ -14,23 +14,23 @@ import java.util.List;
 public class Hand {
 
     @Singular("card")
-    private List<Card> cards;
+    private List<SummoningCard> summoningCards;
 
-    public void addCard(Card card) {
+    public void addCard(SummoningCard summoningCard) {
 
-        List<Card> list = new ArrayList<>(cards);
+        List<SummoningCard> list = new ArrayList<>(summoningCards);
 
-        list.add(card);
+        list.add(summoningCard);
 
-        cards = list;
+        summoningCards = list;
     }
 
-    public void removeCard(Card card) {
+    public void removeCard(SummoningCard summoningCard) {
 
-        List<Card> list = new ArrayList<>(cards);
+        List<SummoningCard> list = new ArrayList<>(summoningCards);
 
-        list.remove(card);
+        list.remove(summoningCard);
 
-        cards = list;
+        summoningCards = list;
     }
 }

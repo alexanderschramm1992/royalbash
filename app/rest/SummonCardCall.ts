@@ -1,7 +1,7 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
 import {SummoningAcceptedActionFactory} from "../actions/SummoningAcceptedAction";
-import {DrawCardDeclinedActionFactory} from "../actions/DrawCardDeclinedAction";
+import {DrawSummoningCardDeclinedActionFactory} from "../actions/DrawSummoningCardDeclinedAction";
 import { Game } from "../model/Game";
 
 class SummonCardCall {
@@ -32,7 +32,7 @@ class SummonCardCall {
                 }).catch((reason: string) => {
 
                     store.dispatch(
-                        DrawCardDeclinedActionFactory.getInstance(
+                        DrawSummoningCardDeclinedActionFactory.getInstance(
                             reason
                         )
                     );

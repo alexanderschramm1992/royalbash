@@ -2,15 +2,15 @@ import { DRAW_CARD_ACCEPTED } from "./ActionTypes";
 import { Action } from "redux";
 import { Game } from "../model/Game";
 
-interface DrawCardAcceptedAction extends Action<DRAW_CARD_ACCEPTED> {
+interface DrawSummoningCardAcceptedAction extends Action<DRAW_CARD_ACCEPTED> {
 
     readonly type: DRAW_CARD_ACCEPTED;
     readonly game: Game;
 }
 
-export class DrawCardAcceptedActionFactory{
+export class DrawSummoningCardAcceptedActionFactory{
 
-    public static getInstance(game: Game): DrawCardAcceptedAction {
+    public static getInstance(game: Game): DrawSummoningCardAcceptedAction {
 
         return {
             type: DRAW_CARD_ACCEPTED,
@@ -19,4 +19,4 @@ export class DrawCardAcceptedActionFactory{
     }
 }
 
-export default DrawCardAcceptedAction;
+export default DrawSummoningCardAcceptedAction;

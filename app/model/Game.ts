@@ -24,24 +24,31 @@ export interface Player {
 
     readonly id: string,
     readonly accountId: string,
-    readonly deck: Deck,
-    readonly health: number,
+    readonly summoningDeck: Deck,
+    readonly resourcesDeck: Deck,
+    readonly graveyard: Graveyard,
     readonly hand: Hand,
+    readonly health: number,
     readonly targets: Array<Target>
 }
 
 export interface Deck {
 
     readonly id: string,
-    readonly cards: Array<Card>
+    readonly cards: Array<SummoningCard>
+}
+
+export interface Graveyard {
+
+    readonly cards: Array<SummoningCard>
 }
 
 export interface Hand {
 
-    readonly cards: Array<Card>
+    readonly summoningCards: Array<SummoningCard>
 }
 
-export interface Card {
+export interface SummoningCard {
 
     readonly id: string,
     readonly name: string,
@@ -66,7 +73,7 @@ export interface Target {
 export interface Summoning {
 
     readonly id: string,
-    readonly card: Card,
+    readonly summoningCard: SummoningCard,
     readonly currentCost: number,
     readonly currentHealth: number,
     readonly currentStrength: number

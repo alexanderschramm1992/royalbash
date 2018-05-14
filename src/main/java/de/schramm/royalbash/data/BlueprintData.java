@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static de.schramm.royalbash.data.CardData.*;
+import static de.schramm.royalbash.data.SummoningCardData.*;
 
 public class BlueprintData {
 

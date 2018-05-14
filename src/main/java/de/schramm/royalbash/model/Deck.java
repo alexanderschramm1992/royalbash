@@ -18,34 +18,34 @@ public class Deck {
     private UUID id;
 
     @Singular("card")
-    private List<Card> cards;
+    private List<SummoningCard> summoningCards;
 
     public static Deck fromBlueprint(Blueprint blueprint, UUID id) {
 
         return Deck.builder()
                 .id(id)
-                .cards(blueprint.getCards())
+                .summoningCards(blueprint.getSummoningCards())
                 .build();
     }
 
     public void shuffle() {
 
-        Collections.shuffle(cards);
+        Collections.shuffle(summoningCards);
     }
 
-    public Card drawCard() {
+    public SummoningCard drawCard() {
 
-        if(cards.isEmpty()) {
+        if(summoningCards.isEmpty()) {
 
             return null;
         } else {
 
-            List<Card> list = new ArrayList<>(cards);
-            Card card = list.remove(0);
+            List<SummoningCard> list = new ArrayList<>(summoningCards);
+            SummoningCard summoningCard = list.remove(0);
 
-            cards = list;
+            summoningCards = list;
 
-            return card;
+            return summoningCard;
         }
     }
 }

@@ -4,7 +4,7 @@ import "./../common/common.css";
 import "./DetailView.css";
 import CardComponent from "./card/CardComponent";
 import SummoningComponent from "./summoning/SummoningComponent";
-import {Card, Summoning} from "../../model/Game";
+import {SummoningCard, Summoning} from "../../model/Game";
 import store, {findCardById, findSummoningById} from "../../Store";
 
 export interface DetailViewProps {
@@ -14,7 +14,7 @@ export interface DetailViewProps {
 
 interface DetailViewState {
 
-    cardOnPreview?: Card;
+    cardOnPreview?: SummoningCard;
     summoningOnPreview?: Summoning;
 }
 
@@ -53,7 +53,7 @@ export class DetailView extends React.Component<DetailViewProps, DetailViewState
                 <div className="detail-view border-large border-radius" style={style}>
                     {this.state.cardOnPreview &&
                         <CardComponent
-                            card={this.state.cardOnPreview}
+                            summoningCard={this.state.cardOnPreview}
                         />
                     }
                     {this.state.summoningOnPreview &&

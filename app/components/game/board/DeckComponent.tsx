@@ -4,7 +4,7 @@ import "./../../common/common.css";
 import "./DeckComponent.css";
 
 import store from "../../../Store";
-import { DrawCardIssuedActionFactory } from "../../../actions/DrawCardIssuedAction";
+import { DrawSummoningCardIssuedActionFactory } from "../../../actions/DrawSummoningCardIssuedAction";
 
 
 export enum DeckComponentType {
@@ -35,7 +35,7 @@ export class DeckComponent extends React.Component<DeckComponentProps, DeckState
         store.subscribe((): void => {
 
             this.setState({
-                showSpinner: store.getState().drawCardIssued
+                showSpinner: store.getState().drawSummoningCardIssued
             });
         });
 
@@ -45,7 +45,7 @@ export class DeckComponent extends React.Component<DeckComponentProps, DeckState
     handleCardDraw(): void {
 
         store.dispatch(
-            DrawCardIssuedActionFactory.getInstance(
+            DrawSummoningCardIssuedActionFactory.getInstance(
                 store.getState().playerId
             )
         );

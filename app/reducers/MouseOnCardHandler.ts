@@ -9,14 +9,14 @@ const handleMouseOnCard: Reducer<StateModel, AnyAction> = (state, action): State
         case MOUSE_ON_CARD:
 
             let mouseOnCardAction = action as MouseOnCardAction;
-            console.log("Mouse on card " + mouseOnCardAction.cardId);
+            console.log("Mouse on summoningCard " + mouseOnCardAction.cardId);
             return {
                 ...state,
                 cardOnPreview: mouseOnCardAction.cardId
             };
         case MOUSE_OFF_CARD:
 
-            console.log("Mouse off card");
+            console.log("Mouse off summoningCard");
             return {
                 ...state,
                 cardOnPreview: null
