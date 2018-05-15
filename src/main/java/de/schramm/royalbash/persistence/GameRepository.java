@@ -1,4 +1,4 @@
-package de.schramm.royalbash.persistence.game;
+package de.schramm.royalbash.persistence;
 
 import de.schramm.royalbash.model.Game;
 import org.springframework.data.mongodb.repository.MongoRepository;

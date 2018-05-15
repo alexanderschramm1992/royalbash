@@ -10,7 +10,7 @@ import { DrawSummoningCardIssuedActionFactory } from "../../../actions/DrawSummo
 export enum DeckComponentType {
 
     SUMMONING_DECK,
-    RESOUCRES_DECK
+    RESOURCES_DECK
 }
 
 export interface DeckComponentProps {

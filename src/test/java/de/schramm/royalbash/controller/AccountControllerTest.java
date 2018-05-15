@@ -4,7 +4,7 @@ import de.schramm.royalbash.controller.requestmodel.AccountRequest;
 import de.schramm.royalbash.controller.responsemodel.AccountExt;
 import de.schramm.royalbash.model.Account;
 import lombok.val;
-import de.schramm.royalbash.persistence.account.AccountRepository;
+import de.schramm.royalbash.persistence.AccountRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class AccountEntityControllerTest {
+public class AccountControllerTest {
 
     @Autowired
     private AccountRepository accountRepository;

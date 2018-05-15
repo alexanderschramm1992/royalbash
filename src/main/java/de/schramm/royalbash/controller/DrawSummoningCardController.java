@@ -3,9 +3,9 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.requestmodel.DrawRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.handler.DrawHandler;
+import de.schramm.royalbash.gameengine.handler.DrawSummoningCardHandler;
 import de.schramm.royalbash.model.Game;
-import de.schramm.royalbash.persistence.game.GameManager;
+import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class DrawSummoningCardController {
 
     private final GameManager gameManager;
-    private final DrawHandler drawSummoningCardHandler;
+    private final DrawSummoningCardHandler drawSummoningCardHandler;
 
     @Autowired
     public DrawSummoningCardController(
             GameManager gameManager,
-            DrawHandler drawSummoningCardHandler
+            DrawSummoningCardHandler drawSummoningCardHandler
     ) {
         this.gameManager = gameManager;
         this.drawSummoningCardHandler = drawSummoningCardHandler;

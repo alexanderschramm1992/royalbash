@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DrawHandler {
+public class DrawSummoningCardHandler {
 
     private final PlayerCanDrawAnotherCardChecker playerCanDrawAnotherCardChecker;
 
     @Autowired
-    public DrawHandler(
+    public DrawSummoningCardHandler(
             PlayerCanDrawAnotherCardChecker playerCanDrawAnotherCardChecker
     ) {
         this.playerCanDrawAnotherCardChecker = playerCanDrawAnotherCardChecker;

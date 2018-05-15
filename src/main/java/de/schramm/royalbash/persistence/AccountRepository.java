@@ -1,4 +1,4 @@
-package de.schramm.royalbash.persistence.account;
+package de.schramm.royalbash.persistence;
 
 import de.schramm.royalbash.model.Account;
 import org.springframework.data.mongodb.repository.MongoRepository;

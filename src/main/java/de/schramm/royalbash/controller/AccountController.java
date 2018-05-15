@@ -3,7 +3,7 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.requestmodel.AccountRequest;
 import de.schramm.royalbash.controller.responsemodel.AccountExt;
 import de.schramm.royalbash.model.Account;
-import de.schramm.royalbash.persistence.account.AccountRepository;
+import de.schramm.royalbash.persistence.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,14 +34,7 @@ public class AccountController {
         ) {
 
         try {
-            Account account;
-            if (request.getName() != null) {
-
-                account = accountRepository.findByName(request.getName());
-            } else {
-
-                account = accountRepository.findByEmail(request.getEmail());
-            }
+            Account account = findAccount(request);
 
             if (account != null) {
 
@@ -59,6 +52,17 @@ public class AccountController {
         } catch(IllegalArgumentException e) {
 
             return ResponseEntity.badRequest().body(AccountExt.fromError(e.getMessage()));
+        }
+    }
+
+    private Account findAccount(AccountRequest request) {
+
+        if (request.getName() != null) {
+
+            return accountRepository.findByName(request.getName());
+        } else {
+
+            return accountRepository.findByEmail(request.getEmail());
         }
     }
 

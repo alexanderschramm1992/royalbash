@@ -4,7 +4,7 @@ import de.schramm.royalbash.controller.requestmodel.GameRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.model.Game;
-import de.schramm.royalbash.persistence.game.GameManager;
+import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

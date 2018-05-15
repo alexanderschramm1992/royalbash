@@ -92,7 +92,7 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                                     <DeckComponent type={DeckComponentType.SUMMONING_DECK}/>
                                 </div>
                                 <div className="resources-deck-area">
-                                    <DeckComponent type={DeckComponentType.RESOUCRES_DECK}/>
+                                    <DeckComponent type={DeckComponentType.RESOURCES_DECK}/>
                                 </div>
                                 <div className="graveyard-area">
                                     <GraveyardComponent />
