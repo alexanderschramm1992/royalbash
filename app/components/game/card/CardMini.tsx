@@ -6,6 +6,7 @@ import {CardProps} from "./CardComponent";
 import store from "../../../Store";
 import {MouseOnCardActionFactory} from "../../../actions/MouseOnCardAction";
 import {MouseOffCardActionFactory} from "../../../actions/MouseOffCardAction";
+import {CardDraggedActionFactory} from "../../../actions/CardDraggedAction";
 
 export class CardMini extends React.Component<CardProps, {}> {
 
@@ -29,10 +30,8 @@ export class CardMini extends React.Component<CardProps, {}> {
 
     handleDrag(event: any): void {
 
-        event.dataTransfer.setData("boardId", this.props.summoningCard);
-        event.dataTransfer.setData("playerInstanceId", "test123");
-        event.dataTransfer.setData("cardId", this.props.summoningCard.id);
         console.dir(event);
+        store.dispatch(CardDraggedActionFactory.getInstance(this.props.summoningCard.id));
     }
 
     render(): any {

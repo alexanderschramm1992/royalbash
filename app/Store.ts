@@ -1,7 +1,6 @@
 import { createStore, Store } from "redux";
 import combinedReducers from "./reducers/CombinedReducer";
 import { Game, Player, SummoningCard, Summoning } from "./model/Game";
-import {LoadGameIssuedActionFactory} from "./actions/LoadGameIssuedAction";
 
 export interface StateModel {
 
