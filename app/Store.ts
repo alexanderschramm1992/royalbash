@@ -47,8 +47,8 @@ export function findCardById(id: string): SummoningCard {
 
 export function findSummoningById(id: string): Summoning {
 
-    let playerBlueSummonings = store.getState().game.board.playerBlue.targets.map((target) => {return target.summoning});
-    let playerRedSummonings = store.getState().game.board.playerRed.targets.map((target) => {return target.summoning});
+    let playerBlueSummonings = store.getState().game.board.playerBlue.field.targets.map((target) => {return target.summoning});
+    let playerRedSummonings = store.getState().game.board.playerRed.field.targets.map((target) => {return target.summoning});
     let summonings = playerBlueSummonings.concat(playerRedSummonings);
     
     return summonings.find((summoning) => {return summoning.id == id});

@@ -2,7 +2,6 @@ package de.schramm.royalbash.model;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Singular;
 import lombok.ToString;
 
 import java.util.*;
@@ -18,31 +17,22 @@ public class Player {
     private final Deck resourcesDeck;
     private final Hand hand;
     private final Graveyard graveyard;
+    private final Field field;
 
     private int health;
 
-    @Singular("target")
-    private List<Target> targets;
-
     public void summon(Summoning summoning, Target target) {
 
-        targets.stream()
-                .filter(element -> element.equals(target))
-                .forEach(element -> element.summon(summoning));
+        field.summon(summoning, target);
     }
 
     public void bury(Summoning summoning) {
 
-        targets.stream()
-                .filter(target -> summoning.equals(target.getSummoning()))
-                .forEach(target -> target.bury(summoning));
+        field.bury(summoning);
     }
 
     public Target getTarget(UUID targetId) {
 
-        return targets.stream()
-                .filter(target -> target.getId().equals(targetId))
-                .findFirst()
-                .orElse(null);
+        return field.getTarget(targetId);
     }
 }

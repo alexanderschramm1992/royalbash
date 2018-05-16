@@ -22,8 +22,8 @@ public class SummoningOwnedByPlayerOnBoardChecker {
     ) throws GameRuleViolationException {
 
         Set<Summoning> summoningsOnBoard = Stream.of(
-                board.getPlayerBlue().getTargets(),
-                board.getPlayerRed().getTargets()
+                board.getPlayerBlue().getField().getTargets(),
+                board.getPlayerRed().getField().getTargets()
         )
                 .flatMap(Collection::stream)
                 .map(Target::getSummoning)

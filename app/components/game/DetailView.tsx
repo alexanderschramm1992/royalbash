@@ -2,8 +2,8 @@ import * as React from "react";
 
 import "./../common/common.css";
 import "./DetailView.css";
-import CardComponent from "./card/CardComponent";
-import SummoningComponent from "./summoning/SummoningComponent";
+import CardComponent from "./CardComponent";
+import SummoningComponent from "./SummoningComponent";
 import {SummoningCard, Summoning} from "../../model/Game";
 import store, {findCardById, findSummoningById} from "../../Store";
 

@@ -1,10 +1,10 @@
 import * as React from "react";
 
 import "./CardMiniContainer.css";
-import "./../../common/common.css";
+import "../common/common.css";
 
 import CardMini from "./CardMini";
-import {SummoningCard} from "../../../model/Game";
+import {SummoningCard} from "../../model/Game";
 
 export interface CardMiniContainerProps {
 

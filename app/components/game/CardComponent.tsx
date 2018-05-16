@@ -1,37 +1,37 @@
 import * as React from "react";
 
-import "./CardMini.css";
-import "./../../common/common.css";
-import {CardProps} from "./CardComponent";
-import store from "../../../Store";
-import {MouseOnCardActionFactory} from "../../../actions/MouseOnCardAction";
-import {MouseOffCardActionFactory} from "../../../actions/MouseOffCardAction";
-import {CardDraggedActionFactory} from "../../../actions/CardDraggedAction";
+import "./CardComponent.css";
+import "../common/common.css";
 
-export class CardMini extends React.Component<CardProps, {}> {
+import {SummoningCard} from "../../model/Game";
+
+export interface CardProps {
+
+    summoningCard: SummoningCard;
+}
+
+export interface CardModel {
+
+    readonly id: string;
+    readonly name: string;
+    readonly image: string;
+    readonly type: string;
+    readonly subType?: string;
+    readonly text: string;
+    readonly lore?: string;
+    readonly cost: number;
+    readonly costRations?: number;
+    readonly costMaterial?: number;
+    readonly costBlessing?: number;
+    strength: number;
+    health: number;
+}
+
+export class CardComponent extends React.Component<CardProps, {}> {
 
     constructor(props: CardProps) {
 
         super(props);
-        this.handleMouseOver = this.handleMouseOver.bind(this);
-        this.handleMouseOut = this.handleMouseOut.bind(this);
-        this.handleDrag = this.handleDrag.bind(this);
-    }
-
-    handleMouseOver(): void {
-
-        store.dispatch(MouseOnCardActionFactory.getInstance(this.props.summoningCard.id));
-    }
-
-    handleMouseOut(): void {
-
-        store.dispatch(MouseOffCardActionFactory.getInstance());
-    }
-
-    handleDrag(event: any): void {
-
-        console.dir(event);
-        store.dispatch(CardDraggedActionFactory.getInstance(this.props.summoningCard.id));
     }
 
     render(): any {
@@ -39,10 +39,7 @@ export class CardMini extends React.Component<CardProps, {}> {
         return (
             <div
                 draggable={true}
-                onDragStart={this.handleDrag}
-                className="card-mini border-large"
-                onMouseOver={this.handleMouseOver}
-                onMouseOut={this.handleMouseOut}
+                className="card border-large border-radius"
             >
                 <div className="head-wrapper">
                     <div className="name">
@@ -71,6 +68,24 @@ export class CardMini extends React.Component<CardProps, {}> {
                 <div className="image-wrapper border-small">
                     <img className="image" src={this.props.summoningCard.image} alt={this.props.summoningCard.name}/>
                 </div>
+                <div className="type">
+                    <div className="font-size-medium">
+                        {this.props.summoningCard.type}
+                        {this.props.summoningCard.subType && " - " + this.props.summoningCard.subType}
+                    </div>
+                </div>
+                <div className="text-wrapper border-small">
+                    <div className="text">
+                        <div className="font-size-medium">
+                            {this.props.summoningCard.text}
+                        </div>
+                    </div>
+                    <div className="lore">
+                        <div className="font-size-medium">
+                            {this.props.summoningCard.lore && this.props.summoningCard.lore}
+                        </div>
+                    </div>
+                </div>
                 <div className="foot-wrapper">
                     <div className="stats-wrapper border-small">
                         <div className="strength border-small">
@@ -90,4 +105,4 @@ export class CardMini extends React.Component<CardProps, {}> {
     }
 }
 
-export default CardMini;
+export default CardComponent;

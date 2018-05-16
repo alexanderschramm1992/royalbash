@@ -29,7 +29,7 @@ export interface Player {
     readonly graveyard: Graveyard,
     readonly hand: Hand,
     readonly health: number,
-    readonly targets: Array<Target>
+    readonly field: Field
 }
 
 export interface Deck {
@@ -62,6 +62,11 @@ export interface SummoningCard {
     readonly costBlessing: number,
     readonly strength: number,
     readonly health: number
+}
+
+export interface Field {
+
+    readonly targets: Array<Target>
 }
 
 export interface Target {

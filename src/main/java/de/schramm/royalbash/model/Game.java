@@ -63,8 +63,8 @@ public class Game {
 
         try {
 
-            val playerRedTargets = board.getPlayerRed().getTargets();
-            val playerBlueTargets = board.getPlayerBlue().getTargets();
+            val playerRedTargets = board.getPlayerRed().getField().getTargets();
+            val playerBlueTargets = board.getPlayerBlue().getField().getTargets();
 
             return Stream.of(playerRedTargets, playerBlueTargets)
                     .flatMap(Collection::stream)

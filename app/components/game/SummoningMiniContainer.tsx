@@ -1,14 +1,15 @@
 import * as React from "react";
 
 import "./SummoningMiniContainer.css";
-import "./../../common/common.css";
+import "../common/common.css";
 
-import {Summoning} from "../../../model/Game";
+import {Summoning} from "../../model/Game";
 import SummoningMini from "./SummoningMini";
 
 export interface SummoningMiniContainerProps {
 
     readonly size: number;
+    summonings: Summoning[];
 }
 
 interface SummoningMiniContainerState {
@@ -22,7 +23,7 @@ export class SummoningMiniContainer extends React.Component<SummoningMiniContain
         super(props);
 
         this.state = {
-            summonings: []
+            summonings: props.summonings
         }
     }
 

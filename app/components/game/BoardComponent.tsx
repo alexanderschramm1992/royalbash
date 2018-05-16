@@ -1,18 +1,18 @@
 import * as React from "react";
 
-import "./../../common/common.css";
-import "./Board.css";
+import "../common/common.css";
+import "./BoardComponent.css";
 
-import Slider from "../../menu/Slider";
-import DetailView from "../DetailView";
+import Slider from "../menu/Slider";
+import DetailView from "./DetailView";
 import DeckComponent, {DeckComponentType} from "./DeckComponent";
 import HandComponent from "./HandComponent";
 import GraveyardComponent from "./GraveyardComponent";
-import DrawSummoningCardCall from "../../../rest/DrawSummoningCardCall";
-import { SummoningMiniContainer } from "../summoning/SummoningMiniContainer";
-import store from "../../../Store";
-import {LoadGameIssuedActionFactory} from "../../../actions/LoadGameIssuedAction";
-import LoadGameCall from "../../../rest/LoadGameCall";
+import DrawSummoningCardCall from "../../rest/DrawSummoningCardCall";
+import store from "../../Store";
+import {LoadGameIssuedActionFactory} from "../../actions/LoadGameIssuedAction";
+import LoadGameCall from "../../rest/LoadGameCall";
+import FieldComponent from "./FieldComponent";
 
 interface BoardState {
 
@@ -73,14 +73,9 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                         </div>
                         <div className="play-area border-large border-radius">
                             <div className="remote-summoning-area">
-                                <SummoningMiniContainer
-                                    size={7}
-                                />
                             </div>
                             <div className="summoning-area">
-                                <SummoningMiniContainer
-                                    size={7}
-                                />
+                                <FieldComponent/>
                             </div>
                         </div>
                         <div className="player-area border-large border-radius">

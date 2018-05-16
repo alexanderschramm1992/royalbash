@@ -11,6 +11,8 @@ import static de.schramm.royalbash.data.AccountData.ACCOUNT_1;
 import static de.schramm.royalbash.data.AccountData.ACCOUNT_2;
 import static de.schramm.royalbash.data.DeckData.DECK_1;
 import static de.schramm.royalbash.data.DeckData.DECK_2;
+import static de.schramm.royalbash.data.FieldData.FIELD_1;
+import static de.schramm.royalbash.data.FieldData.FIELD_2;
 import static de.schramm.royalbash.data.HandData.HAND_1;
 import static de.schramm.royalbash.data.HandData.HAND_2;
 
@@ -22,6 +24,7 @@ public class PlayerData {
             .accountId(ACCOUNT_1.getId())
             .summoningDeck(DECK_1)
             .hand(HAND_1)
+            .field(FIELD_1)
             .build();
 
     public static final Player PLAYER_2 = Player.builder()
@@ -30,5 +33,6 @@ public class PlayerData {
             .accountId(ACCOUNT_2.getId())
             .summoningDeck(DECK_2)
             .hand(HAND_2)
+            .field(FIELD_2)
             .build();
 }

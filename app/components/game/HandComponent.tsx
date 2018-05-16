@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import "./../../common/common.css";
+import "../common/common.css";
 import "./HandComponent.css";
-import store, {getPlayer} from "../../../Store";
-import CardMiniContainer from "../card/CardMiniContainer";
-import {SummoningCard} from "../../../model/Game";
+import store, {getPlayer} from "../../Store";
+import CardMiniContainer from "./CardMiniContainer";
+import {SummoningCard} from "../../model/Game";
 
 export interface HandState {
 

@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import "./../../common/common.css";
+import "../common/common.css";
 import "./BoardContainer.css";
 
-import BoardComponent from "./Board";
+import BoardComponent from "./BoardComponent";
 
 export class BoardContainer extends React.Component<{}, {}> {
 

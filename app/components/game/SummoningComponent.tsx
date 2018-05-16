@@ -1,35 +1,18 @@
 import * as React from "react";
 
-import "./CardComponent.css";
-import "./../../common/common.css";
+import "./SummoningComponent.css";
+import "../common/common.css";
 
-import {SummoningCard} from "../../../model/Game";
+import {Summoning} from "../../model/Game";
 
-export interface CardProps {
+export interface SummoningProps {
 
-    summoningCard: SummoningCard;
+    summoning: Summoning;
 }
 
-export interface CardModel {
+export class SummoningComponent extends React.Component<SummoningProps, {}> {
 
-    readonly id: string;
-    readonly name: string;
-    readonly image: string;
-    readonly type: string;
-    readonly subType?: string;
-    readonly text: string;
-    readonly lore?: string;
-    readonly cost: number;
-    readonly costRations?: number;
-    readonly costMaterial?: number;
-    readonly costBlessing?: number;
-    strength: number;
-    health: number;
-}
-
-export class CardComponent extends React.Component<CardProps, {}> {
-
-    constructor(props: CardProps) {
+    constructor(props: SummoningProps) {
 
         super(props);
     }
@@ -39,50 +22,50 @@ export class CardComponent extends React.Component<CardProps, {}> {
         return (
             <div
                 draggable={true}
-                className="card border-large border-radius"
+                className="summoning border-large border-radius"
             >
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">
-                            {this.props.summoningCard.name}
+                            {this.props.summoning.summoningCard.name}
                         </div>
                     </div>
                     <div className="cost-wrapper border-small">
                         <div className="cost cost-rations border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoningCard.costRations? this.props.summoningCard.costRations : 99}
+                                {this.props.summoning.summoningCard.costRations? this.props.summoning.summoningCard.costRations : 99}
                             </div>
                         </div>
                         <div className="cost cost-material border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoningCard.costMaterial? this.props.summoningCard.costMaterial : 99}
+                                {this.props.summoning.summoningCard.costMaterial? this.props.summoning.summoningCard.costMaterial : 99}
                             </div>
                         </div>
                         <div className="cost cost-blessing border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoningCard.costBlessing? this.props.summoningCard.costBlessing : 99}
+                                {this.props.summoning.summoningCard.costBlessing? this.props.summoning.summoningCard.costBlessing : 99}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img className="image" src={this.props.summoningCard.image} alt={this.props.summoningCard.name}/>
+                    <img className="image" src={this.props.summoning.summoningCard.image} alt={this.props.summoning.summoningCard.name}/>
                 </div>
                 <div className="type">
                     <div className="font-size-medium">
-                        {this.props.summoningCard.type}
-                        {this.props.summoningCard.subType && " - " + this.props.summoningCard.subType}
+                        {this.props.summoning.summoningCard.type}
+                        {this.props.summoning.summoningCard.subType && " - " + this.props.summoning.summoningCard.subType}
                     </div>
                 </div>
                 <div className="text-wrapper border-small">
                     <div className="text">
                         <div className="font-size-medium">
-                            {this.props.summoningCard.text}
+                            {this.props.summoning.summoningCard.text}
                         </div>
                     </div>
                     <div className="lore">
                         <div className="font-size-medium">
-                            {this.props.summoningCard.lore && this.props.summoningCard.lore}
+                            {this.props.summoning.summoningCard.lore && this.props.summoning.summoningCard.lore}
                         </div>
                     </div>
                 </div>
@@ -90,12 +73,12 @@ export class CardComponent extends React.Component<CardProps, {}> {
                     <div className="stats-wrapper border-small">
                         <div className="strength border-small">
                             <div className="font-size-large center-text">
-                                {this.props.summoningCard.strength}
+                                {this.props.summoning.currentStrength}
                             </div>
                         </div>
                         <div className="health border-small">
                             <div className="font-size-large center-text">
-                                {this.props.summoningCard.health}
+                                {this.props.summoning.currentHealth}
                             </div>
                         </div>
                     </div>
@@ -105,4 +88,4 @@ export class CardComponent extends React.Component<CardProps, {}> {
     }
 }
 
-export default CardComponent;
+export default SummoningComponent;

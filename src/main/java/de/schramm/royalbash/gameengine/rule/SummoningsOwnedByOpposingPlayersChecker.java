@@ -20,12 +20,14 @@ public class SummoningsOwnedByOpposingPlayersChecker {
 
         List<Summoning> playerBlueSummonings = board
                 .getPlayerBlue()
+                .getField()
                 .getTargets()
                 .stream()
                 .map(Target::getSummoning)
                 .collect(Collectors.toList());
         List<Summoning> playerRedSummonings = board
                 .getPlayerRed()
+                .getField()
                 .getTargets()
                 .stream()
                 .map(Target::getSummoning)

@@ -1,37 +1,42 @@
 import * as React from "react";
 
-import "./SummoningMini.css";
-import "./../../common/common.css";
-import {SummoningProps} from "./SummoningComponent";
-import store from "../../../Store";
-import {MouseOnSummoningActionFactory} from "../../../actions/MouseOnSummoningAction";
-import {MouseOffSummoningActionFactory} from "../../../actions/MouseOffSummoningAction";
+import "./CardMini.css";
+import "../common/common.css";
+import {CardProps} from "./CardComponent";
+import store from "../../Store";
+import {MouseOnCardActionFactory} from "../../actions/MouseOnCardAction";
+import {MouseOffCardActionFactory} from "../../actions/MouseOffCardAction";
+import {CardDraggedActionFactory} from "../../actions/CardDraggedAction";
 
-export class SummoningMini extends React.Component<SummoningProps, {}> {
+export class CardMini extends React.Component<CardProps, {}> {
 
-    constructor(props: SummoningProps) {
+    constructor(props: CardProps) {
 
         super(props);
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleMouseOut = this.handleMouseOut.bind(this);
-        this.handleDrag = this.handleDrag.bind(this);
+        this.handleDragStart = this.handleDragStart.bind(this);
+        this.handleDragEnd = this.handleDragEnd.bind(this);
     }
 
     handleMouseOver(): void {
 
-        store.dispatch(MouseOnSummoningActionFactory.getInstance(this.props.summoning.id));
+        store.dispatch(MouseOnCardActionFactory.getInstance(this.props.summoningCard.id));
     }
 
     handleMouseOut(): void {
 
-        store.dispatch(MouseOffSummoningActionFactory.getInstance());
+        store.dispatch(MouseOffCardActionFactory.getInstance());
     }
 
-    handleDrag(event: any): void {
+    handleDragStart(event: any): void {
 
-        //event.dataTransfer.setData("boardId", this.props.cardModel);
-        //event.dataTransfer.setData("playerInstanceId", "test123");
-        //event.dataTransfer.setData("cardId", this.props.cardModel.id);
+        console.dir(event);
+        store.dispatch(CardDraggedActionFactory.getInstance(this.props.summoningCard.id));
+    }
+
+    handleDragEnd(event: any): void {
+
         console.dir(event);
     }
 
@@ -39,49 +44,50 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
 
         return (
             <div
-                className="summoning-mini border-large"
                 draggable={true}
-                onDragStart={this.handleDrag}
+                onDragStart={this.handleDragStart}
+                onDragEnd={this.handleDragEnd}
+                className="card-mini border-large"
                 onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}
             >
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">
-                            {this.props.summoning.summoningCard.name}
+                            {this.props.summoningCard.name}
                         </div>
                     </div>
                     <div className="cost-wrapper border-small">
                         <div className="cost cost-rations border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoning.summoningCard.costRations? this.props.summoning.summoningCard.costRations : 99}
+                                {this.props.summoningCard.costRations? this.props.summoningCard.costRations : 99}
                             </div>
                         </div>
                         <div className="cost cost-material border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoning.summoningCard.costMaterial? this.props.summoning.summoningCard.costMaterial : 99}
+                                {this.props.summoningCard.costMaterial? this.props.summoningCard.costMaterial : 99}
                             </div>
                         </div>
                         <div className="cost cost-blessing border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoning.summoningCard.costBlessing? this.props.summoning.summoningCard.costBlessing : 99}
+                                {this.props.summoningCard.costBlessing? this.props.summoningCard.costBlessing : 99}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img className="image" src={this.props.summoning.summoningCard.image} alt={this.props.summoning.summoningCard.name}/>
+                    <img className="image" src={this.props.summoningCard.image} alt={this.props.summoningCard.name}/>
                 </div>
                 <div className="foot-wrapper">
                     <div className="stats-wrapper border-small">
                         <div className="strength border-small">
                             <div className="font-size-large center-text">
-                                {this.props.summoning.currentStrength}
+                                {this.props.summoningCard.strength}
                             </div>
                         </div>
                         <div className="health border-small">
                             <div className="font-size-large center-text">
-                                {this.props.summoning.currentHealth}
+                                {this.props.summoningCard.health}
                             </div>
                         </div>
                     </div>
@@ -91,4 +97,4 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
     }
 }
 
-export default SummoningMini;
+export default CardMini;
