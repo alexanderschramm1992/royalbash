@@ -3,12 +3,12 @@ import * as React from "react";
 import "../common/common.css";
 import "./FieldComponent.css";
 import store, {getPlayer} from "../../Store";
-import {Summoning} from "../../model/Game";
-import SummoningMiniContainer from "./SummoningMiniContainer";
+import {Target} from "../../model/Game";
+import TargetContainer from "./TargetContainer";
 
 export interface FieldComponentState {
 
-    summonings: Summoning[];
+    targets: Target[];
 }
 
 export class FieldComponent extends React.Component<{}, FieldComponentState> {
@@ -17,13 +17,13 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
         super(props);
 
         this.state = {
-            summonings: []
+            targets: []
         };
 
         store.subscribe((): void => {
 
             this.setState({
-                summonings: getPlayer().field.targets.map(target => target.summoning)
+                targets: getPlayer().field.targets
             });
         });
     }
@@ -31,10 +31,9 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
     render(): any {
 
         return (
-            <div className="hand">
-                <SummoningMiniContainer
-                    size={5}
-                    summonings={this.state.summonings}
+            <div className="field">
+                <TargetContainer
+                    targets={this.state.targets}
                 />
             </div>
         );

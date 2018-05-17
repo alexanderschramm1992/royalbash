@@ -39,7 +39,6 @@ public class GameController {
 
             Game game = gameManager.findGame(requestParams.getGameId());
 
-            log.info(game);
             return ResponseEntity.ok(StateResponse.fromGame(game));
         } catch (GameEngineException e) {
 

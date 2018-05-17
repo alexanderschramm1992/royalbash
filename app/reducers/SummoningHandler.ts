@@ -8,8 +8,8 @@ import {AnyAction, Reducer} from "redux";
 import {StateModel} from "../Store";
 import CardDraggedAction from "../actions/CardDraggedAction";
 import SummoningIssuedAction from "../actions/SummoningIssuedAction";
-import SummoningAcceptedAction from "../actions/SummoningAcceptedAction";
 import SummoningDeclinedAction from "../actions/SummoningDeclinedAction";
+import Game from "../model/Game";
 
 const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 
@@ -28,15 +28,20 @@ const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateMo
             console.log("Summoning issued");
             return {
                 ...state,
-                summonCardIssued: true
+                summonCardIssued: true,
+                cardToBeSummoned: summoningIssuedAction.cardId,
+                summoningTarget: summoningIssuedAction.targetId
             };
         case SUMMONING_ACCEPTED:
 
-            let summoningAcceptedAction = action as SummoningAcceptedAction;
+            let game = action.game.game as Game;
             console.log("Summoning accepted");
             return {
                 ...state,
-                // ToDo: Add state
+                game: game,
+                summonCardIssued: false,
+                cardToBeSummoned: null,
+                summoningTarget: null
             };
         case SUMMONING_DECLINED:
 
@@ -44,7 +49,9 @@ const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateMo
             console.log("Summoning declined because: " + summoningDeclinedAction.reason);
             return {
                 ...state,
-                // ToDo: Add state
+                summonCardIssued: false,
+                cardToBeSummoned: null,
+                summoningTarget: null
             };
         default:
             return state;

@@ -13,12 +13,14 @@ import store from "../../Store";
 import {LoadGameIssuedActionFactory} from "../../actions/LoadGameIssuedAction";
 import LoadGameCall from "../../rest/LoadGameCall";
 import FieldComponent from "./FieldComponent";
+import SummonCardCall from "../../rest/SummonCardCall";
 
 interface BoardState {
 
     readonly scale: number;
     readonly drawCardCall: DrawSummoningCardCall;
     readonly loadGameCall: LoadGameCall;
+    readonly summonCardCall: SummonCardCall;
 }
 
 export class BoardComponent extends React.Component<{}, BoardState> {
@@ -29,7 +31,8 @@ export class BoardComponent extends React.Component<{}, BoardState> {
         this.state = {
             scale: 5,
             drawCardCall: new DrawSummoningCardCall(),
-            loadGameCall: new LoadGameCall()
+            loadGameCall: new LoadGameCall(),
+            summonCardCall: new SummonCardCall()
         };
 
         store.dispatch(LoadGameIssuedActionFactory.getInstance("6d5864f4-5fb1-4615-bf6a-07a1211ef6d3"));

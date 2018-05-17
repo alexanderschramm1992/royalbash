@@ -29,14 +29,16 @@ export const store: Store<StateModel> = createStore(
 
 export function getPlayer(): Player {
 
-    let playerId = store.getState().playerId;
+    let state = store.getState();
 
-    if (store.getState().game.board.playerBlue.id == playerId) {
+    let playerId = state.playerId;
 
-        return store.getState().game.board.playerBlue;
+    if (state.game.board.playerBlue.id == playerId) {
+
+        return state.game.board.playerBlue;
     } else {
      
-        return store.getState().game.board.playerBlue;
+        return state.game.board.playerBlue;
     }
 }
 

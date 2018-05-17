@@ -1,8 +1,7 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
 import {SummoningAcceptedActionFactory} from "../actions/SummoningAcceptedAction";
-import {DrawSummoningCardDeclinedActionFactory} from "../actions/DrawSummoningCardDeclinedAction";
-import { Game } from "../model/Game";
+import {SummoningDeclinedActionFactory} from "../actions/SummoningDeclinedAction";
 
 class SummonCardCall {
 
@@ -15,6 +14,7 @@ class SummonCardCall {
                 axios.post(
                     "gameloop/summon",
                     {
+                        "gameId": store.getState().gameId,
                         "playerId": store.getState().playerId,
                         "cardId": store.getState().cardToBeSummoned,
                         "targetId": store.getState().summoningTarget
@@ -32,7 +32,7 @@ class SummonCardCall {
                 }).catch((reason: string) => {
 
                     store.dispatch(
-                        DrawSummoningCardDeclinedActionFactory.getInstance(
+                        SummoningDeclinedActionFactory.getInstance(
                             reason
                         )
                     );

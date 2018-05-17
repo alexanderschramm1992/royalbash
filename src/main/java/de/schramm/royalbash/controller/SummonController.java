@@ -6,6 +6,7 @@ import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.handler.SummonHandler;
 import de.schramm.royalbash.model.Game;
 import de.schramm.royalbash.persistence.GameManager;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+@Log4j2
 @RestController
 public class SummonController {
 
@@ -39,6 +41,7 @@ public class SummonController {
             @RequestBody SummonRequest requestParams
     ) {
 
+        log.info("Summon endpoint called");
         try {
 
             Game game = gameManager.findGame(requestParams.getGameId());

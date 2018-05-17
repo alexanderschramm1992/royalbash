@@ -16,7 +16,6 @@ export class CardMini extends React.Component<CardProps, {}> {
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleMouseOut = this.handleMouseOut.bind(this);
         this.handleDragStart = this.handleDragStart.bind(this);
-        this.handleDragEnd = this.handleDragEnd.bind(this);
     }
 
     handleMouseOver(): void {
@@ -35,18 +34,12 @@ export class CardMini extends React.Component<CardProps, {}> {
         store.dispatch(CardDraggedActionFactory.getInstance(this.props.summoningCard.id));
     }
 
-    handleDragEnd(event: any): void {
-
-        console.dir(event);
-    }
-
     render(): any {
 
         return (
             <div
                 draggable={true}
                 onDragStart={this.handleDragStart}
-                onDragEnd={this.handleDragEnd}
                 className="card-mini border-large"
                 onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}
