@@ -13,8 +13,8 @@ public class Player {
 
     private final UUID id;
     private final UUID accountId;
-    private final Deck summoningDeck;
-    private final Deck resourcesDeck;
+    private final SummoningDeck summoningDeck;
+    private final ResourcesDeck resourcesDeck;
     private final Hand hand;
     private final Graveyard graveyard;
     private final Field field;

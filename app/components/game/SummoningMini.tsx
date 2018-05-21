@@ -54,17 +54,17 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
                     <div className="cost-wrapper border-small">
                         <div className="cost cost-rations border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoning.summoningCard.costRations? this.props.summoning.summoningCard.costRations : 99}
+                                {this.props.summoning.summoningCard.costRations}
                             </div>
                         </div>
                         <div className="cost cost-material border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoning.summoningCard.costMaterial? this.props.summoning.summoningCard.costMaterial : 99}
+                                {this.props.summoning.summoningCard.costMaterial}
                             </div>
                         </div>
                         <div className="cost cost-blessing border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoning.summoningCard.costBlessing? this.props.summoning.summoningCard.costBlessing : 99}
+                                {this.props.summoning.summoningCard.costBlessing}
                             </div>
                         </div>
                     </div>

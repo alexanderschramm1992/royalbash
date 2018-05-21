@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Singular;
 import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @ToString
-public class Deck {
+public class SummoningDeck {
 
     private final UUID id;
 

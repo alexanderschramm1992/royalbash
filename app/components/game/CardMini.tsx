@@ -56,17 +56,17 @@ export class CardMini extends React.Component<CardProps, {}> {
                     <div className="cost-wrapper border-small">
                         <div className="cost cost-rations border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoningCard.costRations? this.props.summoningCard.costRations : 99}
+                                {this.props.summoningCard.costRations}
                             </div>
                         </div>
                         <div className="cost cost-material border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoningCard.costMaterial? this.props.summoningCard.costMaterial : 99}
+                                {this.props.summoningCard.costMaterial}
                             </div>
                         </div>
                         <div className="cost cost-blessing border-small">
                             <div className="font-size-extra-large center-text">
-                                {this.props.summoningCard.costBlessing? this.props.summoningCard.costBlessing : 99}
+                                {this.props.summoningCard.costBlessing}
                             </div>
                         </div>
                     </div>

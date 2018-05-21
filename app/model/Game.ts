@@ -24,15 +24,21 @@ export interface Player {
 
     readonly id: string,
     readonly accountId: string,
-    readonly summoningDeck: Deck,
-    readonly resourcesDeck: Deck,
+    readonly summoningDeck: SummoningDeck,
+    readonly resourcesDeck: ResourcesDeck,
     readonly graveyard: Graveyard,
     readonly hand: Hand,
     readonly health: number,
     readonly field: Field
 }
 
-export interface Deck {
+export interface SummoningDeck {
+
+    readonly id: string,
+    readonly cards: Array<SummoningCard>
+}
+
+export interface ResourcesDeck {
 
     readonly id: string,
     readonly cards: Array<SummoningCard>
