@@ -19,7 +19,10 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
 
     handleMouseOver(): void {
 
-        store.dispatch(MouseOnSummoningActionFactory.getInstance(this.props.summoning.id));
+        let summoningId = this.props.summoning.id;
+        if (summoningId) {
+            store.dispatch(MouseOnSummoningActionFactory.getInstance(summoningId));
+        }
     }
 
     handleMouseOut(): void {
@@ -29,9 +32,6 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
 
     handleDrag(event: any): void {
 
-        //event.dataTransfer.setData("boardId", this.props.cardModel);
-        //event.dataTransfer.setData("playerInstanceId", "test123");
-        //event.dataTransfer.setData("cardId", this.props.cardModel.id);
         console.dir(event);
     }
 
@@ -70,7 +70,12 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img className="image" src={this.props.summoning.summoningCard.image} alt={this.props.summoning.summoningCard.name}/>
+                    <img 
+                        className="image" 
+                        draggable={false}
+                        src={this.props.summoning.summoningCard.image} 
+                        alt={this.props.summoning.summoningCard.name}
+                    />
                 </div>
                 <div className="foot-wrapper">
                     <div className="stats-wrapper border-small">

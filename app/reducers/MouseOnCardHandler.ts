@@ -1,5 +1,5 @@
 import {AnyAction, Reducer} from "redux";
-import {StateModel} from "../Store";
+import {StateModel, store} from "../Store";
 import {MOUSE_OFF_CARD, MOUSE_ON_CARD} from "../actions/ActionTypes";
 import MouseOnCardAction from "../actions/MouseOnCardAction";
 
@@ -9,14 +9,15 @@ const handleMouseOnCard: Reducer<StateModel, AnyAction> = (state, action): State
         case MOUSE_ON_CARD:
 
             let mouseOnCardAction = action as MouseOnCardAction;
-            console.log("Mouse on summoningCard " + mouseOnCardAction.cardId);
-            return {
-                ...state,
-                cardOnPreview: mouseOnCardAction.cardId
-            };
+            if (mouseOnCardAction.cardId && mouseOnCardAction.cardId != state.cardOnPreview) {
+                console.log("Mouse on summoningCard " + mouseOnCardAction.cardId);
+                return {
+                    ...state,
+                    cardOnPreview: mouseOnCardAction.cardId
+                };
+            }
         case MOUSE_OFF_CARD:
 
-            console.log("Mouse off summoningCard");
             return {
                 ...state,
                 cardOnPreview: null

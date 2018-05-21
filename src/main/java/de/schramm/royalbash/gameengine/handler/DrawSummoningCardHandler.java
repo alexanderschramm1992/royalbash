@@ -26,10 +26,7 @@ public class DrawSummoningCardHandler {
     ) throws GameEngineException {
 
         playerCanDrawAnotherCardChecker.checkIfPlayerInstanceCanDrawAnotherCard(player);
-
-        SummoningCard summoningCard = player.getSummoningDeck().drawCard();
-        player.getHand().addCard(summoningCard);
-
+        player.drawCard();
         return game;
     }
 }

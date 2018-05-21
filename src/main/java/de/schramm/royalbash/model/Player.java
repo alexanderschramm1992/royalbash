@@ -31,6 +31,11 @@ public class Player {
         field.bury(summoning);
     }
 
+    public void drawCard() {
+
+        hand.addCard(summoningDeck.drawCard());
+    }
+
     public Target getTarget(UUID targetId) {
 
         return field.getTarget(targetId);

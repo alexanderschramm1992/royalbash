@@ -20,7 +20,10 @@ export class CardMini extends React.Component<CardProps, {}> {
 
     handleMouseOver(): void {
 
-        store.dispatch(MouseOnCardActionFactory.getInstance(this.props.summoningCard.id));
+        let summoningCardId = this.props.summoningCard.id;
+        if(summoningCardId) {
+            store.dispatch(MouseOnCardActionFactory.getInstance(summoningCardId));
+        }
     }
 
     handleMouseOut(): void {
@@ -69,7 +72,12 @@ export class CardMini extends React.Component<CardProps, {}> {
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img className="image" src={this.props.summoningCard.image} alt={this.props.summoningCard.name}/>
+                    <img 
+                        className="image" 
+                        draggable={false}
+                        src={this.props.summoningCard.image} 
+                        alt={this.props.summoningCard.name}
+                    />
                 </div>
                 <div className="foot-wrapper">
                     <div className="stats-wrapper border-small">

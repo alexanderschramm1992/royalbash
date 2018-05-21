@@ -46,7 +46,7 @@ public class DrawSummoningCardController {
                     game,
                     game.findPlayer(requestParams.getPlayerId())
             );
-
+            gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponse.fromGame(game));
         } catch (GameEngineException e) {
 

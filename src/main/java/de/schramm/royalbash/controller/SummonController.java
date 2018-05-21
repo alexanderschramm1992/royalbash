@@ -51,7 +51,7 @@ public class SummonController {
                     game.findHandCard(requestParams.getCardId()),
                     game.findTarget(requestParams.getTargetId())
             );
-
+            gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponse.fromGame(game));
         } catch (GameEngineException e) {
 

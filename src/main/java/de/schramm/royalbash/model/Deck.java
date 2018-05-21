@@ -15,18 +15,10 @@ import java.util.UUID;
 @ToString
 public class Deck {
 
-    private UUID id;
+    private final UUID id;
 
     @Singular("card")
     private List<SummoningCard> summoningCards;
-
-    public static Deck fromBlueprint(Blueprint blueprint, UUID id) {
-
-        return Deck.builder()
-                .id(id)
-                .summoningCards(blueprint.getSummoningCards())
-                .build();
-    }
 
     public void shuffle() {
 
@@ -35,17 +27,6 @@ public class Deck {
 
     public SummoningCard drawCard() {
 
-        if(summoningCards.isEmpty()) {
-
-            return null;
-        } else {
-
-            List<SummoningCard> list = new ArrayList<>(summoningCards);
-            SummoningCard summoningCard = list.remove(0);
-
-            summoningCards = list;
-
-            return summoningCard;
-        }
+        return summoningCards.isEmpty() ? null : summoningCards.remove(0);
     }
 }
