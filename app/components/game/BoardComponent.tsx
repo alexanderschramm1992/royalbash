@@ -5,20 +5,23 @@ import "./BoardComponent.css";
 
 import Slider from "../menu/Slider";
 import DetailView from "./DetailView";
-import DeckComponent, {DeckComponentType} from "./DeckComponent";
+import SummoningDeckComponent from "./SummoningDeckComponent";
 import HandComponent from "./HandComponent";
 import GraveyardComponent from "./GraveyardComponent";
 import DrawSummoningCardCall from "../../rest/DrawSummoningCardCall";
+import DrawResourcesCardCall from "../../rest/DrawResourcesCardCall";
 import store from "../../Store";
 import {LoadGameIssuedActionFactory} from "../../actions/LoadGameIssuedAction";
 import LoadGameCall from "../../rest/LoadGameCall";
 import FieldComponent from "./FieldComponent";
 import SummonCardCall from "../../rest/SummonCardCall";
+import ResourcesDeckComponent from "./ResourcesDeckComponent";
 
 interface BoardState {
 
     readonly scale: number;
-    readonly drawCardCall: DrawSummoningCardCall;
+    readonly drawSummoningCardCall: DrawSummoningCardCall;
+    readonly drawResourcesCardCall: DrawResourcesCardCall;
     readonly loadGameCall: LoadGameCall;
     readonly summonCardCall: SummonCardCall;
 }
@@ -30,7 +33,8 @@ export class BoardComponent extends React.Component<{}, BoardState> {
 
         this.state = {
             scale: 5,
-            drawCardCall: new DrawSummoningCardCall(),
+            drawSummoningCardCall: new DrawSummoningCardCall(),
+            drawResourcesCardCall: new DrawResourcesCardCall(),
             loadGameCall: new LoadGameCall(),
             summonCardCall: new SummonCardCall()
         };
@@ -87,13 +91,13 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                             </div>
                             <div className="stack-area-wrapper">
                                 <div className="summoning-summoningDeck-area">
-                                    <DeckComponent type={DeckComponentType.SUMMONING_DECK}/>
+                                    <SummoningDeckComponent/>
                                 </div>
                                 <div className="resources-summoningDeck-area">
-                                    <DeckComponent type={DeckComponentType.RESOURCES_DECK}/>
+                                    <ResourcesDeckComponent/>
                                 </div>
                                 <div className="graveyard-area">
-                                    <GraveyardComponent />
+                                    <GraveyardComponent/>
                                 </div>
                             </div>
                         </div>

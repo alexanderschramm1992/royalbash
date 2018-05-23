@@ -17,17 +17,17 @@ public class PlayerCanDrawAnotherCardChecker {
         this.maxHandCards = maxHandCards;
     }
 
-    public void checkIfPlayerInstanceCanDrawAnotherCard(
+    public void check(
             Player player
     ) throws GameRuleViolationException {
 
-        if (player.getHand().getSummoningCards().size() >= maxHandCards) {
+        if (player.getHand().getCards().size() >= maxHandCards) {
 
             throw new GameRuleViolationException(
                     String.format(
                             "Player %s cannot draw another card (%d hand cards)",
                             player.getId(),
-                            player.getHand().getSummoningCards().size()
+                            player.getHand().getCards().size()
                     )
             );
         }

@@ -1,31 +1,19 @@
 import * as React from "react";
 
 import "../common/common.css";
-import "./DeckComponent.css";
+import "./ResourcesDeckComponent.css";
 
 import store from "../../Store";
-import { DrawSummoningCardIssuedActionFactory } from "../../actions/DrawSummoningCardIssuedAction";
-
-
-export enum DeckComponentType {
-
-    SUMMONING_DECK,
-    RESOURCES_DECK
-}
-
-export interface DeckComponentProps {
-
-    readonly type: DeckComponentType;
-}
+import {DrawResourcesCardIssuedActionFactory} from "../../actions/DrawResourcesCardIssuedAction";
 
 interface DeckState {
 
     showSpinner: boolean;
 }
 
-export class DeckComponent extends React.Component<DeckComponentProps, DeckState> {
+export class ResourcesDeckComponent extends React.Component<{}, DeckState> {
 
-    constructor(props: DeckComponentProps) {
+    constructor(props: any) {
         super(props);
 
         this.state = {
@@ -35,7 +23,7 @@ export class DeckComponent extends React.Component<DeckComponentProps, DeckState
         store.subscribe((): void => {
 
             this.setState({
-                showSpinner: store.getState().drawSummoningCardIssued
+                showSpinner: store.getState().drawResourcesCardIssued
             });
         });
 
@@ -45,7 +33,7 @@ export class DeckComponent extends React.Component<DeckComponentProps, DeckState
     handleCardDraw(): void {
 
         store.dispatch(
-            DrawSummoningCardIssuedActionFactory.getInstance(
+            DrawResourcesCardIssuedActionFactory.getInstance(
                 store.getState().playerId
             )
         );
@@ -53,18 +41,17 @@ export class DeckComponent extends React.Component<DeckComponentProps, DeckState
 
     render(): any {
 
-        let imageClass = this.props.type == DeckComponentType.SUMMONING_DECK? "summoning-deck" : "resource-deck";
-
         let style: React.CSSProperties = {
             visibility: this.state.showSpinner? "visible" : "hidden"
         };
 
         return (
-            <div className="deck">
+            <div className="resources-deck">
                 <div
-                    className={"stack border-large border-radius " + imageClass}
+                    className="stack border-large border-radius"
                     onClick={this.handleCardDraw}
                 >
+                    <p className="font-size-large">Resources Deck</p>
                     <i className="spinner fa fa-cog fa-spin" style={style}/>
                 </div>
             </div>
@@ -72,4 +59,4 @@ export class DeckComponent extends React.Component<DeckComponentProps, DeckState
     }
 }
 
-export default DeckComponent;
+export default ResourcesDeckComponent;

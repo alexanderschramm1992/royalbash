@@ -1,13 +1,13 @@
-.deck {
+.resources-deck {
 
 }
 
-.deck .stack{
+.resources-deck .stack{
     height: 9em;
     width: 44em;
     background: lightgray;
 }
 
-.deck .stack .spinner{
+.resources-deck .stack .spinner{
     font-size: 15em;
 }

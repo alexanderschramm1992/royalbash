@@ -17,14 +17,14 @@ public class ResourcesDeck {
     private final UUID id;
 
     @Singular("resourcesCard")
-    private List<SummoningCard> resourcesCards;
+    private List<ResourcesCard> resourcesCards;
 
     public void shuffle() {
 
         Collections.shuffle(resourcesCards);
     }
 
-    public SummoningCard drawCard() {
+    public ResourcesCard drawCard() {
 
         return resourcesCards.isEmpty() ? null : resourcesCards.remove(0);
     }

@@ -34,6 +34,12 @@
     border-radius: 1em;
 }
 
+.font-border {
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+
 .center-text {
     display: flex;
     align-items: center;

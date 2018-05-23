@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DrawSummoningCardHandler {
+public class DrawResourcesCardHandler {
 
     private final PlayerCanDrawAnotherCardChecker playerCanDrawAnotherCardChecker;
 
     @Autowired
-    public DrawSummoningCardHandler(
+    public DrawResourcesCardHandler(
             PlayerCanDrawAnotherCardChecker playerCanDrawAnotherCardChecker
     ) {
         this.playerCanDrawAnotherCardChecker = playerCanDrawAnotherCardChecker;
@@ -25,7 +25,7 @@ public class DrawSummoningCardHandler {
     ) throws GameEngineException {
 
         playerCanDrawAnotherCardChecker.check(player);
-        player.drawSummoningCard();
+        player.drawResourcesCard();
         return game;
     }
 }

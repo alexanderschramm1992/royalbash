@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class SummoningCard implements Card{
+public class ResourcesCard implements Card{
 
     private UUID id;
     private String name;
@@ -19,22 +19,9 @@ public class SummoningCard implements Card{
     private int costRations;
     private int costMaterial;
     private int costBlessing;
-    private int strength;
-    private int health;
-
-    public Summoning toInstance(UUID id) {
-
-        return Summoning.builder()
-                .id(id)
-                .summoningCard(this)
-                .currentCost(costRations)
-                .currentStrength(strength)
-                .currentHealth(health)
-                .build();
-    }
 
     @Override
     public String getCardType() {
-        return "SummoningCard";
+        return "ResourcesCard";
     }
 }

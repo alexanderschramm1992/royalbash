@@ -41,21 +41,20 @@ export interface SummoningDeck {
 export interface ResourcesDeck {
 
     readonly id: string,
-    readonly cards: Array<SummoningCard>
+    readonly cards: Array<ResourcesCard>
 }
 
 export interface Graveyard {
 
-    readonly cards: Array<SummoningCard>
+    readonly cards: Array<Card>
 }
 
 export interface Hand {
 
-    readonly summoningCards: Array<SummoningCard>
+    readonly cards: Array<Card>
 }
 
-export interface SummoningCard {
-
+export interface Card {
     readonly id: string,
     readonly name: string,
     readonly image: string,
@@ -66,8 +65,17 @@ export interface SummoningCard {
     readonly costRations: number,
     readonly costMaterial: number,
     readonly costBlessing: number,
+    readonly cardType: string
+}
+
+export interface SummoningCard extends Card {
+
     readonly strength: number,
-    readonly health: number
+    readonly health: number,
+}
+
+export interface ResourcesCard extends Card {
+
 }
 
 export interface Field {

@@ -1,13 +1,12 @@
 .card-mini {
-    --card-background: linear-gradient(to bottom, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);;
-    --cost-background: antiquewhite;
-    --cost-rations-background: linear-gradient(to bottom, #f8ffe8 0%,#e3f5ab 33%,#b7df2d 100%);
-    --cost-material-background: linear-gradient(to bottom, #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
-    --cost-blessing-background: linear-gradient(to bottom, #ebe9f9 0%,#d8d0ef 50%,#cec7ec 51%,#c1bfea 100%);
-    --text-background: antiquewhite;
-    --stats-background: linear-gradient(to bottom, #cedce7 0%,#596a72 100%);
-    --stats-strength-background: linear-gradient(to bottom, #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%);
-    --stats-health-background: linear-gradient(to bottom, #c5deea 0%,#8abbd7 31%,#066dab 100%);
+    --card-background: linear-gradient(to bottom, rgba(240,183,161,1) 0%,rgba(140,51,16,1) 50%,rgba(117,34,1,1) 51%,rgba(191,110,78,1) 100%); ;
+    --cost-background: linear-gradient(to bottom, rgba(0,0,0,0.50) 80%,rgba(0,0,0,0) 100%);
+    --cost-rations-background: radial-gradient(ellipse at center, rgba(57,130,53,1) 0%,rgba(138,182,107,0.44) 56%,rgba(201,222,150,0) 80%);
+    --cost-material-background: radial-gradient(ellipse at center, rgba(210,210,210,1) 0%,rgba(190,190,190,0.44) 56%,rgba(201,222,150,0) 80%);
+    --cost-blessing-background: radial-gradient(ellipse at center, rgba(235,233,249,1) 0%,rgba(193,191,234,0.44) 56%,rgba(201,222,150,0) 80%);
+    --stats-background: linear-gradient(to left, rgba(0,0,0,0.50) 80%,rgba(0,0,0,0) 100%);
+    --stats-strength-background: radial-gradient(ellipse at center, rgba(169,3,41,1) 0%,rgba(133,4,24,0.44) 56%,rgba(201,222,150,0) 80%);
+    --stats-health-background: radial-gradient(ellipse at center, rgba(109,136,183,1) 0%,rgba(109,136,183,0.44) 56%,rgba(201,222,150,0) 80%);
 }
 
 .card-mini {
@@ -34,20 +33,17 @@
  }
 
  .card-mini .head-wrapper .cost-wrapper {
-    border-bottom-left-radius: 1em;
-    position: absolute;
-    top: -0.2em;
-    right: -0.2em;
-    padding: 0.5em 0.5em 0 0.5em;
-    background:  var(--cost-background);
+     position: absolute;
+     top: 0;
+     right: 0;
+     padding: 0.5em 0.7em 0 1em;
+     background: var(--cost-background);
 }
 
 .card-mini .head-wrapper .cost-wrapper .cost {
     height: 3.6em;
-    width: 3.6em;
-    border-radius: 1em;
+    width: 4em;
     margin-bottom: 0.5em;
-    background: antiquewhite;
 }
 
 .card-mini .head-wrapper .cost-wrapper .cost-rations {
@@ -64,10 +60,10 @@
 
 .card-mini .image-wrapper {
     height: 16.1em;
-    width: 23.6em;
-    margin: 0 0.5em 0.5em 0.5em;
+    width: 24.5em;
+    margin-left: 0.5em;
     border-bottom-left-radius: 1em;
-    border-top-right-radius: 1em;
+    overflow: hidden;
 }
 
 .card-mini .image-wrapper .image {
@@ -76,33 +72,30 @@
 }
 
 .card-mini .foot-wrapper {
-    height: 3em;
+    height: 3.5em;
     width: 100%;
     position: relative;
 }
 
 .card-mini .foot-wrapper .stats-wrapper {
-    border-top-left-radius: 1em;
     position: absolute;
-    bottom: -0.2em;
-    right: -0.2em;
-    padding: 0.5em;
+    bottom: -0.5em;
+    right: 0em;
+    padding: 0.5em 0.5em 0.7em 1.5em;
     background: var(--stats-background);
 }
 
 .card-mini .foot-wrapper .strength {
-    height: 2.6em;
-    width: 2.6em;
-    border-radius: 1em;
+    height: 3.6em;
+    width: 4em;
     background: var(--stats-strength-background);
     display: inline-block;
     margin-right: 0.5em;
 }
 
 .card-mini .foot-wrapper .health {
-    height: 2.6em;
-    width: 2.6em;
-    border-radius: 1em;
+    height: 3.6em;
+    width: 4em;
     background: var(--stats-health-background);
     display: inline-block;
 }

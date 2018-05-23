@@ -11,8 +11,8 @@ public class LoggingConfiguration {
     public CommonsRequestLoggingFilter requestLoggingFilter() {
         CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
         //loggingFilter.setIncludeClientInfo(true);
-        loggingFilter.setIncludeQueryString(true);
-        loggingFilter.setIncludePayload(true);
+        //loggingFilter.setIncludeQueryString(true);
+        //loggingFilter.setIncludePayload(true);
         return loggingFilter;
     }
 }

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Singular;
 import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -14,23 +13,15 @@ import java.util.List;
 public class Hand {
 
     @Singular("card")
-    private List<SummoningCard> summoningCards;
+    private List<Card> cards;
 
-    public void addCard(SummoningCard summoningCard) {
+    public void addCard(Card card) {
 
-        List<SummoningCard> list = new ArrayList<>(summoningCards);
-
-        list.add(summoningCard);
-
-        summoningCards = list;
+        cards.add(card);
     }
 
-    public void removeCard(SummoningCard summoningCard) {
+    public void removeCard(Card card) {
 
-        List<SummoningCard> list = new ArrayList<>(summoningCards);
-
-        list.remove(summoningCard);
-
-        summoningCards = list;
+        cards.remove(card);
     }
 }
