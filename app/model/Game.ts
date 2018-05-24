@@ -24,12 +24,20 @@ export interface Player {
 
     readonly id: string,
     readonly accountId: string,
+    readonly resourcePool: ResourcePool,
     readonly summoningDeck: SummoningDeck,
     readonly resourcesDeck: ResourcesDeck,
     readonly graveyard: Graveyard,
     readonly hand: Hand,
     readonly health: number,
     readonly field: Field
+}
+
+export interface ResourcePool {
+
+    readonly rations: number,
+    readonly material: number,
+    readonly blessing: number,
 }
 
 export interface SummoningDeck {

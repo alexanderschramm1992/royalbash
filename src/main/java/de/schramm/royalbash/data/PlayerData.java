@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import static de.schramm.royalbash.data.AccountData.ACCOUNT_1;
 import static de.schramm.royalbash.data.AccountData.ACCOUNT_2;
+import static de.schramm.royalbash.data.ResourcePoolData.RESOURCE_POOL_1;
+import static de.schramm.royalbash.data.ResourcePoolData.RESOURCE_POOL_2;
 import static de.schramm.royalbash.data.SummoningDeckData.SUMMONING_DECK_1;
 import static de.schramm.royalbash.data.SummoningDeckData.SUMMONING_DECK_2;
 import static de.schramm.royalbash.data.FieldData.FIELD_1;
@@ -21,6 +23,7 @@ public class PlayerData {
             .id(UUID.fromString("8dbc6953-e25e-49f0-a298-7a0ea721de6c"))
             .health(20)
             .accountId(ACCOUNT_1.getId())
+            .resourcePool(RESOURCE_POOL_1)
             .summoningDeck(SUMMONING_DECK_1)
             .resourcesDeck(RESOURCES_DECK_1)
             .hand(HAND_1)
@@ -31,6 +34,7 @@ public class PlayerData {
             .id(UUID.fromString("736cb270-c73c-4257-b49f-d71d9b4cb59b"))
             .health(20)
             .accountId(ACCOUNT_2.getId())
+            .resourcePool(RESOURCE_POOL_2)
             .summoningDeck(SUMMONING_DECK_2)
             .resourcesDeck(RESOURCES_DECK_2)
             .hand(HAND_2)

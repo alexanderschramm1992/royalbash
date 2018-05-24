@@ -16,6 +16,7 @@ import LoadGameCall from "../../rest/LoadGameCall";
 import FieldComponent from "./FieldComponent";
 import SummonCardCall from "../../rest/SummonCardCall";
 import ResourcesDeckComponent from "./ResourcesDeckComponent";
+import {ResourcePoolComponent} from "./ResourcePoolComponent";
 
 interface BoardState {
 
@@ -100,6 +101,9 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                                     <GraveyardComponent/>
                                 </div>
                             </div>
+                        </div>
+                        <div className="avatar-area">
+                            <ResourcePoolComponent/>
                         </div>
                     </div>
                     <div className="east border-large border-radius">
