@@ -1,5 +1,6 @@
 package de.schramm.royalbash.model;
 
+import de.schramm.royalbash.model.resourcescard.ResourcesCard;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;

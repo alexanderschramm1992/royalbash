@@ -1,5 +1,6 @@
 package de.schramm.royalbash.model;
 
+import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
@@ -20,8 +21,19 @@ public class Hand {
         cards.add(card);
     }
 
-    public void removeCard(Card card) {
+    public void removeCard(Card card) throws GameRuleViolationException {
 
-        cards.remove(card);
+        if (cards.contains(card)) {
+
+            cards.remove(card);
+        } else {
+
+            throw new GameRuleViolationException(
+                    String.format(
+                            "Card %s not in hand",
+                            card.getId()
+                    )
+            );
+        }
     }
 }

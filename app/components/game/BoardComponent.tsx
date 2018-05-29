@@ -90,6 +90,9 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                             <div className="hand-area">
                                 <HandComponent/>
                             </div>
+                            <div className="avatar-area border-large border-radius">
+                                <ResourcePoolComponent/>
+                            </div>
                             <div className="stack-area-wrapper">
                                 <div className="summoning-summoningDeck-area">
                                     <SummoningDeckComponent/>
@@ -101,9 +104,6 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                                     <GraveyardComponent/>
                                 </div>
                             </div>
-                        </div>
-                        <div className="avatar-area">
-                            <ResourcePoolComponent/>
                         </div>
                     </div>
                     <div className="east border-large border-radius">

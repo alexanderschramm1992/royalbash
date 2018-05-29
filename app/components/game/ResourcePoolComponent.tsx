@@ -10,6 +10,12 @@ export class ResourcePoolComponent extends React.Component<{}, ResourcePool> {
     constructor(props: any) {
         super(props);
 
+        this.state = {
+            rations: 0,
+            material: 0,
+            blessing: 0
+        };
+
         store.subscribe((): void => {
 
             let player = getPlayer();
@@ -28,19 +34,19 @@ export class ResourcePoolComponent extends React.Component<{}, ResourcePool> {
             <div className="resource-pool">
                 <div className="resource-display resource-display-rations">
                     <div className="resource-meter resource-meter-rations"/>
-                    <div className="resource-counter resource-counter-rations">
+                    <div className="resource-counter resource-counter-rations font-size-large">
                         {this.state.rations}
                     </div>
                 </div>
                 <div className="resource-display resource-display-material">
                     <div className="resource-meter resource-meter-material"/>
-                    <div className="resource-counter resource-counter-material">
+                    <div className="resource-counter resource-counter-material font-size-large">
                         {this.state.material}
                     </div>
                 </div>
                 <div className="resource-display resource-display-blessing">
                     <div className="resource-meter resource-meter-blessing"/>
-                    <div className="resource-counter resource-counter-blessing">
+                    <div className="resource-counter resource-counter-blessing font-size-large">
                         {this.state.blessing}
                     </div>
                 </div>

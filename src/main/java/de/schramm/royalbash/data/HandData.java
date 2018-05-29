@@ -1,19 +1,18 @@
 package de.schramm.royalbash.data;
 
 import de.schramm.royalbash.model.Hand;
-
-import static de.schramm.royalbash.data.SummoningCardData.EAGER_RECRUIT;
-import static de.schramm.royalbash.data.SummoningCardData.VETERAN_KNIGHT;
-import static de.schramm.royalbash.data.SummoningCardData.YOUTHFUL_KNIGHT;
+import de.schramm.royalbash.model.summoningcard.EagerCadet;
+import de.schramm.royalbash.model.summoningcard.VeteranKnight;
+import de.schramm.royalbash.model.summoningcard.YouthfulKnight;
 
 public class HandData {
 
     public static final Hand HAND_1 = Hand.builder()
-            .card(YOUTHFUL_KNIGHT)
-            .card(VETERAN_KNIGHT)
+            .card(new YouthfulKnight())
+            .card(new VeteranKnight())
             .build();
 
     public static final Hand HAND_2 = Hand.builder()
-            .card(EAGER_RECRUIT)
+            .card(new EagerCadet())
             .build();
 }

@@ -62,6 +62,11 @@
     display: inline-block;
 }
 
+.board .center .avatar-area {
+    margin-left: 1em;
+    display: inline-block;
+}
+
 .board .center .play-area {
     padding: 1em;
     margin-bottom: 1em;

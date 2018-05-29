@@ -1,0 +1,17 @@
+.resource-pool {
+    padding: 1em;
+    display: flex;
+}
+
+.resource-pool .resource-display {
+    display: inline-block;
+}
+
+.resource-pool .resource-display-rations {
+    margin-right: 1em;
+}
+
+.resource-pool .resource-display-material {
+    margin-right: 1em;
+}
+

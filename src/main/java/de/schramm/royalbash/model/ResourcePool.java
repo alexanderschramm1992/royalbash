@@ -10,4 +10,9 @@ public class ResourcePool {
     private int rations;
     private int material;
     private int blessing;
+
+    public void addRations(int rations) {
+
+        this.rations += rations;
+    }
 }

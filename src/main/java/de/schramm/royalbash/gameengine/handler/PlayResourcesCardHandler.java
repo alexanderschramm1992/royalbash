@@ -4,19 +4,18 @@ import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.rule.PlayerHasCardInHandChecker;
 import de.schramm.royalbash.gameengine.rule.PlayerOnBoardChecker;
 import de.schramm.royalbash.model.*;
+import de.schramm.royalbash.model.resourcescard.ResourcesCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
-public class SummonHandler {
+public class PlayResourcesCardHandler {
 
     private final PlayerOnBoardChecker playerOnBoardChecker;
     private final PlayerHasCardInHandChecker playerHasCardInHandChecker;
 
     @Autowired
-    public SummonHandler(
+    public PlayResourcesCardHandler(
             PlayerOnBoardChecker playerOnBoardChecker,
             PlayerHasCardInHandChecker playerHasCardInHandChecker
     ) {
@@ -24,11 +23,10 @@ public class SummonHandler {
         this.playerHasCardInHandChecker = playerHasCardInHandChecker;
     }
 
-    public Game summon(
+    public Game play(
             Game game,
             Player player,
-            SummoningCard summoningCard,
-            Target target
+            ResourcesCard resourcesCard
     ) throws GameEngineException {
 
         playerOnBoardChecker.check(
@@ -38,12 +36,11 @@ public class SummonHandler {
 
         playerHasCardInHandChecker.check(
                 player,
-                summoningCard
+                resourcesCard
         );
 
-        player.getHand().removeCard(summoningCard);
-        Summoning summoning = Summoning.fromCard(summoningCard, UUID.randomUUID());
-        player.summon(summoning, target);
+        player.getHand().removeCard(resourcesCard);
+        resourcesCard.apply(player.getResourcePool());
 
         return game;
     }
