@@ -4,7 +4,7 @@ public abstract class GameEngineException extends Exception {
 
     static final long serialVersionUID = 1L;
 
-    public GameEngineException(String message) {
+    GameEngineException(String message) {
 
         super(message);
     }

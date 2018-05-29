@@ -3,8 +3,7 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.requestmodel.SummonRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.handler.PlaySummoningCardHandler;
-import de.schramm.royalbash.model.Game;
+import de.schramm.royalbash.gameengine.model.Game;
 import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
 @RestController
-public class PlaySummoningCardController {
+class PlaySummoningCardController {
 
     private final GameManager gameManager;
-    private final PlaySummoningCardHandler playSummoningCardHandler;
 
     @Autowired
-    public PlaySummoningCardController(
-            GameManager gameManager,
-            PlaySummoningCardHandler playSummoningCardHandler
+    private PlaySummoningCardController(
+            GameManager gameManager
     ) {
         this.gameManager = gameManager;
-        this.playSummoningCardHandler = playSummoningCardHandler;
     }
 
     @RequestMapping(
@@ -44,9 +40,7 @@ public class PlaySummoningCardController {
         try {
 
             Game game = gameManager.findGame(requestParams.getGameId());
-            game = playSummoningCardHandler.summon(
-                    game,
-                    game.findPlayer(requestParams.getPlayerId()),
+            game.findPlayer(requestParams.getPlayerId()).playSummoningCard(
                     game.findHandSummoningCard(requestParams.getCardId()),
                     game.findTarget(requestParams.getTargetId())
             );

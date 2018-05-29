@@ -1,10 +1,10 @@
 package de.schramm.royalbash.gameengine.exception;
 
-public class GameRuleViolationException extends GameEngineException {
+public class GameBrokenException extends GameEngineException {
 
     static final long serialVersionUID = 1L;
 
-    public GameRuleViolationException(String message) {
+    public GameBrokenException(String message) {
         super(message);
     }
 }

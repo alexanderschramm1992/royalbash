@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.UUID;
 
 @SpringBootConfiguration
-public class JacksonConfiguration {
+class JacksonConfiguration {
 
     private UUIDDeserializer uuidDeserializer = new UUIDDeserializer();
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class ConverterUUIDToString implements Converter<UUID, String> {
+class ConverterUUIDToString implements Converter<UUID, String> {
 
     @Override
     public String convert(UUID uuid) {

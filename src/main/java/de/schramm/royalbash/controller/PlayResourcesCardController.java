@@ -3,8 +3,7 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.requestmodel.PlayResourcesCardRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.handler.PlayResourcesCardHandler;
-import de.schramm.royalbash.model.Game;
+import de.schramm.royalbash.gameengine.model.Game;
 import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
@@ -18,18 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
 @RestController
-public class PlayResourcesCardController {
+class PlayResourcesCardController {
 
     private final GameManager gameManager;
-    private final PlayResourcesCardHandler playResourcesCardHandler;
 
     @Autowired
-    public PlayResourcesCardController(
-            GameManager gameManager,
-            PlayResourcesCardHandler playResourcesCardHandler
+    private PlayResourcesCardController(
+            GameManager gameManager
     ) {
         this.gameManager = gameManager;
-        this.playResourcesCardHandler = playResourcesCardHandler;
     }
 
     @RequestMapping(
@@ -38,16 +34,14 @@ public class PlayResourcesCardController {
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<StateResponse> summonInstance(
+    public ResponseEntity<StateResponse> playResourcesCard(
             @RequestBody PlayResourcesCardRequest requestParams
     ) {
 
         try {
 
             Game game = gameManager.findGame(requestParams.getGameId());
-            game = playResourcesCardHandler.play(
-                    game,
-                    game.findPlayer(requestParams.getPlayerId()),
+            game.findPlayer(requestParams.getPlayerId()).playResourcesCard(
                     game.findHandResourcesCard(requestParams.getCardId())
             );
             gameManager.saveGame(game);

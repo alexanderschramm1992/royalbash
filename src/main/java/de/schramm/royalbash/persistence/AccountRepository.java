@@ -1,6 +1,6 @@
 package de.schramm.royalbash.persistence;
 
-import de.schramm.royalbash.model.Account;
+import de.schramm.royalbash.gameengine.model.Account;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.UUID;

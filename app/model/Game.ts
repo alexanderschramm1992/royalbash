@@ -17,7 +17,9 @@ export interface Board {
 export interface Turn {
 
     readonly counter: number,
-    readonly playerId: string
+    readonly currentTurnPlayerId: string,
+    readonly playerBlueId: string,
+    readonly playerRedId: string
 }
 
 export interface Player {

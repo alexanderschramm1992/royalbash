@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 
 @Log4j2
 @Configuration
-public class DatabaseInitializer {
+class DatabaseInitializer {
 
     private final GameRepository gameRepository;
 

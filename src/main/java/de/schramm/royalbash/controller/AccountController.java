@@ -2,7 +2,7 @@ package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.AccountRequest;
 import de.schramm.royalbash.controller.responsemodel.AccountExt;
-import de.schramm.royalbash.model.Account;
+import de.schramm.royalbash.gameengine.model.Account;
 import de.schramm.royalbash.persistence.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

@@ -3,8 +3,7 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.requestmodel.DrawRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.handler.DrawResourcesCardHandler;
-import de.schramm.royalbash.model.Game;
+import de.schramm.royalbash.gameengine.model.Game;
 import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Log4j2
 @RestController
 @RequestMapping("gameloop/drawResourcesCard")
-public class DrawResourcesCardController {
+class DrawResourcesCardController {
 
     private final GameManager gameManager;
-    private final DrawResourcesCardHandler drawResourcesCardHandler;
 
     @Autowired
-    public DrawResourcesCardController(
-            GameManager gameManager,
-            DrawResourcesCardHandler drawResourcesCardHandler
+    private DrawResourcesCardController(
+            GameManager gameManager
     ) {
         this.gameManager = gameManager;
-        this.drawResourcesCardHandler = drawResourcesCardHandler;
     }
 
     @PostMapping(
@@ -42,10 +38,7 @@ public class DrawResourcesCardController {
         try {
 
             Game game = gameManager.findGame(requestParams.getGameId());
-            game = drawResourcesCardHandler.draw(
-                    game,
-                    game.findPlayer(requestParams.getPlayerId())
-            );
+            game.findPlayer(requestParams.getPlayerId()).drawResourcesCard();
             gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponse.fromGame(game));
         } catch (GameEngineException e) {

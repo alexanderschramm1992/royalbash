@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 
 @Log4j2
 @Configuration
-public class DatabaseConfiguration extends AbstractMongoConfiguration {
+class DatabaseConfiguration extends AbstractMongoConfiguration {
 
     @Override
     protected String getDatabaseName() {
