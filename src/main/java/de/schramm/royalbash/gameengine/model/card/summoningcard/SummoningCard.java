@@ -27,7 +27,7 @@ public abstract class SummoningCard implements Card {
     private final int health;
 
     @JsonIgnore
-    private final PlayEffect PlayEffect;
+    private final PlayEffect playEffect;
 
     public Summoning toInstance(UUID id) {
 

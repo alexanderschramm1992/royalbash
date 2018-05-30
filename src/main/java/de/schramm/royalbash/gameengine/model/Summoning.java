@@ -1,5 +1,7 @@
 package de.schramm.royalbash.gameengine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.schramm.royalbash.gameengine.model.card.effect.AttackSummoningEffect;
 import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +19,10 @@ public class Summoning {
     private int currentHealth;
     private int currentStrength;
 
-    public static Summoning fromCard(SummoningCard summoningCard, UUID id) {
+    @JsonIgnore
+    private final AttackSummoningEffect attackSummoningEffect;
+
+    static Summoning fromCard(SummoningCard summoningCard, UUID id) {
 
         return Summoning.builder()
                 .id(id)
@@ -29,12 +34,14 @@ public class Summoning {
     }
 
     public void setCurrentHealth(int newHealth) {
-
         this.currentHealth = newHealth;
     }
 
     public void reduceCurrentHealth(int amount) {
+        currentHealth = currentHealth < amount ? 0 : currentHealth - amount;
+    }
 
-        this.currentHealth -= amount;
+    public boolean isDead() {
+        return currentHealth == 0;
     }
 }

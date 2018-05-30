@@ -1,6 +1,5 @@
 package de.schramm.royalbash.gameengine.model.card.resourcescard;
 
-import de.schramm.royalbash.gameengine.model.card.CardContext;
 import de.schramm.royalbash.gameengine.model.card.effect.GrantResources;
 
 import java.util.UUID;

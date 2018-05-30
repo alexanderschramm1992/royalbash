@@ -7,7 +7,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class CardContext {
+public class EffectContext {
 
     private Game game;
     private Player owner;

@@ -1,7 +1,7 @@
 package de.schramm.royalbash.gameengine.model;
 
 import de.schramm.royalbash.gameengine.exception.RuleViolationException;
-import de.schramm.royalbash.gameengine.model.card.CardContext;
+import de.schramm.royalbash.gameengine.model.card.EffectContext;
 import de.schramm.royalbash.gameengine.model.card.resourcescard.ResourcesCard;
 import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.Builder;
@@ -33,14 +33,14 @@ public class Player {
         field.summon(Summoning.fromCard(summoningCard, UUID.randomUUID()), target);
     }
 
-    public void playResourcesCard(ResourcesCard resourcesCard, CardContext context) throws RuleViolationException {
+    public void playResourcesCard(ResourcesCard resourcesCard, EffectContext context) throws RuleViolationException {
 
         resourcePool.payFor(resourcesCard);
         hand.removeCard(resourcesCard);
         resourcesCard.getPlayEffect().apply(context);
     }
 
-    public void bury(Summoning summoning) {
+    void bury(Summoning summoning) {
 
         field.bury(summoning);
     }

@@ -9,6 +9,7 @@ import lombok.val;
 import org.springframework.data.annotation.Id;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -103,14 +104,27 @@ public class Game {
                     .filter(target -> target.getId().equals(targetId))
                     .findFirst()
                     .orElseThrow(NullPointerException::new);
-        } catch (NullPointerException e) {
+        } catch(NullPointerException e) {
+            throw new DomainObjectDoesNotExistException(String.format("Target %s does not exist",targetId));
+        }
+    }
 
-            throw new DomainObjectDoesNotExistException(
-                    String.format(
-                            "Target %s does not exist",
-                            targetId
-                    )
-            );
+    public Summoning findSummoning(UUID summoningId) throws DomainObjectDoesNotExistException {
+
+        try {
+
+            val playerRedTargets = board.getPlayerRed().getField().getTargets();
+            val playerBlueTargets = board.getPlayerBlue().getField().getTargets();
+
+            return Stream.of(playerRedTargets, playerBlueTargets)
+                    .flatMap(Collection::stream)
+                    .map(Target::getSummoning)
+                    .filter(Objects::nonNull)
+                    .filter(summoning -> summoning.getId().equals(summoningId))
+                    .findFirst()
+                    .orElseThrow(NullPointerException::new);
+        } catch(NullPointerException e) {
+            throw new DomainObjectDoesNotExistException(String.format("Summoning %s does not exist", summoningId));
         }
     }
 }

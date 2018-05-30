@@ -1,7 +1,7 @@
 package de.schramm.royalbash.gameengine.model.card.effect;
 
 import de.schramm.royalbash.gameengine.exception.RuleViolationException;
-import de.schramm.royalbash.gameengine.model.card.CardContext;
+import de.schramm.royalbash.gameengine.model.card.EffectContext;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -15,7 +15,7 @@ public class GrantResources implements PlayEffect {
     private int blessing;
 
     @Override
-    public void apply(CardContext context) throws RuleViolationException {
+    public void apply(EffectContext context) throws RuleViolationException {
 
         context.getOwner().getResourcePool().alterRations(rations);
         context.getOwner().getResourcePool().alterMaterial(material);

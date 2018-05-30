@@ -14,21 +14,21 @@ public class Field {
     @Singular("target")
     private List<Target> targets;
 
-    public void summon(Summoning summoning, Target target) {
+    void summon(Summoning summoning, Target target) {
 
         targets.stream()
                 .filter(element -> element.equals(target))
                 .forEach(element -> element.summon(summoning));
     }
 
-    public void bury(Summoning summoning) {
+    void bury(Summoning summoning) {
 
         targets.stream()
                 .filter(target -> summoning.equals(target.getSummoning()))
                 .forEach(target -> target.bury(summoning));
     }
 
-    public Target getTarget(UUID targetId) {
+    Target getTarget(UUID targetId) {
 
         return targets.stream()
                 .filter(target -> target.getId().equals(targetId))
