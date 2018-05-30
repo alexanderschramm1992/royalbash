@@ -1,6 +1,6 @@
 package de.schramm.royalbash.gameengine.model;
 
-import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
+import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,9 +12,31 @@ public class ResourcePool {
     private int material;
     private int blessing;
 
-    public void addRations(int rations) {
+    public void alterRations(int rations) throws RuleViolationException {
 
-        this.rations += rations;
+        if(this.rations + rations >= 0) {
+            this.rations += rations;
+        } else {
+            throw new RuleViolationException(String.format("Cannot alter rations by %s", rations));
+        }
+    }
+
+    public void alterMaterial(int material) throws RuleViolationException {
+
+        if(this.material + material >= 0) {
+            this.material += material;
+        } else {
+            throw new RuleViolationException(String.format("Cannot alter material by %s", material));
+        }
+    }
+
+    public void alterBlessing(int blessing) throws RuleViolationException {
+
+        if(this.blessing + blessing >= 0) {
+            this.blessing += blessing;
+        } else {
+            throw new RuleViolationException(String.format("Cannot alter blessing by %s", blessing));
+        }
     }
 
     private boolean canSustain(Card card) {
@@ -24,7 +46,7 @@ public class ResourcePool {
                 && blessing >= card.getCostBlessing();
     }
 
-    public void payFor(Card card) throws GameRuleViolationException {
+    public void payFor(Card card) throws RuleViolationException {
 
         if(canSustain(card)) {
 
@@ -32,7 +54,7 @@ public class ResourcePool {
             material -= card.getCostMaterial();
             blessing -= card.getCostBlessing();
         } else {
-            throw new GameRuleViolationException(
+            throw new RuleViolationException(
                     String.format(
                             "Card %s cannot be payed",
                             card.getId()

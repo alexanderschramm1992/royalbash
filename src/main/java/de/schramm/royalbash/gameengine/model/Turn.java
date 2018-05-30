@@ -1,7 +1,7 @@
 package de.schramm.royalbash.gameengine.model;
 
 import de.schramm.royalbash.gameengine.exception.GameBrokenException;
-import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
+import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -19,7 +19,7 @@ public class Turn {
     private UUID playerBlueId;
     private UUID playerRedId;
 
-    public void endTurnOf(Player player) throws GameRuleViolationException, GameBrokenException {
+    public void endTurnOf(Player player) throws RuleViolationException, GameBrokenException {
 
         checkPlayerId(player.getId());
 
@@ -28,7 +28,7 @@ public class Turn {
             counter += 1;
             currentTurnPlayerId = playerBlueId.equals(player.getId()) ? playerRedId : playerBlueId;
         } else {
-            throw new GameRuleViolationException(String.format("Player %s does not have turn", player.getId()));
+            throw new RuleViolationException(String.format("Player %s does not have turn", player.getId()));
         }
     }
 

@@ -1,8 +1,9 @@
 package de.schramm.royalbash.gameengine.model;
 
-import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
-import de.schramm.royalbash.gameengine.model.resourcescard.ResourcesCard;
-import de.schramm.royalbash.gameengine.model.summoningcard.SummoningCard;
+import de.schramm.royalbash.gameengine.exception.RuleViolationException;
+import de.schramm.royalbash.gameengine.model.card.CardContext;
+import de.schramm.royalbash.gameengine.model.card.resourcescard.ResourcesCard;
+import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -25,18 +26,18 @@ public class Player {
 
     private int health;
 
-    public void playSummoningCard(SummoningCard summoningCard, Target target) throws GameRuleViolationException {
+    public void playSummoningCard(SummoningCard summoningCard, Target target) throws RuleViolationException {
 
         resourcePool.payFor(summoningCard);
         hand.removeCard(summoningCard);
         field.summon(Summoning.fromCard(summoningCard, UUID.randomUUID()), target);
     }
 
-    public void playResourcesCard(ResourcesCard resourcesCard) throws GameRuleViolationException {
+    public void playResourcesCard(ResourcesCard resourcesCard, CardContext context) throws RuleViolationException {
 
         resourcePool.payFor(resourcesCard);
         hand.removeCard(resourcesCard);
-        resourcesCard.apply(resourcePool);
+        resourcesCard.getPlayEffect().apply(context);
     }
 
     public void bury(Summoning summoning) {
@@ -44,12 +45,12 @@ public class Player {
         field.bury(summoning);
     }
 
-    public void drawSummoningCard() throws GameRuleViolationException {
+    public void drawSummoningCard() throws RuleViolationException {
 
         hand.addCard(summoningDeck.drawCard());
     }
 
-    public void drawResourcesCard() throws GameRuleViolationException {
+    public void drawResourcesCard() throws RuleViolationException {
 
         hand.addCard(resourcesDeck.drawCard());
     }

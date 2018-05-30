@@ -1,12 +1,9 @@
 package de.schramm.royalbash.data;
 
 import de.schramm.royalbash.gameengine.model.Blueprint;
-import de.schramm.royalbash.gameengine.model.summoningcard.VeteranKnight;
-import de.schramm.royalbash.gameengine.model.summoningcard.YouthfulKnight;
+import de.schramm.royalbash.gameengine.model.card.summoningcard.VeteranKnight;
+import de.schramm.royalbash.gameengine.model.card.summoningcard.YouthfulKnight;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 class BlueprintData {

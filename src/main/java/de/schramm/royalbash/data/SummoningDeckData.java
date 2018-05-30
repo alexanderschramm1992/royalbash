@@ -1,7 +1,7 @@
 package de.schramm.royalbash.data;
 
 import de.schramm.royalbash.gameengine.model.SummoningDeck;
-import de.schramm.royalbash.gameengine.model.summoningcard.YouthfulKnight;
+import de.schramm.royalbash.gameengine.model.card.summoningcard.YouthfulKnight;
 
 import java.util.UUID;
 

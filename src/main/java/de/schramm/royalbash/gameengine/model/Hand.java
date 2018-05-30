@@ -1,6 +1,6 @@
 package de.schramm.royalbash.gameengine.model;
 
-import de.schramm.royalbash.gameengine.exception.GameRuleViolationException;
+import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
@@ -18,21 +18,21 @@ public class Hand {
     @Singular("card")
     private List<Card> cards;
 
-    public void addCard(Card card) throws GameRuleViolationException {
+    public void addCard(Card card) throws RuleViolationException {
 
         if(cards.size() < MAX) {
             cards.add(card);
         } else {
-            throw new GameRuleViolationException("Cannot draw another card");
+            throw new RuleViolationException("Cannot draw another card");
         }
     }
 
-    public void removeCard(Card card) throws GameRuleViolationException {
+    public void removeCard(Card card) throws RuleViolationException {
 
         if (cards.contains(card)) {
             cards.remove(card);
         } else {
-            throw new GameRuleViolationException(String.format("Card %s not in hand", card.getId()));
+            throw new RuleViolationException(String.format("Card %s not in hand", card.getId()));
         }
     }
 }

@@ -3,7 +3,7 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.requestmodel.PlayResourcesCardRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.model.Game;
+import de.schramm.royalbash.gameengine.model.card.CardContext;
 import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
@@ -40,9 +40,14 @@ class PlayResourcesCardController {
 
         try {
 
-            Game game = gameManager.findGame(requestParams.getGameId());
-            game.findPlayer(requestParams.getPlayerId()).playResourcesCard(
-                    game.findHandResourcesCard(requestParams.getCardId())
+            val game = gameManager.findGame(requestParams.getGameId());
+            val player = game.findPlayer(requestParams.getPlayerId());
+            player.playResourcesCard(
+                    game.findHandResourcesCard(requestParams.getCardId()),
+                    CardContext.builder()
+                            .game(game)
+                            .owner(player)
+                            .build()
             );
             gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponse.fromGame(game));

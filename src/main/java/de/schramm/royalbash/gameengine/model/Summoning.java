@@ -1,6 +1,6 @@
 package de.schramm.royalbash.gameengine.model;
 
-import de.schramm.royalbash.gameengine.model.summoningcard.SummoningCard;
+import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.Builder;
 import lombok.Getter;
 

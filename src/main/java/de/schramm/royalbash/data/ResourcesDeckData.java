@@ -1,7 +1,7 @@
 package de.schramm.royalbash.data;
 
 import de.schramm.royalbash.gameengine.model.ResourcesDeck;
-import de.schramm.royalbash.gameengine.model.resourcescard.BountifulHarvest;
+import de.schramm.royalbash.gameengine.model.card.resourcescard.BountifulHarvest;
 
 import java.util.UUID;
 

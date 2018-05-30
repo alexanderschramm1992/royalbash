@@ -1,4 +1,4 @@
-package de.schramm.royalbash.gameengine.model.summoningcard;
+package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
 import java.util.UUID;
 
@@ -18,7 +18,8 @@ public class VeteranKnight extends SummoningCard {
                 1,
                 0,
                 3,
-                4
+                4,
+                context -> {}
         );
     }
 }

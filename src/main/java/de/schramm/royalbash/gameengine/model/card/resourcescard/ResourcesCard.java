@@ -1,7 +1,8 @@
-package de.schramm.royalbash.gameengine.model.resourcescard;
+package de.schramm.royalbash.gameengine.model.card.resourcescard;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.gameengine.model.Card;
-import de.schramm.royalbash.gameengine.model.ResourcePool;
+import de.schramm.royalbash.gameengine.model.card.effect.PlayEffect;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -22,10 +23,11 @@ public abstract class ResourcesCard implements Card {
     private final int costMaterial;
     private final int costBlessing;
 
+    @JsonIgnore
+    private final PlayEffect PlayEffect;
+
     @Override
     public String getCardType() {
         return "ResourcesCard";
     }
-
-    public abstract void apply(ResourcePool resourcePool);
 }

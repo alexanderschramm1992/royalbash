@@ -1,8 +1,8 @@
 package de.schramm.royalbash.gameengine.model;
 
 import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
-import de.schramm.royalbash.gameengine.model.resourcescard.ResourcesCard;
-import de.schramm.royalbash.gameengine.model.summoningcard.SummoningCard;
+import de.schramm.royalbash.gameengine.model.card.resourcescard.ResourcesCard;
+import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.Builder;
 import lombok.Value;
 import lombok.val;

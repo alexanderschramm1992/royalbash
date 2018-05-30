@@ -1,7 +1,9 @@
-package de.schramm.royalbash.gameengine.model.summoningcard;
+package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.gameengine.model.Card;
 import de.schramm.royalbash.gameengine.model.Summoning;
+import de.schramm.royalbash.gameengine.model.card.effect.PlayEffect;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -23,6 +25,9 @@ public abstract class SummoningCard implements Card {
     private final int costBlessing;
     private final int strength;
     private final int health;
+
+    @JsonIgnore
+    private final PlayEffect PlayEffect;
 
     public Summoning toInstance(UUID id) {
 

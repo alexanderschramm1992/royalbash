@@ -1,6 +1,7 @@
-package de.schramm.royalbash.gameengine.model.resourcescard;
+package de.schramm.royalbash.gameengine.model.card.resourcescard;
 
-import de.schramm.royalbash.gameengine.model.ResourcePool;
+import de.schramm.royalbash.gameengine.model.card.CardContext;
+import de.schramm.royalbash.gameengine.model.card.effect.GrantResources;
 
 import java.util.UUID;
 
@@ -18,13 +19,8 @@ public class BountifulHarvest extends ResourcesCard {
                 "",
                 0,
                 0,
-                0
+                0,
+                GrantResources.getInstance(3, 0, 0)
         );
-    }
-
-    @Override
-    public void apply(ResourcePool resourcePool) {
-
-        resourcePool.addRations(3);
     }
 }
