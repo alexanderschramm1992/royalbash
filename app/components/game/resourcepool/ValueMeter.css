@@ -1,11 +1,11 @@
 .value-meter{
     --filling-green: rgb(57,130,53);
-    --filling-silver: rgb(57,130,53);
-    --filling-violet: rgb(57,130,53);
-    --filling-red: rgb(57,130,53);
+    --filling-silver: rgb(210,210,210);
+    --filling-violet: rgb(235,233,249);
+    --filling-red: rgb(169,3,41);
     height: 20em;
     width: 5em;
-    background: lightgray;
+    background: gray;
     position: relative;
 }
 

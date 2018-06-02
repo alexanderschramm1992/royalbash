@@ -94,10 +94,10 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                                 <ResourcePoolComponent/>
                             </div>
                             <div className="stack-area-wrapper">
-                                <div className="summoning-summoningDeck-area">
+                                <div className="summoning-deck-area">
                                     <SummoningDeckComponent/>
                                 </div>
-                                <div className="resources-summoningDeck-area">
+                                <div className="resources-deck-area">
                                     <ResourcesDeckComponent/>
                                 </div>
                                 <div className="graveyard-area">
