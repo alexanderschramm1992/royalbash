@@ -1,10 +1,10 @@
 import * as React from "react";
 
 import "../../common/common.css";
-import "./ResourcePoolComponent.css";
+import "./ValueMeter.css";
 
 export enum ValueMeterColor {
-    GREEN, SILVER, VIOLET, RED
+    green, silver, violet, red
 }
 
 export interface ValueMeterProps {
@@ -23,16 +23,12 @@ export class ValueMeter extends React.Component<ValueMeterProps, {}> {
     render(): any {
 
         let style = {
-            height: this.props.resource / this.props.maxResource
+            height: (100 * this.props.resource / this.props.maxResource) + "%"
         };
 
-        switch (this.props.color) {
-
-        }
-
         return (
-            <div className="resource-meter">
-                <div className={"resource-meter-filling " + colorClass} style={style}/>
+            <div className="value-meter">
+                <div className={"value-meter-filling value-meter-filling-" + ValueMeterColor[this.props.color]} style={style}/>
             </div>
         )
     }

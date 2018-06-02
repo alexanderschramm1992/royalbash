@@ -35,7 +35,7 @@
 .summoning-mini .head-wrapper .cost-wrapper {
     position: absolute;
     top: 0;
-    right: 0;
+    right: -0.4em;
     padding: 0.5em 0.7em 0 1em;
     background: var(--cost-background);
 }
@@ -59,7 +59,7 @@
 }
 
 .summoning-mini .image-wrapper {
-    height: 16.1em;
+    height: 15.5em;
     width: 24.5em;
     margin-left: 0.5em;
     border-bottom-left-radius: 1em;
@@ -72,12 +72,13 @@
 }
 
 .summoning-mini .foot-wrapper {
-    height: 3.5em;
+    height: 4em;
     width: 100%;
     position: relative;
 }
 
 .summoning-mini .foot-wrapper .stats-wrapper {
+    height: 3.5em;
     position: absolute;
     bottom: -0.5em;
     right: 0;

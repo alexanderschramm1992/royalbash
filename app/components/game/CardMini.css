@@ -33,11 +33,11 @@
  }
 
 .card-mini .head-wrapper .cost-wrapper {
-     position: absolute;
-     top: 0;
-     right: 0;
-     padding: 0.5em 0.7em 0 1em;
-     background: var(--cost-background);
+    position: absolute;
+    top: 0;
+    right: -0.4em;
+    padding: 0.5em 0.7em 0 1em;
+    background: var(--cost-background);
 }
 
 .card-mini .head-wrapper .cost-wrapper .cost {
@@ -59,7 +59,7 @@
 }
 
 .card-mini .image-wrapper {
-    height: 16.1em;
+    height: 15.5em;
     width: 24.5em;
     margin-left: 0.5em;
     border-bottom-left-radius: 1em;
@@ -72,12 +72,13 @@
 }
 
 .card-mini .foot-wrapper {
-    height: 3.5em;
+    height: 4em;
     width: 100%;
     position: relative;
 }
 
 .card-mini .foot-wrapper .stats-wrapper {
+    height: 3.5em;
     position: absolute;
     bottom: -0.5em;
     right: 0;

@@ -22,7 +22,9 @@ export interface StateModel {
     summonCardIssued: boolean;
 
     constants: {
-        maxRations: number
+        maxRations: number,
+        maxMaterial: number,
+        maxBlessing: number
     };
 }
 

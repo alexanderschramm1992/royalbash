@@ -51,19 +51,19 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
                             {this.props.summoning.summoningCard.name}
                         </div>
                     </div>
-                    <div className="cost-wrapper border-small">
-                        <div className="cost cost-rations border-small">
-                            <div className="font-size-extra-large center-text">
+                    <div className="cost-wrapper">
+                        <div className="cost cost-rations">
+                            <div className="font-size-extra-large center-text font-border">
                                 {this.props.summoning.summoningCard.costRations}
                             </div>
                         </div>
-                        <div className="cost cost-material border-small">
-                            <div className="font-size-extra-large center-text">
+                        <div className="cost cost-material">
+                            <div className="font-size-extra-large center-text font-border">
                                 {this.props.summoning.summoningCard.costMaterial}
                             </div>
                         </div>
-                        <div className="cost cost-blessing border-small">
-                            <div className="font-size-extra-large center-text">
+                        <div className="cost cost-blessing">
+                            <div className="font-size-extra-large center-text font-border">
                                 {this.props.summoning.summoningCard.costBlessing}
                             </div>
                         </div>
@@ -78,14 +78,14 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
                     />
                 </div>
                 <div className="foot-wrapper">
-                    <div className="stats-wrapper border-small">
-                        <div className="strength border-small">
-                            <div className="font-size-large center-text">
+                    <div className="stats-wrapper">
+                        <div className="strength">
+                            <div className="font-size-large center-text font-border">
                                 {this.props.summoning.currentStrength}
                             </div>
                         </div>
-                        <div className="health border-small">
-                            <div className="font-size-large center-text">
+                        <div className="health">
+                            <div className="font-size-large center-text font-border">
                                 {this.props.summoning.currentHealth}
                             </div>
                         </div>

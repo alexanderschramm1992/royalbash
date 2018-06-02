@@ -7,17 +7,6 @@
     display: inline-block;
 }
 
-.resource-pool .resource-display .resource-meter {
-
-    height: 5em;
-    width: 2em;
-}
-
-.resource-pool .resource-display .resource-meter .resource-meter-filling {
-
-    width: 100%;
-}
-
 .resource-pool .resource-display-rations {
     margin-right: 1em;
 }

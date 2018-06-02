@@ -1,5 +1,7 @@
 package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
+import de.schramm.royalbash.gameengine.model.card.effect.PlainPlayEffect;
+
 import java.util.UUID;
 
 public class YouthfulKnight extends SummoningCard {
@@ -19,7 +21,7 @@ public class YouthfulKnight extends SummoningCard {
                 0,
                 3,
                 2,
-                context -> {}
+                new PlainPlayEffect()
         );
     }
 }

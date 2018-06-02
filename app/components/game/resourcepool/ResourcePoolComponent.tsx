@@ -4,6 +4,7 @@ import "../../common/common.css";
 import "./ResourcePoolComponent.css";
 import {ResourcePool} from "../../../model/Game";
 import store, {getPlayer} from "../../../Store";
+import { ValueMeter, ValueMeterColor } from "./ValueMeter";
 
 export class ResourcePoolComponent extends React.Component<{}, ResourcePool> {
 
@@ -37,21 +38,31 @@ export class ResourcePoolComponent extends React.Component<{}, ResourcePool> {
         return (
             <div className="resource-pool">
                 <div className="resource-display resource-display-rations">
-                    <div className="resource-meter resource-meter-rations">
-                        <div className="resource-meter-filling resource-meter-filling-rations" style={style}/>
-                    </div>
+                    <ValueMeter
+                        resource={this.state.rations}
+                        maxResource={store.getState().constants.maxRations}
+                        color={ValueMeterColor.green}
+                    />
                     <div className="resource-counter resource-counter-rations font-size-large">
                         {this.state.rations}
                     </div>
                 </div>
                 <div className="resource-display resource-display-material">
-                    <div className="resource-meter resource-meter-material"/>
+                    <ValueMeter
+                        resource={this.state.material}
+                        maxResource={store.getState().constants.maxMaterial}
+                        color={ValueMeterColor.silver}
+                    />
                     <div className="resource-counter resource-counter-material font-size-large">
                         {this.state.material}
                     </div>
                 </div>
                 <div className="resource-display resource-display-blessing">
-                    <div className="resource-meter resource-meter-blessing"/>
+                    <ValueMeter
+                        resource={this.state.blessing}
+                        maxResource={store.getState().constants.maxBlessing}
+                        color={ValueMeterColor.violet}
+                    />
                     <div className="resource-counter resource-counter-blessing font-size-large">
                         {this.state.blessing}
                     </div>

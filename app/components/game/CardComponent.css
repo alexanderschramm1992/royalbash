@@ -34,8 +34,8 @@
 
 .card .head-wrapper .cost-wrapper {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -0.1em;
+    right: -0.4em;
     padding: 0.5em 0.7em 0 1em;
     background: var(--cost-background);
 }
@@ -111,8 +111,8 @@
 .card .foot-wrapper .stats-wrapper {
     position: absolute;
     bottom: -0.5em;
-    right: 0em;
-    padding: 0.5em 0.5em 0.7em 1.5em;
+    right: -0.1em;
+    padding: 0.4em 0.5em 0.7em 1.5em;
     background: var(--stats-background);
 }
 

@@ -17,7 +17,9 @@ const initialState: StateModel =  {
     summonCardIssued: false,
 
     constants: {
-        maxRations: 10
+        maxRations: 10,
+        maxMaterial: 10,
+        maxBlessing: 10
     }
 };
 
