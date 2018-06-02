@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import "./../common/common.css";
+import "../../common/common.css";
 import "./ResourcePoolComponent.css";
-import {ResourcePool} from "../../model/Game";
-import store, {getPlayer} from "../../Store";
+import {ResourcePool} from "../../../model/Game";
+import store, {getPlayer} from "../../../Store";
 
 export class ResourcePoolComponent extends React.Component<{}, ResourcePool> {
 
@@ -30,10 +30,16 @@ export class ResourcePoolComponent extends React.Component<{}, ResourcePool> {
 
     render(): any {
 
+        let style = {
+            height: this.state.rations/store.getState().constants.maxRations
+        };
+
         return (
             <div className="resource-pool">
                 <div className="resource-display resource-display-rations">
-                    <div className="resource-meter resource-meter-rations"/>
+                    <div className="resource-meter resource-meter-rations">
+                        <div className="resource-meter-filling resource-meter-filling-rations" style={style}/>
+                    </div>
                     <div className="resource-counter resource-counter-rations font-size-large">
                         {this.state.rations}
                     </div>

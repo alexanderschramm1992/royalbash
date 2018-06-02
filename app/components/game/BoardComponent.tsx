@@ -16,7 +16,7 @@ import LoadGameCall from "../../rest/LoadGameCall";
 import FieldComponent from "./FieldComponent";
 import SummonCardCall from "../../rest/SummonCardCall";
 import ResourcesDeckComponent from "./ResourcesDeckComponent";
-import {ResourcePoolComponent} from "./ResourcePoolComponent";
+import {ResourcePoolComponent} from "./resourcepool/ResourcePoolComponent";
 
 interface BoardState {
 

@@ -20,6 +20,10 @@ export interface StateModel {
     cardToBeSummoned?: string;
     summoningTarget?: string;
     summonCardIssued: boolean;
+
+    constants: {
+        maxRations: number
+    };
 }
 
 export const store: Store<StateModel> = createStore(

@@ -15,6 +15,10 @@ const initialState: StateModel =  {
     drawSummoningCardIssued: false,
     drawResourcesCardIssued: false,
     summonCardIssued: false,
+
+    constants: {
+        maxRations: 10
+    }
 };
 
 export const combinedReducers: Reducer<StateModel, AnyAction> =
