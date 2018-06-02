@@ -1,46 +1,21 @@
 import * as React from "react";
 
-import "./CardMini.css";
-import "../common/common.css";
-import store from "../../Store";
-import {MouseOnCardActionFactory} from "../../actions/MouseOnCardAction";
-import {MouseOffCardActionFactory} from "../../actions/MouseOffCardAction";
-import {CardDraggedActionFactory} from "../../actions/CardDraggedAction";
+import "./CardComponent.css";
+import "../../common/common.css";
+
 import {Card, SummoningCard} from "../../model/Game";
 
-export interface CardMiniProps {
+export interface CardViewProps {
 
     card: Card;
 }
 
-export class CardMini extends React.Component<CardMiniProps, {}> {
+export class CardView extends React.Component<CardViewProps, {}> {
 
-    constructor(props: CardMiniProps) {
+    constructor(props: CardViewProps) {
 
         super(props);
-        this.handleMouseOver = this.handleMouseOver.bind(this);
-        this.handleMouseOut = this.handleMouseOut.bind(this);
-        this.handleDragStart = this.handleDragStart.bind(this);
-        this.isSummoningCard = this.isSummoningCard.bind(this);
-    }
-
-    handleMouseOver(): void {
-
-        let summoningCardId = this.props.card.id;
-        if(summoningCardId) {
-            store.dispatch(MouseOnCardActionFactory.getInstance(summoningCardId));
-        }
-    }
-
-    handleMouseOut(): void {
-
-        store.dispatch(MouseOffCardActionFactory.getInstance());
-    }
-
-    handleDragStart(event: any): void {
-
-        console.dir(event);
-        store.dispatch(CardDraggedActionFactory.getInstance(this.props.card.id));
+        this.isSummoningCard = this.isSummoningCard.bind(this)
     }
 
     isSummoningCard(): boolean {
@@ -54,10 +29,7 @@ export class CardMini extends React.Component<CardMiniProps, {}> {
         return (
             <div
                 draggable={true}
-                onDragStart={this.handleDragStart}
-                className="card-mini border-large"
-                onMouseOver={this.handleMouseOver}
-                onMouseOut={this.handleMouseOut}
+                className="card border-large border-radius"
             >
                 <div className="head-wrapper">
                     <div className="name">
@@ -84,24 +56,41 @@ export class CardMini extends React.Component<CardMiniProps, {}> {
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img 
-                        className="image" 
-                        draggable={false}
+                    <img
+                        className="image"
                         src={this.props.card.image}
                         alt={this.props.card.name}
                     />
                 </div>
+                <div className="text-wrapper border-small">
+                    <div className="text">
+                        <div className="font-size-medium">
+                            {this.props.card.text}
+                        </div>
+                    </div>
+                    <div className="lore">
+                        <div className="font-size-medium">
+                            {this.props.card.lore && this.props.card.lore}
+                        </div>
+                    </div>
+                </div>
                 <div className="foot-wrapper">
+                    <div className="type">
+                        <div className="font-size-medium">
+                            {this.props.card.type}
+                            {this.props.card.subType && " - " + this.props.card.subType}
+                        </div>
+                    </div>
                     {
                         this.isSummoningCard() &&
                         <div className="stats-wrapper">
                             <div className="strength">
-                                <div className="font-size-large center-text font-border">
+                                <div className="font-size-extra-large center-text font-border">
                                     {(this.props.card as SummoningCard).strength}
                                 </div>
                             </div>
-                            <div className="health">
-                                <div className="font-size-large center-text font-border">
+                            <div className="health border">
+                                <div className="font-size-extra-large center-text font-border">
                                     {(this.props.card as SummoningCard).health}
                                 </div>
                             </div>
@@ -113,4 +102,4 @@ export class CardMini extends React.Component<CardMiniProps, {}> {
     }
 }
 
-export default CardMini;
+export default CardComponent;

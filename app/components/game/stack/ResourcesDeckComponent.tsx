@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import "../common/common.css";
+import "../../common/common.css";
 import "./ResourcesDeckComponent.css";
 
-import store from "../../Store";
-import {DrawResourcesCardIssuedActionFactory} from "../../actions/DrawResourcesCardIssuedAction";
+import store from "../../../Store";
+import {DrawResourcesCardIssuedActionFactory} from "../../../actions/DrawResourcesCardIssuedAction";
 
 interface DeckState {
 

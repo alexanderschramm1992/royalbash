@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import "../common/common.css";
+import "../../common/common.css";
 import "./SummoningDeckComponent.css";
 
-import store from "../../Store";
-import { DrawSummoningCardIssuedActionFactory } from "../../actions/DrawSummoningCardIssuedAction";
+import store from "../../../Store";
+import { DrawSummoningCardIssuedActionFactory } from "../../../actions/DrawSummoningCardIssuedAction";
 
 interface DeckState {
 

@@ -2,9 +2,6 @@ package de.schramm.royalbash.data;
 
 import de.schramm.royalbash.gameengine.model.Account;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 class AccountData {

@@ -3,7 +3,7 @@ import * as React from "react";
 import "../common/common.css";
 import "./HandComponent.css";
 import store, {getPlayer} from "../../Store";
-import CardMiniContainer from "./CardMiniContainer";
+import CardMiniContainer from "./card/CardMiniContainer";
 import {Card} from "../../model/Game";
 
 export interface HandState {

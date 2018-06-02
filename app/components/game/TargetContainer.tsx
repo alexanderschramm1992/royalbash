@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import "./SummoningMiniContainer.css";
+import "./TargetContainer.css";
 import "../common/common.css";
 
 import {Target} from "../../model/Game";
-import SummoningMini from "./SummoningMini";
+import SummoningMini from "./summoning/SummoningMini";
 import store from "../../Store";
 import {SummoningIssuedActionFactory} from "../../actions/SummoningIssuedAction";
 

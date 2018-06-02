@@ -5,9 +5,9 @@ import "./BoardComponent.css";
 
 import Slider from "../menu/Slider";
 import DetailView from "./DetailView";
-import SummoningDeckComponent from "./SummoningDeckComponent";
+import SummoningDeckComponent from "./stack/SummoningDeckComponent";
 import HandComponent from "./HandComponent";
-import GraveyardComponent from "./GraveyardComponent";
+import GraveyardComponent from "./stack/GraveyardComponent";
 import DrawSummoningCardCall from "../../rest/DrawSummoningCardCall";
 import DrawResourcesCardCall from "../../rest/DrawResourcesCardCall";
 import store from "../../Store";
@@ -15,7 +15,7 @@ import {LoadGameIssuedActionFactory} from "../../actions/LoadGameIssuedAction";
 import LoadGameCall from "../../rest/LoadGameCall";
 import FieldComponent from "./FieldComponent";
 import SummonCardCall from "../../rest/SummonCardCall";
-import ResourcesDeckComponent from "./ResourcesDeckComponent";
+import ResourcesDeckComponent from "./stack/ResourcesDeckComponent";
 import {ResourcePoolComponent} from "./resourcepool/ResourcePoolComponent";
 
 interface BoardState {

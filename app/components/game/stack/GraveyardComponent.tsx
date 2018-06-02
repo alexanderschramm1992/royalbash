@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import "../common/common.css";
+import "../../common/common.css";
 import "./GraveyardComponent.css";
 
 export class DeckComponent extends React.Component<{}, {}> {

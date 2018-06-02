@@ -1,11 +1,12 @@
 import * as React from "react";
 
 import "./SummoningMini.css";
-import "../common/common.css";
+import "../../common/common.css";
+
 import {SummoningProps} from "./SummoningComponent";
-import store from "../../Store";
-import {MouseOnSummoningActionFactory} from "../../actions/MouseOnSummoningAction";
-import {MouseOffSummoningActionFactory} from "../../actions/MouseOffSummoningAction";
+import store from "../../../Store";
+import {MouseOnSummoningActionFactory} from "../../../actions/MouseOnSummoningAction";
+import {MouseOffSummoningActionFactory} from "../../../actions/MouseOffSummoningAction";
 
 export class SummoningMini extends React.Component<SummoningProps, {}> {
 

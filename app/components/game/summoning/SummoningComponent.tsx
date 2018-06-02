@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import "./SummoningComponent.css";
-import "../common/common.css";
+import "../../common/common.css";
 
-import {Summoning} from "../../model/Game";
+import {Summoning} from "../../../model/Game";
 
 export interface SummoningProps {
 
