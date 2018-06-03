@@ -1,13 +1,21 @@
 import * as React from "react";
 
-import "./CardComponent.css";
-import "../../common/common.css";
-
-import {Card, SummoningCard} from "../../model/Game";
+import "./CardView.css";
+import "../common/common.css";
 
 export interface CardViewProps {
 
-    card: Card;
+    name: string;
+    costRations: number,
+    costMaterial: number,
+    costBlessing: number,
+    image: string,
+    text: string,
+    lore: string,
+    type: string,
+    subType?: string,
+    strength?: number,
+    health?: number
 }
 
 export class CardView extends React.Component<CardViewProps, {}> {
@@ -15,13 +23,6 @@ export class CardView extends React.Component<CardViewProps, {}> {
     constructor(props: CardViewProps) {
 
         super(props);
-        this.isSummoningCard = this.isSummoningCard.bind(this)
-    }
-
-    isSummoningCard(): boolean {
-
-        let card = this.props.card as SummoningCard;
-        return card.strength != null && card.health != null;
     }
 
     render(): any {
@@ -29,28 +30,28 @@ export class CardView extends React.Component<CardViewProps, {}> {
         return (
             <div
                 draggable={true}
-                className="card border-large border-radius"
+                className="card-view border-large border-radius"
             >
                 <div className="head-wrapper">
                     <div className="name">
                         <div className="font-size-large">
-                            {this.props.card.name}
+                            {this.props.name}
                         </div>
                     </div>
                     <div className="cost-wrapper">
                         <div className="cost cost-rations">
                             <div className="font-size-extra-large center-text font-border">
-                                {this.props.card.costRations}
+                                {this.props.costRations}
                             </div>
                         </div>
                         <div className="cost cost-material">
                             <div className="font-size-extra-large center-text font-border">
-                                {this.props.card.costMaterial}
+                                {this.props.costMaterial}
                             </div>
                         </div>
                         <div className="cost cost-blessing">
                             <div className="font-size-extra-large center-text font-border">
-                                {this.props.card.costBlessing}
+                                {this.props.costBlessing}
                             </div>
                         </div>
                     </div>
@@ -58,40 +59,40 @@ export class CardView extends React.Component<CardViewProps, {}> {
                 <div className="image-wrapper border-small">
                     <img
                         className="image"
-                        src={this.props.card.image}
-                        alt={this.props.card.name}
+                        src={this.props.image}
+                        alt={this.props.name}
                     />
                 </div>
                 <div className="text-wrapper border-small">
                     <div className="text">
                         <div className="font-size-medium">
-                            {this.props.card.text}
+                            {this.props.text}
                         </div>
                     </div>
                     <div className="lore">
                         <div className="font-size-medium">
-                            {this.props.card.lore && this.props.card.lore}
+                            {this.props.lore && this.props.lore}
                         </div>
                     </div>
                 </div>
                 <div className="foot-wrapper">
                     <div className="type">
                         <div className="font-size-medium">
-                            {this.props.card.type}
-                            {this.props.card.subType && " - " + this.props.card.subType}
+                            {this.props.type}
+                            {this.props.subType && " - " + this.props.subType}
                         </div>
                     </div>
                     {
-                        this.isSummoningCard() &&
+                        this.props.strength && this.props.health &&
                         <div className="stats-wrapper">
                             <div className="strength">
                                 <div className="font-size-extra-large center-text font-border">
-                                    {(this.props.card as SummoningCard).strength}
+                                    {this.props.strength}
                                 </div>
                             </div>
                             <div className="health border">
                                 <div className="font-size-extra-large center-text font-border">
-                                    {(this.props.card as SummoningCard).health}
+                                    {this.props.health}
                                 </div>
                             </div>
                         </div>
@@ -102,4 +103,4 @@ export class CardView extends React.Component<CardViewProps, {}> {
     }
 }
 
-export default CardComponent;
+export default CardView;
