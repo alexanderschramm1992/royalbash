@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import "./CardComponent.css";
 import "../../common/common.css";
 
 import {Card, SummoningCard} from "../../../model/Game";

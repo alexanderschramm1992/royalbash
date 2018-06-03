@@ -8,6 +8,7 @@ import {MouseOnCardActionFactory} from "../../../actions/MouseOnCardAction";
 import {MouseOffCardActionFactory} from "../../../actions/MouseOffCardAction";
 import {CardDraggedActionFactory} from "../../../actions/CardDraggedAction";
 import {Card, SummoningCard} from "../../../model/Game";
+import CardMiniView from "../CardMiniView";
 
 export interface CardMiniProps {
 
@@ -53,63 +54,18 @@ export class CardMini extends React.Component<CardMiniProps, {}> {
     render(): any {
 
         return (
-            <div
-                draggable={true}
-                onDragStart={this.handleDragStart}
-                className="card-mini border-large"
-                onMouseOver={this.handleMouseOver}
-                onMouseOut={this.handleMouseOut}
-            >
-                <div className="head-wrapper">
-                    <div className="name">
-                        <div className="font-size-large">
-                            {this.props.card.name}
-                        </div>
-                    </div>
-                    <div className="cost-wrapper">
-                        <div className="cost cost-rations">
-                            <div className="font-size-extra-large center-text font-border">
-                                {this.props.card.costRations}
-                            </div>
-                        </div>
-                        <div className="cost cost-material">
-                            <div className="font-size-extra-large center-text font-border">
-                                {this.props.card.costMaterial}
-                            </div>
-                        </div>
-                        <div className="cost cost-blessing">
-                            <div className="font-size-extra-large center-text font-border">
-                                {this.props.card.costBlessing}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="image-wrapper border-small">
-                    <img 
-                        className="image" 
-                        draggable={false}
-                        src={this.props.card.image}
-                        alt={this.props.card.name}
-                    />
-                </div>
-                <div className="foot-wrapper">
-                    {
-                        this.isSummoningCard() &&
-                        <div className="stats-wrapper">
-                            <div className="strength">
-                                <div className="font-size-large center-text font-border">
-                                    {(this.props.card as SummoningCard).strength}
-                                </div>
-                            </div>
-                            <div className="health">
-                                <div className="font-size-large center-text font-border">
-                                    {(this.props.card as SummoningCard).health}
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
+            <CardMiniView
+                name={this.props.card.name}
+                costRations={this.props.card.costRations}
+                costMaterial={this.props.card.costMaterial}
+                costBlessing={this.props.card.costBlessing}
+                image={this.props.card.image}
+                strength={(this.props.card as SummoningCard).strength}
+                health={(this.props.card as SummoningCard).health}
+                handleMouseOver={this.handleMouseOver}
+                handleMouseOut={this.handleMouseOut}
+                handleDragStart={this.handleDragStart}
+            />
         );
     }
 }
