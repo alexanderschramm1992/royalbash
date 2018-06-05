@@ -5,7 +5,9 @@ import de.schramm.royalbash.gameengine.model.card.effect.AttackSummoningEffect;
 import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Singular;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Builder
@@ -18,6 +20,10 @@ public class Summoning {
     private int currentCost;
     private int currentHealth;
     private int currentStrength;
+
+    @JsonIgnore
+    @Singular("tag")
+    private Set<Tag> tags;
 
     @JsonIgnore
     private final AttackSummoningEffect attackSummoningEffect;

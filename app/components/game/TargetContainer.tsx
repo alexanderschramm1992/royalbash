@@ -4,7 +4,7 @@ import "./TargetContainer.css";
 import "../common/common.css";
 
 import {Target} from "../../model/Game";
-import SummoningMini from "./summoning/SummoningMini";
+import SummoningMini from "./card/SummoningMini";
 import store from "../../Store";
 import {SummoningIssuedActionFactory} from "../../actions/SummoningIssuedAction";
 

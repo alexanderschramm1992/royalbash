@@ -3,7 +3,7 @@ import * as React from "react";
 import "../../common/common.css";
 
 import {Card, SummoningCard} from "../../../model/Game";
-import CardView from "../CardView";
+import CardView from "./CardView";
 
 export interface CardProps {
 

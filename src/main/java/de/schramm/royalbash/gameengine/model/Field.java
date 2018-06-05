@@ -1,5 +1,6 @@
 package de.schramm.royalbash.gameengine.model;
 
+import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;
@@ -14,11 +15,14 @@ public class Field {
     @Singular("target")
     private List<Target> targets;
 
-    void summon(Summoning summoning, Target target) {
+    void summon(Summoning summoning, Target target) throws DomainObjectDoesNotExistException {
 
         targets.stream()
                 .filter(element -> element.equals(target))
-                .forEach(element -> element.summon(summoning));
+                .findFirst()
+                .orElseThrow(() -> new DomainObjectDoesNotExistException(
+                        String.format("Target %s does not exist on field", target.getId())
+                )).summon(summoning);
     }
 
     void bury(Summoning summoning) {

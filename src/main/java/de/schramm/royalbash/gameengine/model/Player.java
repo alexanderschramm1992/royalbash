@@ -1,5 +1,6 @@
 package de.schramm.royalbash.gameengine.model;
 
+import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import de.schramm.royalbash.gameengine.model.card.EffectContext;
 import de.schramm.royalbash.gameengine.model.card.resourcescard.ResourcesCard;
@@ -26,11 +27,12 @@ public class Player {
 
     private int health;
 
-    public void playSummoningCard(SummoningCard summoningCard, Target target) throws RuleViolationException {
+    public void playSummoningCard(SummoningCard summoningCard, Target target) throws GameEngineException {
 
         resourcePool.payFor(summoningCard);
         hand.removeCard(summoningCard);
         field.summon(Summoning.fromCard(summoningCard, UUID.randomUUID()), target);
+
     }
 
     public void playResourcesCard(ResourcesCard resourcesCard, EffectContext context) throws RuleViolationException {

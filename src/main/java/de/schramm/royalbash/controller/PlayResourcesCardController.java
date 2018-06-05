@@ -43,7 +43,7 @@ class PlayResourcesCardController {
             val game = gameManager.findGame(requestParams.getGameId());
             val player = game.findPlayer(requestParams.getPlayerId());
             player.playResourcesCard(
-                    game.findHandResourcesCard(requestParams.getCardId()),
+                    player.getHand().findResourcesCard(requestParams.getCardId()),
                     EffectContext.builder()
                             .game(game)
                             .owner(player)

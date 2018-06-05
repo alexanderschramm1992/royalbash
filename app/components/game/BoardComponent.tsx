@@ -74,13 +74,14 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                     <div className="west"></div>
                     <div className="center">
                         <div className="player-area player-area-remote border-large border-radius">
-                            <div className="summoning-summoningDeck-area summoning-summoningDeck-area-remote"></div>
-                            <div className="ressources-summoningDeck-area ressources-summoningDeck-area-remote"></div>
+                            <div className="summoning-deck-area summoning-deck-area-remote"></div>
+                            <div className="ressources-deck-area ressources-deck-area-remote"></div>
                             <div className="graveyard-area graveyard-area-remote"></div>
                             <div className="hand-area hand-area-remote"></div>
                         </div>
                         <div className="play-area border-large border-radius">
                             <div className="remote-summoning-area">
+                                <FieldComponent/>
                             </div>
                             <div className="summoning-area">
                                 <FieldComponent/>

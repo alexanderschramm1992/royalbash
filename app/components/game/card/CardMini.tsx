@@ -8,7 +8,7 @@ import {MouseOnCardActionFactory} from "../../../actions/MouseOnCardAction";
 import {MouseOffCardActionFactory} from "../../../actions/MouseOffCardAction";
 import {CardDraggedActionFactory} from "../../../actions/CardDraggedAction";
 import {Card, SummoningCard} from "../../../model/Game";
-import CardMiniView from "../CardMiniView";
+import CardMiniView from "./CardMiniView";
 
 export interface CardMiniProps {
 

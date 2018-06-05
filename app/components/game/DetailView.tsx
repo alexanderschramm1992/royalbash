@@ -3,7 +3,7 @@ import * as React from "react";
 import "./../common/common.css";
 import "./DetailView.css";
 import CardComponent from "./card/CardComponent";
-import SummoningComponent from "./summoning/SummoningComponent";
+import SummoningComponent from "./card/SummoningComponent";
 import {Summoning, Card} from "../../model/Game";
 import store, {findCardById, findSummoningById} from "../../Store";
 

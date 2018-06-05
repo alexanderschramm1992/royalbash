@@ -7,7 +7,7 @@ import {SummoningProps} from "./SummoningComponent";
 import store from "../../../Store";
 import {MouseOnSummoningActionFactory} from "../../../actions/MouseOnSummoningAction";
 import {MouseOffSummoningActionFactory} from "../../../actions/MouseOffSummoningAction";
-import CardMiniView from "../CardMiniView";
+import CardMiniView from "./CardMiniView";
 
 export class SummoningMini extends React.Component<SummoningProps, {}> {
 

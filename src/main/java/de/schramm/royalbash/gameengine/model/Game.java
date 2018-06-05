@@ -1,8 +1,6 @@
 package de.schramm.royalbash.gameengine.model;
 
 import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
-import de.schramm.royalbash.gameengine.model.card.resourcescard.ResourcesCard;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.Builder;
 import lombok.Value;
 import lombok.val;
@@ -34,59 +32,6 @@ public class Game {
                     String.format(
                             "Player %s does not exist",
                             playerId
-                    )
-            );
-        }
-    }
-
-    private Card findHandCard(UUID cardId) throws DomainObjectDoesNotExistException {
-
-        try {
-
-            val playerRedCards = board.getPlayerRed().getHand().getCards();
-            val playerBlueCards = board.getPlayerBlue().getHand().getCards();
-
-            return Stream.of(playerRedCards, playerBlueCards)
-                    .flatMap(Collection::stream)
-                    .filter(card -> card.getId().equals(cardId))
-                    .findFirst()
-                    .orElseThrow(NullPointerException::new);
-        } catch (NullPointerException e) {
-
-            throw new DomainObjectDoesNotExistException(
-                    String.format(
-                            "Hand Card %s does not exist",
-                            cardId
-                    )
-            );
-        }
-    }
-
-    public SummoningCard findHandSummoningCard(UUID cardId) throws DomainObjectDoesNotExistException{
-
-        val card = findHandCard(cardId);
-        if (card instanceof SummoningCard) {
-            return (SummoningCard) card;
-        } else {
-            throw new DomainObjectDoesNotExistException(
-                    String.format(
-                            "Hand Card %s is not a Summoning Card",
-                            cardId
-                    )
-            );
-        }
-    }
-
-    public ResourcesCard findHandResourcesCard(UUID cardId) throws DomainObjectDoesNotExistException{
-
-        val card = findHandCard(cardId);
-        if (card instanceof ResourcesCard) {
-            return (ResourcesCard) card;
-        } else {
-            throw new DomainObjectDoesNotExistException(
-                    String.format(
-                            "Hand Card %s is not a Resources Card",
-                            cardId
                     )
             );
         }

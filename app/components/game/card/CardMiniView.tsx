@@ -1,36 +1,33 @@
 import * as React from "react";
 
-import "./CardView.css";
-import "../common/common.css";
+import "./CardMiniView.css";
+import "../../common/common.css";
 
-export interface CardViewProps {
+export interface CardViewMiniProps {
 
     name: string;
     costRations: number,
     costMaterial: number,
     costBlessing: number,
     image: string,
-    text: string,
-    lore: string,
-    type: string,
-    subType?: string,
     strength?: number,
-    health?: number
+    health?: number,
+    handleMouseOver: () => void,
+    handleMouseOut: () => void,
+    handleDragStart: (event: any) => void
 }
 
-export class CardView extends React.Component<CardViewProps, {}> {
-
-    constructor(props: CardViewProps) {
-
-        super(props);
-    }
+export class CardMini extends React.Component<CardViewMiniProps, {}> {
 
     render(): any {
 
         return (
             <div
                 draggable={true}
-                className="card-view border-large border-radius"
+                onDragStart={this.props.handleDragStart}
+                className="card-mini-view border-large"
+                onMouseOver={this.props.handleMouseOver}
+                onMouseOut={this.props.handleMouseOut}
             >
                 <div className="head-wrapper">
                     <div className="name">
@@ -57,37 +54,24 @@ export class CardView extends React.Component<CardViewProps, {}> {
                     </div>
                 </div>
                 <div className="image-wrapper border-small">
-                    <img
-                        className="image"
+                    <img 
+                        className="image" 
+                        draggable={false}
                         src={this.props.image}
                         alt={this.props.name}
                     />
                 </div>
-                <div className="text-wrapper border-small">
-                    <div className="text">
-                        <div className="font-size-medium" dangerouslySetInnerHTML={{__html: this.props.text}} />
-                    </div>
-                    <div className="lore">
-                        <div className="font-size-medium" dangerouslySetInnerHTML={{__html: this.props.text}} />
-                    </div>
-                </div>
                 <div className="foot-wrapper">
-                    <div className="type">
-                        <div className="font-size-medium">
-                            {this.props.type}
-                            {this.props.subType && " - " + this.props.subType}
-                        </div>
-                    </div>
                     {
                         this.props.strength && this.props.health &&
                         <div className="stats-wrapper">
                             <div className="strength">
-                                <div className="font-size-extra-large center-text font-border">
+                                <div className="font-size-large center-text font-border">
                                     {this.props.strength}
                                 </div>
                             </div>
-                            <div className="health border">
-                                <div className="font-size-extra-large center-text font-border">
+                            <div className="health">
+                                <div className="font-size-large center-text font-border">
                                     {this.props.health}
                                 </div>
                             </div>
@@ -99,4 +83,4 @@ export class CardView extends React.Component<CardViewProps, {}> {
     }
 }
 
-export default CardView;
+export default CardMini;

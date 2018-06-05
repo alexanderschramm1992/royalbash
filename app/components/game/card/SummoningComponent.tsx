@@ -4,7 +4,7 @@ import "./SummoningComponent.css";
 import "../../common/common.css";
 
 import {Summoning} from "../../../model/Game";
-import CardView from "../CardView";
+import CardView from "./CardView";
 
 export interface SummoningProps {
 
