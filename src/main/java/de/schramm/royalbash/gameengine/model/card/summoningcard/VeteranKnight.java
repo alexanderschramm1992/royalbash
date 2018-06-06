@@ -1,7 +1,6 @@
 package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
-import de.schramm.royalbash.gameengine.model.Tag;
-import de.schramm.royalbash.gameengine.model.card.effect.MountedAttackSummoningEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.PlainAttackSummoningEffect;
 import de.schramm.royalbash.gameengine.model.card.effect.PlainPlayEffect;
 
 import java.util.Collections;
@@ -24,9 +23,9 @@ public class VeteranKnight extends SummoningCard {
                 0,
                 3,
                 4,
-                Collections.singleton(Tag.MOUNTED),
+                Collections.emptySet(),
                 new PlainPlayEffect(),
-                new MountedAttackSummoningEffect()
+                new PlainAttackSummoningEffect()
         );
     }
 }
