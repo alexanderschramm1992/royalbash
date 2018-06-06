@@ -3,7 +3,7 @@ import axios, {AxiosResponse} from "axios";
 import {SummoningAcceptedActionFactory} from "../actions/SummoningAcceptedAction";
 import {SummoningDeclinedActionFactory} from "../actions/SummoningDeclinedAction";
 
-class SummonCardCall {
+class SummoningCardCall {
 
     constructor () {
 
@@ -42,4 +42,4 @@ class SummonCardCall {
     }
 }
 
-export default SummonCardCall;
+export default SummoningCardCall;

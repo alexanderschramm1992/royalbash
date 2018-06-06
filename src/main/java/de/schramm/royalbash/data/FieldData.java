@@ -41,5 +41,25 @@ class FieldData {
                             .id(UUID.fromString("bbfc3e08-db9f-49ba-8028-b24c61fe0a1a"))
                             .build()
             )
+            .target(
+                    Target.builder()
+                            .id(UUID.fromString("f9f7311d-f348-4dd7-a030-a71af733a9f0"))
+                            .build()
+            )
+            .target(
+                    Target.builder()
+                            .id(UUID.fromString("2c36d72e-fa79-424a-875d-4e064894e6f1"))
+                            .build()
+            )
+            .target(
+                    Target.builder()
+                            .id(UUID.fromString("d073e4d6-b295-45bb-8094-2d4e6593685c"))
+                            .build()
+            )
+            .target(
+                    Target.builder()
+                            .id(UUID.fromString("d073e4d6-b295-45bb-8094-2d4e6593685c"))
+                            .build()
+            )
             .build();
 }

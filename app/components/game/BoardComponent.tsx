@@ -14,7 +14,7 @@ import store from "../../Store";
 import {LoadGameIssuedActionFactory} from "../../actions/LoadGameIssuedAction";
 import LoadGameCall from "../../rest/LoadGameCall";
 import FieldComponent from "./FieldComponent";
-import SummonCardCall from "../../rest/SummonCardCall";
+import SummoningCardCall from "../../rest/SummoningCardCall";
 import ResourcesDeckComponent from "./stack/ResourcesDeckComponent";
 import {ResourcePoolComponent} from "./resourcepool/ResourcePoolComponent";
 import EnemyFieldComponent from "./EnemyFieldComponent";
@@ -25,7 +25,7 @@ interface BoardState {
     readonly drawSummoningCardCall: DrawSummoningCardCall;
     readonly drawResourcesCardCall: DrawResourcesCardCall;
     readonly loadGameCall: LoadGameCall;
-    readonly summonCardCall: SummonCardCall;
+    readonly summoningCardCall: SummoningCardCall;
 }
 
 export class BoardComponent extends React.Component<{}, BoardState> {
@@ -38,7 +38,7 @@ export class BoardComponent extends React.Component<{}, BoardState> {
             drawSummoningCardCall: new DrawSummoningCardCall(),
             drawResourcesCardCall: new DrawResourcesCardCall(),
             loadGameCall: new LoadGameCall(),
-            summonCardCall: new SummonCardCall()
+            summoningCardCall: new SummoningCardCall()
         };
 
         store.dispatch(LoadGameIssuedActionFactory.getInstance("6d5864f4-5fb1-4615-bf6a-07a1211ef6d3"));
