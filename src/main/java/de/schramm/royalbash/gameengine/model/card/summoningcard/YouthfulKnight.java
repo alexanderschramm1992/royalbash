@@ -2,9 +2,7 @@ package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
 import de.schramm.royalbash.gameengine.model.Tag;
 import de.schramm.royalbash.gameengine.model.card.effect.MountedAttackSummoningEffect;
-import de.schramm.royalbash.gameengine.model.card.effect.PlainPlayEffect;
 
-import java.util.Collections;
 import java.util.UUID;
 
 public class YouthfulKnight extends SummoningCard {
@@ -23,10 +21,10 @@ public class YouthfulKnight extends SummoningCard {
                 1,
                 0,
                 3,
-                2,
-                Collections.singleton(Tag.MOUNTED),
-                new PlainPlayEffect(),
-                new MountedAttackSummoningEffect()
+                2
         );
+
+        addTag(Tag.MOUNTED);
+        setAttackSummoningEffect(new MountedAttackSummoningEffect());
     }
 }

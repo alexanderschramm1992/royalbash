@@ -2,7 +2,7 @@ package de.schramm.royalbash.gameengine.model.card.resourcescard;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.gameengine.model.Card;
-import de.schramm.royalbash.gameengine.model.card.effect.PlayEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.GenericEffect;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -24,7 +24,7 @@ public abstract class ResourcesCard implements Card {
     private final int costBlessing;
 
     @JsonIgnore
-    private final PlayEffect PlayEffect;
+    private final GenericEffect playEffect;
 
     @Override
     public String getCardType() {

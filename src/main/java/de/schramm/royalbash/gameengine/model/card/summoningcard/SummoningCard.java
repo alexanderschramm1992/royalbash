@@ -4,16 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.gameengine.model.Card;
 import de.schramm.royalbash.gameengine.model.Summoning;
 import de.schramm.royalbash.gameengine.model.Tag;
-import de.schramm.royalbash.gameengine.model.card.effect.AttackSummoningEffect;
-import de.schramm.royalbash.gameengine.model.card.effect.PlayEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.Singular;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Getter
+@Setter
 @RequiredArgsConstructor
 public abstract class SummoningCard implements Card {
 
@@ -32,15 +34,22 @@ public abstract class SummoningCard implements Card {
 
     @JsonIgnore
     @Singular("tag")
-    private final Set<Tag> tags;
+    private final Set<Tag> tags = new HashSet<>();
 
     @JsonIgnore
-    private final PlayEffect playEffect;
+    private GenericEffect playEffect = new PlainGenericEffect();
 
     @JsonIgnore
-    private final AttackSummoningEffect attackSummoningEffect;
+    private AttackSummoningEffect attackSummoningEffect = new PlainAttackSummoningEffect();
 
-    public Summoning toInstance(UUID id) {
+    @JsonIgnore
+    private GenericEffect ownerTurnStartEffect = new PlainGenericEffect();
+
+    @JsonIgnore
+    private GenericEffectWithSourceSummoning ownerTurnStartEffectWithSource =
+            new PlainGenericEffectWithSourceSummoning();
+
+    public final Summoning toInstance(UUID id) {
 
         return Summoning.builder()
                 .id(id)
@@ -55,5 +64,13 @@ public abstract class SummoningCard implements Card {
     @Override
     public String getCardType() {
         return "SummoningCard";
+    }
+
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
+
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
     }
 }

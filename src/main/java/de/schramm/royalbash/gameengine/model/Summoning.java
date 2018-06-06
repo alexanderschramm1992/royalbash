@@ -47,6 +47,13 @@ public class Summoning {
         currentHealth = currentHealth < amount ? 0 : currentHealth - amount;
     }
 
+    public void increaseCurrentHealth(int amount) {
+        currentHealth += amount;
+        if(currentHealth > getSummoningCard().getHealth()) {
+            currentHealth = getSummoningCard().getHealth();
+        }
+    }
+
     public boolean isDead() {
         return currentHealth == 0;
     }

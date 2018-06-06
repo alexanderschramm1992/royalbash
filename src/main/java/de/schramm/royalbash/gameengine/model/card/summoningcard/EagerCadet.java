@@ -1,9 +1,5 @@
 package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
-import de.schramm.royalbash.gameengine.model.card.effect.PlainAttackSummoningEffect;
-import de.schramm.royalbash.gameengine.model.card.effect.PlainPlayEffect;
-
-import java.util.Collections;
 import java.util.UUID;
 
 public class EagerCadet extends SummoningCard {
@@ -22,10 +18,7 @@ public class EagerCadet extends SummoningCard {
                 0,
                 0,
                 1,
-                1,
-                Collections.emptySet(),
-                new PlainPlayEffect(),
-                new PlainAttackSummoningEffect()
+                1
         );
     }
 }

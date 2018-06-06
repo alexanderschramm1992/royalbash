@@ -1,9 +1,10 @@
 package de.schramm.royalbash.gameengine.model.card.effect;
 
 import de.schramm.royalbash.gameengine.exception.RuleViolationException;
+import de.schramm.royalbash.gameengine.model.Summoning;
 import de.schramm.royalbash.gameengine.model.card.EffectContext;
 
-public interface PlayEffect {
+public interface GenericEffectWithSourceSummoning {
 
-    void apply(EffectContext context) throws RuleViolationException;
+    void apply(Summoning source, EffectContext context) throws RuleViolationException;
 }

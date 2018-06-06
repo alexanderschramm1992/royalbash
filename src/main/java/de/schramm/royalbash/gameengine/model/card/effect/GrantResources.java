@@ -8,7 +8,7 @@ import lombok.Value;
 
 @Value
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class GrantResources implements PlayEffect {
+public class GrantResources implements GenericEffect {
 
     private int rations;
     private int material;
