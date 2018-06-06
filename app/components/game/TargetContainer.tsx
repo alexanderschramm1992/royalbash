@@ -5,35 +5,15 @@ import "../common/common.css";
 
 import {Target} from "../../model/Game";
 import SummoningMini from "./card/SummoningMini";
-import store from "../../Store";
-import {SummoningIssuedActionFactory} from "../../actions/SummoningIssuedAction";
 
 export interface TargetContainerProps {
 
     targets: Target[];
+    handleDragOver: (event: any) => void,
+    handleDrop: (event: any) => void
 }
 
 export class TargetContainer extends React.Component<TargetContainerProps, {}> {
-
-    handleDrop(event: any): any {
-
-        console.log("We are handeling the drop, bitches!");
-        event.preventDefault();
-        if (!store.getState().summonCardIssued) {
-            store.dispatch(
-                SummoningIssuedActionFactory.getInstance(
-                    store.getState().cardToBeSummoned,
-                    event.target.attributes["data-target-id"].nodeValue
-                )
-            );
-        }
-    }
-
-    handleDragOver(event: any): void {
-
-        console.log("Watch out, something is coming from above!");
-        event.preventDefault();
-    }
 
     render(): any {
 
@@ -45,8 +25,8 @@ export class TargetContainer extends React.Component<TargetContainerProps, {}> {
                     key={i}
                     data-target-id={this.props.targets[i].id}
                     className={"summoning-mini-placeholder summoning-mini-placeholder-" + i + " border-large"}
-                    onDragOver={this.handleDragOver}
-                    onDrop={this.handleDrop}
+                    onDragOver={this.props.handleDragOver}
+                    onDrop={this.props.handleDrop}
                 >
                     {this.props.targets[i].summoning &&
                     <SummoningMini summoning = {this.props.targets[i].summoning} />

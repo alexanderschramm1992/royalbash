@@ -35,13 +35,10 @@ export class CardMini extends React.Component<CardMiniProps, {}> {
     }
 
     handleMouseOut(): void {
-
         store.dispatch(MouseOffCardActionFactory.getInstance());
     }
 
     handleDragStart(event: any): void {
-
-        console.dir(event);
         store.dispatch(CardDraggedActionFactory.getInstance(this.props.card.id));
     }
 

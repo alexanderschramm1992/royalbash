@@ -8,6 +8,7 @@ import store from "../../../Store";
 import {MouseOnSummoningActionFactory} from "../../../actions/MouseOnSummoningAction";
 import {MouseOffSummoningActionFactory} from "../../../actions/MouseOffSummoningAction";
 import CardMiniView from "./CardMiniView";
+import {SummoningDraggedActionFactory} from "../../../actions/SummoningDraggedAction";
 
 export class SummoningMini extends React.Component<SummoningProps, {}> {
 
@@ -28,13 +29,11 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
     }
 
     handleMouseOut(): void {
-
         store.dispatch(MouseOffSummoningActionFactory.getInstance());
     }
 
     handleDragStart(event: any): void {
-
-        console.dir(event);
+        store.dispatch(SummoningDraggedActionFactory.getInstance(this.props.summoning.id));
     }
 
     render(): any {

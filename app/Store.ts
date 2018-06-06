@@ -5,6 +5,7 @@ import {Game, Player, Summoning, Card} from "./model/Game";
 export interface StateModel {
 
     playerId?: string;
+    enemyId?: string;
 
     game?: Game;
 
@@ -38,14 +39,25 @@ export function getPlayer(): Player {
 
     let state = store.getState();
 
-    let playerId = state.playerId;
-
-    if (state.game.board.playerBlue.id == playerId) {
+    if (state.game.board.playerBlue.id == state.playerId) {
 
         return state.game.board.playerBlue;
     } else {
      
+        return state.game.board.playerRed;
+    }
+}
+
+export function getEnemyPlayer(): Player {
+
+    let state = store.getState();
+
+    if (state.game.board.playerBlue.id == state.enemyId) {
+
         return state.game.board.playerBlue;
+    } else {
+
+        return state.game.board.playerRed;
     }
 }
 

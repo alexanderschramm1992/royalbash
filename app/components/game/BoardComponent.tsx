@@ -17,6 +17,7 @@ import FieldComponent from "./FieldComponent";
 import SummonCardCall from "../../rest/SummonCardCall";
 import ResourcesDeckComponent from "./stack/ResourcesDeckComponent";
 import {ResourcePoolComponent} from "./resourcepool/ResourcePoolComponent";
+import EnemyFieldComponent from "./EnemyFieldComponent";
 
 interface BoardState {
 
@@ -81,7 +82,7 @@ export class BoardComponent extends React.Component<{}, BoardState> {
                         </div>
                         <div className="play-area border-large border-radius">
                             <div className="remote-summoning-area">
-                                <FieldComponent/>
+                                <EnemyFieldComponent/>
                             </div>
                             <div className="summoning-area">
                                 <FieldComponent/>
