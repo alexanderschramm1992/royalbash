@@ -14,7 +14,7 @@ public class BountifulHarvest extends ResourcesCard {
                 "/img/bountiful_harvest.jpg",
                 "Resources",
                 "",
-                "You gain <b>3 Rations</b>",
+                "Gain <b>3 Rations</b>",
                 "",
                 0,
                 0,
