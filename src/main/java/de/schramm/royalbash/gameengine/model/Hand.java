@@ -6,6 +6,7 @@ import de.schramm.royalbash.gameengine.model.card.resourcescard.ResourcesCard;
 import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,7 +32,9 @@ public class Hand {
     void removeCard(Card card) throws RuleViolationException {
 
         if (cards.contains(card)) {
-            cards.remove(card);
+            val newCards = new ArrayList<Card>(cards);
+            newCards.remove(card);
+            cards = newCards;
         } else {
             throw new RuleViolationException(String.format("Card %s not in hand", card.getId()));
         }

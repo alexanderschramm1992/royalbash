@@ -4,6 +4,7 @@ import de.schramm.royalbash.controller.requestmodel.SummonRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.persistence.GameManager;
+import de.schramm.royalbash.util.UUIDGenerator;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 class PlaySummoningCardController {
 
     private final GameManager gameManager;
+    private final UUIDGenerator uuidGenerator;
 
     @Autowired
     private PlaySummoningCardController(
-            GameManager gameManager
+            GameManager gameManager,
+            UUIDGenerator uuidGenerator
     ) {
         this.gameManager = gameManager;
+        this.uuidGenerator = uuidGenerator;
     }
 
     @RequestMapping(
@@ -43,7 +47,8 @@ class PlaySummoningCardController {
             val player = game.findPlayer(requestParams.getPlayerId());
             player.playSummoningCard(
                     player.getHand().findSummoningCard(requestParams.getCardId()),
-                    game.findTarget(requestParams.getTargetId())
+                    game.findTarget(requestParams.getTargetId()),
+                    uuidGenerator.generateUUID()
             );
             gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponse.fromGame(game));

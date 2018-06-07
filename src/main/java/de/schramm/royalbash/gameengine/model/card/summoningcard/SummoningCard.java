@@ -5,10 +5,7 @@ import de.schramm.royalbash.gameengine.model.Card;
 import de.schramm.royalbash.gameengine.model.Summoning;
 import de.schramm.royalbash.gameengine.model.Tag;
 import de.schramm.royalbash.gameengine.model.card.effect.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.Singular;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -50,15 +47,7 @@ public abstract class SummoningCard implements Card {
             new PlainGenericEffectWithSourceSummoning();
 
     public final Summoning toInstance(UUID id) {
-
-        return Summoning.builder()
-                .id(id)
-                .summoningCard(this)
-                .currentCost(costRations)
-                .currentStrength(strength)
-                .currentHealth(health)
-                .tags(tags)
-                .build();
+        return Summoning.fromCard(this, id);
     }
 
     @Override

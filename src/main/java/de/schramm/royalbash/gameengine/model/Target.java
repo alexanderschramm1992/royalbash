@@ -1,5 +1,6 @@
 package de.schramm.royalbash.gameengine.model;
 
+import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,11 +13,16 @@ public class Target {
     private UUID id;
     private Summoning summoning;
 
-    public void summon(Summoning summoning) {
-        this.summoning = summoning;
+    void summon(Summoning summoning) throws RuleViolationException {
+
+        if(this.summoning == null) {
+            this.summoning = summoning;
+        } else {
+            throw new RuleViolationException(String.format("Target %s is occupied", id));
+        }
     }
 
-    public void bury(Summoning summoning) {
+    void bury(Summoning summoning) {
         if (summoning.equals(this.summoning)) {
             this.summoning = null;
         }

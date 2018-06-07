@@ -5,6 +5,8 @@ import de.schramm.royalbash.gameengine.model.Target;
 
 import java.util.UUID;
 
+import static de.schramm.royalbash.data.SummoningData.VETERAN_KNIGHT;
+
 class FieldData {
 
     static final Field FIELD_1 = Field.builder()
@@ -39,6 +41,7 @@ class FieldData {
             .target(
                     Target.builder()
                             .id(UUID.fromString("bbfc3e08-db9f-49ba-8028-b24c61fe0a1a"))
+                            .summoning(VETERAN_KNIGHT)
                             .build()
             )
             .target(

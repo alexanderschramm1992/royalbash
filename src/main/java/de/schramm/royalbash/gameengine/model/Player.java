@@ -27,11 +27,11 @@ public class Player {
 
     private int health;
 
-    public void playSummoningCard(SummoningCard summoningCard, Target target) throws GameEngineException {
+    public void playSummoningCard(SummoningCard summoningCard, Target target, UUID id) throws GameEngineException {
 
         resourcePool.payFor(summoningCard);
         hand.removeCard(summoningCard);
-        field.summon(Summoning.fromCard(summoningCard, UUID.randomUUID()), target);
+        field.summon(Summoning.fromCard(summoningCard, id), target);
 
     }
 

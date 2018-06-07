@@ -3,15 +3,15 @@ package de.schramm.royalbash.gameengine.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.gameengine.model.card.effect.AttackSummoningEffect;
 import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Singular;
+import lombok.*;
 
 import java.util.Set;
 import java.util.UUID;
 
-@Builder
 @Getter
+@ToString
+@EqualsAndHashCode
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Summoning {
 
     private final UUID id;
@@ -28,15 +28,17 @@ public class Summoning {
     @JsonIgnore
     private final AttackSummoningEffect attackSummoningEffect;
 
-    static Summoning fromCard(SummoningCard summoningCard, UUID id) {
+    public static Summoning fromCard(SummoningCard summoningCard, UUID id) {
 
-        return Summoning.builder()
-                .id(id)
-                .summoningCard(summoningCard)
-                .currentCost(summoningCard.getCostRations())
-                .currentHealth(summoningCard.getHealth())
-                .currentStrength(summoningCard.getStrength())
-                .build();
+        return new Summoning(
+            id,
+            summoningCard,
+            summoningCard.getCostRations(),
+            summoningCard.getHealth(),
+            summoningCard.getStrength(),
+            summoningCard.getTags(),
+            summoningCard.getAttackSummoningEffect()
+        );
     }
 
     public void setCurrentHealth(int newHealth) {

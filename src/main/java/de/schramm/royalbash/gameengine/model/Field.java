@@ -1,6 +1,7 @@
 package de.schramm.royalbash.gameengine.model;
 
 import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
+import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;
@@ -15,7 +16,7 @@ public class Field {
     @Singular("target")
     private List<Target> targets;
 
-    void summon(Summoning summoning, Target target) throws DomainObjectDoesNotExistException {
+    void summon(Summoning summoning, Target target) throws GameEngineException {
 
         targets.stream()
                 .filter(element -> element.equals(target))
