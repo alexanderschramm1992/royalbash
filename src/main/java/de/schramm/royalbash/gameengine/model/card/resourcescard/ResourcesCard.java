@@ -3,13 +3,15 @@ package de.schramm.royalbash.gameengine.model.card.resourcescard;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.gameengine.model.Card;
 import de.schramm.royalbash.gameengine.model.card.effect.GenericEffect;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Getter
-@AllArgsConstructor
+@Setter
+@RequiredArgsConstructor
 public abstract class ResourcesCard implements Card {
 
     private final UUID id;
@@ -24,7 +26,7 @@ public abstract class ResourcesCard implements Card {
     private final int costBlessing;
 
     @JsonIgnore
-    private final GenericEffect playEffect;
+    private GenericEffect playEffect;
 
     @Override
     public String getCardType() {

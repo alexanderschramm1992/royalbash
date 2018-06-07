@@ -17,8 +17,9 @@ public class HiddenAmory extends ResourcesCard {
                 "",
                 0,
                 0,
-                0,
-                GrantResources.getInstance(0, 3, 0)
+                0
         );
+
+        setPlayEffect(GrantResources.getInstance(0, 3, 0));
     }
 }

@@ -17,8 +17,9 @@ public class RuralHomestead extends ResourcesCard {
                 "",
                 0,
                 1,
-                0,
-                GrantResources.getInstance(5, 0, 0)
+                0
         );
+
+        setPlayEffect(GrantResources.getInstance(5, 0, 0));
     }
 }

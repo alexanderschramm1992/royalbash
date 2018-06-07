@@ -17,8 +17,9 @@ public class BlessedAltar extends ResourcesCard {
                 "",
                 0,
                 0,
-                0,
-                GrantResources.getInstance(0, 0, 3)
+                0
         );
+
+        setPlayEffect(GrantResources.getInstance(0, 0, 3));
     }
 }

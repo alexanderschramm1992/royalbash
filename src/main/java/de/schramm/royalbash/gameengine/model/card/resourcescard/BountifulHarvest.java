@@ -18,8 +18,9 @@ public class BountifulHarvest extends ResourcesCard {
                 "",
                 0,
                 0,
-                0,
-                GrantResources.getInstance(3, 0, 0)
+                0
         );
+
+        setPlayEffect(GrantResources.getInstance(3, 0, 0));
     }
 }
