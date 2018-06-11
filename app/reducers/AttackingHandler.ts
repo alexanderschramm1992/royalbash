@@ -28,7 +28,7 @@ const handleAttacking: Reducer<StateModel, AnyAction> = (state, action): StateMo
             console.log("Attacking issued");
             return {
                 ...state,
-                attackingIssued: true,
+                attackingSummoningIssued: true,
                 attackingSummoning: attackingIssuedAction.attackingSummoningId,
                 attackedSummoning: attackingIssuedAction.attackedSummoningId
             };
@@ -39,7 +39,7 @@ const handleAttacking: Reducer<StateModel, AnyAction> = (state, action): StateMo
             return {
                 ...state,
                 game: game,
-                attackingIssued: false,
+                attackingSummoningIssued: false,
                 attackingSummoning: null,
                 attackedSummoning: null
             };
@@ -49,7 +49,7 @@ const handleAttacking: Reducer<StateModel, AnyAction> = (state, action): StateMo
             console.log("Attacking declined because: " + attackingDeclinedAction.reason);
             return {
                 ...state,
-                attackingIssued: false,
+                attackingSummoningIssued: false,
                 attackingSummoning: null,
                 attackedSummoning: null
             };

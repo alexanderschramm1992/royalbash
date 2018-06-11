@@ -13,6 +13,10 @@ public class Target {
     private UUID id;
     private Summoning summoning;
 
+    public boolean isOccupied() {
+        return summoning == null;
+    }
+
     void summon(Summoning summoning) throws RuleViolationException {
 
         if(this.summoning == null) {

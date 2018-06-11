@@ -24,7 +24,7 @@ export interface StateModel {
 
     attackingSummoning?: string;
     attackedSummoning?: string;
-    attackingIssued: boolean;
+    attackingSummoningIssued: boolean;
 
     summoningToAttack?: string;
 

@@ -1,7 +1,7 @@
 package de.schramm.royalbash.gameengine.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.schramm.royalbash.gameengine.model.card.effect.AttackSummoningEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.AttackingTargetEffect;
 import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.*;
 
@@ -26,7 +26,7 @@ public class Summoning {
     private Set<Tag> tags;
 
     @JsonIgnore
-    private final AttackSummoningEffect attackSummoningEffect;
+    private final AttackingTargetEffect attackingTargetEffect;
 
     public static Summoning fromCard(SummoningCard summoningCard, UUID id) {
 
@@ -37,7 +37,7 @@ public class Summoning {
             summoningCard.getHealth(),
             summoningCard.getStrength(),
             summoningCard.getTags(),
-            summoningCard.getAttackSummoningEffect()
+            summoningCard.getAttackingTargetEffect()
         );
     }
 

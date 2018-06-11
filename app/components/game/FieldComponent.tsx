@@ -40,7 +40,6 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
 
     handleDrop(event: any): void {
 
-        console.log("We are handeling the drop, bitches!");
         event.preventDefault();
         if (!store.getState().summonCardIssued) {
             store.dispatch(

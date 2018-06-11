@@ -7,10 +7,10 @@ import java.util.UUID;
 
 @Value
 @Builder
-public class AttackSummoningRequest {
+public class AttackingTargetRequest {
 
     private UUID gameId;
     private UUID playerId;
     private UUID attackingSummoningId;
-    private UUID attackedSummoningId;
+    private UUID attackedTargetId;
 }

@@ -5,6 +5,7 @@ import "./FieldComponent.css";
 import store, {getEnemyPlayer} from "../../Store";
 import {Target} from "../../model/Game";
 import TargetContainer from "./TargetContainer";
+import {AttackingIssuedActionFactory} from "../../actions/AttackingIssuedAction";
 
 interface EnemyFieldComponentState {
 
@@ -41,6 +42,14 @@ export class EnemyFieldComponent extends React.Component<{}, EnemyFieldComponent
 
         console.log("We are handeling the drop, bitches!");
         event.preventDefault();
+        if(!store.getState().attackingSummoningIssued) {
+            store.dispatch(
+                AttackingIssuedActionFactory.getInstance(
+                    store.getState().attackingSummoning,
+                    event.target.attributes["data-target-id"].nodeValue
+                )
+            )
+        }
     }
 
     render(): any {

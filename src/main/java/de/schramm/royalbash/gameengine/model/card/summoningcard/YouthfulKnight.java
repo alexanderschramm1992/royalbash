@@ -1,7 +1,7 @@
 package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
 import de.schramm.royalbash.gameengine.model.Tag;
-import de.schramm.royalbash.gameengine.model.card.effect.MountedAttackSummoningEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.MountedAttackingTargetEffect;
 
 import java.util.UUID;
 
@@ -25,6 +25,6 @@ public class YouthfulKnight extends SummoningCard {
         );
 
         addTag(Tag.MOUNTED);
-        setAttackSummoningEffect(new MountedAttackSummoningEffect());
+        this.setAttackingTargetEffect(new MountedAttackingTargetEffect());
     }
 }

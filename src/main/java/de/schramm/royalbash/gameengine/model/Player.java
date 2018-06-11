@@ -61,4 +61,9 @@ public class Player {
 
         return field.getTarget(targetId);
     }
+
+    public Target findTarget(UUID attackedTargetId) {
+
+        return field.getTarget(attackedTargetId);
+    }
 }

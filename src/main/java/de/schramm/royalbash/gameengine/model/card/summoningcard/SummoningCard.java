@@ -37,7 +37,7 @@ public abstract class SummoningCard implements Card {
     private GenericEffect playEffect = new PlainGenericEffect();
 
     @JsonIgnore
-    private AttackSummoningEffect attackSummoningEffect = new PlainAttackSummoningEffect();
+    private AttackingTargetEffect attackingTargetEffect = new PlainAttackingTargetEffect();
 
     @JsonIgnore
     private GenericEffect ownerTurnStartEffect = new PlainGenericEffect();

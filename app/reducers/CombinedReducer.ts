@@ -17,7 +17,7 @@ const initialState: StateModel =  {
     drawSummoningCardIssued: false,
     drawResourcesCardIssued: false,
     summonCardIssued: false,
-    attackingIssued: false,
+    attackingSummoningIssued: false,
 
     constants: {
         maxRations: 10,
