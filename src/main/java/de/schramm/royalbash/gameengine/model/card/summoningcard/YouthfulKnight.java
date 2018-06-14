@@ -15,13 +15,13 @@ public class YouthfulKnight extends SummoningCard {
                 "/img/youthful_knight.png",
                 "Creature",
                 "Knight",
-                "",
+                "<b>Mounted</b> (+1/+1 while attacking)",
                 "",
                 2,
                 1,
                 0,
-                3,
-                2
+                2,
+                1
         );
 
         addTag(Tag.MOUNTED);

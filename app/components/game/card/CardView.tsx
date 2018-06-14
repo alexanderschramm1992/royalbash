@@ -68,7 +68,7 @@ export class CardView extends React.Component<CardViewProps, {}> {
                         <div className="font-size-medium" dangerouslySetInnerHTML={{__html: this.props.text}} />
                     </div>
                     <div className="lore">
-                        <div className="font-size-medium" dangerouslySetInnerHTML={{__html: this.props.text}} />
+                        <div className="font-size-medium" dangerouslySetInnerHTML={{__html: this.props.lore}} />
                     </div>
                 </div>
                 <div className="foot-wrapper">

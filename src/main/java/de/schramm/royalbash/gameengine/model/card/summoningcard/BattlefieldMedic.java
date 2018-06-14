@@ -12,7 +12,7 @@ public class BattlefieldMedic extends SummoningCard {
                 "/img/battlefield_medic.png",
                 "Creature",
                 "Soldier",
-                "",
+                "At the start of your turn, heal an ally for 1",
                 "",
                 2,
                 0,
