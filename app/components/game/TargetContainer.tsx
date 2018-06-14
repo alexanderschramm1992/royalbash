@@ -4,7 +4,7 @@ import "./TargetContainer.css";
 import "../common/common.css";
 
 import {Target} from "../../model/Game";
-import SummoningMini from "./card/SummoningMini";
+import TargetComponent from "./TargetComponent";
 
 export interface TargetContainerProps {
 
@@ -21,22 +21,18 @@ export class TargetContainer extends React.Component<TargetContainerProps, {}> {
         for (let i = 0; i < this.props.targets.length; i++) {
 
             targetElements.push(
-                <div
-                    key={i}
-                    data-target-id={this.props.targets[i].id}
-                    className={"summoning-mini-placeholder summoning-mini-placeholder-" + i + " border-large"}
-                    onDragOver={this.props.handleDragOver}
-                    onDrop={this.props.handleDrop}
-                >
-                    {this.props.targets[i].summoning &&
-                    <SummoningMini summoning = {this.props.targets[i].summoning} />
-                    }
+                <div className="target-wrapper" key={i}>
+                    <TargetComponent
+                        target={this.props.targets[i]}
+                        handleDragOver={this.props.handleDragOver}
+                        handleDrop={this.props.handleDrop}
+                    />
                 </div>
             );
         }
 
         return (
-            <div className="summoning-mini-container border-large">
+            <div className="target-container border-large">
                 {targetElements}
             </div>
         );
