@@ -10,7 +10,6 @@ class SummoningCardCall {
         store.subscribe((): void => {
 
             if(store.getState().summonCardIssued) {
-
                 axios.post(
                     "gameloop/summon",
                     {
@@ -25,17 +24,9 @@ class SummoningCardCall {
                         }
                     },
                 ).then((response: AxiosResponse): void => {
-
-                    store.dispatch(
-                        SummoningAcceptedActionFactory.getInstance(response.data)
-                    );
+                    store.dispatch(SummoningAcceptedActionFactory.getInstance(response.data));
                 }).catch((reason: string) => {
-
-                    store.dispatch(
-                        SummoningDeclinedActionFactory.getInstance(
-                            reason
-                        )
-                    );
+                    store.dispatch(SummoningDeclinedActionFactory.getInstance(reason));
                 });
             }
         });

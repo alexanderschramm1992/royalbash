@@ -38,14 +38,14 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
         event.preventDefault();
     }
 
-    handleDrop(event: any): void {
+    handleDrop(target: Target, event: any): void {
 
         event.preventDefault();
         if (!store.getState().summonCardIssued) {
             store.dispatch(
                 SummoningIssuedActionFactory.getInstance(
                     store.getState().cardToBeSummoned,
-                    event.target.attributes["data-target-id"].nodeValue
+                    target.id
                 )
             );
         }

@@ -23,10 +23,9 @@ export interface StateModel {
     summonCardIssued: boolean;
 
     attackingSummoning?: string;
-    attackedSummoning?: string;
-    attackingSummoningIssued: boolean;
-
-    summoningToAttack?: string;
+    attackedTarget?: string;
+    attackingTargetIssued: boolean;
+    attackingTargetProcessing: boolean;
 
     constants: {
         maxRations: number,

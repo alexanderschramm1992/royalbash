@@ -49,7 +49,7 @@ public class GameManager {
     public Player findEnemyPlayer(UUID playerId, Game game) throws DomainObjectDoesNotExistException {
 
         return Stream.of(game.getBoard().getPlayerBlue(), game.getBoard().getPlayerRed())
-                .filter(player -> player.getId() != playerId)
+                .filter(player -> !player.getId().equals(playerId))
                 .findFirst()
                 .orElseThrow(() -> new DomainObjectDoesNotExistException(
                     String.format(

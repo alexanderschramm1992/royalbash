@@ -1,20 +1,23 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
-import {AttackingAcceptedActionFactory} from "../actions/AttackingAcceptedAction";
-import {AttackingDeclinedActionFactory} from "../actions/AttackingDeclinedAction";
+import {AttackingAcceptedActionFactory} from "../actions/AttackingTargetAcceptedAction";
+import {AttackingDeclinedActionFactory} from "../actions/AttackingTargetDeclinedAction";
+import {AttackingTargetProcessingActionFactory} from "../actions/AttackingTargetProcessingAction";
 
-class AttackSummoningCall {
+class AttackingTargetCall {
 
     constructor () {
         store.subscribe((): void => {
-            if(store.getState().summonCardIssued) {
+            if(store.getState().attackingTargetIssued && !store.getState().attackingTargetProcessing) {
+
+                store.dispatch(AttackingTargetProcessingActionFactory.getInstance());
                 axios.post(
-                    "gameloop/attackSummoning",
+                    "gameloop/attackingTarget",
                     {
                         "gameId": store.getState().gameId,
                         "playerId": store.getState().playerId,
-                        "attackingSummoning": store.getState().attackingSummoning,
-                        "attackedSummoning": store.getState().attackedSummoning
+                        "attackingSummoningId": store.getState().attackingSummoning,
+                        "attackedTargetId": store.getState().attackedTarget
                     },
                     {
                         headers: {
@@ -31,4 +34,4 @@ class AttackSummoningCall {
     }
 }
 
-export default AttackSummoningCall;
+export default AttackingTargetCall;

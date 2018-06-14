@@ -10,10 +10,20 @@ export interface TargetComponentProps {
 
     target: Target;
     handleDragOver: (event: any) => void,
-    handleDrop: (event: any) => void
+    handleDrop: (target: Target, event: any) => void
 }
 
 export class TargetComponent extends React.Component<TargetComponentProps, {}> {
+
+    constructor(props: TargetComponentProps) {
+
+        super(props);
+        this.handleDrop = this.handleDrop.bind(this);
+    }
+
+    handleDrop(event: any): void {
+        this.props.handleDrop(this.props.target, event);
+    }
 
     render(): any {
 
@@ -21,7 +31,7 @@ export class TargetComponent extends React.Component<TargetComponentProps, {}> {
             <div
                 className={"target border-large"}
                 onDragOver={this.props.handleDragOver}
-                onDrop={this.props.handleDrop}
+                onDrop={this.handleDrop}
             >
                 {this.props.target.summoning &&
                 <SummoningMini summoning = {this.props.target.summoning} />

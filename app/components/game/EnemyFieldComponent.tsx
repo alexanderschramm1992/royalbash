@@ -5,7 +5,7 @@ import "./FieldComponent.css";
 import store, {getEnemyPlayer} from "../../Store";
 import {Target} from "../../model/Game";
 import TargetContainer from "./TargetContainer";
-import {AttackingIssuedActionFactory} from "../../actions/AttackingIssuedAction";
+import {AttackingIssuedActionFactory} from "../../actions/AttackingTargetIssuedAction";
 
 interface EnemyFieldComponentState {
 
@@ -38,15 +38,14 @@ export class EnemyFieldComponent extends React.Component<{}, EnemyFieldComponent
         event.preventDefault();
     }
 
-    handleDrop(event: any): void {
+    handleDrop(target: Target, event: any): void {
 
-        console.log("We are handeling the drop, bitches!");
         event.preventDefault();
-        if(!store.getState().attackingSummoningIssued) {
+        if(!store.getState().attackingTargetIssued) {
             store.dispatch(
                 AttackingIssuedActionFactory.getInstance(
                     store.getState().attackingSummoning,
-                    event.target.attributes["data-target-id"].nodeValue
+                    target.id
                 )
             )
         }

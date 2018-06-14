@@ -53,23 +53,4 @@ public class Game {
             throw new DomainObjectDoesNotExistException(String.format("Target %s does not exist",targetId));
         }
     }
-
-    public Summoning findSummoning(UUID summoningId) throws DomainObjectDoesNotExistException {
-
-        try {
-
-            val playerRedTargets = board.getPlayerRed().getField().getTargets();
-            val playerBlueTargets = board.getPlayerBlue().getField().getTargets();
-
-            return Stream.of(playerRedTargets, playerBlueTargets)
-                    .flatMap(Collection::stream)
-                    .map(Target::getSummoning)
-                    .filter(Objects::nonNull)
-                    .filter(summoning -> summoning.getId().equals(summoningId))
-                    .findFirst()
-                    .orElseThrow(NullPointerException::new);
-        } catch(NullPointerException e) {
-            throw new DomainObjectDoesNotExistException(String.format("Summoning %s does not exist", summoningId));
-        }
-    }
 }

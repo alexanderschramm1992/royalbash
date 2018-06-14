@@ -33,11 +33,13 @@ public class Field {
                 .forEach(target -> target.bury(summoning));
     }
 
-    Target getTarget(UUID targetId) {
+    Target getTarget(UUID targetId) throws DomainObjectDoesNotExistException {
 
         return targets.stream()
                 .filter(target -> target.getId().equals(targetId))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new DomainObjectDoesNotExistException(
+                        String.format("Cannot find target %s", targetId)
+                ));
     }
 }

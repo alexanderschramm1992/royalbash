@@ -14,7 +14,7 @@ public class Target {
     private Summoning summoning;
 
     public boolean isOccupied() {
-        return summoning == null;
+        return summoning != null;
     }
 
     void summon(Summoning summoning) throws RuleViolationException {

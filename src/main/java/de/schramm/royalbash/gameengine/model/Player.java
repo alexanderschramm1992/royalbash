@@ -1,5 +1,6 @@
 package de.schramm.royalbash.gameengine.model;
 
+import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import de.schramm.royalbash.gameengine.model.card.EffectContext;
@@ -9,7 +10,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.UUID;
 
 @Builder
 @Getter
@@ -43,27 +45,29 @@ public class Player {
     }
 
     void bury(Summoning summoning) {
-
         field.bury(summoning);
     }
 
     public void drawSummoningCard() throws RuleViolationException {
-
         hand.addCard(summoningDeck.drawCard());
     }
 
     public void drawResourcesCard() throws RuleViolationException {
-
         hand.addCard(resourcesDeck.drawCard());
     }
 
-    public Target getTarget(UUID targetId) {
-
-        return field.getTarget(targetId);
+    public Target findTarget(UUID attackedTargetId) throws DomainObjectDoesNotExistException {
+        return field.getTarget(attackedTargetId);
     }
 
-    public Target findTarget(UUID attackedTargetId) {
-
-        return field.getTarget(attackedTargetId);
+    public Summoning findSummoning(UUID summoningId) throws DomainObjectDoesNotExistException {
+        return field.getTargets().stream()
+            .map(Target::getSummoning)
+            .filter(Objects::nonNull)
+            .filter(summoning -> summoning.getId().equals(summoningId))
+            .findFirst()
+            .orElseThrow(() -> new DomainObjectDoesNotExistException(
+                    String.format("Summoning %s does not exist", summoningId)
+            ));
     }
 }

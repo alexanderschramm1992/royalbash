@@ -33,8 +33,9 @@ public class AttackingTargetController {
         try {
 
             val game = gameManager.findGame(requestParams.getGameId());
-            val attackingSummoning = game.findSummoning(requestParams.getAttackingSummoningId());
+            val player = game.findPlayer(requestParams.getPlayerId());
             val enemyPlayer = gameManager.findEnemyPlayer(requestParams.getPlayerId(), game);
+            val attackingSummoning = player.findSummoning(requestParams.getAttackingSummoningId());
             val attackedTarget = enemyPlayer.findTarget(requestParams.getAttackedTargetId());
             attackingSummoning.getAttackingTargetEffect().apply(
                     attackingSummoning,

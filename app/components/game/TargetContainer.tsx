@@ -10,7 +10,7 @@ export interface TargetContainerProps {
 
     targets: Target[];
     handleDragOver: (event: any) => void,
-    handleDrop: (event: any) => void
+    handleDrop: (target: Target, event: any) => void
 }
 
 export class TargetContainer extends React.Component<TargetContainerProps, {}> {
