@@ -17,14 +17,16 @@ public class PlainAttackingTargetEffect implements AttackingTargetEffect {
         if(attackedTarget.isOccupied()) {
 
             val attackedSummoning = attackedTarget.getSummoning();
-            attackedSummoning.reduceCurrentHealth(attackingSummoning.getCurrentStrength());
-            attackingSummoning.reduceCurrentHealth(attackedSummoning.getCurrentStrength());
+            attackingSummoning.dealDamage(attackedSummoning);
+            attackedSummoning.dealDamage(attackingSummoning);
 
-            if(attackedSummoning.getCurrentHealth() <= 0) {
+            attackingSummoning.setCanAttack(false);
+
+            if(attackedSummoning.isDead()) {
                 context.getGame().getBoard().bury(attackedSummoning);
             }
 
-            if(attackingSummoning.getCurrentHealth() <= 0) {
+            if(attackingSummoning.isDead()) {
                 context.getGame().getBoard().bury(attackingSummoning);
             }
         }

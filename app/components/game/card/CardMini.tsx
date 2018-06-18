@@ -62,6 +62,7 @@ export class CardMini extends React.Component<CardMiniProps, {}> {
                 handleMouseOver={this.handleMouseOver}
                 handleMouseOut={this.handleMouseOut}
                 handleDragStart={this.handleDragStart}
+                isDraggable={true}
             />
         );
     }

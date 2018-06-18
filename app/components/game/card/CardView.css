@@ -79,19 +79,19 @@
     position: relative;
     top: -0.5em;
     background: var(--text-background);
+    white-space: initial;
 }
 
 .card-view .text-wrapper .text {
-    width: 10.5em;
     margin: 0.5em;
 }
 
 .card-view .text-wrapper .lore {
-    width: 10.5em;
     margin: 0.5em;
     font-style: italic;
     position: absolute;
     bottom: 0;
+    right: 0;
 }
 
 .card-view .foot-wrapper {

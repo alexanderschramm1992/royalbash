@@ -14,7 +14,8 @@ export interface CardViewMiniProps {
     health?: number,
     handleMouseOver: () => void,
     handleMouseOut: () => void,
-    handleDragStart: (event: any) => void
+    handleDragStart: (event: any) => void,
+    isDraggable: boolean
 }
 
 export class CardMini extends React.Component<CardViewMiniProps, {}> {
@@ -23,7 +24,7 @@ export class CardMini extends React.Component<CardViewMiniProps, {}> {
 
         return (
             <div
-                draggable={true}
+                draggable={this.props.isDraggable}
                 onDragStart={this.props.handleDragStart}
                 className="card-mini-view border-large"
                 onMouseOver={this.props.handleMouseOver}

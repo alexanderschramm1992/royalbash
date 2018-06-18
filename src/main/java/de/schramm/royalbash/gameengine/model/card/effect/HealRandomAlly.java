@@ -1,6 +1,5 @@
 package de.schramm.royalbash.gameengine.model.card.effect;
 
-import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import de.schramm.royalbash.gameengine.model.Summoning;
 import de.schramm.royalbash.gameengine.model.Target;
 import de.schramm.royalbash.gameengine.model.card.EffectContext;
@@ -18,13 +17,13 @@ public class HealRandomAlly implements GenericEffectWithSourceSummoning{
     private final int healAmount;
 
     @Override
-    public void apply(Summoning source, EffectContext context) throws RuleViolationException {
+    public void apply(Summoning source, EffectContext context) {
 
         val damagedSummonings = context.getOwner().getField().getTargets().stream()
                 .map(Target::getSummoning)
                 .filter(Objects::nonNull)
                 .filter(summoning -> summoning != source)
-                .filter(summoning -> summoning.getCurrentHealth() < summoning.getSummoningCard().getHealth())
+                .filter(Summoning::isWounded)
                 .collect(Collectors.toList());
 
         if(!damagedSummonings.isEmpty()) {

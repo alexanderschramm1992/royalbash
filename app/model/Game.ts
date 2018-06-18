@@ -105,7 +105,8 @@ export interface Summoning {
     readonly summoningCard: SummoningCard,
     readonly currentCost: number,
     readonly currentHealth: number,
-    readonly currentStrength: number
+    readonly currentStrength: number,
+    readonly canAttack: boolean
 }
 
 export default Game;

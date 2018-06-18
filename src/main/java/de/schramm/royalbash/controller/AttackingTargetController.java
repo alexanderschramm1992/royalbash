@@ -3,7 +3,6 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.requestmodel.AttackingTargetRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.model.card.EffectContext;
 import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
@@ -37,13 +36,10 @@ public class AttackingTargetController {
             val enemyPlayer = gameManager.findEnemyPlayer(requestParams.getPlayerId(), game);
             val attackingSummoning = player.findSummoning(requestParams.getAttackingSummoningId());
             val attackedTarget = enemyPlayer.findTarget(requestParams.getAttackedTargetId());
-            attackingSummoning.getAttackingTargetEffect().apply(
-                    attackingSummoning,
+            attackingSummoning.attackTarget(
                     attackedTarget,
-                    EffectContext.builder()
-                            .game(game)
-                            .owner(game.findPlayer(requestParams.getPlayerId()))
-                            .build()
+                    player,
+                    game
             );
             gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponse.fromGame(game));

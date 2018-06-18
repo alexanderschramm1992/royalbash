@@ -17,25 +17,25 @@ public class MountedAttackingTargetEffect implements AttackingTargetEffect {
 
         if(attackedTarget.isOccupied()) {
             val attackedSummoning = attackedTarget.getSummoning();
-            if(attackedSummoning.getTags().contains(Tag.MOUNTED)) {
+            if(attackedSummoning.hasTag(Tag.MOUNTED)) {
                 new PlainAttackingTargetEffect().apply(
                         attackingSummoning,
                         attackedTarget,
                         context
                 );
             } else {
-                attackedSummoning.reduceCurrentHealth(
-                        attackingSummoning.getCurrentStrength() + 1
-                );
-                attackingSummoning.reduceCurrentHealth(
-                        attackedSummoning.getCurrentStrength() > 0 ? attackedSummoning.getCurrentStrength() - 1 : 0
-                );
+                attackingSummoning.increaseCurrentStrength(1);
+                attackingSummoning.dealDamage(attackedSummoning);
+                attackingSummoning.reduceCurrentStrength(1);
 
-                if(attackedSummoning.getCurrentHealth() <= 0) {
+                if(attackedSummoning.isDead()) {
                     context.getGame().getBoard().bury(attackedSummoning);
-                }
-                if(attackingSummoning.getCurrentHealth() <= 0) {
-                    context.getGame().getBoard().bury(attackingSummoning);
+                } else {
+                    attackedSummoning.dealDamage(attackingSummoning);
+
+                    if(attackingSummoning.isDead()) {
+                        context.getGame().getBoard().bury(attackingSummoning);
+                    }
                 }
             }
         }

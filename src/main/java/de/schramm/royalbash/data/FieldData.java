@@ -2,9 +2,11 @@ package de.schramm.royalbash.data;
 
 import de.schramm.royalbash.gameengine.model.Field;
 import de.schramm.royalbash.gameengine.model.Target;
+import de.schramm.royalbash.gameengine.model.card.summoningcard.EagerCadet;
 
 import java.util.UUID;
 
+import static de.schramm.royalbash.data.SummoningData.EAGER_CADET;
 import static de.schramm.royalbash.data.SummoningData.VETERAN_KNIGHT;
 
 class FieldData {
@@ -52,6 +54,7 @@ class FieldData {
             .target(
                     Target.builder()
                             .id(UUID.fromString("2c36d72e-fa79-424a-875d-4e064894e6f1"))
+                            .summoning(EAGER_CADET)
                             .build()
             )
             .target(

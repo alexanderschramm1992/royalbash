@@ -55,7 +55,7 @@ public abstract class SummoningCard implements Card {
         return "SummoningCard";
     }
 
-    public void addTag(Tag tag) {
+    void addTag(Tag tag) {
         tags.add(tag);
     }
 
