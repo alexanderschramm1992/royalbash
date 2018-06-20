@@ -20,7 +20,7 @@ const handleAttackingTarget: Reducer<StateModel, AnyAction> = (state, action): S
             console.log("Summoning " + summoningDraggedAction.summoningId + " is dragged");
             return {
                 ...state,
-                attackingSummoning: summoningDraggedAction.summoningId
+                summoningDragged: summoningDraggedAction.summoningId
             };
         case ATTACKING_TARGET_ISSUED:
 
@@ -29,7 +29,7 @@ const handleAttackingTarget: Reducer<StateModel, AnyAction> = (state, action): S
             return {
                 ...state,
                 attackingTargetIssued: true,
-                attackingSummoning: attackingIssuedAction.attackingSummoningId,
+                summoningDragged: attackingIssuedAction.attackingSummoningId,
                 attackedTarget: attackingIssuedAction.attackedTargetId
             };
         case ATTACKING_TARGET_PROCESSING:
@@ -48,7 +48,7 @@ const handleAttackingTarget: Reducer<StateModel, AnyAction> = (state, action): S
                 game: game,
                 attackingTargetProcessing: false,
                 attackingTargetIssued: false,
-                attackingSummoning: null,
+                summoningDragged: null,
                 attackedTarget: null
             };
         case ATTACKING_TARGET_DECLINED:
@@ -59,7 +59,7 @@ const handleAttackingTarget: Reducer<StateModel, AnyAction> = (state, action): S
                 ...state,
                 attackingTargetProcessing: false,
                 attackingTargetIssued: false,
-                attackingSummoning: null,
+                summoningDragged: null,
                 attackedTarget: null
             };
         default:

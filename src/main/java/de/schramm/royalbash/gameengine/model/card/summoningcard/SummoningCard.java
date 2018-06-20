@@ -52,7 +52,7 @@ public abstract class SummoningCard implements Card {
 
     @Override
     public String getCardType() {
-        return "SummoningCard";
+        return "Summoning";
     }
 
     void addTag(Tag tag) {

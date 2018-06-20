@@ -1,12 +1,10 @@
 import {
-    CARD_DRAGGED,
     SUMMONING_ISSUED,
     SUMMONING_ACCEPTED,
     SUMMONING_DECLINED
 } from "../actions/ActionTypes";
 import {AnyAction, Reducer} from "redux";
 import {StateModel} from "../Store";
-import CardDraggedAction from "../actions/CardDraggedAction";
 import SummoningIssuedAction from "../actions/SummoningIssuedAction";
 import SummoningDeclinedAction from "../actions/SummoningDeclinedAction";
 import Game from "../model/Game";
@@ -14,14 +12,6 @@ import Game from "../model/Game";
 const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 
     switch (action.type) {
-        case CARD_DRAGGED:
-
-            let cardDraggedAction = action as CardDraggedAction;
-            console.log("Card " + cardDraggedAction.cardId + " is dragged");
-            return {
-                ...state,
-                cardToBeSummoned: cardDraggedAction.cardId
-            };
         case SUMMONING_ISSUED:
 
             let summoningIssuedAction = action as SummoningIssuedAction;
@@ -29,7 +19,7 @@ const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateMo
             return {
                 ...state,
                 summonCardIssued: true,
-                cardToBeSummoned: summoningIssuedAction.cardId,
+                cardDragged: summoningIssuedAction.cardId,
                 summoningTarget: summoningIssuedAction.targetId
             };
         case SUMMONING_ACCEPTED:
@@ -40,7 +30,7 @@ const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateMo
                 ...state,
                 game: game,
                 summonCardIssued: false,
-                cardToBeSummoned: null,
+                cardDragged: null,
                 summoningTarget: null
             };
         case SUMMONING_DECLINED:
@@ -50,7 +40,7 @@ const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateMo
             return {
                 ...state,
                 summonCardIssued: false,
-                cardToBeSummoned: null,
+                cardDragged: null,
                 summoningTarget: null
             };
         default:

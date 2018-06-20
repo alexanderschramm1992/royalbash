@@ -1,10 +1,10 @@
 package de.schramm.royalbash.controller;
 
-import de.schramm.royalbash.controller.requestmodel.SummonRequest;
+import de.schramm.royalbash.controller.requestmodel.GatheringResourcesRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponse;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
+import de.schramm.royalbash.gameengine.model.card.EffectContext;
 import de.schramm.royalbash.persistence.GameManager;
-import de.schramm.royalbash.util.UUIDGenerator;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,44 +17,43 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
 @RestController
-class PlaySummoningCardController {
+public class GatheringResourcesController {
 
     private final GameManager gameManager;
-    private final UUIDGenerator uuidGenerator;
 
     @Autowired
-    private PlaySummoningCardController(
-            GameManager gameManager,
-            UUIDGenerator uuidGenerator
+    private GatheringResourcesController(
+            GameManager gameManager
     ) {
         this.gameManager = gameManager;
-        this.uuidGenerator = uuidGenerator;
     }
 
     @RequestMapping(
-            value = "gameloop/summon",
+            value = "gameloop/gatheringResources",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<StateResponse> summonInstance(
-            @RequestBody SummonRequest requestParams
+    public ResponseEntity<StateResponse> gatherResources(
+            @RequestBody GatheringResourcesRequest requestParams
     ) {
 
         try {
 
             val game = gameManager.findGame(requestParams.getGameId());
             val player = game.findPlayer(requestParams.getPlayerId());
-            player.playSummoningCard(
-                    player.getHand().findSummoningCard(requestParams.getCardId()),
-                    game.findTarget(requestParams.getTargetId()),
-                    uuidGenerator.generateUUID()
+            val resourcesCard = player.getHand().findResourcesCard(requestParams.getCardId());
+            resourcesCard.getPlayEffect().apply(
+                    EffectContext.builder()
+                            .game(game)
+                            .owner(player)
+                            .build()
             );
             gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponse.fromGame(game));
         } catch (GameEngineException e) {
 
-            log.warn("Failed to summon card due to: " + e.getMessage());
+            log.warn("Failed to gather resources due to: " + e.getMessage());
             return ResponseEntity.badRequest().body(StateResponse.fromError(e.getMessage()));
         }
     }

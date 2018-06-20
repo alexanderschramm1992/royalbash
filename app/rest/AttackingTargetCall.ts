@@ -16,7 +16,7 @@ class AttackingTargetCall {
                     {
                         "gameId": store.getState().gameId,
                         "playerId": store.getState().playerId,
-                        "attackingSummoningId": store.getState().attackingSummoning,
+                        "attackingSummoningId": store.getState().summoningDragged,
                         "attackedTargetId": store.getState().attackedTarget
                     },
                     {

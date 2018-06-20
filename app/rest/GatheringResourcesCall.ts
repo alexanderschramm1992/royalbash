@@ -1,22 +1,21 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
-import {SummoningAcceptedActionFactory} from "../actions/SummoningAcceptedAction";
-import {SummoningDeclinedActionFactory} from "../actions/SummoningDeclinedAction";
+import {GatheringResourcesAcceptedActionFactory} from "../actions/GatheringResourcesAcceptedAction";
+import {GatheringResourcesDeclinedActionFactory} from "../actions/GatheringResourcesDeclinedAction";
 
-class SummoningCardCall {
+class GatheringResourcesCall {
 
     constructor () {
 
         store.subscribe((): void => {
 
-            if(store.getState().summonCardIssued) {
+            if(store.getState().gatheringResourceIssued) {
                 axios.post(
-                    "gameloop/summon",
+                    "gameloop/gatheringResources",
                     {
                         "gameId": store.getState().gameId,
                         "playerId": store.getState().playerId,
-                        "cardId": store.getState().cardDragged,
-                        "targetId": store.getState().summoningTarget
+                        "cardId": store.getState().cardDragged
                     },
                     {
                         headers: {
@@ -24,13 +23,13 @@ class SummoningCardCall {
                         }
                     },
                 ).then((response: AxiosResponse): void => {
-                    store.dispatch(SummoningAcceptedActionFactory.getInstance(response.data));
+                    store.dispatch(GatheringResourcesAcceptedActionFactory.getInstance(response.data));
                 }).catch((reason: string) => {
-                    store.dispatch(SummoningDeclinedActionFactory.getInstance(reason));
+                    store.dispatch(GatheringResourcesDeclinedActionFactory.getInstance(reason));
                 });
             }
         });
     }
 }
 
-export default SummoningCardCall;
+export default GatheringResourcesCall;

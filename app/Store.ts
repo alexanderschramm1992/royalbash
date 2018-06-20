@@ -18,11 +18,14 @@ export interface StateModel {
     cardOnPreview?: string;
     summoningOnPreview?: string;
     
-    cardToBeSummoned?: string;
+    cardDragged?: string;
+    summoningDragged?: string;
+
     summoningTarget?: string;
     summonCardIssued: boolean;
 
-    attackingSummoning?: string;
+    gatheringResourceIssued: boolean;
+
     attackedTarget?: string;
     attackingTargetIssued: boolean;
     attackingTargetProcessing: boolean;

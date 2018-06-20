@@ -30,6 +30,6 @@ public abstract class ResourcesCard implements Card {
 
     @Override
     public String getCardType() {
-        return "ResourcesCard";
+        return "Resources";
     }
 }

@@ -7,6 +7,8 @@ import handleSummoning from "./SummoningHandler";
 import handleLoadGame from "./LoadGameHandler";
 import handleDrawResourcesCard from "./DrawResourcesCardHandler";
 import handleAttackingTarget from "./AttackingTargetHandler";
+import handleGatheringResources from "./GatheringResourcesHandler";
+import handleDraggingCard from "./DraggingCardHandler";
 
 const initialState: StateModel =  {
 
@@ -17,6 +19,7 @@ const initialState: StateModel =  {
     drawSummoningCardIssued: false,
     drawResourcesCardIssued: false,
     summonCardIssued: false,
+    gatheringResourceIssued: false,
     attackingTargetIssued: false,
     attackingTargetProcessing: false,
 
@@ -30,6 +33,7 @@ const initialState: StateModel =  {
 export const combinedReducers: Reducer<StateModel, AnyAction> =
     (state = initialState, action): StateModel => {
 
+        state = handleDraggingCard(state, action);
         state = handleDrawSummoningCard(state, action);
         state = handleDrawResourcesCard(state, action);
         state = handleMouseOnCard(state, action);
@@ -37,6 +41,7 @@ export const combinedReducers: Reducer<StateModel, AnyAction> =
         state = handleSummoning(state, action);
         state = handleLoadGame(state, action);
         state = handleAttackingTarget(state, action);
+        state = handleGatheringResources(state, action);
         return state;
     };
 

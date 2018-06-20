@@ -43,9 +43,11 @@ export class CardMini extends React.Component<CardMiniProps, {}> {
     }
 
     isSummoningCard(): boolean {
+        return this.props.card.cardType == "Summoning";
+    }
 
-        let card = this.props.card as SummoningCard;
-        return card.strength != null && card.health != null;
+    isResourcesCard(): boolean {
+        return this.props.card.cardType == "Resources";
     }
 
     render(): any {

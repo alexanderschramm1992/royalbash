@@ -41,10 +41,10 @@ export class EnemyFieldComponent extends React.Component<{}, EnemyFieldComponent
     handleDrop(target: Target, event: any): void {
 
         event.preventDefault();
-        if(!store.getState().attackingTargetIssued) {
+        if(!store.getState().attackingTargetIssued && store.getState().summoningDragged) {
             store.dispatch(
                 AttackingIssuedActionFactory.getInstance(
-                    store.getState().attackingSummoning,
+                    store.getState().summoningDragged,
                     target.id
                 )
             )

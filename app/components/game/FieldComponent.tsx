@@ -6,6 +6,7 @@ import store, {getPlayer} from "../../Store";
 import {Target} from "../../model/Game";
 import TargetContainer from "./TargetContainer";
 import {SummoningIssuedActionFactory} from "../../actions/SummoningIssuedAction";
+import {GatheringResourcesIssuedActionFactory} from "../../actions/GatheringResourcesIssuedAction";
 
 interface FieldComponentState {
 
@@ -30,21 +31,39 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
 
         this.handleDragOver = this.handleDragOver.bind(this);
         this.handleDrop = this.handleDrop.bind(this);
+        this.handleDragOverForTargets = this.handleDragOverForTargets.bind(this);
+        this.handleDropForTargets = this.handleDropForTargets.bind(this);
     }
 
     handleDragOver(event: any): void {
-
-        console.log("Watch out, something is coming from above!");
+        console.log("Field: 'Watch out, something is coming from above!'");
         event.preventDefault();
     }
 
-    handleDrop(target: Target, event: any): void {
+    handleDrop(event: any): void {
 
         event.preventDefault();
-        if (!store.getState().summonCardIssued) {
+        if (!store.getState().summonCardIssued && store.getState().cardDragged) {
+            store.dispatch(
+                GatheringResourcesIssuedActionFactory.getInstance(
+                    store.getState().cardDragged,
+                )
+            );
+        }
+    }
+
+    handleDragOverForTargets(event: any): void {
+        console.log("Target: 'Watch out, something is coming from above!'");
+        event.preventDefault();
+    }
+
+    handleDropForTargets(target: Target, event: any): void {
+
+        event.preventDefault();
+        if (!store.getState().summonCardIssued && store.getState().cardDragged) {
             store.dispatch(
                 SummoningIssuedActionFactory.getInstance(
-                    store.getState().cardToBeSummoned,
+                    store.getState().cardDragged,
                     target.id
                 )
             );
@@ -57,8 +76,8 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
             <div className="field">
                 <TargetContainer
                     targets={this.state.targets}
-                    handleDragOver={this.handleDragOver}
-                    handleDrop={this.handleDrop}
+                    handleDragOver={this.handleDragOverForTargets}
+                    handleDrop={this.handleDropForTargets}
                 />
             </div>
         );
