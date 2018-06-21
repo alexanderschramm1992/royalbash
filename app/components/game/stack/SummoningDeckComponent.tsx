@@ -4,7 +4,7 @@ import "../../common/common.css";
 import "./SummoningDeckComponent.css";
 
 import store from "../../../Store";
-import { DrawSummoningCardIssuedActionFactory } from "../../../actions/DrawSummoningCardIssuedAction";
+import { DrawSummoningCardIssuedActionFactory } from "../../../actions/drawingsummoningcard/DrawSummoningCardIssuedAction";
 
 interface DeckState {
 

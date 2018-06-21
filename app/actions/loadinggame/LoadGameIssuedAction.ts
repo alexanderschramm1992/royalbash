@@ -1,4 +1,4 @@
-import {LOAD_GAME_ISSUED} from "./ActionTypes";
+import {LOAD_GAME_ISSUED} from "../ActionTypes";
 import { Action } from "redux";
 
 interface LoadGameIssuedAction extends Action<LOAD_GAME_ISSUED>{

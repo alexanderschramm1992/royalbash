@@ -1,6 +1,6 @@
-import {SUMMONING_ACCEPTED} from "./ActionTypes";
+import {SUMMONING_ACCEPTED} from "../ActionTypes";
 import {Action} from "redux";
-import { Game } from "../model/Game";
+import { Game } from "../../model/Game";
 
 interface SummoningAcceptedAction extends Action<SUMMONING_ACCEPTED>{
 

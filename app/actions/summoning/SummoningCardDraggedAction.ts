@@ -1,4 +1,4 @@
-import {SUMMONING_CARD_DRAGGED} from "./ActionTypes";
+import {SUMMONING_CARD_DRAGGED} from "../ActionTypes";
 import {Action} from "redux";
 
 interface SummoningCardDraggedAction extends Action<SUMMONING_CARD_DRAGGED>{

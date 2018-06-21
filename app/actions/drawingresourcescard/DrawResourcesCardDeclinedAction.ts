@@ -1,4 +1,4 @@
-import {DRAW_RESOURCES_CARD_DECLINED, DRAW_SUMMONING_CARD_DECLINED} from "./ActionTypes";
+import {DRAW_RESOURCES_CARD_DECLINED, DRAW_SUMMONING_CARD_DECLINED} from "../ActionTypes";
 import { Action } from "redux";
 
 interface DrawResourcesCardDeclinedAction extends Action<DRAW_RESOURCES_CARD_DECLINED>{

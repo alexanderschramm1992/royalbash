@@ -1,4 +1,4 @@
-import { MOUSE_OFF_SUMMONING } from "./ActionTypes";
+import { MOUSE_OFF_SUMMONING } from "../ActionTypes";
 import {Action} from "redux";
 
 interface MouseOffSummoningAction extends Action<MOUSE_OFF_SUMMONING>{

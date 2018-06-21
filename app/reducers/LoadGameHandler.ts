@@ -5,9 +5,9 @@ import {
 } from "../actions/ActionTypes";
 import {AnyAction, Reducer} from "redux";
 import { StateModel } from "../Store";
-import LoadGameAcceptedAction from "../actions/LoadGameAcceptedAction";
-import LoadGameDeclinedAction from "../actions/LoadGameDeclinedAction";
-import LoadGameIssuedAction from "../actions/LoadGameIssuedAction";
+import LoadGameAcceptedAction from "../actions/loadinggame/LoadGameAcceptedAction";
+import LoadGameDeclinedAction from "../actions/loadinggame/LoadGameDeclinedAction";
+import LoadGameIssuedAction from "../actions/loadinggame/LoadGameIssuedAction";
 
 const handleLoadGame: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 

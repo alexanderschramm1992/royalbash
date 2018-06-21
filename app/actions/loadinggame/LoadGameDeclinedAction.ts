@@ -1,4 +1,4 @@
-import {LOAD_GAME_DECLINED} from "./ActionTypes";
+import {LOAD_GAME_DECLINED} from "../ActionTypes";
 import { Action } from "redux";
 
 interface LoadGameDeclinedAction extends Action<LOAD_GAME_DECLINED>{

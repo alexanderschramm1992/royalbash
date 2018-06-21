@@ -1,7 +1,7 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
-import { DrawSummoningCardAcceptedActionFactory } from "../actions/DrawSummoningCardAcceptedAction";
-import { DrawSummoningCardDeclinedActionFactory } from "../actions/DrawSummoningCardDeclinedAction";
+import { DrawSummoningCardAcceptedActionFactory } from "../actions/drawingsummoningcard/DrawSummoningCardAcceptedAction";
+import { DrawSummoningCardDeclinedActionFactory } from "../actions/drawingsummoningcard/DrawSummoningCardDeclinedAction";
 
 class DrawCardCall {
 

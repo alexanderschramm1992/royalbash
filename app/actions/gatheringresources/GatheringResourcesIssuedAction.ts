@@ -1,4 +1,4 @@
-import {GATHERING_RESOURCES_ISSUED} from "./ActionTypes";
+import {GATHERING_RESOURCES_ISSUED} from "../ActionTypes";
 import { Action } from "redux";
 
 interface GatheringResourcesIssuedAction extends Action<GATHERING_RESOURCES_ISSUED>{

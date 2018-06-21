@@ -1,8 +1,8 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
-import {AttackingAcceptedActionFactory} from "../actions/AttackingTargetAcceptedAction";
-import {AttackingDeclinedActionFactory} from "../actions/AttackingTargetDeclinedAction";
-import {AttackingTargetProcessingActionFactory} from "../actions/AttackingTargetProcessingAction";
+import {AttackingAcceptedActionFactory} from "../actions/attackingtarget/AttackingTargetAcceptedAction";
+import {AttackingDeclinedActionFactory} from "../actions/attackingtarget/AttackingTargetDeclinedAction";
+import {AttackingTargetProcessingActionFactory} from "../actions/attackingtarget/AttackingTargetProcessingAction";
 
 class AttackingTargetCall {
 

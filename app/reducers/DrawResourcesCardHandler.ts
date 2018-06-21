@@ -5,8 +5,8 @@ import {
 } from "../actions/ActionTypes";
 import {AnyAction, Reducer} from "redux";
 import { StateModel } from "../Store";
-import DrawCardAcceptedAction from "../actions/DrawSummoningCardAcceptedAction";
-import DrawCardDeclinedAction from "../actions/DrawSummoningCardDeclinedAction";
+import DrawCardAcceptedAction from "../actions/drawingsummoningcard/DrawSummoningCardAcceptedAction";
+import DrawCardDeclinedAction from "../actions/drawingsummoningcard/DrawSummoningCardDeclinedAction";
 
 const handleDrawResourcesCard: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 

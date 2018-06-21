@@ -1,4 +1,4 @@
-import {ATTACKING_TARGET_DECLINED} from "./ActionTypes";
+import {ATTACKING_TARGET_DECLINED} from "../ActionTypes";
 import {Action} from "redux";
 
 interface AttackingTargetDeclinedAction extends Action<ATTACKING_TARGET_DECLINED>{

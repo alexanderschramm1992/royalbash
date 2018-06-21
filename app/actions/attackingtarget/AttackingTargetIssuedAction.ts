@@ -1,4 +1,4 @@
-import {ATTACKING_TARGET_ISSUED} from "./ActionTypes";
+import {ATTACKING_TARGET_ISSUED} from "../ActionTypes";
 import {Action} from "redux";
 
 interface AttackingTargetIssuedAction extends Action<ATTACKING_TARGET_ISSUED>{

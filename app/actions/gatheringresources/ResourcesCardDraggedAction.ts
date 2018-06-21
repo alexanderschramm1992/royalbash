@@ -1,4 +1,4 @@
-import {RESOURCES_CARD_DRAGGED} from "./ActionTypes";
+import {RESOURCES_CARD_DRAGGED} from "../ActionTypes";
 import {Action} from "redux";
 
 interface ResourcesCardDraggedAction extends Action<RESOURCES_CARD_DRAGGED>{

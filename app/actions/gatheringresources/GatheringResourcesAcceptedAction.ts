@@ -1,6 +1,6 @@
-import {GATHERING_RESOURCES_ACCEPTED} from "./ActionTypes";
+import {GATHERING_RESOURCES_ACCEPTED} from "../ActionTypes";
 import { Action } from "redux";
-import Game from "../model/Game";
+import Game from "../../model/Game";
 
 interface GatheringResourcesAcceptedAction extends Action<GATHERING_RESOURCES_ACCEPTED>{
 

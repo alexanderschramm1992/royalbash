@@ -1,7 +1,7 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
-import {LoadGameAcceptedActionFactory} from "../actions/LoadGameAcceptedAction";
-import {LoadGameDeclinedActionFactory} from "../actions/LoadGameDeclinedAction";
+import {LoadGameAcceptedActionFactory} from "../actions/loadinggame/LoadGameAcceptedAction";
+import {LoadGameDeclinedActionFactory} from "../actions/loadinggame/LoadGameDeclinedAction";
 
 class LoadGameCall {
 

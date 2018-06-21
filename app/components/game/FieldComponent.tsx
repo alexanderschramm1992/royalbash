@@ -5,8 +5,8 @@ import "./FieldComponent.css";
 import store, {getPlayer} from "../../Store";
 import {Target} from "../../model/Game";
 import TargetContainer from "./TargetContainer";
-import {SummoningIssuedActionFactory} from "../../actions/SummoningIssuedAction";
-import {GatheringResourcesIssuedActionFactory} from "../../actions/GatheringResourcesIssuedAction";
+import {SummoningIssuedActionFactory} from "../../actions/summoning/SummoningIssuedAction";
+import {GatheringResourcesIssuedActionFactory} from "../../actions/gatheringresources/GatheringResourcesIssuedAction";
 
 interface FieldComponentState {
 

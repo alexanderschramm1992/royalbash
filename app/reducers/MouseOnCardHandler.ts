@@ -1,7 +1,7 @@
 import {AnyAction, Reducer} from "redux";
 import {StateModel, store} from "../Store";
 import {MOUSE_OFF_CARD, MOUSE_ON_CARD} from "../actions/ActionTypes";
-import MouseOnCardAction from "../actions/MouseOnCardAction";
+import MouseOnCardAction from "../actions/hovering/MouseOnCardAction";
 
 const handleMouseOnCard: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 

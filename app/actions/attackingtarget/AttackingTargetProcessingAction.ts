@@ -1,4 +1,4 @@
-import {ATTACKING_TARGET_PROCESSING} from "./ActionTypes";
+import {ATTACKING_TARGET_PROCESSING} from "../ActionTypes";
 import {Action} from "redux";
 
 interface AttackingTargetProcessingAction extends Action<ATTACKING_TARGET_PROCESSING>{

@@ -4,12 +4,12 @@ import "./CardMini.css";
 import "../../common/common.css";
 
 import store from "../../../Store";
-import {MouseOnCardActionFactory} from "../../../actions/MouseOnCardAction";
-import {MouseOffCardActionFactory} from "../../../actions/MouseOffCardAction";
+import {MouseOnCardActionFactory} from "../../../actions/hovering/MouseOnCardAction";
+import {MouseOffCardActionFactory} from "../../../actions/hovering/MouseOffCardAction";
 import {Card, SummoningCard} from "../../../model/Game";
 import CardMiniView from "./CardMiniView";
-import {SummoningCardDraggedActionFactory} from "../../../actions/SummoningCardDraggedAction";
-import {ResourcesCardDraggedActionFactory} from "../../../actions/ResourcesCardDraggedAction";
+import {SummoningCardDraggedActionFactory} from "../../../actions/summoning/SummoningCardDraggedAction";
+import {ResourcesCardDraggedActionFactory} from "../../../actions/gatheringresources/ResourcesCardDraggedAction";
 
 export interface CardMiniProps {
 

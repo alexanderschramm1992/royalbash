@@ -1,6 +1,6 @@
-import {LOAD_GAME_ACCEPTED} from "./ActionTypes";
+import {LOAD_GAME_ACCEPTED} from "../ActionTypes";
 import { Action } from "redux";
-import Game from "../model/Game";
+import Game from "../../model/Game";
 
 interface LoadGameAcceptedAction extends Action<LOAD_GAME_ACCEPTED>{
 

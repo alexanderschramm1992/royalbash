@@ -5,7 +5,7 @@ import "./FieldComponent.css";
 import store, {getEnemyPlayer} from "../../Store";
 import {Target} from "../../model/Game";
 import TargetContainer from "./TargetContainer";
-import {AttackingIssuedActionFactory} from "../../actions/AttackingTargetIssuedAction";
+import {AttackingIssuedActionFactory} from "../../actions/attackingtarget/AttackingTargetIssuedAction";
 
 interface EnemyFieldComponentState {
 

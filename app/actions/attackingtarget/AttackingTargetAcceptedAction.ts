@@ -1,6 +1,6 @@
-import {ATTACKING_TARGET_ACCEPTED} from "./ActionTypes";
+import {ATTACKING_TARGET_ACCEPTED} from "../ActionTypes";
 import {Action} from "redux";
-import {Game} from "../model/Game";
+import {Game} from "../../model/Game";
 
 interface AttackingTargetAcceptedAction extends Action<ATTACKING_TARGET_ACCEPTED>{
 

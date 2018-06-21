@@ -6,10 +6,10 @@ import {
 } from "../actions/ActionTypes";
 import {AnyAction, Reducer} from "redux";
 import {StateModel} from "../Store";
-import SummoningIssuedAction from "../actions/SummoningIssuedAction";
-import SummoningDeclinedAction from "../actions/SummoningDeclinedAction";
+import SummoningIssuedAction from "../actions/summoning/SummoningIssuedAction";
+import SummoningDeclinedAction from "../actions/summoning/SummoningDeclinedAction";
 import Game from "../model/Game";
-import SummoningCardDraggedAction from "../actions/SummoningCardDraggedAction";
+import SummoningCardDraggedAction from "../actions/summoning/SummoningCardDraggedAction";
 
 const handleSummoning: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 

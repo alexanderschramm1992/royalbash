@@ -1,7 +1,7 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
-import {SummoningAcceptedActionFactory} from "../actions/SummoningAcceptedAction";
-import {SummoningDeclinedActionFactory} from "../actions/SummoningDeclinedAction";
+import {SummoningAcceptedActionFactory} from "../actions/summoning/SummoningAcceptedAction";
+import {SummoningDeclinedActionFactory} from "../actions/summoning/SummoningDeclinedAction";
 
 class SummoningCardCall {
 

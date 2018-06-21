@@ -7,9 +7,9 @@ import {
 import {AnyAction, Reducer} from "redux";
 import {StateModel} from "../Store";
 import Game from "../model/Game";
-import GatheringResourcesIssuedAction from "../actions/GatheringResourcesIssuedAction";
-import GatheringResourcesDeclinedAction from "../actions/GatheringResourcesDeclinedAction";
-import ResourcesCardDraggedAction from "../actions/ResourcesCardDraggedAction";
+import GatheringResourcesIssuedAction from "../actions/gatheringresources/GatheringResourcesIssuedAction";
+import GatheringResourcesDeclinedAction from "../actions/gatheringresources/GatheringResourcesDeclinedAction";
+import ResourcesCardDraggedAction from "../actions/gatheringresources/ResourcesCardDraggedAction";
 
 const handleGatheringResources: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 

@@ -6,9 +6,9 @@ import {
 } from "../actions/ActionTypes";
 import {AnyAction, Reducer} from "redux";
 import {StateModel} from "../Store";
-import SummoningDraggedAction from "../actions/SummoningDraggedAction";
-import AttackingTargetIssuedAction from "../actions/AttackingTargetIssuedAction";
-import AttackingTargetDeclinedAction from "../actions/AttackingTargetDeclinedAction";
+import SummoningDraggedAction from "../actions/attackingtarget/SummoningDraggedAction";
+import AttackingTargetIssuedAction from "../actions/attackingtarget/AttackingTargetIssuedAction";
+import AttackingTargetDeclinedAction from "../actions/attackingtarget/AttackingTargetDeclinedAction";
 import Game from "../model/Game";
 
 const handleAttackingTarget: Reducer<StateModel, AnyAction> = (state, action): StateModel => {

@@ -1,7 +1,7 @@
 import store from "../Store";
 import axios, {AxiosResponse} from "axios";
-import {GatheringResourcesAcceptedActionFactory} from "../actions/GatheringResourcesAcceptedAction";
-import {GatheringResourcesDeclinedActionFactory} from "../actions/GatheringResourcesDeclinedAction";
+import {GatheringResourcesAcceptedActionFactory} from "../actions/gatheringresources/GatheringResourcesAcceptedAction";
+import {GatheringResourcesDeclinedActionFactory} from "../actions/gatheringresources/GatheringResourcesDeclinedAction";
 
 class GatheringResourcesCall {
 

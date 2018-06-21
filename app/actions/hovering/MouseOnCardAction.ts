@@ -1,4 +1,4 @@
-import {MOUSE_ON_CARD} from "./ActionTypes";
+import {MOUSE_ON_CARD} from "../ActionTypes";
 import {Action} from "redux";
 
 interface MouseOnCardAction extends Action<MOUSE_ON_CARD>{

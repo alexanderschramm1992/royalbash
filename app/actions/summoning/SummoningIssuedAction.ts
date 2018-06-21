@@ -1,4 +1,4 @@
-import {SUMMONING_ISSUED} from "./ActionTypes";
+import {SUMMONING_ISSUED} from "../ActionTypes";
 import {Action} from "redux";
 
 interface SummoningIssuedAction extends Action<SUMMONING_ISSUED>{

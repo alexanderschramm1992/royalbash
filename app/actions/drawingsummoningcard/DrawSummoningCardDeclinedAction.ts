@@ -1,4 +1,4 @@
-import { DRAW_SUMMONING_CARD_DECLINED } from "./ActionTypes";
+import { DRAW_SUMMONING_CARD_DECLINED } from "../ActionTypes";
 import { Action } from "redux";
 
 interface DrawSummoningCardDeclinedAction extends Action<DRAW_SUMMONING_CARD_DECLINED>{

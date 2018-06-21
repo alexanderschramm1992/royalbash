@@ -5,10 +5,10 @@ import "../../common/common.css";
 
 import {SummoningProps} from "./SummoningComponent";
 import store from "../../../Store";
-import {MouseOnSummoningActionFactory} from "../../../actions/MouseOnSummoningAction";
-import {MouseOffSummoningActionFactory} from "../../../actions/MouseOffSummoningAction";
+import {MouseOnSummoningActionFactory} from "../../../actions/hovering/MouseOnSummoningAction";
+import {MouseOffSummoningActionFactory} from "../../../actions/hovering/MouseOffSummoningAction";
 import CardMiniView from "./CardMiniView";
-import {SummoningDraggedActionFactory} from "../../../actions/SummoningDraggedAction";
+import {SummoningDraggedActionFactory} from "../../../actions/attackingtarget/SummoningDraggedAction";
 
 export class SummoningMini extends React.Component<SummoningProps, {}> {
 

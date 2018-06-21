@@ -4,7 +4,7 @@ import "../../common/common.css";
 import "./ResourcesDeckComponent.css";
 
 import store from "../../../Store";
-import {DrawResourcesCardIssuedActionFactory} from "../../../actions/DrawResourcesCardIssuedAction";
+import {DrawResourcesCardIssuedActionFactory} from "../../../actions/drawingresourcescard/DrawResourcesCardIssuedAction";
 
 interface DeckState {
 

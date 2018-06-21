@@ -11,7 +11,7 @@ import GraveyardComponent from "./stack/GraveyardComponent";
 import DrawSummoningCardCall from "../../rest/DrawSummoningCardCall";
 import DrawResourcesCardCall from "../../rest/DrawResourcesCardCall";
 import store from "../../Store";
-import {LoadGameIssuedActionFactory} from "../../actions/LoadGameIssuedAction";
+import {LoadGameIssuedActionFactory} from "../../actions/loadinggame/LoadGameIssuedAction";
 import LoadGameCall from "../../rest/LoadGameCall";
 import FieldComponent from "./FieldComponent";
 import SummoningCardCall from "../../rest/SummoningCardCall";
