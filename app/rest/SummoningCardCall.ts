@@ -15,7 +15,7 @@ class SummoningCardCall {
                     {
                         "gameId": store.getState().gameId,
                         "playerId": store.getState().playerId,
-                        "cardId": store.getState().cardDragged,
+                        "cardId": store.getState().summoningCardDragged,
                         "targetId": store.getState().summoningTarget
                     },
                     {

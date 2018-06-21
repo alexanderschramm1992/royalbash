@@ -18,7 +18,8 @@ export interface StateModel {
     cardOnPreview?: string;
     summoningOnPreview?: string;
     
-    cardDragged?: string;
+    summoningCardDragged?: string;
+    resourcesCardDragged?: string;
     summoningDragged?: string;
 
     summoningTarget?: string;

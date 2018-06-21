@@ -29,7 +29,7 @@ class PlayResourcesCardController {
     }
 
     @RequestMapping(
-            value = "gameloop/play/resource",
+            value = "gameloop/gatheringResources",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE

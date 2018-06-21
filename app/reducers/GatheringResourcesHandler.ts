@@ -1,25 +1,35 @@
 import {
     GATHERING_RESOURCES_ISSUED,
     GATHERING_RESOURCES_ACCEPTED,
-    GATHERING_RESOURCES_DECLINED
+    GATHERING_RESOURCES_DECLINED,
+    RESOURCES_CARD_DRAGGED
 } from "../actions/ActionTypes";
 import {AnyAction, Reducer} from "redux";
 import {StateModel} from "../Store";
 import Game from "../model/Game";
 import GatheringResourcesIssuedAction from "../actions/GatheringResourcesIssuedAction";
 import GatheringResourcesDeclinedAction from "../actions/GatheringResourcesDeclinedAction";
+import ResourcesCardDraggedAction from "../actions/ResourcesCardDraggedAction";
 
 const handleGatheringResources: Reducer<StateModel, AnyAction> = (state, action): StateModel => {
 
     switch (action.type) {
+        case RESOURCES_CARD_DRAGGED:
+
+            let cardDraggedAction = action as ResourcesCardDraggedAction;
+            console.log("Resources card " + cardDraggedAction.cardId + " is dragged");
+            return {
+                ...state,
+                resourcesCardDragged: cardDraggedAction.cardId
+            };
         case GATHERING_RESOURCES_ISSUED:
 
-            let summoningIssuedAction = action as GatheringResourcesIssuedAction;
+            let gatheringResourcesIssuedAction = action as GatheringResourcesIssuedAction;
             console.log("Gathering resources issued");
             return {
                 ...state,
                 gatheringResourceIssued: true,
-                cardDragged: summoningIssuedAction.cardId
+                resourcesCardDragged: gatheringResourcesIssuedAction.cardId
             };
         case GATHERING_RESOURCES_ACCEPTED:
 
@@ -29,7 +39,7 @@ const handleGatheringResources: Reducer<StateModel, AnyAction> = (state, action)
                 ...state,
                 game: game,
                 gatheringResourceIssued: false,
-                cardDragged: null
+                resourcesCardDragged: null
             };
         case GATHERING_RESOURCES_DECLINED:
 
@@ -38,7 +48,7 @@ const handleGatheringResources: Reducer<StateModel, AnyAction> = (state, action)
             return {
                 ...state,
                 gatheringResourceIssued: false,
-                cardDragged: null
+                resourcesCardDragged: null
             };
         default:
             return state;

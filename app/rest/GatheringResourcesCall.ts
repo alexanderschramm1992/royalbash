@@ -5,6 +5,7 @@ import {GatheringResourcesDeclinedActionFactory} from "../actions/GatheringResou
 
 class GatheringResourcesCall {
 
+
     constructor () {
 
         store.subscribe((): void => {
@@ -15,7 +16,7 @@ class GatheringResourcesCall {
                     {
                         "gameId": store.getState().gameId,
                         "playerId": store.getState().playerId,
-                        "cardId": store.getState().cardDragged
+                        "cardId": store.getState().resourcesCardDragged
                     },
                     {
                         headers: {

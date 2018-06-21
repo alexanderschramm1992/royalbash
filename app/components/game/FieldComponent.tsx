@@ -43,10 +43,10 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
     handleDrop(event: any): void {
 
         event.preventDefault();
-        if (!store.getState().summonCardIssued && store.getState().cardDragged) {
+        if (!store.getState().gatheringResourceIssued && store.getState().resourcesCardDragged) {
             store.dispatch(
                 GatheringResourcesIssuedActionFactory.getInstance(
-                    store.getState().cardDragged,
+                    store.getState().resourcesCardDragged,
                 )
             );
         }
@@ -60,10 +60,10 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
     handleDropForTargets(target: Target, event: any): void {
 
         event.preventDefault();
-        if (!store.getState().summonCardIssued && store.getState().cardDragged) {
+        if (!store.getState().summonCardIssued && store.getState().summoningCardDragged) {
             store.dispatch(
                 SummoningIssuedActionFactory.getInstance(
-                    store.getState().cardDragged,
+                    store.getState().summoningCardDragged,
                     target.id
                 )
             );
@@ -73,7 +73,10 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
     render(): any {
 
         return (
-            <div className="field">
+            <div className="field"
+                 onDragOver={this.handleDragOver}
+                 onDrop={this.handleDrop}
+            >
                 <TargetContainer
                     targets={this.state.targets}
                     handleDragOver={this.handleDragOverForTargets}

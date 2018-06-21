@@ -16,21 +16,6 @@ export class CardMiniContainer extends React.Component<CardMiniContainerProps, {
 
     constructor(props: CardMiniContainerProps) {
         super(props);
-
-        this.handleDrop = this.handleDrop.bind(this);
-        this.handleDragOver = this.handleDragOver.bind(this);
-    }
-
-    handleDrop(event: any): any {
-
-        console.log("We are handeling the drop, bitches!");
-        event.preventDefault();
-    }
-
-    handleDragOver(event: any): void {
-
-        console.log("Watch out, something is coming from above!");
-        event.preventDefault();
     }
 
     render(): any {
@@ -42,8 +27,6 @@ export class CardMiniContainer extends React.Component<CardMiniContainerProps, {
                 <div
                     key={i}
                     className={"card-placeholder card-placeholder-" + i + " border-large"}
-                    onDragOver={this.handleDragOver}
-                    onDrop={this.handleDrop}
                 >
                     {this.props.cards[i] &&
                     <CardMini card = {this.props.cards[i]} />

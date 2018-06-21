@@ -8,7 +8,6 @@ import handleLoadGame from "./LoadGameHandler";
 import handleDrawResourcesCard from "./DrawResourcesCardHandler";
 import handleAttackingTarget from "./AttackingTargetHandler";
 import handleGatheringResources from "./GatheringResourcesHandler";
-import handleDraggingCard from "./DraggingCardHandler";
 
 const initialState: StateModel =  {
 
@@ -33,7 +32,6 @@ const initialState: StateModel =  {
 export const combinedReducers: Reducer<StateModel, AnyAction> =
     (state = initialState, action): StateModel => {
 
-        state = handleDraggingCard(state, action);
         state = handleDrawSummoningCard(state, action);
         state = handleDrawResourcesCard(state, action);
         state = handleMouseOnCard(state, action);

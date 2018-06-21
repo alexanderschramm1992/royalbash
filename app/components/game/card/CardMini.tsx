@@ -6,9 +6,10 @@ import "../../common/common.css";
 import store from "../../../Store";
 import {MouseOnCardActionFactory} from "../../../actions/MouseOnCardAction";
 import {MouseOffCardActionFactory} from "../../../actions/MouseOffCardAction";
-import {CardDraggedActionFactory} from "../../../actions/CardDraggedAction";
 import {Card, SummoningCard} from "../../../model/Game";
 import CardMiniView from "./CardMiniView";
+import {SummoningCardDraggedActionFactory} from "../../../actions/SummoningCardDraggedAction";
+import {ResourcesCardDraggedActionFactory} from "../../../actions/ResourcesCardDraggedAction";
 
 export interface CardMiniProps {
 
@@ -39,7 +40,12 @@ export class CardMini extends React.Component<CardMiniProps, {}> {
     }
 
     handleDragStart(event: any): void {
-        store.dispatch(CardDraggedActionFactory.getInstance(this.props.card.id));
+
+        if(this.isSummoningCard()) {
+            store.dispatch(SummoningCardDraggedActionFactory.getInstance(this.props.card.id));
+        } else if(this.isResourcesCard()) {
+            store.dispatch(ResourcesCardDraggedActionFactory.getInstance(this.props.card.id));
+        }
     }
 
     isSummoningCard(): boolean {
