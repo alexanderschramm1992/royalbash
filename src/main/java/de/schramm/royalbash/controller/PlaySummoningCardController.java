@@ -1,7 +1,7 @@
 package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.SummonRequest;
-import de.schramm.royalbash.controller.responsemodel.StateResponse;
+import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.persistence.GameManager;
 import de.schramm.royalbash.util.UUIDGenerator;
@@ -37,7 +37,7 @@ class PlaySummoningCardController {
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<StateResponse> summonInstance(
+    public ResponseEntity<StateResponseGame> summonInstance(
             @RequestBody SummonRequest requestParams
     ) {
 
@@ -51,11 +51,11 @@ class PlaySummoningCardController {
                     uuidGenerator.generateUUID()
             );
             gameManager.saveGame(game);
-            return ResponseEntity.ok(StateResponse.fromGame(game));
+            return ResponseEntity.ok(StateResponseGame.fromGame(game));
         } catch (GameEngineException e) {
 
             log.warn("Failed to summon card due to: " + e.getMessage());
-            return ResponseEntity.badRequest().body(StateResponse.fromError(e.getMessage()));
+            return ResponseEntity.badRequest().body(StateResponseGame.fromError(e.getMessage()));
         }
     }
 }

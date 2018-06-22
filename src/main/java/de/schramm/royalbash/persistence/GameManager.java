@@ -53,7 +53,7 @@ public class GameManager {
                 .findFirst()
                 .orElseThrow(() -> new DomainObjectDoesNotExistException(
                     String.format(
-                            "Cannot find enemy player of %s in game %s",
+                            "Cannot find enemy player of %s in constants %s",
                             playerId,
                             game.getId()
                     )

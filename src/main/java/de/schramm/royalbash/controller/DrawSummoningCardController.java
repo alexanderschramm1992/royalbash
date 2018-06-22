@@ -1,7 +1,7 @@
 package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.DrawRequest;
-import de.schramm.royalbash.controller.responsemodel.StateResponse;
+import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.model.Game;
 import de.schramm.royalbash.persistence.GameManager;
@@ -31,7 +31,7 @@ class DrawSummoningCardController {
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<StateResponse> draw(
+    public ResponseEntity<StateResponseGame> draw(
             @RequestBody DrawRequest requestParams
     ) {
 
@@ -40,13 +40,13 @@ class DrawSummoningCardController {
             Game game = gameManager.findGame(requestParams.getGameId());
             game.findPlayer(requestParams.getPlayerId()).drawSummoningCard();
             gameManager.saveGame(game);
-            return ResponseEntity.ok(StateResponse.fromGame(game));
+            return ResponseEntity.ok(StateResponseGame.fromGame(game));
         } catch (GameEngineException e) {
 
             log.warn("Failed to draw Summoning Card due to: " + e.getMessage());
 
             return ResponseEntity.badRequest().body(
-                    StateResponse.builder()
+                    StateResponseGame.builder()
                             .reason(e.getMessage())
                             .build()
             );

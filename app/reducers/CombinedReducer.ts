@@ -4,6 +4,7 @@ import handleDrawSummoningCard from "./DrawSummoningCardHandler";
 import handleMouseOnCard from "./MouseOnCardHandler";
 import handleMouseOnSummoning from "./MouseOnSummoningHandler";
 import handleSummoning from "./SummoningHandler";
+import handleLoadingConstants from "./LoadingConstantsHandler";
 import handleLoadGame from "./LoadGameHandler";
 import handleDrawResourcesCard from "./DrawResourcesCardHandler";
 import handleAttackingTarget from "./AttackingTargetHandler";
@@ -15,29 +16,25 @@ const initialState: StateModel =  {
     enemyId: "736cb270-c73c-4257-b49f-d71d9b4cb59b",
 
     loadGameIssued: false,
+    loadingConstantsIssued: false,
     drawSummoningCardIssued: false,
     drawResourcesCardIssued: false,
     summonCardIssued: false,
     gatheringResourceIssued: false,
     attackingTargetIssued: false,
     attackingTargetProcessing: false,
-
-    constants: {
-        maxRations: 10,
-        maxMaterial: 10,
-        maxBlessing: 10
-    }
 };
 
 export const combinedReducers: Reducer<StateModel, AnyAction> =
     (state = initialState, action): StateModel => {
 
+        state = handleLoadingConstants(state, action);
+        state = handleLoadGame(state, action);
         state = handleDrawSummoningCard(state, action);
         state = handleDrawResourcesCard(state, action);
         state = handleMouseOnCard(state, action);
         state = handleMouseOnSummoning(state, action);
         state = handleSummoning(state, action);
-        state = handleLoadGame(state, action);
         state = handleAttackingTarget(state, action);
         state = handleGatheringResources(state, action);
         return state;

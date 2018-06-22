@@ -31,10 +31,6 @@ export class ResourcePoolComponent extends React.Component<{}, ResourcePool> {
 
     render(): any {
 
-        let style = {
-            height: this.state.rations/store.getState().constants.maxRations
-        };
-
         return (
             <div className="resource-pool">
                 <div className="resource-display resource-display-rations">

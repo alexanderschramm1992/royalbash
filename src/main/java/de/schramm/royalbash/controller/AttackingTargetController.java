@@ -1,7 +1,7 @@
 package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.AttackingTargetRequest;
-import de.schramm.royalbash.controller.responsemodel.StateResponse;
+import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
@@ -27,7 +27,7 @@ public class AttackingTargetController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<StateResponse> attack(@RequestBody AttackingTargetRequest requestParams) {
+    public ResponseEntity<StateResponseGame> attack(@RequestBody AttackingTargetRequest requestParams) {
 
         try {
 
@@ -42,11 +42,11 @@ public class AttackingTargetController {
                     game
             );
             gameManager.saveGame(game);
-            return ResponseEntity.ok(StateResponse.fromGame(game));
+            return ResponseEntity.ok(StateResponseGame.fromGame(game));
         } catch (GameEngineException e) {
 
             log.warn("Failed to attack Target due to: " + e.getMessage());
-            return ResponseEntity.badRequest().body(StateResponse.fromError(e.getMessage()));
+            return ResponseEntity.badRequest().body(StateResponseGame.fromError(e.getMessage()));
         }
     }
 }

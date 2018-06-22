@@ -8,46 +8,23 @@ import DetailView from "./DetailView";
 import SummoningDeckComponent from "./stack/SummoningDeckComponent";
 import HandComponent from "./HandComponent";
 import GraveyardComponent from "./stack/GraveyardComponent";
-import DrawSummoningCardCall from "../../rest/DrawSummoningCardCall";
-import DrawResourcesCardCall from "../../rest/DrawResourcesCardCall";
-import store from "../../Store";
-import {LoadGameIssuedActionFactory} from "../../actions/loadinggame/LoadGameIssuedAction";
-import LoadGameCall from "../../rest/LoadGameCall";
 import FieldComponent from "./FieldComponent";
-import SummoningCardCall from "../../rest/SummoningCardCall";
 import ResourcesDeckComponent from "./stack/ResourcesDeckComponent";
 import {ResourcePoolComponent} from "./resourcepool/ResourcePoolComponent";
 import EnemyFieldComponent from "./EnemyFieldComponent";
-import AttackingTargetCall from "../../rest/AttackingTargetCall";
-import GatheringResourcesCall from "../../rest/GatheringResourcesCall";
 
-interface BoardState {
-
+interface BoardComponentState {
     readonly scale: number;
-    readonly drawSummoningCardCall: DrawSummoningCardCall;
-    readonly drawResourcesCardCall: DrawResourcesCardCall;
-    readonly loadGameCall: LoadGameCall;
-    readonly summoningCardCall: SummoningCardCall;
-    readonly attackingTargetCall: AttackingTargetCall;
-    readonly gatheringResourcesCall: GatheringResourcesCall;
 }
 
-export class BoardComponent extends React.Component<{}, BoardState> {
+export class BoardComponent extends React.Component<{}, BoardComponentState> {
 
     constructor(props: any) {
         super(props);
 
         this.state = {
-            scale: 5,
-            drawSummoningCardCall: new DrawSummoningCardCall(),
-            drawResourcesCardCall: new DrawResourcesCardCall(),
-            loadGameCall: new LoadGameCall(),
-            summoningCardCall: new SummoningCardCall(),
-            attackingTargetCall: new AttackingTargetCall(),
-            gatheringResourcesCall: new GatheringResourcesCall()
+            scale: 5
         };
-
-        store.dispatch(LoadGameIssuedActionFactory.getInstance("6d5864f4-5fb1-4615-bf6a-07a1211ef6d3"));
 
         this.changeScale = this.changeScale.bind(this);
     }

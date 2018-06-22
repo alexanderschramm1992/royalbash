@@ -1,6 +1,7 @@
 import { createStore, Store } from "redux";
 import combinedReducers from "./reducers/CombinedReducer";
 import {Game, Player, Summoning, Card} from "./model/Game";
+import {Constants} from "./model/Constants";
 
 export interface StateModel {
 
@@ -8,9 +9,11 @@ export interface StateModel {
     enemyId?: string;
 
     game?: Game;
-
     gameId?: string;
     loadGameIssued: boolean;
+
+    constants?: Constants;
+    loadingConstantsIssued: boolean;
 
     drawSummoningCardIssued: boolean;
     drawResourcesCardIssued: boolean;
@@ -30,12 +33,6 @@ export interface StateModel {
     attackedTarget?: string;
     attackingTargetIssued: boolean;
     attackingTargetProcessing: boolean;
-
-    constants: {
-        maxRations: number,
-        maxMaterial: number,
-        maxBlessing: number
-    };
 }
 
 export const store: Store<StateModel> = createStore(

@@ -1,7 +1,7 @@
 package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.PlayResourcesCardRequest;
-import de.schramm.royalbash.controller.responsemodel.StateResponse;
+import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.model.card.EffectContext;
 import de.schramm.royalbash.persistence.GameManager;
@@ -34,7 +34,7 @@ class PlayResourcesCardController {
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<StateResponse> playResourcesCard(
+    public ResponseEntity<StateResponseGame> playResourcesCard(
             @RequestBody PlayResourcesCardRequest requestParams
     ) {
 
@@ -50,12 +50,12 @@ class PlayResourcesCardController {
                             .build()
             );
             gameManager.saveGame(game);
-            return ResponseEntity.ok(StateResponse.fromGame(game));
+            return ResponseEntity.ok(StateResponseGame.fromGame(game));
         } catch (GameEngineException e) {
 
             val message = "Failed to play resources card due to: " + e.getMessage();
             log.warn(message);
-            return ResponseEntity.badRequest().body(StateResponse.fromError(message));
+            return ResponseEntity.badRequest().body(StateResponseGame.fromError(message));
         }
     }
 }

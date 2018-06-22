@@ -1,7 +1,7 @@
 package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.GameRequest;
-import de.schramm.royalbash.controller.responsemodel.StateResponse;
+import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.model.Game;
 import de.schramm.royalbash.persistence.GameManager;
@@ -31,7 +31,7 @@ class GameController {
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<StateResponse> drawCard(
+    public ResponseEntity<StateResponseGame> drawCard(
             @RequestBody GameRequest requestParams
     ) {
 
@@ -39,13 +39,13 @@ class GameController {
 
             Game game = gameManager.findGame(requestParams.getGameId());
 
-            return ResponseEntity.ok(StateResponse.fromGame(game));
+            return ResponseEntity.ok(StateResponseGame.fromGame(game));
         } catch (GameEngineException e) {
 
-            log.warn("Failed to find game due to: " + e.getMessage());
+            log.warn("Failed to find constants due to: " + e.getMessage());
 
             return ResponseEntity.badRequest().body(
-                    StateResponse.builder()
+                    StateResponseGame.builder()
                         .reason(e.getMessage())
                         .build()
             );
