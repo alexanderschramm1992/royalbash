@@ -36,7 +36,6 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
     }
 
     handleDragOver(event: any): void {
-        console.log("Field: 'Watch out, something is coming from above!'");
         event.preventDefault();
     }
 
@@ -53,7 +52,6 @@ export class FieldComponent extends React.Component<{}, FieldComponentState> {
     }
 
     handleDragOverForTargets(event: any): void {
-        console.log("Target: 'Watch out, something is coming from above!'");
         event.preventDefault();
     }
 
