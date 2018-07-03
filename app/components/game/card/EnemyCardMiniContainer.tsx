@@ -3,7 +3,6 @@ import * as React from "react";
 import "./EnemyCardMiniContainer.css";
 import "../../common/common.css";
 
-import CardMini from "./CardMini";
 import {Card} from "../../../model/Game";
 
 export interface CardMiniContainerProps {

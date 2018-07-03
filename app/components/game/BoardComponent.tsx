@@ -13,6 +13,7 @@ import ResourcesDeckComponent from "./stack/ResourcesDeckComponent";
 import {ResourcePoolComponent} from "./resourcepool/ResourcePoolComponent";
 import EnemyFieldComponent from "./EnemyFieldComponent";
 import EndTurnButtonComponent from "./EndTurnButtonComponent";
+import EnemyHandComponent from "./EnemyHandComponent";
 
 interface BoardComponentState {
     readonly scale: number;
@@ -62,7 +63,9 @@ export class BoardComponent extends React.Component<{}, BoardComponentState> {
                             <div className="summoning-deck-area summoning-deck-area-remote"></div>
                             <div className="ressources-deck-area ressources-deck-area-remote"></div>
                             <div className="graveyard-area graveyard-area-remote"></div>
-                            <div className="hand-area hand-area-remote"></div>
+                            <div className="hand-area hand-area-remote">
+                                <EnemyHandComponent/>
+                            </div>
                         </div>
                         <div className="play-area border-large border-radius">
                             <div className="remote-summoning-area">

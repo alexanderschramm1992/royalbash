@@ -1,4 +1,6 @@
 .enemy-card-container {
+    --card-background: linear-gradient(to bottom, rgba(240,183,161,1) 0%,rgba(140,51,16,1) 50%,rgba(117,34,1,1) 51%,rgba(191,110,78,1) 100%);
+
     height: 27em;
     padding: 1em 0 0 1em;
     border-radius: 1em;
@@ -15,8 +17,10 @@
     display: inline-block;
 }
 
-.enemy-card-container .card-placeholder > div {
+.enemy-card-container .card-placeholder .card-back {
     top: -0.5em;
     left: -0.5em;
     position: absolute;
+    background: var(--card-background);
 }
+
