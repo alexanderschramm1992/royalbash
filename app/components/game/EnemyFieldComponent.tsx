@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import "../common/common.css";
-import "./FieldComponent.css";
+import "./EnemyFieldComponent.css";
 import store, {getEnemyPlayer} from "../../Store";
 import {Target} from "../../model/Game";
 import TargetContainer from "./TargetContainer";
