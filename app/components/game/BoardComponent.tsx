@@ -12,6 +12,7 @@ import FieldComponent from "./FieldComponent";
 import ResourcesDeckComponent from "./stack/ResourcesDeckComponent";
 import {ResourcePoolComponent} from "./resourcepool/ResourcePoolComponent";
 import EnemyFieldComponent from "./EnemyFieldComponent";
+import EndTurnButtonComponent from "./EndTurnButtonComponent";
 
 interface BoardComponentState {
     readonly scale: number;
@@ -96,6 +97,9 @@ export class BoardComponent extends React.Component<{}, BoardComponentState> {
                             <DetailView scale={this.state.scale * 1.5}/>
                         </div>
                         <div className="log-area"></div>
+                        <div className="next-turn-button-area">
+                            <EndTurnButtonComponent/>
+                        </div>
                     </div>
                 </div>
                 <div className="south border-large border-radius"></div>

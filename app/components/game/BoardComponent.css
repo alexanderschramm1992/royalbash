@@ -90,6 +90,13 @@
     height: 149em;
     margin-left: 1em;
     display: inline-block;
+    position: relative;
+}
+
+.board .east .next-turn-button-area {
+    position: absolute;
+    left: 1em;
+    bottom: 1em;
 }
 
 .board .south {

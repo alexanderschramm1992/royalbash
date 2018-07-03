@@ -1,0 +1,9 @@
+.end-turn-button {
+    width: 44em;
+    height: 10em;
+}
+
+.end-turn-button .button {
+    width: 100%;
+    height: 100%;
+}

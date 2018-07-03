@@ -5,6 +5,8 @@ import {Constants} from "./model/Constants";
 
 export interface StateModel {
 
+    ownTurn: boolean;
+
     playerId?: string;
     enemyId?: string;
 

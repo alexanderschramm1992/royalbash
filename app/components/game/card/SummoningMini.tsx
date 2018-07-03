@@ -50,7 +50,7 @@ export class SummoningMini extends React.Component<SummoningProps, {}> {
                 handleMouseOver={this.handleMouseOver}
                 handleMouseOut={this.handleMouseOut}
                 handleDragStart={this.handleDragStart}
-                isDraggable={this.props.summoning.canAttack}
+                isDraggable={this.props.summoning.canAttack && store.getState().ownTurn}
             />
         );
     }
