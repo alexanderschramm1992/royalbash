@@ -26,10 +26,7 @@ public class MountedAttackingTargetEffect implements AttackingTargetEffect {
                         context
                 );
             } else {
-                attackingSummoning.increaseCurrentStrength(1);
                 attackingSummoning.dealDamage(attackedSummoning);
-                attackingSummoning.reduceCurrentStrength(1);
-
                 if(attackedSummoning.isDead()) {
                     context.getGame().getBoard().bury(attackedSummoning);
                 } else {

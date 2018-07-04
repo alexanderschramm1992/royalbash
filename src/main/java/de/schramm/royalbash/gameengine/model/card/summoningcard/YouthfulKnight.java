@@ -15,7 +15,7 @@ public class YouthfulKnight extends SummoningCard {
                 "/img/youthful_knight.png",
                 "Creature",
                 "Knight",
-                "<b>Mounted</b>",
+                "<b>Mounted</b> <i>(When attacking, the defending Summoning can be slain before dealing damage)</i>",
                 "Pride goes before a fall",
                 2,
                 1,
@@ -25,6 +25,6 @@ public class YouthfulKnight extends SummoningCard {
         );
 
         addTag(Tag.MOUNTED);
-        this.setAttackingTargetEffect(new MountedAttackingTargetEffect());
+        setAttackingTargetEffect(new MountedAttackingTargetEffect());
     }
 }

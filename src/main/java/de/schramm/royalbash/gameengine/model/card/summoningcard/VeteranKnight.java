@@ -1,5 +1,8 @@
 package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
+import de.schramm.royalbash.gameengine.model.Tag;
+import de.schramm.royalbash.gameengine.model.card.effect.defendingtarget.SteadfastDefendingTargetEffect;
+
 import java.util.UUID;
 
 public class VeteranKnight extends SummoningCard {
@@ -12,7 +15,7 @@ public class VeteranKnight extends SummoningCard {
                 "/img/veteran_knight.png",
                 "Creature",
                 "Knight",
-                "",
+                "<b>Steadfast</b> <i>(When defending, Veteran Knight gains +1 Strength)</i>",
                 "I've seen too much to fear my enemy",
                 4,
                 1,
@@ -20,5 +23,8 @@ public class VeteranKnight extends SummoningCard {
                 3,
                 4
         );
+
+        addTag(Tag.STEADFAST);
+        setDefendingTargetEffect(new SteadfastDefendingTargetEffect());
     }
 }
