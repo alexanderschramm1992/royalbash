@@ -2,7 +2,7 @@ package de.schramm.royalbash.gameengine.model.card.resourcescard;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.gameengine.model.Card;
-import de.schramm.royalbash.gameengine.model.card.effect.GenericEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.generic.GenericEffect;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

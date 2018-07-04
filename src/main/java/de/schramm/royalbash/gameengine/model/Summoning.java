@@ -1,9 +1,11 @@
 package de.schramm.royalbash.gameengine.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.schramm.royalbash.gameengine.exception.GameBrokenException;
 import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import de.schramm.royalbash.gameengine.model.card.EffectContext;
-import de.schramm.royalbash.gameengine.model.card.effect.AttackingTargetEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.attackingtarget.AttackingTargetEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.defendingtarget.DefendingTargetEffect;
 import de.schramm.royalbash.gameengine.model.card.summoningcard.SummoningCard;
 import lombok.*;
 
@@ -22,6 +24,7 @@ public class Summoning {
     private int currentHealth;
     private int currentStrength;
     private boolean canAttack;
+    private boolean canDefend;
 
     @JsonIgnore
     @Singular("tag")
@@ -30,18 +33,23 @@ public class Summoning {
     @JsonIgnore
     private final AttackingTargetEffect attackingTargetEffect;
 
+    @JsonIgnore
+    private final DefendingTargetEffect defendingTargetEffect;
+
     public static Summoning fromCard(SummoningCard summoningCard, UUID id) {
 
         val summoning = new Summoning(
             id,
             summoningCard,
-            summoningCard.getAttackingTargetEffect()
+            summoningCard.getAttackingTargetEffect(),
+            summoningCard.getDefendingTargetEffect()
         );
 
         summoning.currentHealth = summoningCard.getHealth();
         summoning.currentStrength = summoningCard.getStrength();
         summoning.tags = summoningCard.getTags();
         summoning.canAttack = true;
+        summoning.canDefend = true;
 
         return summoning;
     }
@@ -87,11 +95,17 @@ public class Summoning {
         this.canAttack = canAttack;
     }
 
+    public void setCanDefend(boolean canDefend) { this.canDefend = canDefend; }
+
     public void dealDamage(Summoning summoning) {
         summoning.currentHealth -= currentStrength;
     }
 
-    public void attackTarget(Target attackedTarget, Player owner, Game game) throws RuleViolationException {
+    public void attackTarget(
+            Target attackedTarget,
+            Player owner,
+            Game game
+    ) throws RuleViolationException, GameBrokenException {
 
         if(canAttack) {
             attackingTargetEffect.apply(
@@ -104,6 +118,28 @@ public class Summoning {
             );
         } else {
             throw new RuleViolationException(String.format("Summoning %s cannot attack", id));
+        }
+    }
+
+    public void defendTarget(
+            Summoning attackingSummoning,
+            Target attackedTarget,
+            Player attackingPlayer,
+            Game game
+    ) throws RuleViolationException, GameBrokenException {
+
+        if(canDefend) {
+            defendingTargetEffect.apply(
+                    attackingSummoning,
+                    attackedTarget,
+                    this,
+                    EffectContext.builder()
+                            .owner(game.findOpponent(attackingPlayer))
+                            .game(game)
+                            .build()
+            );
+        } else {
+            throw new RuleViolationException(String.format("Summoning %s cannot defend", id));
         }
     }
 }

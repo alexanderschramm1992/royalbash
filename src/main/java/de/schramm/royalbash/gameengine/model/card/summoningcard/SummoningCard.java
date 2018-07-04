@@ -4,7 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.gameengine.model.Card;
 import de.schramm.royalbash.gameengine.model.Summoning;
 import de.schramm.royalbash.gameengine.model.Tag;
-import de.schramm.royalbash.gameengine.model.card.effect.*;
+import de.schramm.royalbash.gameengine.model.card.effect.attackingtarget.AttackingTargetEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.attackingtarget.PlainAttackingTargetEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.defendingtarget.DefendingTargetEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.defendingtarget.PlainDefendingTargetEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.generic.GenericEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.generic.PlainGenericEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.genericwithsourcesummoning.GenericEffectWithSourceSummoning;
+import de.schramm.royalbash.gameengine.model.card.effect.genericwithsourcesummoning
+        .PlainGenericEffectWithSourceSummoning;
 import lombok.*;
 
 import java.util.HashSet;
@@ -38,6 +46,9 @@ public abstract class SummoningCard implements Card {
 
     @JsonIgnore
     private AttackingTargetEffect attackingTargetEffect = new PlainAttackingTargetEffect();
+
+    @JsonIgnore
+    private DefendingTargetEffect defendingTargetEffect = new PlainDefendingTargetEffect();
 
     @JsonIgnore
     private GenericEffect ownerTurnStartEffect = new PlainGenericEffect();

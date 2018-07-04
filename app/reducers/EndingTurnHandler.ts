@@ -25,6 +25,7 @@ const handleEndingTurn: Reducer<StateModel, AnyAction> = (state, action): StateM
             return {
                 ...state,
                 endingTurnIssued: false,
+                ownTurn: false,
                 game: endingTurnAcceptedAction.game
             };
         case ENDING_TURN_DECLINED:

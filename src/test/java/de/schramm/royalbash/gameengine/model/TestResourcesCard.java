@@ -1,6 +1,6 @@
 package de.schramm.royalbash.gameengine.model;
 
-import de.schramm.royalbash.gameengine.model.card.effect.GenericEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.generic.GenericEffect;
 import de.schramm.royalbash.gameengine.model.card.resourcescard.ResourcesCard;
 
 import java.util.UUID;

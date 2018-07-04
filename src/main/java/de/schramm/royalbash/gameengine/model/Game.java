@@ -1,6 +1,8 @@
 package de.schramm.royalbash.gameengine.model;
 
 import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
+import de.schramm.royalbash.gameengine.exception.GameBrokenException;
+import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Value;
 import lombok.val;
@@ -35,6 +37,10 @@ public class Game {
                     )
             );
         }
+    }
+
+    public Player findOpponent(Player player) throws GameBrokenException {
+        return board.findOpponent(player);
     }
 
     public Target findTarget(UUID targetId) throws DomainObjectDoesNotExistException {

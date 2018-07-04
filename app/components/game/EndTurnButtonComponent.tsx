@@ -2,6 +2,8 @@ import * as React from "react";
 
 import "../common/common.css";
 import "./EndTurnButtonComponent.css";
+import store from "../../Store";
+import {EndingTurnIssuedActionFactory} from "../../actions/endingturn/EndingTurnIssuedAction";
 
 export class EndTurnButtonComponent extends React.Component<{}, {}> {
 
@@ -10,6 +12,15 @@ export class EndTurnButtonComponent extends React.Component<{}, {}> {
 
         this.state = {
         };
+    }
+
+    endTurn(): void {
+        if(!store.getState().endingTurnIssued) {
+            store.dispatch(EndingTurnIssuedActionFactory.getInstance(
+                store.getState().gameId,
+                store.getState().playerId
+            ));
+        }
     }
 
     render(): any {

@@ -1,7 +1,7 @@
 package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
 import de.schramm.royalbash.gameengine.model.Tag;
-import de.schramm.royalbash.gameengine.model.card.effect.MountedAttackingTargetEffect;
+import de.schramm.royalbash.gameengine.model.card.effect.attackingtarget.MountedAttackingTargetEffect;
 
 import java.util.UUID;
 

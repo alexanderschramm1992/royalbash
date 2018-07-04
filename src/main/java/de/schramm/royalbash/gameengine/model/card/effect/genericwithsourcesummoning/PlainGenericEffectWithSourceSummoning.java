@@ -1,7 +1,8 @@
-package de.schramm.royalbash.gameengine.model.card.effect;
+package de.schramm.royalbash.gameengine.model.card.effect.genericwithsourcesummoning;
 
 import de.schramm.royalbash.gameengine.model.Summoning;
 import de.schramm.royalbash.gameengine.model.card.EffectContext;
+import de.schramm.royalbash.gameengine.model.card.effect.genericwithsourcesummoning.GenericEffectWithSourceSummoning;
 
 public class PlainGenericEffectWithSourceSummoning implements GenericEffectWithSourceSummoning {
 

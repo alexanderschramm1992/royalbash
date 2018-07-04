@@ -1,4 +1,4 @@
-package de.schramm.royalbash.gameengine.model.card.effect;
+package de.schramm.royalbash.gameengine.model.card.effect.genericwithsourcesummoning;
 
 import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import de.schramm.royalbash.gameengine.model.Summoning;

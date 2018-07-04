@@ -1,4 +1,4 @@
-package de.schramm.royalbash.gameengine.model.card.effect;
+package de.schramm.royalbash.gameengine.model.card.effect.genericwithsourcesummoning;
 
 import de.schramm.royalbash.gameengine.model.Summoning;
 import de.schramm.royalbash.gameengine.model.Target;
@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class HealRandomAlly implements GenericEffectWithSourceSummoning{
+public class HealRandomAlly implements GenericEffectWithSourceSummoning {
 
     private final int healAmount;
 

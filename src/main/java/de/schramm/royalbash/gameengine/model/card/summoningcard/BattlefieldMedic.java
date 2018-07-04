@@ -1,6 +1,6 @@
 package de.schramm.royalbash.gameengine.model.card.summoningcard;
 
-import de.schramm.royalbash.gameengine.model.card.effect.HealRandomAlly;
+import de.schramm.royalbash.gameengine.model.card.effect.genericwithsourcesummoning.HealRandomAlly;
 
 import java.util.UUID;
 
