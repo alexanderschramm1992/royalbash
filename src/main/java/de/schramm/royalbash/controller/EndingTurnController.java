@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller;
 
-import de.schramm.royalbash.controller.requestmodel.GameRequest;
+import de.schramm.royalbash.controller.requestmodel.EndingTurnRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.model.Game;
@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
 @RestController
-@RequestMapping("game")
-class GameController {
+@RequestMapping("gameloop/endingturn")
+public class EndingTurnController {
 
     private final GameManager gameManager;
 
     @Autowired
-    private GameController(
+    private EndingTurnController(
             GameManager gameManager
     ) {
         this.gameManager = gameManager;
@@ -31,23 +31,25 @@ class GameController {
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
-    public ResponseEntity<StateResponseGame> loadingGame(
-            @RequestBody GameRequest requestParams
+    public ResponseEntity<StateResponseGame> endingTurn(
+            @RequestBody EndingTurnRequest requestParams
     ) {
 
         try {
 
             Game game = gameManager.findGame(requestParams.getGameId());
+            game.getBoard().endTurnOf(game.findPlayer(requestParams.getPlayerId()));
+            gameManager.saveGame(game);
 
             return ResponseEntity.ok(StateResponseGame.fromGame(game));
         } catch (GameEngineException e) {
 
-            log.warn("Failed to load game due to: " + e.getMessage());
+            log.warn("Failed to end turn due to: " + e.getMessage());
 
             return ResponseEntity.badRequest().body(
                     StateResponseGame.builder()
-                        .reason(e.getMessage())
-                        .build()
+                            .reason(e.getMessage())
+                            .build()
             );
         }
     }

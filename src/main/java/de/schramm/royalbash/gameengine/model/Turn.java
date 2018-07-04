@@ -19,12 +19,11 @@ public class Turn {
     private UUID playerBlueId;
     private UUID playerRedId;
 
-    public void endTurnOf(Player player) throws RuleViolationException, GameBrokenException {
+    void endTurnOf(Player player) throws RuleViolationException, GameBrokenException {
 
         checkPlayerId(player.getId());
 
         if (currentTurnPlayerId.equals(player.getId())) {
-
             counter += 1;
             currentTurnPlayerId = playerBlueId.equals(player.getId()) ? playerRedId : playerBlueId;
         } else {
@@ -39,7 +38,7 @@ public class Turn {
                 .findFirst()
                 .orElseThrow(
                         () -> new GameBrokenException(
-                                String.format("Player %s is not manages by Turn object", playerId)
+                                String.format("Player %s is not managed by Turn object", playerId)
                         )
                 );
     }
