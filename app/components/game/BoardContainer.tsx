@@ -14,10 +14,12 @@ import DrawResourcesCardCall from "../../rest/DrawResourcesCardCall";
 import store from "../../Store";
 import {LoadGameIssuedActionFactory} from "../../actions/loadinggame/LoadGameIssuedAction";
 import {LoadingConstantsIssuedActionFactory} from "../../actions/loadingconstants/LoadingConstantsIssuedAction";
+import EndingTurnCall from "../../rest/EndingTurnCall";
 
 interface BoardContainerState {
     readonly loadingConstantsCall: LoadingConstantsCall;
     readonly loadingGameCall: LoadGameCall;
+    readonly endingTurnCall: EndingTurnCall;
     readonly drawingSummoningCardCall: DrawSummoningCardCall;
     readonly drawingResourcesCardCall: DrawResourcesCardCall;
     readonly summoningCardCall: SummoningCardCall;
@@ -35,6 +37,7 @@ export class BoardContainer extends React.Component<{}, BoardContainerState> {
         this.state = {
             loadingConstantsCall: new LoadingConstantsCall(),
             loadingGameCall: new LoadGameCall(),
+            endingTurnCall: new EndingTurnCall(),
             drawingSummoningCardCall: new DrawSummoningCardCall(),
             drawingResourcesCardCall: new DrawResourcesCardCall(),
             summoningCardCall: new SummoningCardCall(),

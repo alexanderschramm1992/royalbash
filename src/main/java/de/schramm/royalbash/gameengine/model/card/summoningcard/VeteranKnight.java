@@ -13,7 +13,7 @@ public class VeteranKnight extends SummoningCard {
                 "Creature",
                 "Knight",
                 "",
-                "",
+                "I've seen too much to fear my enemy",
                 4,
                 1,
                 0,

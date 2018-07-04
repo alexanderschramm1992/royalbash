@@ -13,7 +13,7 @@ public class EagerCadet extends SummoningCard {
                 "Creature",
                 "Knight",
                 "",
-                "'No one can hold me back!'",
+                "No one can hold me back!",
                 1,
                 0,
                 0,
