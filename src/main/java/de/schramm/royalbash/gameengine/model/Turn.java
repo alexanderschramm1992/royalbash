@@ -3,6 +3,7 @@ package de.schramm.royalbash.gameengine.model;
 import de.schramm.royalbash.gameengine.exception.GameBrokenException;
 import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
 @Builder
 @Getter
 @ToString
+@EqualsAndHashCode
 public class Turn {
 
     private int counter;

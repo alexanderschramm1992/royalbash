@@ -2,6 +2,7 @@ package de.schramm.royalbash.gameengine.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.gameengine.exception.GameBrokenException;
+import de.schramm.royalbash.gameengine.exception.GameEngineException;
 import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import de.schramm.royalbash.gameengine.model.card.EffectContext;
 import de.schramm.royalbash.gameengine.model.card.effect.attackingtarget.AttackingTargetEffect;
@@ -105,7 +106,7 @@ public class Summoning {
             Target attackedTarget,
             Player owner,
             Game game
-    ) throws RuleViolationException, GameBrokenException {
+    ) throws GameEngineException {
 
         if(canAttack) {
             attackingTargetEffect.apply(

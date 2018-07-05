@@ -2,11 +2,14 @@ package de.schramm.royalbash.gameengine.model;
 
 import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.gameengine.exception.GameEngineException;
+import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;
+import lombok.val;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Value
@@ -26,11 +29,22 @@ public class Field {
                 )).summon(summoning);
     }
 
-    void bury(Summoning summoning) {
+    void bury(Summoning summoning) throws DomainObjectDoesNotExistException, RuleViolationException {
 
-        targets.stream()
+        val targetOptional = targets.stream()
                 .filter(target -> summoning.equals(target.getSummoning()))
-                .forEach(target -> target.bury(summoning));
+                .findFirst();
+
+        if(targetOptional.isPresent()) {
+
+            targetOptional.get().bury(summoning);
+        } else {
+
+            throw new DomainObjectDoesNotExistException(String.format(
+                    "Cannot find Target occupied by Summoning %s",
+                    summoning.getId()
+            ));
+        }
     }
 
     Target getTarget(UUID targetId) throws DomainObjectDoesNotExistException {

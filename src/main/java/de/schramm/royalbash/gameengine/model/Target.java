@@ -26,9 +26,15 @@ public class Target {
         }
     }
 
-    void bury(Summoning summoning) {
+    void bury(Summoning summoning) throws RuleViolationException {
         if (summoning.equals(this.summoning)) {
             this.summoning = null;
+        } else {
+            throw new RuleViolationException(String.format(
+                    "Target %s not occupied by Summoning %s",
+                    id,
+                    summoning.getId()
+            ));
         }
     }
 }

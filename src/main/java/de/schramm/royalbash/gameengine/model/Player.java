@@ -44,7 +44,7 @@ public class Player {
         resourcesCard.getPlayEffect().apply(context);
     }
 
-    void bury(Summoning summoning) {
+    public void bury(Summoning summoning) throws DomainObjectDoesNotExistException, RuleViolationException {
         field.bury(summoning);
     }
 

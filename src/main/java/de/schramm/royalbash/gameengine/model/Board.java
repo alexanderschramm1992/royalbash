@@ -19,17 +19,11 @@ public class Board {
     private final Player playerBlue;
     private final Player playerRed;
 
-    public void bury(Summoning summoning) {
-
-        playerBlue.bury(summoning);
-        playerRed.bury(summoning);
-    }
-
     public void endTurnOf(Player player) throws GameBrokenException, RuleViolationException {
         turn.endTurnOf(player);
     }
 
-    Player findOpponent(Player player) throws GameBrokenException {
+    public Player findOpponent(Player player) throws GameBrokenException {
         Stream.of(playerBlue, playerRed)
                 .filter(playerOnBoard -> playerOnBoard.equals(player))
                 .findFirst()
