@@ -15,6 +15,7 @@ const initialState: StateModel =  {
 
     ownTurn: true,
     endingTurnIssued: false,
+    pollingGame: false,
 
     playerId: "8dbc6953-e25e-49f0-a298-7a0ea721de6c",
     enemyId: "736cb270-c73c-4257-b49f-d71d9b4cb59b",

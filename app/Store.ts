@@ -7,6 +7,7 @@ export interface StateModel {
 
     ownTurn: boolean;
     endingTurnIssued: boolean;
+    pollingGame: boolean;
 
     playerId?: string;
     enemyId?: string;
