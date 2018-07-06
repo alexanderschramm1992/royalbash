@@ -25,7 +25,7 @@ public class SummoningDeck {
         Collections.shuffle(summoningCards);
     }
 
-    public SummoningCard drawCard() {
+    SummoningCard drawCard() {
 
         return summoningCards.isEmpty() ? null : summoningCards.remove(0);
     }

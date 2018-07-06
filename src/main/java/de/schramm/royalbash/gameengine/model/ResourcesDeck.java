@@ -25,7 +25,7 @@ public class ResourcesDeck {
         Collections.shuffle(resourcesCards);
     }
 
-    public ResourcesCard drawCard() {
+    ResourcesCard drawCard() {
 
         return resourcesCards.isEmpty() ? null : resourcesCards.remove(0);
     }

@@ -46,7 +46,7 @@ public class ResourcePool {
                 && blessing >= card.getCostBlessing();
     }
 
-    public void payFor(Card card) throws RuleViolationException {
+    void payFor(Card card) throws RuleViolationException {
 
         if(canSustain(card)) {
 
