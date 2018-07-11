@@ -2,14 +2,12 @@ package de.schramm.royalbash.gameengine.model;
 
 import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.gameengine.exception.GameBrokenException;
-import de.schramm.royalbash.gameengine.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Value;
 import lombok.val;
 import org.springframework.data.annotation.Id;
 
 import java.util.Collection;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Stream;
 

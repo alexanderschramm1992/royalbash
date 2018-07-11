@@ -2,7 +2,6 @@ package de.schramm.royalbash.data;
 
 import de.schramm.royalbash.gameengine.model.Field;
 import de.schramm.royalbash.gameengine.model.Target;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.EagerCadet;
 
 import java.util.UUID;
 
