@@ -1,6 +1,6 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.gameengine.model.ResourcePool;
+import de.schramm.royalbash.core.domain.game.board.player.ResourcePool;
 
 class ResourcePoolData {
 

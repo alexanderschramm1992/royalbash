@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller.responsemodel;
 
-import de.schramm.royalbash.gameengine.model.Game;
+import de.schramm.royalbash.core.domain.game.Game;
 import lombok.Builder;
 import lombok.Value;
 

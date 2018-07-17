@@ -2,7 +2,7 @@ package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.AttackingTargetRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
-import de.schramm.royalbash.gameengine.exception.GameEngineException;
+import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;

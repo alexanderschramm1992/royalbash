@@ -1,6 +1,6 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.gameengine.model.Game;
+import de.schramm.royalbash.core.domain.game.Game;
 
 import java.util.UUID;
 

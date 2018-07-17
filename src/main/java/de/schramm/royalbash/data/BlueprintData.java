@@ -1,8 +1,8 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.gameengine.model.Blueprint;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.VeteranKnight;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.YouthfulKnight;
+import de.schramm.royalbash.core.domain.Blueprint;
+import de.schramm.royalbash.core.domain.card.summoningcard.VeteranKnight;
+import de.schramm.royalbash.core.domain.card.summoningcard.YouthfulKnight;
 
 import java.util.UUID;
 

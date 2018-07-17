@@ -2,8 +2,8 @@ package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.GameRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
-import de.schramm.royalbash.gameengine.exception.GameEngineException;
-import de.schramm.royalbash.gameengine.model.Game;
+import de.schramm.royalbash.core.exception.GameEngineException;
+import de.schramm.royalbash.core.domain.game.Game;
 import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

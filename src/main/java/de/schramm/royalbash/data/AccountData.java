@@ -1,6 +1,6 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.gameengine.model.Account;
+import de.schramm.royalbash.core.domain.Account;
 
 import java.util.UUID;
 

@@ -1,9 +1,8 @@
 package de.schramm.royalbash.persistence;
 
-import de.schramm.royalbash.gameengine.exception.DomainObjectDoesNotExistException;
-import de.schramm.royalbash.gameengine.model.Game;
-import de.schramm.royalbash.gameengine.model.Player;
-import de.schramm.royalbash.persistence.GameRepository;
+import de.schramm.royalbash.core.exception.DomainObjectDoesNotExistException;
+import de.schramm.royalbash.core.domain.game.Game;
+import de.schramm.royalbash.core.domain.game.board.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

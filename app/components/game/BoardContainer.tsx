@@ -29,9 +29,15 @@ interface BoardContainerState {
     ready: boolean;
 }
 
-export class BoardContainer extends React.Component<{}, BoardContainerState> {
+export interface BoardContainerProps {
 
-    constructor(props: any) {
+    readonly gameId: string;
+    readonly playerId: string;
+}
+
+export class BoardContainer extends React.Component<BoardContainerProps, BoardContainerState> {
+
+    constructor(props: BoardContainerProps) {
         super(props);
 
         this.state = {
@@ -56,7 +62,10 @@ export class BoardContainer extends React.Component<{}, BoardContainerState> {
         console.log("Loading costants...");
         store.dispatch(LoadingConstantsIssuedActionFactory.getInstance());
         console.log("Loading game...");
-        store.dispatch(LoadGameIssuedActionFactory.getInstance("6d5864f4-5fb1-4615-bf6a-07a1211ef6d3"));
+        store.dispatch(LoadGameIssuedActionFactory.getInstance(
+            props.gameId,
+            props.playerId
+        ));
     }
 
     render(): any {
@@ -65,6 +74,9 @@ export class BoardContainer extends React.Component<{}, BoardContainerState> {
             <div className="board-container">
                 {store.getState().constants && store.getState().game &&
                     <BoardComponent/>
+                }
+                {(!store.getState().constants || !store.getState().game) &&
+                <div className="loading-symbol font-size-extra-large">Loading...</div>
                 }
                 <div id="modal" title="Start Game"/>
             </div>

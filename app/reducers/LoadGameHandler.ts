@@ -19,7 +19,8 @@ const handleLoadGame: Reducer<StateModel, AnyAction> = (state, action): StateMod
             return {
                 ...state,
                 loadGameIssued: true,
-                gameId: loadGameIssuedAction.gameId
+                gameId: loadGameIssuedAction.gameId,
+                playerId: loadGameIssuedAction.playerId
             };
         case LOAD_GAME_ACCEPTED:
 

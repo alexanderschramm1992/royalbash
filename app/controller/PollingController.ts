@@ -7,7 +7,7 @@ import Timer = NodeJS.Timer;
 
 class PollingController {
 
-    private interval: Timer;
+    private interval: any;
 
     constructor () {
 
@@ -28,7 +28,11 @@ class PollingController {
     private activateInterval(): void {
 
         this.interval = setInterval((): void => {
-            store.dispatch(LoadGameIssuedActionFactory.getInstance(store.getState().gameId));
+            store.dispatch(LoadGameIssuedActionFactory.getInstance(
+                store.getState().gameId,
+                store.getState().playerId
+
+            ));
         }, 1000);
     }
 

@@ -12,6 +12,8 @@ export class EndTurnButtonComponent extends React.Component<{}, {}> {
 
         this.state = {
         };
+
+        this.endTurn = this.endTurn.bind(this);
     }
 
     endTurn(): void {
@@ -27,7 +29,7 @@ export class EndTurnButtonComponent extends React.Component<{}, {}> {
 
         return (
             <div className="end-turn-button">
-                <button className="button">
+                <button onClick={this.endTurn} className="button">
                     <div className="font-size-extra-large">End Turn</div>
                 </button>
             </div>

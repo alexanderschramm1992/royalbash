@@ -1,9 +1,9 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.gameengine.model.Hand;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.EagerCadet;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.VeteranKnight;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.YouthfulKnight;
+import de.schramm.royalbash.core.domain.game.board.player.Hand;
+import de.schramm.royalbash.core.domain.card.summoningcard.EagerCadet;
+import de.schramm.royalbash.core.domain.card.summoningcard.VeteranKnight;
+import de.schramm.royalbash.core.domain.card.summoningcard.YouthfulKnight;
 
 class HandData {
 

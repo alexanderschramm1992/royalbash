@@ -1,7 +1,7 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.gameengine.model.Board;
-import de.schramm.royalbash.gameengine.model.Turn;
+import de.schramm.royalbash.core.domain.game.board.Board;
+import de.schramm.royalbash.core.domain.game.board.Turn;
 
 import java.util.*;
 

@@ -1,10 +1,10 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.gameengine.model.ResourcesDeck;
-import de.schramm.royalbash.gameengine.model.card.resourcescard.BlessedAltar;
-import de.schramm.royalbash.gameengine.model.card.resourcescard.BountifulHarvest;
-import de.schramm.royalbash.gameengine.model.card.resourcescard.HiddenAmory;
-import de.schramm.royalbash.gameengine.model.card.resourcescard.RuralHomestead;
+import de.schramm.royalbash.core.domain.game.board.player.ResourcesDeck;
+import de.schramm.royalbash.core.domain.card.resourcescard.BlessedAltar;
+import de.schramm.royalbash.core.domain.card.resourcescard.BountifulHarvest;
+import de.schramm.royalbash.core.domain.card.resourcescard.HiddenAmory;
+import de.schramm.royalbash.core.domain.card.resourcescard.RuralHomestead;
 
 import java.util.UUID;
 

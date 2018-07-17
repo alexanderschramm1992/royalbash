@@ -1,7 +1,7 @@
 package de.schramm.royalbash.controller.responsemodel;
 
-import de.schramm.royalbash.gameengine.model.Blueprint;
-import de.schramm.royalbash.gameengine.model.Account;
+import de.schramm.royalbash.core.domain.Blueprint;
+import de.schramm.royalbash.core.domain.Account;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;

@@ -1,7 +1,7 @@
 package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.responsemodel.StateResponseConstants;
-import de.schramm.royalbash.gameengine.model.Constants;
+import de.schramm.royalbash.core.domain.game.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

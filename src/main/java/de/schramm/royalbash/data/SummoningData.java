@@ -1,8 +1,8 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.gameengine.model.Summoning;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.EagerCadet;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.VeteranKnight;
+import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
+import de.schramm.royalbash.core.domain.card.summoningcard.EagerCadet;
+import de.schramm.royalbash.core.domain.card.summoningcard.VeteranKnight;
 
 import java.util.UUID;
 

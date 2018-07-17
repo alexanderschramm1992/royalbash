@@ -1,7 +1,7 @@
 package de.schramm.royalbash.data;
 
-import de.schramm.royalbash.gameengine.model.SummoningDeck;
-import de.schramm.royalbash.gameengine.model.card.summoningcard.*;
+import de.schramm.royalbash.core.domain.game.board.player.SummoningDeck;
+import de.schramm.royalbash.core.domain.card.summoningcard.*;
 
 import java.util.UUID;
 
