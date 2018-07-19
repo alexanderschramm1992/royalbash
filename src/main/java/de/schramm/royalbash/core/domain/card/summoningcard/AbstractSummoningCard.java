@@ -1,17 +1,18 @@
 package de.schramm.royalbash.core.domain.card.summoningcard;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.schramm.royalbash.core.domain.card.Card;
+import de.schramm.royalbash.core.domain.game.board.player.Card;
 import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
-import de.schramm.royalbash.core.domain.card.effect.attackingtarget.AttackingTargetEffect;
-import de.schramm.royalbash.core.domain.card.effect.attackingtarget.PlainAttackingTargetEffect;
-import de.schramm.royalbash.core.domain.card.effect.defendingtarget.DefendingTargetEffect;
-import de.schramm.royalbash.core.domain.card.effect.defendingtarget.PlainDefendingTargetEffect;
-import de.schramm.royalbash.core.domain.card.effect.generic.GenericEffect;
-import de.schramm.royalbash.core.domain.card.effect.generic.PlainGenericEffect;
-import de.schramm.royalbash.core.domain.card.effect.genericwithsourcesummoning.GenericEffectWithSourceSummoning;
-import de.schramm.royalbash.core.domain.card.effect.genericwithsourcesummoning
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackingTargetEffect;
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.PlainAttackingTargetEffect;
+import de.schramm.royalbash.core.domain.card.summoningcard.defendingtarget.DefendingTargetEffect;
+import de.schramm.royalbash.core.domain.card.summoningcard.defendingtarget.PlainDefendingTargetEffect;
+import de.schramm.royalbash.core.domain.card.effect.GenericEffect;
+import de.schramm.royalbash.core.domain.card.effect.PlainGenericEffect;
+import de.schramm.royalbash.core.domain.card.summoningcard.effectwithsourcesummoning.GenericEffectWithSourceSummoning;
+import de.schramm.royalbash.core.domain.card.summoningcard.effectwithsourcesummoning
         .PlainGenericEffectWithSourceSummoning;
+import de.schramm.royalbash.core.domain.game.board.player.field.SummoningCard;
 import lombok.*;
 
 import java.util.HashSet;
@@ -21,7 +22,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public abstract class SummoningCard implements Card {
+abstract class AbstractSummoningCard implements SummoningCard {
 
     private final UUID id;
     private final String name;

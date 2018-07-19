@@ -1,7 +1,6 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
 import de.schramm.royalbash.core.exception.RuleViolationException;
-import de.schramm.royalbash.core.domain.card.Card;
 import lombok.Builder;
 import lombok.Getter;
 

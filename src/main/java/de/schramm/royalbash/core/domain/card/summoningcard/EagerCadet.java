@@ -2,7 +2,7 @@ package de.schramm.royalbash.core.domain.card.summoningcard;
 
 import java.util.UUID;
 
-public class EagerCadet extends SummoningCard {
+public class EagerCadet extends AbstractSummoningCard {
 
     public EagerCadet() {
 

@@ -1,10 +1,10 @@
 package de.schramm.royalbash.core.domain.card.summoningcard;
 
-import de.schramm.royalbash.core.domain.card.effect.defendingtarget.SteadfastDefendingTargetEffect;
+import de.schramm.royalbash.core.domain.card.summoningcard.defendingtarget.SteadfastDefendingTargetEffect;
 
 import java.util.UUID;
 
-public class VeteranKnight extends SummoningCard {
+public class VeteranKnight extends AbstractSummoningCard {
 
     public VeteranKnight() {
 

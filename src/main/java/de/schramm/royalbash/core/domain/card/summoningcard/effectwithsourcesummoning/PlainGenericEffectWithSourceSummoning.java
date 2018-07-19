@@ -1,4 +1,4 @@
-package de.schramm.royalbash.core.domain.card.effect.genericwithsourcesummoning;
+package de.schramm.royalbash.core.domain.card.summoningcard.effectwithsourcesummoning;
 
 import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
 import de.schramm.royalbash.core.domain.card.EffectContext;

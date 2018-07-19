@@ -1,10 +1,10 @@
 package de.schramm.royalbash.core.domain.card.resourcescard;
 
-import de.schramm.royalbash.core.domain.card.effect.generic.GrantResources;
+import de.schramm.royalbash.core.domain.card.effect.GrantResources;
 
 import java.util.UUID;
 
-public class BountifulHarvest extends ResourcesCard {
+public class BountifulHarvest extends AbstractResourcesCard {
 
     public BountifulHarvest() {
 

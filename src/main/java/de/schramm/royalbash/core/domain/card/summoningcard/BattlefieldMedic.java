@@ -1,10 +1,10 @@
 package de.schramm.royalbash.core.domain.card.summoningcard;
 
-import de.schramm.royalbash.core.domain.card.effect.genericwithsourcesummoning.HealRandomAlly;
+import de.schramm.royalbash.core.domain.card.summoningcard.effectwithsourcesummoning.HealRandomAlly;
 
 import java.util.UUID;
 
-public class BattlefieldMedic extends SummoningCard {
+public class BattlefieldMedic extends AbstractSummoningCard {
     public BattlefieldMedic() {
         super(
                 UUID.fromString("b7cec0ea-61d1-408c-996c-c09837ea2b8f"),

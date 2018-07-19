@@ -1,10 +1,29 @@
-package de.schramm.royalbash.core.domain.card;
+package de.schramm.royalbash.core.domain.card.summoningcard;
 
-import de.schramm.royalbash.core.domain.card.summoningcard.SummoningCard;
+
+import lombok.EqualsAndHashCode;
 
 import java.util.UUID;
 
-public class TestSummoningCard extends SummoningCard {
+@EqualsAndHashCode
+public class TestSummoningCard extends AbstractSummoningCard {
+
+    public TestSummoningCard() {
+        super(
+                UUID.randomUUID(),
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                0,
+                0,
+                0,
+                0,
+                0
+        );
+    }
 
     public TestSummoningCard(UUID id) {
         super(

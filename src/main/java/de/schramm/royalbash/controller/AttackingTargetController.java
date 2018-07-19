@@ -36,11 +36,7 @@ public class AttackingTargetController {
             val enemyPlayer = gameManager.findEnemyPlayer(requestParams.getPlayerId(), game);
             val attackingSummoning = player.findSummoning(requestParams.getAttackingSummoningId());
             val attackedTarget = enemyPlayer.findTarget(requestParams.getAttackedTargetId());
-            attackingSummoning.attackTarget(
-                    attackedTarget,
-                    player,
-                    game
-            );
+            attackingSummoning.attackTarget(attackedTarget);
             gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponseGame.fromGame(game));
         } catch (GameEngineException e) {

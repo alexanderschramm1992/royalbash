@@ -5,9 +5,8 @@ import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.core.exception.RuleViolationException;
 import de.schramm.royalbash.core.domain.card.summoningcard.Tag;
 import de.schramm.royalbash.core.domain.card.EffectContext;
-import de.schramm.royalbash.core.domain.card.effect.attackingtarget.AttackingTargetEffect;
-import de.schramm.royalbash.core.domain.card.effect.defendingtarget.DefendingTargetEffect;
-import de.schramm.royalbash.core.domain.card.summoningcard.SummoningCard;
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackingTargetEffect;
+import de.schramm.royalbash.core.domain.card.summoningcard.defendingtarget.DefendingTargetEffect;
 import de.schramm.royalbash.core.domain.game.Game;
 import de.schramm.royalbash.core.domain.game.board.player.Player;
 import lombok.*;
@@ -105,19 +104,13 @@ public class Summoning {
     }
 
     public void attackTarget(
-            Target attackedTarget,
-            Player owner,
-            Game game
+            Target attackedTarget
     ) throws GameEngineException {
 
         if(canAttack) {
             attackingTargetEffect.apply(
-                    id,
-                    attackedTarget.getId(),
-                    EffectContext.builder()
-                            .owner(owner)
-                            .game(game)
-                            .build()
+                    this,
+                    attackedTarget
             );
         } else {
             throw new RuleViolationException(String.format("Summoning %s cannot attack", id));
@@ -126,20 +119,14 @@ public class Summoning {
 
     public void defendTarget(
             Summoning attackingSummoning,
-            Target attackedTarget,
-            Player attackingPlayer,
-            Game game
+            Target attackedTarget
     ) throws GameEngineException {
 
         if(canDefend) {
             defendingTargetEffect.apply(
-                    attackingSummoning.id,
-                    attackedTarget.getId(),
-                    id,
-                    EffectContext.builder()
-                            .owner(game.findOpponent(attackingPlayer))
-                            .game(game)
-                            .build()
+                    attackingSummoning,
+                    attackedTarget,
+                    this
             );
         } else {
             throw new RuleViolationException(String.format("Summoning %s cannot defend", id));

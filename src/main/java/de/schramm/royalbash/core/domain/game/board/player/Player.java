@@ -1,14 +1,10 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
+import de.schramm.royalbash.core.domain.game.board.player.field.*;
 import de.schramm.royalbash.core.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.core.exception.RuleViolationException;
 import de.schramm.royalbash.core.domain.card.EffectContext;
-import de.schramm.royalbash.core.domain.card.resourcescard.ResourcesCard;
-import de.schramm.royalbash.core.domain.card.summoningcard.SummoningCard;
-import de.schramm.royalbash.core.domain.game.board.player.field.Field;
-import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
-import de.schramm.royalbash.core.domain.game.board.player.field.Target;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -37,7 +33,6 @@ public class Player {
         resourcePool.payFor(summoningCard);
         hand.removeCard(summoningCard);
         field.summon(Summoning.fromCard(summoningCard, id), target);
-
     }
 
     public void playResourcesCard(ResourcesCard resourcesCard, EffectContext context) throws RuleViolationException {

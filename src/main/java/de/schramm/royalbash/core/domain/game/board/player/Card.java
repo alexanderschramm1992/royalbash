@@ -1,4 +1,4 @@
-package de.schramm.royalbash.core.domain.card;
+package de.schramm.royalbash.core.domain.game.board.player;
 
 import java.util.UUID;
 

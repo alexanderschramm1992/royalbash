@@ -2,7 +2,7 @@ package de.schramm.royalbash.core.domain.card.summoningcard;
 
 import java.util.UUID;
 
-public class PlatedTuskrider extends SummoningCard {
+public class PlatedTuskrider extends AbstractSummoningCard {
 
     public PlatedTuskrider() {
         super(

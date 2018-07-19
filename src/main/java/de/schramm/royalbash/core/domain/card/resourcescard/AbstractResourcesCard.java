@@ -1,8 +1,9 @@
 package de.schramm.royalbash.core.domain.card.resourcescard;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.schramm.royalbash.core.domain.card.Card;
-import de.schramm.royalbash.core.domain.card.effect.generic.GenericEffect;
+import de.schramm.royalbash.core.domain.game.board.player.Card;
+import de.schramm.royalbash.core.domain.card.effect.GenericEffect;
+import de.schramm.royalbash.core.domain.game.board.player.field.ResourcesCard;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public abstract class ResourcesCard implements Card {
+abstract class AbstractResourcesCard implements ResourcesCard {
 
     private final UUID id;
     private final String name;

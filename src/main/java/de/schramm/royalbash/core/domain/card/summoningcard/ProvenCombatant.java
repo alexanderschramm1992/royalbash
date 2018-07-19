@@ -1,10 +1,10 @@
 package de.schramm.royalbash.core.domain.card.summoningcard;
 
-import de.schramm.royalbash.core.domain.card.effect.attackingtarget.VigorousAttackingTargetEffect;
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.VigorousAttackingTargetEffect;
 
 import java.util.UUID;
 
-public class ProvenCombatant extends SummoningCard {
+public class ProvenCombatant extends AbstractSummoningCard {
     public ProvenCombatant() {
 
         super(

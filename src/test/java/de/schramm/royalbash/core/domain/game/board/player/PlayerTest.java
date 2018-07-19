@@ -1,12 +1,12 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
-import de.schramm.royalbash.core.domain.card.TestResourcesCard;
-import de.schramm.royalbash.core.domain.card.TestSummoningCard;
+import de.schramm.royalbash.core.domain.card.resourcescard.TestResourcesCard;
+import de.schramm.royalbash.core.domain.card.summoningcard.TestSummoningCard;
 import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.core.exception.RuleViolationException;
 import de.schramm.royalbash.core.domain.card.EffectContext;
-import de.schramm.royalbash.core.domain.card.effect.generic.GrantResources;
-import de.schramm.royalbash.core.domain.card.effect.generic.PlainGenericEffect;
+import de.schramm.royalbash.core.domain.card.effect.GrantResources;
+import de.schramm.royalbash.core.domain.card.effect.PlainGenericEffect;
 import de.schramm.royalbash.core.domain.game.*;
 import de.schramm.royalbash.core.domain.game.board.player.field.Field;
 import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;

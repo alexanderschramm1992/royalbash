@@ -1,10 +1,10 @@
 package de.schramm.royalbash.core.domain.card.summoningcard;
 
-import de.schramm.royalbash.core.domain.card.effect.attackingtarget.MountedAttackingTargetEffect;
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.MountedAttackingTargetEffect;
 
 import java.util.UUID;
 
-public class YouthfulKnight extends SummoningCard {
+public class YouthfulKnight extends AbstractSummoningCard {
 
     public YouthfulKnight() {
 

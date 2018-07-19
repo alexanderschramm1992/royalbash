@@ -1,4 +1,4 @@
-package de.schramm.royalbash.core.domain.card.effect.generic;
+package de.schramm.royalbash.core.domain.card.effect;
 
 import de.schramm.royalbash.core.domain.card.EffectContext;
 
