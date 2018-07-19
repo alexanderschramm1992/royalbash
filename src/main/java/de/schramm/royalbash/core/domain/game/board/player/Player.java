@@ -1,10 +1,10 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
+import de.schramm.royalbash.core.domain.card.EffectContext;
 import de.schramm.royalbash.core.domain.game.board.player.field.*;
 import de.schramm.royalbash.core.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.core.exception.RuleViolationException;
-import de.schramm.royalbash.core.domain.card.EffectContext;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -67,5 +67,9 @@ public class Player {
             .orElseThrow(() -> new DomainObjectDoesNotExistException(
                     String.format("Summoning %s does not exist", summoningId)
             ));
+    }
+
+    public void purge() {
+        field.getTargets().forEach(Target::purge);
     }
 }

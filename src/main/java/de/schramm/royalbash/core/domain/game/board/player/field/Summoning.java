@@ -1,14 +1,11 @@
 package de.schramm.royalbash.core.domain.game.board.player.field;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.schramm.royalbash.core.exception.GameEngineException;
-import de.schramm.royalbash.core.exception.RuleViolationException;
 import de.schramm.royalbash.core.domain.card.summoningcard.Tag;
-import de.schramm.royalbash.core.domain.card.EffectContext;
 import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackingTargetEffect;
 import de.schramm.royalbash.core.domain.card.summoningcard.defendingtarget.DefendingTargetEffect;
-import de.schramm.royalbash.core.domain.game.Game;
-import de.schramm.royalbash.core.domain.game.board.player.Player;
+import de.schramm.royalbash.core.exception.GameEngineException;
+import de.schramm.royalbash.core.exception.RuleViolationException;
 import lombok.*;
 
 import java.util.Set;

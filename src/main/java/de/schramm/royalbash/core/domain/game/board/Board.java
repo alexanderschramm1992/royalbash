@@ -1,5 +1,6 @@
 package de.schramm.royalbash.core.domain.game.board;
 
+import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
 import de.schramm.royalbash.core.exception.GameBrokenException;
 import de.schramm.royalbash.core.exception.RuleViolationException;
 import de.schramm.royalbash.core.domain.game.board.player.Player;
@@ -7,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -35,5 +37,9 @@ public class Board {
                 )));
 
         return playerBlue.equals(player) ? playerRed : playerBlue;
+    }
+
+    public void purge() {
+        Stream.of(playerBlue, playerRed).forEach(Player::purge);
     }
 }

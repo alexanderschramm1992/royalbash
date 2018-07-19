@@ -37,4 +37,11 @@ public class Target {
             ));
         }
     }
+
+    public void purge() {
+
+        if(isOccupied() && summoning.isDead()) {
+            summoning = null;
+        }
+    }
 }

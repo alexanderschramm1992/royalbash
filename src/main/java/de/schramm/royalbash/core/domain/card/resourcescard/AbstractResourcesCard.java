@@ -1,7 +1,6 @@
 package de.schramm.royalbash.core.domain.card.resourcescard;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.schramm.royalbash.core.domain.game.board.player.Card;
 import de.schramm.royalbash.core.domain.card.effect.GenericEffect;
 import de.schramm.royalbash.core.domain.game.board.player.field.ResourcesCard;
 import lombok.Getter;

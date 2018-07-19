@@ -1,5 +1,6 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
+import de.schramm.royalbash.core.domain.game.board.player.field.Card;
 import de.schramm.royalbash.core.domain.game.board.player.field.ResourcesCard;
 import de.schramm.royalbash.core.domain.game.board.player.field.SummoningCard;
 import de.schramm.royalbash.core.exception.DomainObjectDoesNotExistException;

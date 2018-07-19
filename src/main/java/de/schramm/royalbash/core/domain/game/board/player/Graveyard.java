@@ -1,5 +1,6 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
+import de.schramm.royalbash.core.domain.game.board.player.field.Card;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
