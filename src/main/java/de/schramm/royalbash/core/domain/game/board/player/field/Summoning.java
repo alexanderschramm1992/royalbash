@@ -1,11 +1,11 @@
 package de.schramm.royalbash.core.domain.game.board.player.field;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.schramm.royalbash.core.domain.card.summoningcard.Tag;
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.Tag;
 import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackableTarget;
 import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackingTargetEffect;
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.FightableSummoning;
 import de.schramm.royalbash.core.domain.card.summoningcard.defendingtarget.DefendingTargetEffect;
-import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.core.exception.RuleViolationException;
 import lombok.*;
 
@@ -16,7 +16,7 @@ import java.util.UUID;
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class Summoning {
+public class Summoning implements FightableSummoning {
 
     private final UUID id;
     private final SummoningCard summoningCard;
@@ -97,13 +97,14 @@ public class Summoning {
 
     public void setCanDefend(boolean canDefend) { this.canDefend = canDefend; }
 
-    public void dealDamage(Summoning summoning) {
-        summoning.currentHealth -= currentStrength;
+    public void dealDamage(FightableSummoning summoning) {
+
+        summoning.setCurrentHealth(summoning.getCurrentHealth() - currentStrength);
     }
 
     public void attackTarget(
             Target attackedTarget
-    ) throws GameEngineException {
+    ) throws RuleViolationException {
 
         if(canAttack) {
             attackingTargetEffect.apply(
@@ -116,9 +117,9 @@ public class Summoning {
     }
 
     public void defendTarget(
-            Summoning attackingSummoning,
+            FightableSummoning attackingSummoning,
             AttackableTarget attackedTarget
-    ) throws GameEngineException {
+    ) throws RuleViolationException {
 
         if(canDefend) {
             defendingTargetEffect.apply(

@@ -1,12 +1,11 @@
 package de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget;
 
-import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
-import de.schramm.royalbash.core.exception.GameEngineException;
+import de.schramm.royalbash.core.exception.RuleViolationException;
 
 public interface AttackingTargetEffect {
 
     void apply(
-            Summoning attackingSummoning,
+            FightableSummoning attackingSummoning,
             AttackableTarget attackedTarget
-    ) throws GameEngineException;
+    ) throws RuleViolationException;
 }

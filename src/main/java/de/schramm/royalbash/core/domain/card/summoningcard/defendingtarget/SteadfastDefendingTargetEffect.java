@@ -1,16 +1,16 @@
 package de.schramm.royalbash.core.domain.card.summoningcard.defendingtarget;
 
 import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackableTarget;
-import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
-import de.schramm.royalbash.core.exception.GameEngineException;
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.FightableSummoning;
+import de.schramm.royalbash.core.exception.RuleViolationException;
 
 public class SteadfastDefendingTargetEffect implements DefendingTargetEffect {
     @Override
     public void apply(
-            Summoning attackingSummoning,
+            FightableSummoning attackingSummoning,
             AttackableTarget attackedTarget,
-            Summoning defendingSummoning
-    ) throws GameEngineException {
+            FightableSummoning defendingSummoning
+    ) throws RuleViolationException {
 
         defendingSummoning.increaseCurrentStrength(1);
         new PlainDefendingTargetEffect().apply(

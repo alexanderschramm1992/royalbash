@@ -1,6 +1,7 @@
 package de.schramm.royalbash.core.domain.card.summoningcard;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.Tag;
 import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
 import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackingTargetEffect;
 import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.PlainAttackingTargetEffect;

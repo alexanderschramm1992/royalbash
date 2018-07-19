@@ -1,17 +1,15 @@
 package de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget;
 
-import de.schramm.royalbash.core.domain.card.summoningcard.Tag;
-import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
-import de.schramm.royalbash.core.exception.GameEngineException;
+import de.schramm.royalbash.core.exception.RuleViolationException;
 import lombok.val;
 
 public class MountedAttackingTargetEffect implements AttackingTargetEffect {
 
     @Override
     public void apply(
-            Summoning attackingSummoning,
+            FightableSummoning attackingSummoning,
             AttackableTarget attackedTarget
-    ) throws GameEngineException {
+    ) throws RuleViolationException {
 
         if(attackedTarget.isOccupied()) {
             val attackedSummoning = attackedTarget.getSummoning();

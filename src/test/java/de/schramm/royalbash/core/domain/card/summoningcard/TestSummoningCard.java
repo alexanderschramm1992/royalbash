@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import java.util.UUID;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 public class TestSummoningCard extends AbstractSummoningCard {
 
     public TestSummoningCard() {

@@ -1,5 +1,6 @@
 package de.schramm.royalbash.core.domain.card.summoningcard;
 
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.Tag;
 import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.VigorousAttackingTargetEffect;
 
 import java.util.UUID;
