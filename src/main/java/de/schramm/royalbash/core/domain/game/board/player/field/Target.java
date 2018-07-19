@@ -1,5 +1,6 @@
 package de.schramm.royalbash.core.domain.game.board.player.field;
 
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackableTarget;
 import de.schramm.royalbash.core.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import java.util.UUID;
 
 @Builder
 @Getter
-public class Target {
+public class Target implements AttackableTarget {
 
     private UUID id;
     private Summoning summoning;

@@ -1,7 +1,7 @@
 package de.schramm.royalbash.core.domain.card.summoningcard.defendingtarget;
 
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackableTarget;
 import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
-import de.schramm.royalbash.core.domain.game.board.player.field.Target;
 import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.core.exception.RuleViolationException;
 
@@ -10,7 +10,7 @@ public class PlainDefendingTargetEffect implements DefendingTargetEffect {
     @Override
     public void apply(
             Summoning attackingSummoning,
-            Target attackedTarget,
+            AttackableTarget attackedTarget,
             Summoning defendingSummoning
     ) throws GameEngineException {
 

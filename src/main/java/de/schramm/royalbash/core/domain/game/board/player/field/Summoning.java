@@ -2,6 +2,7 @@ package de.schramm.royalbash.core.domain.game.board.player.field;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.schramm.royalbash.core.domain.card.summoningcard.Tag;
+import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackableTarget;
 import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackingTargetEffect;
 import de.schramm.royalbash.core.domain.card.summoningcard.defendingtarget.DefendingTargetEffect;
 import de.schramm.royalbash.core.exception.GameEngineException;
@@ -116,7 +117,7 @@ public class Summoning {
 
     public void defendTarget(
             Summoning attackingSummoning,
-            Target attackedTarget
+            AttackableTarget attackedTarget
     ) throws GameEngineException {
 
         if(canDefend) {
