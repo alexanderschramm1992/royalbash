@@ -2,7 +2,6 @@ package de.schramm.royalbash.core.domain.card.summoningcard.effectwithsourcesumm
 
 import de.schramm.royalbash.core.exception.RuleViolationException;
 import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
-import de.schramm.royalbash.core.domain.card.EffectContext;
 
 public interface GenericEffectWithSourceSummoning {
 

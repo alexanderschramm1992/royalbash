@@ -1,7 +1,6 @@
 package de.schramm.royalbash.core.domain.card.effect;
 
 import de.schramm.royalbash.core.exception.RuleViolationException;
-import de.schramm.royalbash.core.domain.card.EffectContext;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -15,11 +14,11 @@ public class GrantResources implements GenericEffect {
     private int blessing;
 
     @Override
-    public void apply(EffectContext context) throws RuleViolationException {
+    public void apply(GameAccessor game, PlayerAccessor owner) throws RuleViolationException {
 
-        context.getOwner().getResourcePool().alterRations(rations);
-        context.getOwner().getResourcePool().alterMaterial(material);
-        context.getOwner().getResourcePool().alterBlessing(blessing);
+        owner.getResourcePool().alterRations(rations);
+        owner.getResourcePool().alterMaterial(material);
+        owner.getResourcePool().alterBlessing(blessing);
     }
 
     public static GrantResources getInstance(int rations, int material, int blessing) {

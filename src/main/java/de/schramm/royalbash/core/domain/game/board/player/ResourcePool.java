@@ -1,5 +1,6 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
+import de.schramm.royalbash.core.domain.card.effect.ResourcePoolAccessor;
 import de.schramm.royalbash.core.domain.game.board.player.field.Card;
 import de.schramm.royalbash.core.exception.RuleViolationException;
 import lombok.Builder;
@@ -7,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ResourcePool {
+public class ResourcePool implements ResourcePoolAccessor {
 
     private int rations;
     private int material;

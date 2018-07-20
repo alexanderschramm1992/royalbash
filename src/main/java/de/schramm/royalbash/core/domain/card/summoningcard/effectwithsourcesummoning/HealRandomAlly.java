@@ -2,7 +2,6 @@ package de.schramm.royalbash.core.domain.card.summoningcard.effectwithsourcesumm
 
 import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
 import de.schramm.royalbash.core.domain.game.board.player.field.Target;
-import de.schramm.royalbash.core.domain.card.EffectContext;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.val;

@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,18 +22,14 @@ public class JDependCycleTest {
         JDepend jdepend = new JDepend();
         jdepend.addDirectory(DIRECTORY);
 
-        Collection filters = new ArrayList();
-        filters.add(PACKAGE_TO_ANALYZE);
-        jdepend.setFilter(new PackageFilter(filters));
-
+        jdepend.setFilter(new PackageFilter(Collections.singleton(PACKAGE_TO_ANALYZE)));
         jdepend.analyze();
 
         if(jdepend.containsCycles()){
             ReportHelper.printReportToSystemOut();
         }
 
-        //assertThat(jdepend.containsCycles()).isFalse(); ToDo: Activate Test
-
+        assertThat(jdepend.containsCycles()).isFalse();
     }
 
 

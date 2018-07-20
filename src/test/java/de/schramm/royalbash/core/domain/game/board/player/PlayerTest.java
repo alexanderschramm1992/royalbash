@@ -1,16 +1,15 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
-import de.schramm.royalbash.core.domain.card.resourcescard.TestResourcesCard;
-import de.schramm.royalbash.core.domain.card.summoningcard.TestSummoningCard;
-import de.schramm.royalbash.core.exception.GameEngineException;
-import de.schramm.royalbash.core.exception.RuleViolationException;
-import de.schramm.royalbash.core.domain.card.EffectContext;
 import de.schramm.royalbash.core.domain.card.effect.GrantResources;
 import de.schramm.royalbash.core.domain.card.effect.PlainGenericEffect;
-import de.schramm.royalbash.core.domain.game.*;
+import de.schramm.royalbash.core.domain.card.resourcescard.TestResourcesCard;
+import de.schramm.royalbash.core.domain.card.summoningcard.TestSummoningCard;
+import de.schramm.royalbash.core.domain.game.Game;
 import de.schramm.royalbash.core.domain.game.board.player.field.Field;
 import de.schramm.royalbash.core.domain.game.board.player.field.Summoning;
 import de.schramm.royalbash.core.domain.game.board.player.field.Target;
+import de.schramm.royalbash.core.exception.GameEngineException;
+import de.schramm.royalbash.core.exception.RuleViolationException;
 import lombok.val;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -174,13 +173,9 @@ public class PlayerTest {
                 )
                 .hand(Hand.builder().card(resourcesCard).build())
                 .build();
-        val effectContext = EffectContext.builder()
-                .game(Game.builder().build())
-                .owner(player)
-                .build();
 
         // When
-        player.playResourcesCard(resourcesCard, effectContext);
+        player.playResourcesCard(resourcesCard, Game.builder().build(), player);
 
         // Then
         Assert.assertThat(player.getResourcePool().getRations(), Matchers.is(1));
@@ -197,13 +192,9 @@ public class PlayerTest {
                 .hand(Hand.builder().card(resourcesCard).build())
                 .resourcePool(ResourcePool.builder().build())
                 .build();
-        val effectContext = EffectContext.builder()
-                .game(Game.builder().build())
-                .owner(player)
-                .build();
 
         // When
-        player.playResourcesCard(resourcesCard, effectContext);
+        player.playResourcesCard(resourcesCard, Game.builder().build(), player);
 
         // Then
         Assert.assertThat(player.getHand().getCards(), Matchers.not(Matchers.hasItem(resourcesCard)));

@@ -1,4 +1,4 @@
-package de.schramm.royalbash.core.domain.card;
+package de.schramm.royalbash.core.domain.card.summoningcard.effectwithsourcesummoning;
 
 import de.schramm.royalbash.core.domain.game.Game;
 import de.schramm.royalbash.core.domain.game.board.player.Player;

@@ -1,6 +1,7 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
-import de.schramm.royalbash.core.domain.card.EffectContext;
+import de.schramm.royalbash.core.domain.card.effect.PlayerAccessor;
+import de.schramm.royalbash.core.domain.game.Game;
 import de.schramm.royalbash.core.domain.game.board.player.field.*;
 import de.schramm.royalbash.core.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.core.exception.GameEngineException;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @Builder
 @Getter
 @ToString
-public class Player {
+public class Player implements PlayerAccessor {
 
     private final UUID id;
     private final UUID accountId;
@@ -35,11 +36,11 @@ public class Player {
         field.summon(Summoning.fromCard(summoningCard, id), target);
     }
 
-    public void playResourcesCard(ResourcesCard resourcesCard, EffectContext context) throws RuleViolationException {
+    public void playResourcesCard(ResourcesCard resourcesCard, Game game, Player owner) throws RuleViolationException {
 
         resourcePool.payFor(resourcesCard);
         hand.removeCard(resourcesCard);
-        resourcesCard.getPlayEffect().apply(context);
+        resourcesCard.getPlayEffect().apply(game, owner);
     }
 
     public void bury(Summoning summoning) throws DomainObjectDoesNotExistException, RuleViolationException {

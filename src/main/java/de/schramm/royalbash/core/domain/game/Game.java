@@ -1,5 +1,6 @@
 package de.schramm.royalbash.core.domain.game;
 
+import de.schramm.royalbash.core.domain.card.effect.GameAccessor;
 import de.schramm.royalbash.core.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.core.exception.GameBrokenException;
 import de.schramm.royalbash.core.domain.game.board.Board;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
 
 @Value
 @Builder
-public class Game {
+public class Game implements GameAccessor {
 
     @Id
     private UUID id;
