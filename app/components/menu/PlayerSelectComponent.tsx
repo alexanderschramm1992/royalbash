@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import "../common/common.css";
-import "./BoardContainer.css";
+import "./PlayerSelectComponent.css";
 import BoardContainer from "../game/BoardContainer";
 
 interface PlayerSelectState {
@@ -29,7 +29,15 @@ export class PlayerSelectComponent extends React.Component<{}, PlayerSelectState
     }
 
     select(): void {
-        document.getElementsByClassName("player-select-selector").item(0)
+        let selectElement = (
+            document
+                .getElementsByClassName("player-select-selector")
+                .item(0)
+        ) as HTMLSelectElement;
+        let selectedPlayerId = selectElement.options[selectElement.selectedIndex].text;
+        this.setState({
+            selectedPlayerId: selectedPlayerId
+        });
     }
 
     render(): any {

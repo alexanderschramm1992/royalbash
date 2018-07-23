@@ -45,12 +45,7 @@ public class EndingTurnController {
         } catch (GameEngineException e) {
 
             log.warn("Failed to end turn due to: " + e.getMessage());
-
-            return ResponseEntity.badRequest().body(
-                    StateResponseGame.builder()
-                            .reason(e.getMessage())
-                            .build()
-            );
+            return ResponseEntity.badRequest().body(StateResponseGame.fromError(e.getMessage()));
         }
     }
 }
