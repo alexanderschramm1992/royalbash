@@ -29,7 +29,11 @@ export class EndTurnButtonComponent extends React.Component<{}, {}> {
 
         return (
             <div className="end-turn-button">
-                <button onClick={this.endTurn} className="button">
+                <button
+                    onClick={this.endTurn}
+                    disabled={!store.getState().ownTurn}
+                    className="button"
+                >
                     <div className="font-size-extra-large">End Turn</div>
                 </button>
             </div>
