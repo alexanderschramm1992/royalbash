@@ -5,63 +5,41 @@ import de.schramm.royalbash.core.domain.game.board.player.field.Card;
 import de.schramm.royalbash.core.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.val;
 
 @Getter
 @Builder
 public class ResourcePool implements ResourcePoolAccessor {
 
-    private int rations;
-    private int material;
-    private int blessing;
+    private final int rations;
+    private final int material;
+    private final int blessing;
 
-    public void alterRations(int rations) throws RuleViolationException {
-
-        if(this.rations + rations >= 0) {
-            this.rations += rations;
-        } else {
-            throw new RuleViolationException(String.format("Cannot alter rations by %s", rations));
-        }
+    public ResourcePool alterRations(int rations) {
+        return new ResourcePool(this.rations + rations, material, blessing);
     }
 
-    public void alterMaterial(int material) throws RuleViolationException {
-
-        if(this.material + material >= 0) {
-            this.material += material;
-        } else {
-            throw new RuleViolationException(String.format("Cannot alter material by %s", material));
-        }
+    public ResourcePool alterMaterial(int material) {
+        return new ResourcePool(rations, this.material + material, blessing);
     }
 
-    public void alterBlessing(int blessing) throws RuleViolationException {
-
-        if(this.blessing + blessing >= 0) {
-            this.blessing += blessing;
-        } else {
-            throw new RuleViolationException(String.format("Cannot alter blessing by %s", blessing));
-        }
+    public ResourcePool alterBlessing(int blessing) {
+        return new ResourcePool(rations, material, this.blessing + blessing);
     }
 
-    private boolean canSustain(Card card) {
+    boolean canSustain(Card card) {
 
         return rations >= card.getCostRations()
                 && material >= card.getCostMaterial()
                 && blessing >= card.getCostBlessing();
     }
 
-    void payFor(Card card) throws RuleViolationException {
+    ResourcePool payFor(Card card) {
 
-        if(canSustain(card)) {
+        val rations = this.rations - card.getCostRations();
+        val material = this.material - card.getCostMaterial();
+        val blessing = this.blessing - card.getCostBlessing();
 
-            rations -= card.getCostRations();
-            material -= card.getCostMaterial();
-            blessing -= card.getCostBlessing();
-        } else {
-            throw new RuleViolationException(
-                    String.format(
-                            "Card %s cannot be payed",
-                            card.getId()
-                    )
-            );
-        }
+        return new ResourcePool(rations, material, blessing);
     }
 }

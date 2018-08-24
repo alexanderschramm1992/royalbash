@@ -2,6 +2,7 @@ package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.SummonRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
+import de.schramm.royalbash.core.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.persistence.GameManager;
 import de.schramm.royalbash.util.UUIDGenerator;
@@ -45,11 +46,16 @@ class PlaySummoningCardController {
 
             val game = gameManager.findGame(requestParams.getGameId());
             val player = game.findPlayer(requestParams.getPlayerId());
-            player.playSummoningCard(
-                    player.getHand().findSummoningCard(requestParams.getCardId()),
-                    game.findTarget(requestParams.getTargetId()),
-                    uuidGenerator.generateUUID()
-            );
+            val card = player.getHand().findSummoningCard(requestParams.getCardId());
+            if(card.isPresent()) {
+                player.playSummoningCard(
+                        card.get(),
+                        game.findTarget(requestParams.getTargetId()),
+                        uuidGenerator.generateUUID()
+                );
+            } else {
+                throw new DomainObjectDoesNotExistException(requestParams.getCardId().toString());
+            }
             gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponseGame.fromGame(game));
         } catch (GameEngineException e) {

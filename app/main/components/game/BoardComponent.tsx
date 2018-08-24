@@ -14,6 +14,7 @@ import {ResourcePoolComponent} from "./resourcepool/ResourcePoolComponent";
 import EnemyFieldComponent from "./EnemyFieldComponent";
 import EndTurnButtonComponent from "./EndTurnButtonComponent";
 import EnemyHandComponent from "./EnemyHandComponent";
+import store from "../../Store";
 
 interface BoardComponentState {
     readonly scale: number;
@@ -101,7 +102,7 @@ export class BoardComponent extends React.Component<{}, BoardComponentState> {
                         </div>
                         <div className="log-area"></div>
                         <div className="next-turn-button-area">
-                            <EndTurnButtonComponent/>
+                            <EndTurnButtonComponent store={store} />
                         </div>
                     </div>
                 </div>

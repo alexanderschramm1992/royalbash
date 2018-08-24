@@ -1,22 +1,37 @@
 import * as React from "react";
-
 import "../common/common.css";
 import "./EndTurnButtonComponent.css";
-import store from "../../Store";
-import {EndingTurnIssuedActionFactory} from "../../actions/endingturn/EndingTurnIssuedAction";
+import {
+    default as EndingTurnIssuedAction,
+    EndingTurnIssuedActionFactory
+} from "../../actions/endingturn/EndingTurnIssuedAction";
 
-export class EndTurnButtonComponent extends React.Component<{}, {}> {
+export interface EndTurnButtonComponentProps {
+    store: {
+        getState: () => {
+            endingTurnIssued: boolean,
+            ownTurn: boolean,
+            gameId: string,
+            playerId: string
+        },
+        dispatch: (action: EndingTurnIssuedAction) => void
+    }
+}
 
-    constructor(props: any) {
+export class EndTurnButtonComponent extends React.Component<EndTurnButtonComponentProps, {}> {
+
+    constructor(props: EndTurnButtonComponentProps) {
         super(props);
 
-        this.state = {
-        };
+        this.state = {};
 
         this.endTurn = this.endTurn.bind(this);
     }
 
     endTurn(): void {
+
+        let store = this.props.store;
+
         if(!store.getState().endingTurnIssued) {
             store.dispatch(EndingTurnIssuedActionFactory.getInstance(
                 store.getState().gameId,
@@ -31,7 +46,7 @@ export class EndTurnButtonComponent extends React.Component<{}, {}> {
             <div className="end-turn-button">
                 <button
                     onClick={this.endTurn}
-                    disabled={!store.getState().ownTurn}
+                    disabled={!this.props.store.getState().ownTurn}
                     className="button"
                 >
                     <div className="font-size-extra-large">End Turn</div>

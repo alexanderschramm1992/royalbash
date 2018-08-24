@@ -8,8 +8,10 @@ import lombok.Singular;
 import lombok.Value;
 import lombok.val;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Value
 @Builder
@@ -18,32 +20,38 @@ public class Field {
     @Singular("target")
     private List<Target> targets;
 
-    public void summon(Summoning summoning, Target target) throws GameEngineException {
+    public Field summon(Summoning summoning, Target target) throws GameEngineException {
 
-        targets.stream()
-                .filter(element -> element.equals(target))
-                .findFirst()
-                .orElseThrow(() -> new DomainObjectDoesNotExistException(
-                        String.format("Target %s does not exist on field", target.getId())
-                )).summon(summoning);
+        if(!targets.contains(target)) {
+            throw new DomainObjectDoesNotExistException(
+                    String.format("Target %s does not exist on field", target.getId())
+            );
+        } else if (target.isOccupied()) {
+            throw new RuleViolationException(
+                    String.format("Target %s is already occupied", target.getId())
+            );
+        } else {
+            val targets = new ArrayList<Target>(this.targets);
+            targets.remove(target);
+            targets.add(target.summon(summoning));
+            return new Field(targets);
+        }
     }
 
-    public void bury(Summoning summoning) throws DomainObjectDoesNotExistException, RuleViolationException {
+    public Field bury(Summoning summoning) throws DomainObjectDoesNotExistException {
 
-        val targetOptional = targets.stream()
-                .filter(target -> summoning.equals(target.getSummoning()))
-                .findFirst();
+        val target = targets.stream()
+                .filter(ownTarget -> summoning.equals(ownTarget.getSummoning()))
+                .findFirst()
+                .orElseThrow(() -> new DomainObjectDoesNotExistException(String.format(
+                        "Cannot find Target occupied by Summoning %s",
+                        summoning.getId()
+                )));
 
-        if(targetOptional.isPresent()) {
-
-            targetOptional.get().bury(summoning);
-        } else {
-
-            throw new DomainObjectDoesNotExistException(String.format(
-                    "Cannot find Target occupied by Summoning %s",
-                    summoning.getId()
-            ));
-        }
+        val targets = this.targets;
+        targets.remove(target);
+        targets.add(target.bury(summoning));
+        return new Field(targets);
     }
 
     public Target getTarget(UUID targetId) throws DomainObjectDoesNotExistException {
@@ -54,5 +62,14 @@ public class Field {
                 .orElseThrow(() -> new DomainObjectDoesNotExistException(
                         String.format("Cannot find target %s", targetId)
                 ));
+    }
+
+    public Field purge() {
+
+        val targets = this.targets.stream()
+                .map(Target::purge)
+                .collect(Collectors.toList());
+
+        return new Field(targets);
     }
 }

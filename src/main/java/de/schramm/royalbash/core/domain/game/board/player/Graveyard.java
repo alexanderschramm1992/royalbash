@@ -14,5 +14,5 @@ import java.util.List;
 class Graveyard {
 
     @Singular("card")
-    private List<Card> cards;
+    private final List<Card> cards;
 }

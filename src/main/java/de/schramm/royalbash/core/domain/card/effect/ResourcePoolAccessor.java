@@ -1,9 +1,9 @@
 package de.schramm.royalbash.core.domain.card.effect;
 
-import de.schramm.royalbash.core.exception.RuleViolationException;
+import de.schramm.royalbash.core.domain.game.board.player.ResourcePool;
 
 public interface ResourcePoolAccessor {
-    void alterRations(int rations) throws RuleViolationException;
-    void alterMaterial(int material) throws RuleViolationException;
-    void alterBlessing(int blessing) throws RuleViolationException;
+    ResourcePool alterRations(int rations);
+    ResourcePool alterMaterial(int material);
+    ResourcePool alterBlessing(int blessing);
 }

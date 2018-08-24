@@ -6,53 +6,70 @@ import de.schramm.royalbash.core.domain.game.board.player.field.*;
 import de.schramm.royalbash.core.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.core.exception.RuleViolationException;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Objects;
 import java.util.UUID;
 
 @Builder
 @Getter
+@Setter
 @ToString
 public class Player implements PlayerAccessor {
 
     private final UUID id;
     private final UUID accountId;
-    private final SummoningDeck summoningDeck;
-    private final ResourcesDeck resourcesDeck;
-    private final ResourcePool resourcePool;
-    private final Hand hand;
+    private SummoningDeck summoningDeck;
+    private ResourcesDeck resourcesDeck;
+    private ResourcePool resourcePool;
+    private Hand hand;
     private final Graveyard graveyard;
-    private final Field field;
+    private Field field;
 
     private int health;
 
     public void playSummoningCard(SummoningCard summoningCard, Target target, UUID id) throws GameEngineException {
 
-        resourcePool.payFor(summoningCard);
-        hand.removeCard(summoningCard);
-        field.summon(Summoning.fromCard(summoningCard, id), target);
+        if(resourcePool.canSustain(summoningCard)) {
+            resourcePool = resourcePool.payFor(summoningCard);
+            hand = hand.removeCard(summoningCard);
+            field = field.summon(Summoning.fromCard(summoningCard, id), target);
+        } else {
+            throw new RuleViolationException(String.format("Cannot sustain Card %s", summoningCard.getId()));
+        }
     }
 
     public void playResourcesCard(ResourcesCard resourcesCard, Game game, Player owner) throws RuleViolationException {
 
-        resourcePool.payFor(resourcesCard);
-        hand.removeCard(resourcesCard);
-        resourcesCard.getPlayEffect().apply(game, owner);
+        if(resourcePool.canSustain(resourcesCard)) {
+            resourcePool = resourcePool.payFor(resourcesCard);
+            hand = hand.removeCard(resourcesCard);
+            resourcesCard.getPlayEffect().apply(game, owner);
+        } else {
+            throw new RuleViolationException(String.format("Cannot sustain Card %s", resourcesCard.getId()));
+        }
     }
 
-    public void bury(Summoning summoning) throws DomainObjectDoesNotExistException, RuleViolationException {
-        field.bury(summoning);
+    public void bury(Summoning summoning) throws DomainObjectDoesNotExistException {
+        field = field.bury(summoning);
     }
 
     public void drawSummoningCard() throws RuleViolationException {
-        hand.addCard(summoningDeck.drawCard());
+
+        val card = summoningDeck.getTopCard();
+        if(card.isPresent()) {
+            summoningDeck = summoningDeck.removeTopCard();
+            hand = hand.addCard(card.get());
+        }
     }
 
     public void drawResourcesCard() throws RuleViolationException {
-        hand.addCard(resourcesDeck.drawCard());
+
+        val card = resourcesDeck.getTopCard();
+        if(card.isPresent()) {
+            resourcesDeck = resourcesDeck.removeTopCard();
+            hand = hand.addCard(card.get());
+        }
     }
 
     public Target findTarget(UUID attackedTargetId) throws DomainObjectDoesNotExistException {
@@ -71,6 +88,6 @@ public class Player implements PlayerAccessor {
     }
 
     public void purge() {
-        field.getTargets().forEach(Target::purge);
+        field = field.purge();
     }
 }

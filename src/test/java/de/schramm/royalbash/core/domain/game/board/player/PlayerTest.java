@@ -25,7 +25,7 @@ public class PlayerTest {
 
         // Given
         val summoningCard = new TestSummoningCard(UUID.randomUUID());
-        val target = Target.builder().build();
+        val target = new Target(UUID.randomUUID(), null);
         val summoningId = UUID.randomUUID();
 
         val player = Player.builder()
@@ -52,7 +52,7 @@ public class PlayerTest {
 
         // Given
         val summoningCard = new TestSummoningCard(UUID.randomUUID());
-        val target = Target.builder().build();
+        val target = new Target(UUID.randomUUID(), null);
 
         val player = Player.builder()
                 .resourcePool(ResourcePool.builder().build())
@@ -80,7 +80,7 @@ public class PlayerTest {
                 .blessing(initialBlessing)
                 .build();
         val summoningCard = new TestSummoningCard(UUID.randomUUID(), 2, 3, 4);
-        val target = Target.builder().build();
+        val target = new Target(UUID.randomUUID(), null);
 
         val player = Player.builder()
                 .resourcePool(resourcePool)
@@ -93,15 +93,15 @@ public class PlayerTest {
 
         // Then
         Assert.assertThat(
-                resourcePool.getRations(),
+                player.getResourcePool().getRations(),
                 Matchers.is(initialRations - summoningCard.getCostRations())
         );
         Assert.assertThat(
-                resourcePool.getMaterial(),
+                player.getResourcePool().getMaterial(),
                 Matchers.is(initialMaterial - summoningCard.getCostMaterial())
         );
         Assert.assertThat(
-                resourcePool.getBlessing(),
+                player.getResourcePool().getBlessing(),
                 Matchers.is(initialBlessing - summoningCard.getCostBlessing())
         );
     }
@@ -111,7 +111,7 @@ public class PlayerTest {
 
         // Given
         val summoningCard = new TestSummoningCard(UUID.randomUUID());
-        val target = Target.builder().build();
+        val target = new Target(UUID.randomUUID(), null);
 
         val player = Player.builder()
                 .resourcePool(ResourcePool.builder().build())
@@ -128,7 +128,7 @@ public class PlayerTest {
 
         // Given
         val summoningCard = new TestSummoningCard(UUID.randomUUID());
-        val target = Target.builder().summoning(Summoning.fromCard(summoningCard, UUID.randomUUID())).build();
+        val target = new Target(UUID.randomUUID(), Summoning.fromCard(summoningCard, UUID.randomUUID()));
 
         val player = Player.builder()
                 .resourcePool(ResourcePool.builder().build())
@@ -145,7 +145,7 @@ public class PlayerTest {
 
         // Given
         val summoningCard = new TestSummoningCard(UUID.randomUUID(), 1, 1, 1);
-        val target = Target.builder().summoning(Summoning.fromCard(summoningCard, UUID.randomUUID())).build();
+        val target = new Target(UUID.randomUUID(), null);
 
         val player = Player.builder()
                 .resourcePool(ResourcePool.builder().build())

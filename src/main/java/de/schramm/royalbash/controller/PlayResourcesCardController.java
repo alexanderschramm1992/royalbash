@@ -2,6 +2,7 @@ package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.requestmodel.PlayResourcesCardRequest;
 import de.schramm.royalbash.controller.responsemodel.StateResponseGame;
+import de.schramm.royalbash.core.exception.DomainObjectDoesNotExistException;
 import de.schramm.royalbash.core.exception.GameEngineException;
 import de.schramm.royalbash.persistence.GameManager;
 import lombok.extern.log4j.Log4j2;
@@ -41,11 +42,16 @@ class PlayResourcesCardController {
 
             val game = gameManager.findGame(requestParams.getGameId());
             val player = game.findPlayer(requestParams.getPlayerId());
-            player.playResourcesCard(
-                    player.getHand().findResourcesCard(requestParams.getCardId()),
-                    game,
-                    player
-            );
+            val card = player.getHand().findResourcesCard(requestParams.getCardId());
+            if(card.isPresent()) {
+                player.playResourcesCard(
+                        card.get(),
+                        game,
+                        player
+                );
+            } else {
+                throw new DomainObjectDoesNotExistException(requestParams.getCardId().toString());
+            }
             gameManager.saveGame(game);
             return ResponseEntity.ok(StateResponseGame.fromGame(game));
         } catch (GameEngineException e) {

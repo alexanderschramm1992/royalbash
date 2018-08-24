@@ -9,14 +9,14 @@ export interface StateModel {
     endingTurnIssued: boolean;
     pollingGame: boolean;
 
-    playerId?: string;
-    enemyId?: string;
+    playerId: string;
+    enemyId: string;
 
-    game?: Game;
-    gameId?: string;
+    game: Game;
+    gameId: string;
     loadGameIssued: boolean;
 
-    constants?: Constants;
+    constants: Constants;
     loadingConstantsIssued: boolean;
 
     drawSummoningCardIssued: boolean;

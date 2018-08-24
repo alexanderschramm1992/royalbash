@@ -1,48 +1,32 @@
 package de.schramm.royalbash.core.domain.game.board.player.field;
 
 import de.schramm.royalbash.core.domain.card.summoningcard.attackingtarget.AttackableTarget;
-import de.schramm.royalbash.core.exception.RuleViolationException;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
 
-@Builder
 @Getter
+@RequiredArgsConstructor
 public class Target implements AttackableTarget {
 
-    private UUID id;
-    private Summoning summoning;
+    private final UUID id;
+    private final Summoning summoning;
 
     public boolean isOccupied() {
         return summoning != null;
     }
 
-    void summon(Summoning summoning) throws RuleViolationException {
-
-        if(this.summoning == null) {
-            this.summoning = summoning;
-        } else {
-            throw new RuleViolationException(String.format("Target %s is occupied", id));
-        }
+    Target summon(Summoning summoning) {
+        return new Target(id, summoning);
     }
 
-    void bury(Summoning summoning) throws RuleViolationException {
-        if (summoning.equals(this.summoning)) {
-            this.summoning = null;
-        } else {
-            throw new RuleViolationException(String.format(
-                    "Target %s not occupied by Summoning %s",
-                    id,
-                    summoning.getId()
-            ));
-        }
+    Target bury(Summoning summoning) {
+        return new Target(id, null);
     }
 
-    public void purge() {
-
-        if(isOccupied() && summoning.isDead()) {
-            summoning = null;
-        }
+    Target purge() {
+        return isOccupied() && summoning.isDead() ? new Target(id, null) : this;
     }
 }

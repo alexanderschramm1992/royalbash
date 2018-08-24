@@ -1,13 +1,11 @@
 package de.schramm.royalbash.core.domain.game.board.player;
 
 import de.schramm.royalbash.core.domain.game.board.player.field.SummoningCard;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Singular;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
@@ -18,15 +16,23 @@ public class SummoningDeck {
     private final UUID id;
 
     @Singular("card")
-    private List<SummoningCard> summoningCards;
+    private final List<SummoningCard> summoningCards;
 
-    public void shuffle() {
+    SummoningDeck shuffle() {
 
+        val summoningCards = this.summoningCards;
         Collections.shuffle(summoningCards);
+        return new SummoningDeck(id, summoningCards);
     }
 
-    SummoningCard drawCard() {
+    Optional<SummoningCard> getTopCard() {
+        return summoningCards.isEmpty() ? Optional.empty() : Optional.of(summoningCards.get(0));
+    }
 
-        return summoningCards.isEmpty() ? null : summoningCards.remove(0);
+    SummoningDeck removeTopCard() {
+
+        val summoningCards = this.summoningCards;
+        summoningCards.remove(0);
+        return new SummoningDeck(id, summoningCards);
     }
 }
