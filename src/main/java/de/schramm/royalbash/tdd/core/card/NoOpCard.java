@@ -11,6 +11,7 @@ import lombok.Value;
 public class NoOpCard implements Card {
 
     private final String name;
+    private final int cost;
 
     @Override
     public Game invoke(Context context) {

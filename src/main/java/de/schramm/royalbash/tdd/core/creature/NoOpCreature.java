@@ -11,6 +11,8 @@ import lombok.val;
 @Builder
 public class NoOpCreature implements Card {
 
+    private final int cost = 0;
+
     @Override
     public Game invoke(Context context) {
 

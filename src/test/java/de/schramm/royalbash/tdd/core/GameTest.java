@@ -157,4 +157,54 @@ public class GameTest {
         // Then
         assertThat(game.getPlayer1().getHandcards()).isEmpty();
     }
+
+    @Test
+    public void should_not_play_card_if_resources_are_not_sufficient() {
+
+        // Given
+        val card = NoOpCard.builder()
+                .cost(2)
+                .build();
+        val player1 = Player.builder()
+                .handcard(card)
+                .resources(1)
+                .build();
+        val player2 = Player.builder().build();
+        val testee = Game.builder()
+                .player1(player1)
+                .player2(player2)
+                .build();
+
+        // When
+        val game = testee.playCard(card, player1, player2, Spot.builder().build());
+
+        // Then
+        assertThat(game.getPlayer1().getHandcards()).hasSize(1);
+        assertThat(game.getPlayer1().getHandcards()).contains(card);
+    }
+
+    @Test
+    public void should_reduce_ressource_of_player_according_to_card_cost() {
+
+        // Given
+        val card = NoOpCard.builder()
+                .cost(2)
+                .build();
+        val player1 = Player.builder()
+                .handcard(card)
+                .resources(2)
+                .build();
+        val player2 = Player.builder().build();
+        val testee = Game.builder()
+                .player1(player1)
+                .player2(player2)
+                .build();
+
+        // When
+        val game = testee.playCard(card, player1, player2, Spot.builder().build());
+
+        // Then
+        assertThat(game.getPlayer1().getHandcards()).isEmpty();
+        assertThat(game.getPlayer1().getResources()).isEqualTo(0);
+    }
 }

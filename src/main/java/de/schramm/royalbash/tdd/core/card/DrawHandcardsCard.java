@@ -12,6 +12,7 @@ import lombok.val;
 public class DrawHandcardsCard implements Card {
 
     private final int amountOfCards;
+    private final int cost;
 
     @Override
     public Game invoke(Context context) {

@@ -14,6 +14,7 @@ public class Player {
 
     private final String name;
     private final int hitpoints;
+    private final int resources;
     @Singular("handcard")
     private final List<Card> handcards;
     @Singular("deckcard")
@@ -98,6 +99,12 @@ public class Player {
         return this.toBuilder()
                 .clearSpots()
                 .spots(spots)
+                .build();
+    }
+
+    Player reduceResources(int cost) {
+        return this.toBuilder()
+                .resources(resources - cost)
                 .build();
     }
 }

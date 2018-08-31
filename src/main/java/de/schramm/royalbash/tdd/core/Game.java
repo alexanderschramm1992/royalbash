@@ -46,20 +46,24 @@ public class Game {
     }
 
     Game playCard(Card card, Player owner, Player target, Spot targetSpot) {
-        return getPlayers()
+
+        val context = Context.builder()
+                .owner(owner)
+                .targetPlayer(target)
+                .targetSpot(targetSpot)
+                .build();
+
+        val playerOptional = getPlayers()
                 .filter(player -> player.equals(owner))
                 .filter(player -> player.hasCard(card))
-                .findFirst()
+                .filter(player -> player.getResources() >= card.getCost())
+                .findFirst();
+
+        return playerOptional
                 .map(player -> player.removeHandcard(card))
+                .map(player -> player.reduceResources(card.getCost()))
                 .map(player -> updatePlayer(owner, player))
-                .map(game -> card.invoke(
-                        Context.builder()
-                            .game(game)
-                            .owner(owner)
-                            .targetPlayer(target)
-                            .targetSpot(targetSpot)
-                            .build()
-                ))
+                .map(game -> card.invoke(context.toBuilder().game(game).build()))
                 .orElse(this);
     }
 

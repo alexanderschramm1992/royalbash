@@ -14,6 +14,7 @@ public class DealDamageToPlayerCard implements Card {
 
     private final String name;
     private final int amountOfDamage;
+    private final int cost;
 
     @Override
     public Game invoke(Context context) {
