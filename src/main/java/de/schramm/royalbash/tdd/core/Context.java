@@ -8,5 +8,7 @@ import lombok.Value;
 public class Context {
 
     private final Game game;
+    private final Player owner;
     private final Player targetPlayer;
+    private final Spot targetSpot;
 }

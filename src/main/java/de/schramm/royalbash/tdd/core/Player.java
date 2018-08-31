@@ -16,6 +16,10 @@ public class Player {
     private final int hitpoints;
     @Singular("handcard")
     private final List<Card> handcards;
+    @Singular("deckcard")
+    private final List<Card> deckcards;
+    @Singular("spot")
+    private final List<Spot> spots;
 
     public Player setHitpoints(int hitpoints) {
         return Player.builder()
@@ -38,5 +42,62 @@ public class Player {
     boolean hasCard(Card card) {
         return handcards.stream()
                 .anyMatch(handcard -> handcard.equals(card));
+    }
+
+    public Player drawCards(int amountOfCards) {
+
+        Player player = this;
+        for(int iterator = 0; iterator < amountOfCards; iterator++) {
+            player = player.drawCard();
+        }
+
+        return player;
+    }
+
+    private Player drawCard() {
+
+        if(deckcards.isEmpty()) {
+            return this;
+        }
+
+        return this.toBuilder()
+                .clearDeckcards()
+                .deckcards(deckcards.subList(1, deckcards.size()))
+                .handcard(deckcards.get(0))
+                .build();
+    }
+
+    public Player discardCards(int amountOfCards) {
+
+        Player player = this;
+        for(int iterator = 0; iterator < amountOfCards; iterator++) {
+            player = player.discardCard();
+        }
+
+        return player;
+    }
+
+    private Player discardCard() {
+
+        if(handcards.isEmpty()) {
+            return this;
+        }
+
+        return this.toBuilder()
+                .clearHandcards()
+                .handcards(handcards.subList(1, handcards.size()))
+                .build();
+    }
+
+    public Player updateSpot(Spot oldSpot, Spot newSpot) {
+
+        val spots = this.spots.stream()
+                .map(spot -> spot.equals(oldSpot) ? newSpot : spot)
+                .collect(Collectors.toList());
+
+        return this.toBuilder()
+                .clearSpots()
+                .spots(spots)
+                .build();
     }
 }

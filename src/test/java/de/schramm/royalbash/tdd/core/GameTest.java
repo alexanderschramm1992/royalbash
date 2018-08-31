@@ -1,6 +1,5 @@
 package de.schramm.royalbash.tdd.core;
 
-import de.schramm.royalbash.tdd.core.card.DealDamageToPlayerCard;
 import de.schramm.royalbash.tdd.core.card.NoOpCard;
 import lombok.val;
 import org.junit.Test;
@@ -139,11 +138,10 @@ public class GameTest {
     }
 
     @Test
-    public void should_play_noop_card() {
+    public void should_remove_played_card_from_handcards() {
 
         // Given
-        val card = NoOpCard.builder()
-                .build();
+        val card = NoOpCard.builder().build();
         val player1 = Player.builder()
                 .handcard(card)
                 .build();
@@ -152,42 +150,11 @@ public class GameTest {
                 .player1(player1)
                 .player2(player2)
                 .build();
-        val context = Context.builder()
-                .targetPlayer(player2)
-                .build();
 
         // When
-        val game = testee.playCard(card, player1, player2);
+        val game = testee.playCard(card, player1, player2, Spot.builder().build());
 
         // Then
         assertThat(game.getPlayer1().getHandcards()).isEmpty();
-    }
-    @Test
-    public void should_play_deal_damage_to_player_card() {
-
-        // Given
-        val card = DealDamageToPlayerCard.builder()
-                .amountOfDamage(3)
-                .build();
-        val player1 = Player.builder()
-                .handcard(card)
-                .build();
-        val player2 = Player.builder()
-                .hitpoints(20)
-                .build();
-        val testee = Game.builder()
-                .player1(player1)
-                .player2(player2)
-                .build();
-        val context = Context.builder()
-                .targetPlayer(player2)
-                .build();
-
-        // When
-        val game = testee.playCard(card, player1, player2);
-
-        // Then
-        assertThat(game.getPlayer1().getHandcards()).isEmpty();
-        assertThat(game.getPlayer2().getHitpoints()).isEqualTo(17);
     }
 }

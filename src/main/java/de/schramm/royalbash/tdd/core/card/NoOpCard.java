@@ -16,4 +16,9 @@ public class NoOpCard implements Card {
     public Game invoke(Context context) {
         return context.getGame();
     }
+
+    @Override
+    public boolean canBePlacedOnSpot() {
+        return false;
+    }
 }

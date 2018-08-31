@@ -24,6 +24,11 @@ public class DealDamageToPlayerCard implements Card {
                 .orElse(context.getGame());
     }
 
+    @Override
+    public boolean canBePlacedOnSpot() {
+        return false;
+    }
+
     private Game updateTargetPlayer(Player updatedPlayer, Context context) {
 
         val game = context.getGame();

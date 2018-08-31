@@ -45,7 +45,7 @@ public class Game {
                 .build();
     }
 
-    Game playCard(Card card, Player owner, Player target) {
+    Game playCard(Card card, Player owner, Player target, Spot targetSpot) {
         return getPlayers()
                 .filter(player -> player.equals(owner))
                 .filter(player -> player.hasCard(card))
@@ -55,13 +55,15 @@ public class Game {
                 .map(game -> card.invoke(
                         Context.builder()
                             .game(game)
+                            .owner(owner)
                             .targetPlayer(target)
+                            .targetSpot(targetSpot)
                             .build()
                 ))
                 .orElse(this);
     }
 
-    private Game updatePlayer(Player oldPlayer, Player newPlayer) {
+    public Game updatePlayer(Player oldPlayer, Player newPlayer) {
         return this.toBuilder()
                 .player1(player1.equals(oldPlayer) ? newPlayer : player1)
                 .player2(player2.equals(oldPlayer) ? newPlayer : player2)
