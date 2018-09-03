@@ -1,9 +1,13 @@
 package de.schramm.royalbash.tdd.core;
 
 import de.schramm.royalbash.tdd.core.card.NoOpCard;
+import de.schramm.royalbash.tdd.core.creature.NoOpCreature;
 import lombok.val;
 import org.assertj.core.data.Index;
 import org.junit.Test;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -133,5 +137,109 @@ public class PlayerTest {
         assertThat(player.getHandcards()).hasSize(2);
         assertThat(player.getHandcards()).contains(handcard1, Index.atIndex(0));
         assertThat(player.getHandcards()).contains(handcard3, Index.atIndex(1));
+    }
+
+    @Test
+    public void should_remove_creature() {
+
+        // Given
+        val creature = NoOpCreature.builder().build();
+        val spot = Spot.builder()
+                .creature(creature)
+                .build();
+        val testee = Player.builder()
+                .spot(spot)
+                .build();
+
+        // When
+        val player = testee.removeCreature(creature);
+
+        // Then
+        val creaturesOfPlayer = player.getSpots()
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+        assertThat(creaturesOfPlayer).isEmpty();
+    }
+
+    @Test
+    public void should_not_remove_creature() {
+
+        // Given
+        val creature = NoOpCreature.builder().build();
+        val spot = Spot.builder()
+                .creature(creature)
+                .build();
+        val testee = Player.builder()
+                .spot(spot)
+                .build();
+
+        // When
+        val player = testee.removeCreature(
+                NoOpCreature.builder()
+                        .hitpoints(2)
+                        .build()
+        );
+
+        // Then
+        val creaturesOfPlayer = player.getSpots()
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+        assertThat(creaturesOfPlayer).hasSize(1);
+        assertThat(creaturesOfPlayer).contains(creature);
+    }
+
+    @Test
+    public void should_update_creature() {
+
+        // Given
+        val creature = NoOpCreature.builder().build();
+        val spot = Spot.builder()
+                .creature(creature)
+                .build();
+        val testee = Player.builder()
+                .spot(spot)
+                .build();
+        val updatedCreature = creature.toBuilder()
+                .hitpoints(12)
+                .build();
+
+        // When
+        val player = testee.updateCreature(creature, updatedCreature);
+
+        // Then
+        val creaturesOfPlayer = player.getSpots()
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+        assertThat(creaturesOfPlayer).contains(updatedCreature);
+        assertThat(creaturesOfPlayer).doesNotContain(creature);
+    }
+
+    @Test
+    public void should_not_update_creature() {
+
+        // Given
+        val creature = NoOpCreature.builder().build();
+        val spot = Spot.builder()
+                .build();
+        val testee = Player.builder()
+                .spot(spot)
+                .build();
+
+        // When
+        val player = testee.updateCreature(creature, creature);
+
+        // Then
+        val creaturesOfPlayer = player.getSpots()
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+        assertThat(creaturesOfPlayer).doesNotContain(creature);
     }
 }

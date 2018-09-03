@@ -197,7 +197,7 @@ public class GameTest {
     }
 
     @Test
-    public void should_deal_damage_to_creature_after_combat() {
+    public void should_deal_damage_to_creature_in_combat() {
 
         // Given
         val attacker = NoOpCreature.builder()
@@ -232,5 +232,13 @@ public class GameTest {
         val spotsOfPlayer1 = game.getPlayer1().getSpots().collect(Collectors.toList());
         assertThat(spotsOfPlayer1.get(0).getCreature().isPresent()).isTrue();
         assertThat(spotsOfPlayer1.get(0).getCreature().get().getHitpoints()).isEqualTo(1);
+    }
+
+    @Test
+    public void should_deal_damage_to_player_in_combat() {
+
+        // Given
+        val testee = Game.builder().build();
+
     }
 }
