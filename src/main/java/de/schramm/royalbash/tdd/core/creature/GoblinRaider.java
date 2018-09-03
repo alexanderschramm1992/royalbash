@@ -5,17 +5,24 @@ import de.schramm.royalbash.tdd.core.Creature;
 import de.schramm.royalbash.tdd.core.Game;
 import lombok.Builder;
 import lombok.Value;
+import lombok.val;
 
 @Value
 @Builder(toBuilder = true)
-public class NoOpCreature implements Creature {
+public class GoblinRaider implements Creature {
 
     private final int hitpoints;
     private final int attack;
 
     @Override
     public Game invoke(Context context) {
-        return CreatureUtil.spawnCreature(this, context);
+
+        val game = CreatureUtil.spawnCreature(this, context);
+
+        return game.getPlayer(context.getTargetPlayer())
+                .map(player -> player.discardCards(1))
+                .map(player -> game.updatePlayer(context.getTargetPlayer(), player))
+                .orElse(game);
     }
 
     @Override

@@ -2,6 +2,7 @@ package de.schramm.royalbash.tdd.core;
 
 import lombok.Builder;
 import lombok.Value;
+import lombok.val;
 
 import java.util.Optional;
 
@@ -9,20 +10,37 @@ import java.util.Optional;
 @Builder(toBuilder = true)
 public class Spot {
 
-    private final Card card;
+    private final Creature creature;
 
-    public Optional<Card> getCard() {
-        return Optional.ofNullable(card);
+    public Optional<Creature> getCreature() {
+        return Optional.ofNullable(creature);
     }
 
-    public Spot place(Card card) {
+    public Spot place(Creature creature) {
 
-        if(!card.canBePlacedOnSpot()) {
+        if(!creature.canBePlacedOnSpot()) {
             return this;
         }
 
         return this.toBuilder()
-                .card(card)
+                .creature(creature)
+                .build();
+    }
+
+    Spot updateCreature(Creature oldCreature, Creature newCreature) {
+
+        val updatedCreature = getCreature()
+                .map(creature -> creature.equals(oldCreature) ? newCreature : creature)
+                .orElse(null);
+
+        return this.toBuilder()
+                .creature(updatedCreature)
+                .build();
+    }
+
+    Spot removeCreature(Creature creature) {
+        return this.toBuilder()
+                .creature(creature.equals(this.creature) ? null : this.creature)
                 .build();
     }
 }

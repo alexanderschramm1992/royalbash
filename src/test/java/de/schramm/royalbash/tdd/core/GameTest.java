@@ -1,6 +1,7 @@
 package de.schramm.royalbash.tdd.core;
 
 import de.schramm.royalbash.tdd.core.card.NoOpCard;
+import de.schramm.royalbash.tdd.core.creature.NoOpCreature;
 import lombok.val;
 import org.junit.Test;
 
@@ -156,5 +157,80 @@ public class GameTest {
 
         // Then
         assertThat(game.getPlayer1().getHandcards()).isEmpty();
+    }
+
+    @Test
+    public void should_remove_dead_creature_after_combat() {
+
+        // Given
+        val attacker = NoOpCreature.builder()
+                .hitpoints(2)
+                .attack(2)
+                .build();
+        val defender = NoOpCreature.builder()
+                .hitpoints(1)
+                .attack(1)
+                .build();
+        val spot1 = Spot.builder()
+                .creature(attacker)
+                .build();
+        val spot2 = Spot.builder()
+                .creature(defender)
+                .build();
+        val player1 = Player.builder()
+                .spot(spot1)
+                .build();
+        val player2 = Player.builder()
+                .spot(spot2)
+                .build();
+        val testee = Game.builder()
+                .player1(player1)
+                .player2(player2)
+                .build();
+
+        // When
+        val game = testee.combat(attacker, player1, defender);
+
+        // Then
+        val spotsOfPlayer2 = game.getPlayer2().getSpots().collect(Collectors.toList());
+        assertThat(spotsOfPlayer2.get(0).getCreature().isPresent()).isFalse();
+    }
+
+    @Test
+    public void should_deal_damage_to_creature_after_combat() {
+
+        // Given
+        val attacker = NoOpCreature.builder()
+                .hitpoints(2)
+                .attack(2)
+                .build();
+        val defender = NoOpCreature.builder()
+                .hitpoints(1)
+                .attack(1)
+                .build();
+        val spot1 = Spot.builder()
+                .creature(attacker)
+                .build();
+        val spot2 = Spot.builder()
+                .creature(defender)
+                .build();
+        val player1 = Player.builder()
+                .spot(spot1)
+                .build();
+        val player2 = Player.builder()
+                .spot(spot2)
+                .build();
+        val testee = Game.builder()
+                .player1(player1)
+                .player2(player2)
+                .build();
+
+        // When
+        val game = testee.combat(attacker, player1, defender);
+
+        // Then
+        val spotsOfPlayer1 = game.getPlayer1().getSpots().collect(Collectors.toList());
+        assertThat(spotsOfPlayer1.get(0).getCreature().isPresent()).isTrue();
+        assertThat(spotsOfPlayer1.get(0).getCreature().get().getHitpoints()).isEqualTo(1);
     }
 }

@@ -7,19 +7,21 @@ import de.schramm.royalbash.tdd.core.Spot;
 import lombok.val;
 import org.junit.Test;
 
+import java.util.stream.Collectors;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NoOpCreatureTest {
+public class CreatureUtilTest {
 
     @Test
     public void should_put_creature_to_player_board() {
 
         // Given
-        val testee = NoOpCreature.builder()
+        val card = NoOpCreature.builder()
                 .build();
         val spot = Spot.builder().build();
         val player1 = Player.builder()
-                .handcard(testee)
+                .handcard(card)
                 .spot(spot)
                 .build();
         val player2 = Player.builder().build();
@@ -34,11 +36,11 @@ public class NoOpCreatureTest {
                 .build();
 
         // When
-        val updatedGame = testee.invoke(context);
+        val updatedGame = CreatureUtil.spawnCreature(card, context);
 
         // Then
-        val cardInSpot = updatedGame.getPlayer1().getSpots().get(0).getCard();
+        val cardInSpot = updatedGame.getPlayer1().getSpots().collect(Collectors.toList()).get(0).getCreature();
         assertThat(cardInSpot.isPresent()).isTrue();
-        assertThat(cardInSpot.orElse(NoOpCreature.builder().build())).isEqualTo(testee);
+        assertThat(cardInSpot.orElse(NoOpCreature.builder().build())).isEqualTo(card);
     }
 }

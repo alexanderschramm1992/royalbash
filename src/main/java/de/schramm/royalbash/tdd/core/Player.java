@@ -7,6 +7,7 @@ import lombok.val;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Value
 @Builder(toBuilder = true)
@@ -27,6 +28,10 @@ public class Player {
                 .build();
     }
 
+    public Stream<Spot> getSpots() {
+        return spots.stream();
+    }
+
     Player removeHandcard(Card handcard) {
 
         val handcards = this.handcards.stream()
@@ -36,6 +41,30 @@ public class Player {
         return this.toBuilder()
                 .clearHandcards()
                 .handcards(handcards)
+                .build();
+    }
+
+    Player removeCreature(Creature creature) {
+
+        val spots = getSpots()
+                .map(spot -> spot.removeCreature(creature))
+                .collect(Collectors.toList());
+
+        return this.toBuilder()
+                .clearSpots()
+                .spots(spots)
+                .build();
+    }
+
+    Player updateCreature(Creature oldCreature, Creature newCreature) {
+
+        val spots = getSpots()
+                .map(spot -> spot.updateCreature(oldCreature, newCreature))
+                .collect(Collectors.toList());
+
+        return this.toBuilder()
+                .clearSpots()
+                .spots(spots)
                 .build();
     }
 

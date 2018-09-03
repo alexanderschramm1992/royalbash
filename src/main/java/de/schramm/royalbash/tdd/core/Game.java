@@ -63,6 +63,54 @@ public class Game {
                 .orElse(this);
     }
 
+    Game combat(Creature attacker, Player owner, Creature defender) {
+
+        val opponent = getOpponent(owner);
+
+        val attackerOptional = owner.getSpots()
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(creature -> creature.equals(attacker))
+                .findFirst();
+
+        val defenderOptional = opponent.getSpots()
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(creature -> creature.equals(defender))
+                .findFirst();
+
+        val updatedAttacker = attackerOptional
+                .flatMap(actualAttacker -> defenderOptional
+                        .map(actualAttacker::damage)
+                )
+                .orElse(attacker);
+
+        val updatedDefender =defenderOptional
+                .flatMap(actualDefender -> attackerOptional
+                        .map(actualDefender::damage)
+                ).orElse(defender);
+
+        val updatedOwner = updatedAttacker.isDead() ? owner.removeCreature(attacker) : owner.updateCreature(
+                attacker,
+                updatedAttacker
+        );
+
+        val updatedOpponent = updatedDefender.isDead() ? opponent.removeCreature(defender) : opponent.updateCreature(
+                defender,
+                updatedDefender
+        );
+
+        return this
+                .updatePlayer(owner, updatedOwner)
+                .updatePlayer(opponent, updatedOpponent);
+    }
+
+    private Player getOpponent(Player player) {
+        return player1.equals(player) ? player2 : player1;
+    }
+
     public Game updatePlayer(Player oldPlayer, Player newPlayer) {
         return this.toBuilder()
                 .player1(player1.equals(oldPlayer) ? newPlayer : player1)
