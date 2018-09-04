@@ -1,6 +1,5 @@
 package de.schramm.royalbash.tdd.core;
 
-import de.schramm.royalbash.tdd.core.creature.NoOpCreature;
 import lombok.Builder;
 import lombok.Value;
 import lombok.val;
@@ -123,10 +122,24 @@ public class Game {
                 .map(actualAttakecker -> opponent.setHitpoints(opponent.getHitpoints() - actualAttakecker.getAttack()))
                 .orElse(opponent);
 
-        return this.toBuilder()
+        val game = this.toBuilder()
                 .player1(player1.equals(opponent) ? updatedOpponent : player1)
                 .player2(player2.equals(opponent) ? updatedOpponent : player2)
                 .build();
+
+        return game.toBuilder()
+                .state(evaluateState(game.player1, game.player2))
+                .build();
+    }
+
+    private State evaluateState(Player player1, Player player2) {
+        if(player1.getHitpoints() <= 0) {
+            return State.PLAYER_2_WON;
+        } else if(player2.getHitpoints() <= 0) {
+            return State.PLAYER_1_WON;
+        } else {
+            return state;
+        }
     }
 
     private Player getOpponent(Player player) {

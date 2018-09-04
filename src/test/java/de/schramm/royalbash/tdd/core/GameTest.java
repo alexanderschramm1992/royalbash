@@ -261,4 +261,34 @@ public class GameTest {
         // Then
         assertThat(game.getPlayer2().getHitpoints()).isEqualTo(15);
     }
+
+    @Test
+    public void should_set_game_state_when_player_dies_in_combat() {
+
+        // Given
+        val creature = NoOpCreature.builder()
+                .attack(5)
+                .build();
+        val spot = Spot.builder()
+                .creature(creature)
+                .build();
+        val player1 = Player.builder()
+                .hitpoints(1)
+                .spot(spot)
+                .build();
+        val player2 = Player.builder()
+                .hitpoints(5)
+                .build();
+        val testee = Game.builder()
+                .state(State.OPEN)
+                .player1(player1)
+                .player2(player2)
+                .build();
+
+        // When
+        val game = testee.combat(creature, player1);
+
+        // Then
+        assertThat(game.getState()).isEqualTo(State.PLAYER_1_WON);
+    }
 }
