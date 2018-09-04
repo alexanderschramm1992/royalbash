@@ -1,5 +1,6 @@
 package de.schramm.royalbash.tdd.core;
 
+import de.schramm.royalbash.tdd.core.creature.NoOpCreature;
 import lombok.Builder;
 import lombok.Value;
 import lombok.val;
@@ -105,6 +106,27 @@ public class Game {
         return this
                 .updatePlayer(owner, updatedOwner)
                 .updatePlayer(opponent, updatedOpponent);
+    }
+
+    Game combat(Creature attacker, Player owner) {
+
+        val opponent = getOpponent(owner);
+
+        val attackerOptional = owner.getSpots()
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(creature -> creature.equals(attacker))
+                .findFirst();
+
+        val updatedOpponent = attackerOptional
+                .map(actualAttakecker -> opponent.setHitpoints(opponent.getHitpoints() - actualAttakecker.getAttack()))
+                .orElse(opponent);
+
+        return this.toBuilder()
+                .player1(player1.equals(opponent) ? updatedOpponent : player1)
+                .player2(player2.equals(opponent) ? updatedOpponent : player2)
+                .build();
     }
 
     private Player getOpponent(Player player) {

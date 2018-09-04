@@ -238,7 +238,27 @@ public class GameTest {
     public void should_deal_damage_to_player_in_combat() {
 
         // Given
-        val testee = Game.builder().build();
+        val creature = NoOpCreature.builder()
+                .attack(5)
+                .build();
+        val spot = Spot.builder()
+                .creature(creature)
+                .build();
+        val player1 = Player.builder()
+                .spot(spot)
+                .build();
+        val player2 = Player.builder()
+                .hitpoints(20)
+                .build();
+        val testee = Game.builder()
+                .player1(player1)
+                .player2(player2)
+                .build();
 
+        // When
+        val game = testee.combat(creature, player1);
+
+        // Then
+        assertThat(game.getPlayer2().getHitpoints()).isEqualTo(15);
     }
 }
