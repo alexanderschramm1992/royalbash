@@ -13,6 +13,7 @@ public class GoblinRaider implements Creature {
 
     private final int hitpoints;
     private final int attack;
+    private final boolean isPlaceableOnSpot = true;
 
     @Override
     public Game invoke(Context context) {
@@ -26,11 +27,6 @@ public class GoblinRaider implements Creature {
     }
 
     @Override
-    public boolean canBePlacedOnSpot() {
-        return true;
-    }
-
-    @Override
     public Creature damage(Creature attacker) {
         return this.toBuilder()
                 .hitpoints(hitpoints - attacker.getAttack())
@@ -39,6 +35,6 @@ public class GoblinRaider implements Creature {
 
     @Override
     public boolean isDead() {
-        return hitpoints <= 0;
+        return CreatureUtil.isDead(this);
     }
 }

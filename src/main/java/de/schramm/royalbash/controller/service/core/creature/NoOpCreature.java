@@ -12,15 +12,11 @@ public class NoOpCreature implements Creature {
 
     private final int hitpoints;
     private final int attack;
+    private final boolean isPlaceableOnSpot = true;
 
     @Override
     public Game invoke(Context context) {
         return CreatureUtil.spawnCreature(this, context);
-    }
-
-    @Override
-    public boolean canBePlacedOnSpot() {
-        return true;
     }
 
     @Override
@@ -32,6 +28,6 @@ public class NoOpCreature implements Creature {
 
     @Override
     public boolean isDead() {
-        return hitpoints <= 0;
+        return CreatureUtil.isDead(this);
     }
 }

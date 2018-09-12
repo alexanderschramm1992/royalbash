@@ -20,7 +20,7 @@ public class GoblinRaiderTest {
         val testee = GoblinRaider.builder().build();
 
         // When
-        val isPlaceableOnSpot = testee.canBePlacedOnSpot();
+        val isPlaceableOnSpot = testee.isPlaceableOnSpot();
 
         // Then
         assertThat(isPlaceableOnSpot).isTrue();

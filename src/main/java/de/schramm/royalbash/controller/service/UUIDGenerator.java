@@ -1,4 +1,4 @@
-package de.schramm.royalbash.util;
+package de.schramm.royalbash.controller.service;
 
 import org.springframework.stereotype.Component;
 

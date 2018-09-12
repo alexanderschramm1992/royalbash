@@ -2,6 +2,7 @@ package de.schramm.royalbash.controller;
 
 import de.schramm.royalbash.controller.service.core.Game;
 import de.schramm.royalbash.controller.service.GameService;
+import de.schramm.royalbash.controller.service.core.Player;
 import lombok.val;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,12 @@ public class GameControllerTest {
     public void should_deliver_game() throws Exception {
 
         // Given
-        Mockito.when(gameService.retrieveGame(any())).thenReturn(Game.builder().build());
+        val game = Game.builder()
+                .player1(Player.builder()
+                        .name("Player 1")
+                        .build())
+                .build();
+        Mockito.when(gameService.retrieveGame(any())).thenReturn(game);
 
         val requestBuilder = MockMvcRequestBuilders
                 .get("/game/1")
@@ -44,6 +50,46 @@ public class GameControllerTest {
                 .getContentAsString();
 
         // Then
-        JSONAssert.assertEquals("{}", result, false);
+        JSONAssert.assertEquals("{\"player1\": {\"name\": \"Player 1\"}}", result, false);
+    }
+
+    @Test
+    public void should_deliver_new_game() throws Exception {
+
+        // Given
+        val accountId1 = "Account 1";
+        val accountId2 = "Account 2";
+        val game = Game.builder()
+                .player1(Player.builder()
+                        .name(accountId1)
+                        .build())
+                .player2(Player.builder()
+                        .name(accountId2)
+                        .build())
+                .build();
+        Mockito.when(gameService.createGame(accountId1, accountId2)).thenReturn(game);
+
+        val requestBuilder = MockMvcRequestBuilders
+                .post("/game")
+                .content(String.format(
+                        "{\"accountId1\": \"%s\", \"accountId2\": \"%s\"}",
+                        accountId1,
+                        accountId2
+                ))
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // When
+        val result = mockMvc.perform(requestBuilder)
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        // Then
+        JSONAssert.assertEquals(
+                "{\"player1\": {\"name\": \"Account 1\"}, \"player2\": {\"name\": \"Account 2\"}}",
+                result,
+                false
+        );
     }
 }

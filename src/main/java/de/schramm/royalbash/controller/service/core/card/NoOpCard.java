@@ -18,7 +18,7 @@ public class NoOpCard implements Card {
     }
 
     @Override
-    public boolean canBePlacedOnSpot() {
+    public boolean isPlaceableOnSpot() {
         return false;
     }
 }

@@ -18,7 +18,7 @@ public class Spot {
 
     public Spot place(Creature creature) {
 
-        if(!creature.canBePlacedOnSpot()) {
+        if(!creature.isPlaceableOnSpot()) {
             return this;
         }
 
