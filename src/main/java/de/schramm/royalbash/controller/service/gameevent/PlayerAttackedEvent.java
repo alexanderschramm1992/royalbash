@@ -6,7 +6,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class AttackEvent implements GameEvent {
+public class PlayerAttackedEvent implements GameEvent {
 
     private final GameEventType type = GameEventType.ATTACK_PLAYER;
 

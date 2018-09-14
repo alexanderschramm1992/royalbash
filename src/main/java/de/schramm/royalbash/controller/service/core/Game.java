@@ -119,7 +119,7 @@ public class Game {
                 .findFirst();
 
         val updatedOpponent = attackerOptional
-                .map(actualAttakecker -> opponent.setHitpoints(opponent.getHitpoints() - actualAttakecker.getAttack()))
+                .map(actualAttacker -> opponent.setHitpoints(opponent.getHitpoints() - actualAttacker.getAttack()))
                 .orElse(opponent);
 
         val game = this.toBuilder()
