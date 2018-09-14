@@ -11,6 +11,7 @@ import lombok.val;
 @Builder(toBuilder = true)
 public class GoblinRaider implements Creature {
 
+    private final String id;
     private final int hitpoints;
     private final int attack;
     private final boolean isPlaceableOnSpot = true;
@@ -20,7 +21,7 @@ public class GoblinRaider implements Creature {
 
         val game = CreatureUtil.spawnCreature(this, context);
 
-        return game.getPlayer(context.getTargetPlayer())
+        return game.findPlayer(context.getTargetPlayer())
                 .map(player -> player.discardCards(1))
                 .map(player -> game.updatePlayer(context.getTargetPlayer(), player))
                 .orElse(game);

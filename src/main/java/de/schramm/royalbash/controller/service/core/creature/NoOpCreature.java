@@ -10,6 +10,7 @@ import lombok.Value;
 @Builder(toBuilder = true)
 public class NoOpCreature implements Creature {
 
+    private final String id;
     private final int hitpoints;
     private final int attack;
     private final boolean isPlaceableOnSpot = true;

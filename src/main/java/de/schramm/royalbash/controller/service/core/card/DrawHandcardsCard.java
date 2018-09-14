@@ -11,6 +11,7 @@ import lombok.val;
 @Builder
 public class DrawHandcardsCard implements Card {
 
+    private final String id;
     private final int amountOfCards;
     private final int cost;
 
@@ -21,7 +22,7 @@ public class DrawHandcardsCard implements Card {
         val targetPlayer = context.getTargetPlayer();
 
         return game
-                .getPlayer(targetPlayer)
+                .findPlayer(targetPlayer)
                 .map(player -> player.drawCards(amountOfCards))
                 .map(player -> game.updatePlayer(targetPlayer, player))
                 .orElse(game);

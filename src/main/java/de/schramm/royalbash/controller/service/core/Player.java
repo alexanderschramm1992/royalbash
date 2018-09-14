@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class Player {
 
+    private final String id;
     private final String name;
     private final int hitpoints;
     private final int resources;

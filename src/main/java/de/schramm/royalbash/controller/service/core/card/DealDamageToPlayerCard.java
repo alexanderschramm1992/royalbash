@@ -12,6 +12,7 @@ import lombok.val;
 @Builder
 public class DealDamageToPlayerCard implements Card {
 
+    private final String id;
     private final String name;
     private final int amountOfDamage;
     private final int cost;
@@ -19,7 +20,7 @@ public class DealDamageToPlayerCard implements Card {
     @Override
     public Game invoke(Context context) {
         return context.getGame()
-                .getPlayer(context.getTargetPlayer())
+                .findPlayer(context.getTargetPlayer())
                 .map(player -> player.setHitpoints(player.getHitpoints() - amountOfDamage))
                 .map(player -> updateTargetPlayer(player, context))
                 .orElse(context.getGame());

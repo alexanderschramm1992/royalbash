@@ -10,6 +10,7 @@ import lombok.Value;
 @Builder
 public class NoOpCard implements Card {
 
+    private final String id;
     private final String name;
 
     @Override

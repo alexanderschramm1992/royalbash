@@ -15,7 +15,7 @@ class CreatureUtil {
 
         val updatedSpot = targetSpot.place(creature);
 
-        return game.getPlayer(owner)
+        return game.findPlayer(owner)
                 .map(player -> player.updateSpot(targetSpot, updatedSpot))
                 .map(player -> game.updatePlayer(owner, player))
                 .orElse(game);

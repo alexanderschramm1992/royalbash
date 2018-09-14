@@ -9,6 +9,8 @@ import org.junit.Test;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class GameTest {
 
@@ -291,5 +293,80 @@ public class GameTest {
 
         // Then
         assertThat(game.getState()).isEqualTo(State.PLAYER_1_WON);
+    }
+
+    @Test
+    public void should_deliver_player_with_given_id() throws Exception {
+
+        // Given
+        val player1 = Player.builder()
+                .id("Id 1")
+                .build();
+        val testee = Game.builder()
+                .player1(player1)
+                .player2(Player.builder().build())
+                .build();
+
+        // When
+        val playerOptional = testee.findPlayer("Id 1");
+
+        // Then
+        val player = playerOptional.orElseThrow(() -> new Exception("Player is not present"));
+        assertThat(player).isEqualTo(player1);
+    }
+
+    @Test
+    public void should_deliver_optional_empty_if_player_id_cannot_be_found() {
+
+        // Given
+        val testee = Game.builder()
+                .player1(Player.builder().build())
+                .player2(Player.builder().build())
+                .build();
+
+        // When
+        val optional = testee.findPlayer("Id 1");
+
+        // Then
+        assertThat(optional.isPresent()).isFalse();
+    }
+
+    @Test
+    public void should_deliver_creature_with_given_id() throws Exception {
+
+        // Given
+        val creature = mock(Creature.class);
+        when(creature.getId()).thenReturn("Id 1");
+        val testee = Game.builder()
+                .player1(Player.builder()
+                        .spot(Spot.builder()
+                            .creature(creature)
+                            .build())
+                        .build())
+                .player2(Player.builder().build())
+                .build();
+
+        // When
+        val optional = testee.findCreature("Id 1");
+
+        // Then
+        val foundCreature = optional.orElseThrow(() -> new Exception("Creature not present"));
+        assertThat(foundCreature).isEqualTo(creature);
+    }
+
+    @Test
+    public void should_deliver_optional_empty_if_creature_id_cannot_be_found() {
+
+        // Given
+        val testee = Game.builder()
+                .player1(Player.builder().build())
+                .player2(Player.builder().build())
+                .build();
+
+        // When
+        val optional = testee.findCreature("Id 1");
+
+        // Then
+        assertThat(optional.isPresent()).isFalse();
     }
 }

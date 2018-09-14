@@ -107,7 +107,7 @@ public class Game {
                 .updatePlayer(opponent, updatedOpponent);
     }
 
-    Game combat(Creature attacker, Player owner) {
+    public Game combat(Creature attacker, Player owner) {
 
         val opponent = getOpponent(owner);
 
@@ -153,9 +153,25 @@ public class Game {
                 .build();
     }
 
-    public Optional<Player> getPlayer(Player player) {
+    public Optional<Player> findPlayer(Player player) {
         return getPlayers()
                 .filter(ownPlayer -> ownPlayer.equals(player))
+                .findFirst();
+    }
+
+    public Optional<Player> findPlayer(String playerId) {
+        return Stream.of(player1, player2)
+                .filter(player -> playerId.equals(player.getId()))
+                .findFirst();
+    }
+
+    public Optional<Creature> findCreature(String creatureId) {
+        return Stream.of(player1, player2)
+                .flatMap(Player::getSpots)
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(creature -> creatureId.equals(creature.getId()))
                 .findFirst();
     }
 }
