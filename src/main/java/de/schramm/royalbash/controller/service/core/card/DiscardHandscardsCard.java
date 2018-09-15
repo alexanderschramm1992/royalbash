@@ -12,6 +12,7 @@ import lombok.val;
 class DiscardHandscardsCard implements Card {
 
     private final String id;
+    private final String name;
     private final int amountOfCards;
     private final int cost;
 

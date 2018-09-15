@@ -57,8 +57,8 @@ public class PlayerTest {
         val cards = testee.getHandcards();
 
         // Then
-        Assertions.assertThat(cards).hasSize(1);
-        Assertions.assertThat(cards).contains(handcard);
+        Assertions.assertThat(cards.collect(Collectors.toList())).hasSize(1);
+        Assertions.assertThat(cards.collect(Collectors.toList())).contains(handcard);
     }
 
     @Test
@@ -80,8 +80,8 @@ public class PlayerTest {
         val cards = testee.getHandcards();
 
         // Then
-        Assertions.assertThat(cards).contains(handcard1, Index.atIndex(0));
-        Assertions.assertThat(cards).contains(handcard2, Index.atIndex(1));
+        Assertions.assertThat(cards.collect(Collectors.toList())).contains(handcard1, Index.atIndex(0));
+        Assertions.assertThat(cards.collect(Collectors.toList())).contains(handcard2, Index.atIndex(1));
     }
 
     @Test
@@ -97,7 +97,7 @@ public class PlayerTest {
         val player = testee.removeHandcard(handcard);
 
         // Then
-        assertThat(player.getHandcards()).hasSize(0);
+        assertThat(player.getHandcards().collect(Collectors.toList())).hasSize(0);
     }
 
     @Test
@@ -114,8 +114,8 @@ public class PlayerTest {
         val player = testee.removeHandcard(handcard2);
 
         // Then
-        assertThat(player.getHandcards()).hasSize(1);
-        assertThat(player.getHandcards()).contains(handcard1);
+        assertThat(player.getHandcards().collect(Collectors.toList())).hasSize(1);
+        assertThat(player.getHandcards().collect(Collectors.toList())).contains(handcard1);
     }
 
     @Test
@@ -135,9 +135,9 @@ public class PlayerTest {
         val player = testee.removeHandcard(handcard2);
 
         // Then
-        assertThat(player.getHandcards()).hasSize(2);
-        assertThat(player.getHandcards()).contains(handcard1, Index.atIndex(0));
-        assertThat(player.getHandcards()).contains(handcard3, Index.atIndex(1));
+        assertThat(player.getHandcards().collect(Collectors.toList())).hasSize(2);
+        assertThat(player.getHandcards().collect(Collectors.toList())).contains(handcard1, Index.atIndex(0));
+        assertThat(player.getHandcards().collect(Collectors.toList())).contains(handcard3, Index.atIndex(1));
     }
 
     @Test

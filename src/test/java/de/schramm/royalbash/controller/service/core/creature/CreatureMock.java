@@ -13,8 +13,10 @@ public class CreatureMock implements Creature {
     private final boolean placeableOnSpot = true;
 
     private final String id;
+    private final String name;
     private final int hitpoints;
     private final int attack;
+    private final int cost;
 
     @Override
     public Creature damage(Creature attacker) {

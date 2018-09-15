@@ -9,6 +9,8 @@ import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.util.stream.Collectors;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoblinRaiderTest {
@@ -84,7 +86,7 @@ public class GoblinRaiderTest {
         val updatedGame = testee.invoke(context);
 
         // Then
-        Assertions.assertThat(updatedGame.getPlayer2().getHandcards()).hasSize(1);
+        Assertions.assertThat(updatedGame.getPlayer2().getHandcards().collect(Collectors.toList())).hasSize(1);
     }
 
 }

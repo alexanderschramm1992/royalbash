@@ -6,6 +6,8 @@ import de.schramm.royalbash.controller.service.core.Player;
 import lombok.val;
 import org.junit.Test;
 
+import java.util.stream.Collectors;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DrawHandcardsCardTest {
@@ -36,8 +38,9 @@ public class DrawHandcardsCardTest {
         val updatedGame = testee.invoke(context);
 
         // Then
-        assertThat(updatedGame.getPlayer1().getHandcards()).hasSize(3);
-        assertThat(updatedGame.getPlayer1().getHandcards()).contains(NoOpCard.builder().build());
+        assertThat(updatedGame.getPlayer1().getHandcards().collect(Collectors.toList())).hasSize(3);
+        assertThat(updatedGame.getPlayer1().getHandcards().collect(Collectors.toList()))
+                .contains(NoOpCard.builder().build());
     }
 
     @Test
@@ -64,6 +67,6 @@ public class DrawHandcardsCardTest {
         val updatedGame = testee.invoke(context);
 
         // Then
-        assertThat(updatedGame.getPlayer1().getHandcards()).hasSize(1);
+        assertThat(updatedGame.getPlayer1().getHandcards().collect(Collectors.toList())).hasSize(1);
     }
 }

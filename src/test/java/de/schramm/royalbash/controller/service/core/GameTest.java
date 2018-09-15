@@ -159,7 +159,7 @@ public class GameTest {
         val game = testee.playCard(card, player1, player2, Spot.builder().build());
 
         // Then
-        assertThat(game.getPlayer1().getHandcards()).isEmpty();
+        assertThat(game.getPlayer1().getHandcards().collect(Collectors.toList())).isEmpty();
     }
 
     @Test

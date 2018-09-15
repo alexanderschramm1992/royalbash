@@ -11,8 +11,10 @@ import lombok.Value;
 public class NoOpCreature implements Creature {
 
     private final String id;
+    private final String name;
     private final int hitpoints;
     private final int attack;
+    private final int cost;
     private final boolean isPlaceableOnSpot = true;
 
     @Override

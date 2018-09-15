@@ -7,6 +7,8 @@ import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.util.stream.Collectors;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DiscardHandscardsCardTest {
@@ -38,7 +40,7 @@ public class DiscardHandscardsCardTest {
         val updatedGame = testee.invoke(context);
 
         // Then
-        Assertions.assertThat(updatedGame.getPlayer2().getHandcards()).hasSize(0);
+        Assertions.assertThat(updatedGame.getPlayer2().getHandcards().collect(Collectors.toList())).hasSize(0);
     }
 
     @Test
@@ -67,6 +69,6 @@ public class DiscardHandscardsCardTest {
         val updatedGame = testee.invoke(context);
 
         // Then
-        Assertions.assertThat(updatedGame.getPlayer2().getHandcards()).hasSize(0);
+        Assertions.assertThat(updatedGame.getPlayer2().getHandcards().collect(Collectors.toList())).hasSize(0);
     }
 }

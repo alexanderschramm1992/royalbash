@@ -34,9 +34,17 @@ public class Player {
         return spots.stream();
     }
 
+    public Stream<Card> getHandcards() {
+        return handcards.stream();
+    }
+
+    public Stream<Card> getDeckcards() {
+        return deckcards.stream();
+    }
+
     Player removeHandcard(Card handcard) {
 
-        val handcards = this.handcards.stream()
+        val handcards = getHandcards()
                 .filter(ownHandcard -> !ownHandcard.equals(handcard))
                 .collect(Collectors.toList());
 
@@ -71,7 +79,7 @@ public class Player {
     }
 
     boolean hasCard(Card card) {
-        return handcards.stream()
+        return getHandcards()
                 .anyMatch(handcard -> handcard.equals(card));
     }
 
