@@ -54,17 +54,20 @@ public class GameServiceTest {
     public void should_retrieve_game_after_event_is_committed() {
 
         // Given
+        val game = Game.builder().build();
         val gameEvent = mock(GameEvent.class);
+        when(gameEvent.invoke(game)).thenReturn(game);
         val repository = mock(GameRepository.class);
+        when(repository.findOne("Id 1")).thenReturn(game);
         val testee = GameService.builder()
                 .gameRepository(repository)
                 .build();
 
         // When
-        val game = testee.commitGameEvent(gameEvent);
+        val updatedGame = testee.commitGameEvent("Id 1", gameEvent);
 
         // Then
-        assertThat(game).isNotNull();
-        assertThat(game).isEqualTo(game);
+        assertThat(updatedGame).isNotNull();
+        assertThat(updatedGame).isEqualTo(game);
     }
 }

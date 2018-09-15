@@ -8,8 +8,6 @@ import lombok.Value;
 @Builder
 public class PlayerAttackedEvent implements GameEvent {
 
-    private final GameEventType type = GameEventType.ATTACK_PLAYER;
-
     private final String creatureId;
     private final String ownerId;
 

@@ -63,7 +63,7 @@ public class Game {
                 .orElse(this);
     }
 
-    Game combat(Creature attacker, Player owner, Creature defender) {
+    public Game combat(Creature attacker, Player owner, Creature defender) {
 
         val opponent = getOpponent(owner);
 

@@ -3,6 +3,7 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.service.core.Game;
 import de.schramm.royalbash.controller.service.GameService;
 import de.schramm.royalbash.controller.service.core.Player;
+import de.schramm.royalbash.controller.service.gameevent.NoOpEvent;
 import lombok.val;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = GameController.class, secure = false)
@@ -88,6 +91,37 @@ public class GameControllerTest {
         // Then
         JSONAssert.assertEquals(
                 "{\"player1\": {\"name\": \"Account 1\"}, \"player2\": {\"name\": \"Account 2\"}}",
+                result,
+                false
+        );
+    }
+
+    @Test
+    public void should_resolve_event_and_return_updated_game() throws Exception {
+
+        // Given
+        val gameId = "Id 1";
+        val game = Game.builder().build();
+        Mockito.when(gameService.commitGameEvent(gameId, NoOpEvent.builder().build())).thenReturn(game);
+        val requestBuilder = MockMvcRequestBuilders
+                .post("/game/event")
+                .content(String.format(
+                        "{\"gameId\": \"%s\", \"event\": {\"type\": \"NO_OP\"}}",
+                        gameId
+                ))
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // When
+        val result = mockMvc.perform(requestBuilder)
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        // Then
+        verify(gameService, times(1)).commitGameEvent(gameId, NoOpEvent.builder().build());
+        JSONAssert.assertEquals(
+                "{}",
                 result,
                 false
         );

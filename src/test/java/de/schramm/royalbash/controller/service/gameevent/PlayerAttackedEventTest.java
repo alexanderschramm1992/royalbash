@@ -1,15 +1,13 @@
 package de.schramm.royalbash.controller.service.gameevent;
 
-import de.schramm.royalbash.controller.service.core.Creature;
 import de.schramm.royalbash.controller.service.core.Game;
 import de.schramm.royalbash.controller.service.core.Player;
 import de.schramm.royalbash.controller.service.core.Spot;
+import de.schramm.royalbash.controller.service.core.creature.CreatureMock;
 import lombok.val;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class PlayerAttackedEventTest {
 
@@ -18,9 +16,10 @@ public class PlayerAttackedEventTest {
     public void should_invoke_attack_on_player() {
 
         // Given
-        val creature = mock(Creature.class);
-        when(creature.getId()).thenReturn("Id 1");
-        when(creature.getAttack()).thenReturn(2);
+        val creature = CreatureMock.builder()
+                .id("Id 1")
+                .attack(2)
+                .build();
         val game = Game.builder()
                 .player1(Player.builder()
                         .id("Id 2")

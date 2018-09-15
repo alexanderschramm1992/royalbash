@@ -39,7 +39,7 @@ public class GameService {
         return game;
     }
 
-    public Game commitGameEvent(GameEvent gameEvent) {
-        return Game.builder().build();
+    public Game commitGameEvent(String gameId, GameEvent gameEvent) {
+        return gameEvent.invoke(gameRepository.findOne(gameId));
     }
 }

@@ -30,7 +30,7 @@ public class GameController {
     }
 
     @PostMapping("/game/event")
-    Game commitEvent(@RequestBody GameEvent gameEvent) {
-        return gameService.commitGameEvent(gameEvent);
+    Game commitEvent(@RequestBody CommitGameEventRequest request) {
+        return gameService.commitGameEvent(request.getGameId(), request.getEvent());
     }
 }
