@@ -1,7 +1,7 @@
 package de.schramm.royalbash.controller.service.core;
 
 import de.schramm.royalbash.controller.service.core.card.NoOpCard;
-import de.schramm.royalbash.controller.service.core.creature.NoOpCreature;
+import de.schramm.royalbash.controller.service.core.card.creature.NoOpCreature;
 import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Index;

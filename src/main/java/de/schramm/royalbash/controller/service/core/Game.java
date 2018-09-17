@@ -24,7 +24,7 @@ public class Game {
                 .map(player -> player.removeHandcard(card))
                 .map(player -> updatePlayer(owner, player))
                 .map(game -> card.invoke(
-                        CardOnPlayerContext.builder()
+                        Context.builder()
                             .game(game)
                             .owner(owner)
                             .targetPlayer(targetPlayer)

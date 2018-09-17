@@ -3,7 +3,7 @@ package de.schramm.royalbash.controller.service.gameevent;
 import de.schramm.royalbash.controller.service.core.Game;
 import de.schramm.royalbash.controller.service.core.Player;
 import de.schramm.royalbash.controller.service.core.Spot;
-import de.schramm.royalbash.controller.service.core.creature.CreatureMock;
+import de.schramm.royalbash.controller.service.core.card.creature.CreatureMock;
 import lombok.val;
 import org.junit.Test;
 

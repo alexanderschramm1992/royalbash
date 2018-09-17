@@ -1,6 +1,6 @@
-package de.schramm.royalbash.controller.service.core.creature;
+package de.schramm.royalbash.controller.service.core.card.creature;
 
-import de.schramm.royalbash.controller.service.core.CardOnPlayerContext;
+import de.schramm.royalbash.controller.service.core.Context;
 import de.schramm.royalbash.controller.service.core.Creature;
 import de.schramm.royalbash.controller.service.core.Game;
 import lombok.Builder;
@@ -8,15 +8,19 @@ import lombok.Value;
 
 @Value
 @Builder(toBuilder = true)
-public class CreatureMock implements Creature {
-
-    private final boolean placeableOnSpot = true;
+public class NoOpCreature implements Creature {
 
     private final String id;
     private final String name;
     private final int hitpoints;
     private final int attack;
     private final int cost;
+    private final boolean isPlaceableOnSpot = true;
+
+    @Override
+    public Game invoke(Context context) {
+        return CreatureUtil.spawnCreature(this, context);
+    }
 
     @Override
     public Creature damage(Creature attacker) {
@@ -27,11 +31,6 @@ public class CreatureMock implements Creature {
 
     @Override
     public boolean isDead() {
-        return hitpoints <= 0;
-    }
-
-    @Override
-    public Game invoke(CardOnPlayerContext cardOnPlayerContext) {
-        return null;
+        return CreatureUtil.isDead(this);
     }
 }

@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller.service.gameevent;
 
-import de.schramm.royalbash.controller.service.core.CardOnPlayerContext;
+import de.schramm.royalbash.controller.service.core.Context;
 import de.schramm.royalbash.controller.service.core.Game;
 import lombok.Builder;
 import lombok.Value;
@@ -24,7 +24,7 @@ public class CardPlayedOnPlayerEvent implements GameEvent {
             .orElse(game);
     }
 
-    private CardOnPlayerContext buildContext(Game game) {
-        return CardOnPlayerContext.builder().build();
+    private Context buildContext(Game game) {
+        return Context.builder().build();
     }
 }

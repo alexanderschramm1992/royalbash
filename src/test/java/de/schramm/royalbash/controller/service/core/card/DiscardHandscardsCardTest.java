@@ -1,10 +1,10 @@
 package de.schramm.royalbash.controller.service.core.card;
 
-import de.schramm.royalbash.controller.service.core.CardOnPlayerContext;
+import de.schramm.royalbash.controller.service.core.Context;
 import de.schramm.royalbash.controller.service.core.Game;
 import de.schramm.royalbash.controller.service.core.Player;
+import de.schramm.royalbash.controller.service.core.effect.DiscardHandcardsEffect;
 import lombok.val;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.util.stream.Collectors;
@@ -18,7 +18,9 @@ public class DiscardHandscardsCardTest {
 
         // Given
         val testee = DiscardHandscardsCard.builder()
-                .amountOfCards(2)
+                .effect(DiscardHandcardsEffect.builder()
+                        .amountOfCards(2)
+                        .build())
                 .build();
         val player1 = Player.builder()
                 .handcard(testee)
@@ -31,7 +33,7 @@ public class DiscardHandscardsCardTest {
                 .player1(player1)
                 .player2(player2)
                 .build();
-        val context = CardOnPlayerContext.builder()
+        val context = Context.builder()
                 .game(game)
                 .targetPlayer(player2)
                 .build();
@@ -40,7 +42,7 @@ public class DiscardHandscardsCardTest {
         val updatedGame = testee.invoke(context);
 
         // Then
-        Assertions.assertThat(updatedGame.getPlayer2().getHandcards().collect(Collectors.toList())).hasSize(0);
+        assertThat(updatedGame.getPlayer2().getHandcards().collect(Collectors.toList())).hasSize(0);
     }
 
     @Test
@@ -48,7 +50,9 @@ public class DiscardHandscardsCardTest {
 
         // Given
         val testee = DiscardHandscardsCard.builder()
-                .amountOfCards(2)
+                .effect(DiscardHandcardsEffect.builder()
+                        .amountOfCards(2)
+                        .build())
                 .build();
         val player1 = Player.builder()
                 .handcard(testee)
@@ -60,7 +64,7 @@ public class DiscardHandscardsCardTest {
                 .player1(player1)
                 .player2(player2)
                 .build();
-        val context = CardOnPlayerContext.builder()
+        val context = Context.builder()
                 .game(game)
                 .targetPlayer(player2)
                 .build();
@@ -69,6 +73,6 @@ public class DiscardHandscardsCardTest {
         val updatedGame = testee.invoke(context);
 
         // Then
-        Assertions.assertThat(updatedGame.getPlayer2().getHandcards().collect(Collectors.toList())).hasSize(0);
+        assertThat(updatedGame.getPlayer2().getHandcards().collect(Collectors.toList())).hasSize(0);
     }
 }
