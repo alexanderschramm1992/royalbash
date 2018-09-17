@@ -1,17 +1,17 @@
 package de.schramm.royalbash.controller.service.core.creature;
 
-import de.schramm.royalbash.controller.service.core.Context;
+import de.schramm.royalbash.controller.service.core.CardOnPlayerContext;
 import de.schramm.royalbash.controller.service.core.Creature;
 import de.schramm.royalbash.controller.service.core.Game;
 import lombok.val;
 
 class CreatureUtil {
 
-    static Game spawnCreature(Creature creature, Context context) {
+    static Game spawnCreature(Creature creature, CardOnPlayerContext cardOnPlayerContext) {
 
-        val game = context.getGame();
-        val owner = context.getOwner();
-        val targetSpot = context.getTargetSpot();
+        val game = cardOnPlayerContext.getGame();
+        val owner = cardOnPlayerContext.getOwner();
+        val targetSpot = cardOnPlayerContext.getTargetSpot();
 
         val updatedSpot = targetSpot.place(creature);
 

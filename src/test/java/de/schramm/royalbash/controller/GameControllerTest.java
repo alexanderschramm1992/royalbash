@@ -3,6 +3,7 @@ package de.schramm.royalbash.controller;
 import de.schramm.royalbash.controller.service.core.Game;
 import de.schramm.royalbash.controller.service.GameService;
 import de.schramm.royalbash.controller.service.core.Player;
+import de.schramm.royalbash.controller.service.core.State;
 import de.schramm.royalbash.controller.service.gameevent.NoOpEvent;
 import lombok.val;
 import org.junit.Test;
@@ -39,6 +40,9 @@ public class GameControllerTest {
                 .player1(Player.builder()
                         .name("Player 1")
                         .build())
+                .player2(Player.builder().build())
+                .playerOnTurn(Player.builder().build())
+                .state(State.OPEN)
                 .build();
         Mockito.when(gameService.retrieveGame(any())).thenReturn(game);
 
@@ -69,6 +73,8 @@ public class GameControllerTest {
                 .player2(Player.builder()
                         .name(accountId2)
                         .build())
+                .playerOnTurn(Player.builder().build())
+                .state(State.OPEN)
                 .build();
         Mockito.when(gameService.createGame(accountId1, accountId2)).thenReturn(game);
 
@@ -101,7 +107,12 @@ public class GameControllerTest {
 
         // Given
         val gameId = "Id 1";
-        val game = Game.builder().build();
+        val game = Game.builder()
+                .player1(Player.builder().build())
+                .player2(Player.builder().build())
+                .playerOnTurn(Player.builder().build())
+                .state(State.OPEN)
+                .build();
         Mockito.when(gameService.commitGameEvent(gameId, NoOpEvent.builder().build())).thenReturn(game);
         val requestBuilder = MockMvcRequestBuilders
                 .post("/game/event")

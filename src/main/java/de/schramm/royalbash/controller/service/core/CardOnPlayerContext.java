@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder(toBuilder = true)
-public class Context {
+public class CardOnPlayerContext {
 
     private final Game game;
     private final Player owner;

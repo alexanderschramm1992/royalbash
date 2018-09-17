@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller.service.core.creature;
 
-import de.schramm.royalbash.controller.service.core.Context;
+import de.schramm.royalbash.controller.service.core.CardOnPlayerContext;
 import de.schramm.royalbash.controller.service.core.Creature;
 import de.schramm.royalbash.controller.service.core.Game;
 import lombok.Builder;
@@ -18,8 +18,8 @@ public class NoOpCreature implements Creature {
     private final boolean isPlaceableOnSpot = true;
 
     @Override
-    public Game invoke(Context context) {
-        return CreatureUtil.spawnCreature(this, context);
+    public Game invoke(CardOnPlayerContext cardOnPlayerContext) {
+        return CreatureUtil.spawnCreature(this, cardOnPlayerContext);
     }
 
     @Override

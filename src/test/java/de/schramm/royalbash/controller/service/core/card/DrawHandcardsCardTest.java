@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller.service.core.card;
 
-import de.schramm.royalbash.controller.service.core.Context;
+import de.schramm.royalbash.controller.service.core.CardOnPlayerContext;
 import de.schramm.royalbash.controller.service.core.Game;
 import de.schramm.royalbash.controller.service.core.Player;
 import lombok.val;
@@ -29,7 +29,7 @@ public class DrawHandcardsCardTest {
                 .player1(player1)
                 .player2(player2)
                 .build();
-        val context = Context.builder()
+        val context = CardOnPlayerContext.builder()
                 .game(game)
                 .targetPlayer(player1)
                 .build();
@@ -58,7 +58,7 @@ public class DrawHandcardsCardTest {
                 .player1(player1)
                 .player2(player2)
                 .build();
-        val context = Context.builder()
+        val context = CardOnPlayerContext.builder()
                 .game(game)
                 .targetPlayer(player1)
                 .build();

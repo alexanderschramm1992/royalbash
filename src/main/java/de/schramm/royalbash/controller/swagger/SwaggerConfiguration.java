@@ -1,4 +1,4 @@
-package de.schramm.royalbash.controller;
+package de.schramm.royalbash.controller.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

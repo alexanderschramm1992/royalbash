@@ -54,11 +54,11 @@ public class PlayerTest {
                 .build();
 
         // When
-        val cards = testee.getHandcards();
+        val cards = testee.getHandcards().collect(Collectors.toList());
 
         // Then
-        Assertions.assertThat(cards.collect(Collectors.toList())).hasSize(1);
-        Assertions.assertThat(cards.collect(Collectors.toList())).contains(handcard);
+        Assertions.assertThat(cards).hasSize(1);
+        Assertions.assertThat(cards).contains(handcard);
     }
 
     @Test
@@ -77,11 +77,11 @@ public class PlayerTest {
                 .build();
 
         // When
-        val cards = testee.getHandcards();
+        val cards = testee.getHandcards().collect(Collectors.toList());
 
         // Then
-        Assertions.assertThat(cards.collect(Collectors.toList())).contains(handcard1, Index.atIndex(0));
-        Assertions.assertThat(cards.collect(Collectors.toList())).contains(handcard2, Index.atIndex(1));
+        Assertions.assertThat(cards).contains(handcard1, Index.atIndex(0));
+        Assertions.assertThat(cards).contains(handcard2, Index.atIndex(1));
     }
 
     @Test
@@ -242,5 +242,37 @@ public class PlayerTest {
                 .map(Optional::get)
                 .collect(Collectors.toList());
         Assertions.assertThat(creaturesOfPlayer).doesNotContain(creature);
+    }
+
+    @Test
+    public void should_find_handcard() throws Exception {
+
+        // Given
+        val card = NoOpCard.builder()
+                .id("Id 1")
+                .build();
+        val testee = Player.builder()
+                .handcard(card)
+                .build();
+
+        // When
+        val foundCard = testee.findHandcard("Id 1")
+                .orElseThrow(() -> new Exception("Card not present"));
+
+        // Then
+        assertThat(foundCard).isEqualTo(card);
+    }
+
+    @Test
+    public void should_not_find_handcard() {
+
+        // Given
+        val testee = Player.builder().build();
+
+        // When
+        val card = testee.findHandcard("Id 1");
+
+        // Then
+        assertThat(card.isPresent()).isFalse();
     }
 }

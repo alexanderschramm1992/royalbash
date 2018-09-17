@@ -156,7 +156,7 @@ public class GameTest {
                 .build();
 
         // When
-        val game = testee.playCard(card, player1, player2, Spot.builder().build());
+        val game = testee.playCard(card, player1, player2);
 
         // Then
         assertThat(game.getPlayer1().getHandcards().collect(Collectors.toList())).isEmpty();

@@ -1,11 +1,13 @@
 package de.schramm.royalbash.controller.service.core;
 
+import jdk.nashorn.internal.objects.NativeDebug;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;
 import lombok.val;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -144,5 +146,11 @@ public class Player {
         return this.toBuilder()
                 .resources(resources - cost)
                 .build();
+    }
+
+    public Optional<Card> findHandcard(String cardId) {
+        return getHandcards()
+                .filter(card -> cardId.equals(card.getId()))
+                .findFirst();
     }
 }

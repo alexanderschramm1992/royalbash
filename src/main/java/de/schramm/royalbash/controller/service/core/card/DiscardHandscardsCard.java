@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller.service.core.card;
 
-import de.schramm.royalbash.controller.service.core.Context;
+import de.schramm.royalbash.controller.service.core.CardOnPlayerContext;
 import de.schramm.royalbash.controller.service.core.Card;
 import de.schramm.royalbash.controller.service.core.Game;
 import lombok.Builder;
@@ -17,10 +17,10 @@ class DiscardHandscardsCard implements Card {
     private final int cost;
 
     @Override
-    public Game invoke(Context context) {
+    public Game invoke(CardOnPlayerContext cardOnPlayerContext) {
 
-        val game = context.getGame();
-        val target = context.getTargetPlayer();
+        val game = cardOnPlayerContext.getGame();
+        val target = cardOnPlayerContext.getTargetPlayer();
 
         return game.findPlayer(target)
                 .map(player -> player.discardCards(amountOfCards))

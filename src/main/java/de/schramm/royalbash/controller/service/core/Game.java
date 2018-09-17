@@ -16,36 +16,7 @@ public class Game {
     private final Player player2;
     private final Player playerOnTurn;
 
-    Stream<Player> getPlayers() {
-        return Stream.of(player1, player2);
-    }
-
-    Game nextTurn() {
-        return this.toBuilder()
-                .playerOnTurn(playerOnTurn.equals(player1) ? player2 : player1)
-                .build();
-    }
-
-    Game setState(State state) {
-        return this.toBuilder()
-                .state(state)
-                .build();
-    }
-
-    Game updateStateAccordingToWinContitions() {
-
-        val hitpointsOfPlayer1 = player1.getHitpoints();
-        val hitpointsOfPlayer2 = player2.getHitpoints();
-
-        State state = hitpointsOfPlayer1 <= 0 ? State.PLAYER_2_WON : this.state;
-        state = hitpointsOfPlayer2 <= 0 ? State.PLAYER_1_WON : state;
-
-        return this.toBuilder()
-                .state(state)
-                .build();
-    }
-
-    Game playCard(Card card, Player owner, Player target, Spot targetSpot) {
+    public Game playCard(Card card, Player owner, Player targetPlayer) {
         return getPlayers()
                 .filter(player -> player.equals(owner))
                 .filter(player -> player.hasCard(card))
@@ -53,11 +24,10 @@ public class Game {
                 .map(player -> player.removeHandcard(card))
                 .map(player -> updatePlayer(owner, player))
                 .map(game -> card.invoke(
-                        Context.builder()
+                        CardOnPlayerContext.builder()
                             .game(game)
                             .owner(owner)
-                            .targetPlayer(target)
-                            .targetSpot(targetSpot)
+                            .targetPlayer(targetPlayer)
                             .build()
                 ))
                 .orElse(this);
@@ -173,5 +143,34 @@ public class Game {
                 .map(Optional::get)
                 .filter(creature -> creatureId.equals(creature.getId()))
                 .findFirst();
+    }
+
+    Stream<Player> getPlayers() {
+        return Stream.of(player1, player2);
+    }
+
+    Game nextTurn() {
+        return this.toBuilder()
+                .playerOnTurn(playerOnTurn.equals(player1) ? player2 : player1)
+                .build();
+    }
+
+    Game setState(State state) {
+        return this.toBuilder()
+                .state(state)
+                .build();
+    }
+
+    Game updateStateAccordingToWinContitions() {
+
+        val hitpointsOfPlayer1 = player1.getHitpoints();
+        val hitpointsOfPlayer2 = player2.getHitpoints();
+
+        State state = hitpointsOfPlayer1 <= 0 ? State.PLAYER_2_WON : this.state;
+        state = hitpointsOfPlayer2 <= 0 ? State.PLAYER_1_WON : state;
+
+        return this.toBuilder()
+                .state(state)
+                .build();
     }
 }

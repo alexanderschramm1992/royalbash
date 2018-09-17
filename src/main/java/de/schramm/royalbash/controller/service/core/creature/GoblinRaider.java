@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller.service.core.creature;
 
-import de.schramm.royalbash.controller.service.core.Context;
+import de.schramm.royalbash.controller.service.core.CardOnPlayerContext;
 import de.schramm.royalbash.controller.service.core.Creature;
 import de.schramm.royalbash.controller.service.core.Game;
 import lombok.Builder;
@@ -20,13 +20,13 @@ public class GoblinRaider implements Creature {
     private final boolean isPlaceableOnSpot = true;
 
     @Override
-    public Game invoke(Context context) {
+    public Game invoke(CardOnPlayerContext cardOnPlayerContext) {
 
-        val game = CreatureUtil.spawnCreature(this, context);
+        val game = CreatureUtil.spawnCreature(this, cardOnPlayerContext);
 
-        return game.findPlayer(context.getTargetPlayer())
+        return game.findPlayer(cardOnPlayerContext.getTargetPlayer())
                 .map(player -> player.discardCards(1))
-                .map(player -> game.updatePlayer(context.getTargetPlayer(), player))
+                .map(player -> game.updatePlayer(cardOnPlayerContext.getTargetPlayer(), player))
                 .orElse(game);
     }
 

@@ -1,4 +1,4 @@
-package de.schramm.royalbash.controller;
+package de.schramm.royalbash.controller.swagger;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
