@@ -8,14 +8,13 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DealDamageToPlayerCardTest {
+public class FireballTest {
 
     @Test
     public void should_deal_damage_to_target_player() {
 
         // Given
-        val testee = DealDamageToPlayerCard.builder()
-                .amountOfDamage(3)
+        val testee = Fireball.builder()
                 .build();
         val player1 = Player.builder()
                 .handcard(testee)
@@ -36,7 +35,7 @@ public class DealDamageToPlayerCardTest {
         val updatedGame = testee.invoke(context);
 
         // Then
-        assertThat(updatedGame.getPlayer2().getHitpoints()).isEqualTo(17);
+        assertThat(updatedGame.getPlayer2().getHitpoints()).isEqualTo(18);
     }
 
 }
