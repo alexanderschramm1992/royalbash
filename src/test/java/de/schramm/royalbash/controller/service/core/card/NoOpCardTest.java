@@ -15,8 +15,7 @@ public class NoOpCardTest {
     public void should_not_alter_game() {
 
         // Given
-        val testee = NoOpCard.builder()
-                .build();
+        val testee = NoOpCard.builder().build();
         val player1 = Player.builder()
                 .handcard(testee)
                 .build();

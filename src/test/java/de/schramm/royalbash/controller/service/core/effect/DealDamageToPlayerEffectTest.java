@@ -1,4 +1,4 @@
-package de.schramm.royalbash.controller.service.core.card;
+package de.schramm.royalbash.controller.service.core.effect;
 
 import de.schramm.royalbash.controller.service.core.Context;
 import de.schramm.royalbash.controller.service.core.Game;
@@ -8,17 +8,16 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FireballTest {
+public class DealDamageToPlayerEffectTest {
 
     @Test
     public void should_deal_damage_to_target_player() {
 
         // Given
-        val testee = Fireball.builder()
+        val testee = DealDamageToPlayerEffect.builder()
+                .amountOfDamage(2)
                 .build();
-        val player1 = Player.builder()
-                .handcard(testee)
-                .build();
+        val player1 = Player.builder().build();
         val player2 = Player.builder()
                 .hitpoints(20)
                 .build();
@@ -37,5 +36,4 @@ public class FireballTest {
         // Then
         assertThat(updatedGame.getPlayer2().getHitpoints()).isEqualTo(18);
     }
-
 }
