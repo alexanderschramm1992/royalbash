@@ -19,9 +19,9 @@ public class CreatureMock implements Creature {
     private final int cost;
 
     @Override
-    public Creature damage(Creature attacker) {
+    public Creature damage(int amountOfDamage) {
         return this.toBuilder()
-                .hitpoints(hitpoints - attacker.getAttack())
+                .hitpoints(hitpoints - amountOfDamage)
                 .build();
     }
 

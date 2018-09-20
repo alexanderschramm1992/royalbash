@@ -5,7 +5,7 @@ public interface Creature extends Card {
     int getHitpoints();
     int getAttack();
 
-    Creature damage(Creature attacker);
+    Creature damage(int amountOfDamage);
 
     boolean isDead();
 }

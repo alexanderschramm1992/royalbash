@@ -53,14 +53,13 @@ public class Game {
 
         val updatedAttacker = attackerOptional
                 .flatMap(actualAttacker -> defenderOptional
-                        .map(actualAttacker::damage)
-                )
+                        .map(actualDefender -> actualAttacker.damage(actualDefender.getAttack())))
                 .orElse(attacker);
 
         val updatedDefender =defenderOptional
                 .flatMap(actualDefender -> attackerOptional
-                        .map(actualDefender::damage)
-                ).orElse(defender);
+                        .map(actualAttacker -> actualDefender.damage(actualAttacker.getAttack())))
+                .orElse(defender);
 
         val updatedOwner = updatedAttacker.isDead() ? owner.removeCreature(attacker) : owner.updateCreature(
                 attacker,
@@ -120,6 +119,13 @@ public class Game {
         return this.toBuilder()
                 .player1(player1.equals(oldPlayer) ? newPlayer : player1)
                 .player2(player2.equals(oldPlayer) ? newPlayer : player2)
+                .build();
+    }
+
+    public Game updateCreature(Creature oldCreature, Creature newCreature) {
+        return this.toBuilder()
+                .player1(player1.updateCreature(oldCreature, newCreature))
+                .player2(player2.updateCreature(oldCreature, newCreature))
                 .build();
     }
 

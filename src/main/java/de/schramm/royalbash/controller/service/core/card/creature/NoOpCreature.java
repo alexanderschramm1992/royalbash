@@ -23,9 +23,9 @@ public class NoOpCreature implements Creature {
     }
 
     @Override
-    public Creature damage(Creature attacker) {
+    public Creature damage(int amountOfDamage) {
         return this.toBuilder()
-                .hitpoints(hitpoints - attacker.getAttack())
+                .hitpoints(hitpoints - amountOfDamage)
                 .build();
     }
 
