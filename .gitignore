@@ -39,8 +39,8 @@ transaction-logs
 .flattened-pom.xml
 secrets.yml
 
-/node
-/node_modules
+/public/node
+/public/node_modules
 /public/bundle.js
-package-lock.json
-npm-debug.log
+/public/package-lock.json
+/public/npm-debug.log

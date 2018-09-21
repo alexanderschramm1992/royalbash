@@ -1,0 +1,16 @@
+{
+  "name": "royal-bash-frontend",
+  "version": "0.0.1",
+  "description": "RoyalBash Frontend",
+  "main": "index.js",
+  "dependencies": {
+    "semantic-ui": "^2.4.0",
+    "semantic-ui-card": "^2.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Alexander Schramm",
+  "license": "ISC"
+}
