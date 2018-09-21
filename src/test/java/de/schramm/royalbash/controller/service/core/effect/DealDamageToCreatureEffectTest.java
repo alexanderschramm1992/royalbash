@@ -8,8 +8,6 @@ import de.schramm.royalbash.controller.service.core.card.creature.CreatureMock;
 import lombok.val;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DealDamageToCreatureEffectTest {

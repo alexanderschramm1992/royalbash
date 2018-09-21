@@ -12,7 +12,7 @@ public class DealDamageToCreatureEffect {
 
     private final int amountOfDamage;
 
-    Game invoke(final Context context) {
+    public Game invoke(final Context context) {
 
         val game = context.getGame();
 

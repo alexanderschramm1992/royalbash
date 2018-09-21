@@ -22,6 +22,8 @@ public class Player {
     private final List<Card> handcards;
     @Singular("deckcard")
     private final List<Card> deckcards;
+    @Singular("depositcard")
+    private final List<Card> depositcards;
     @Singular("spot")
     private final List<Spot> spots;
 
@@ -43,16 +45,57 @@ public class Player {
         return deckcards.stream();
     }
 
+    public Player updateSpot(Spot oldSpot, Spot newSpot) {
+
+        val spots = this.spots.stream()
+                .map(spot -> spot.equals(oldSpot) ? newSpot : spot)
+                .collect(Collectors.toList());
+
+        return this.toBuilder()
+                .clearSpots()
+                .spots(spots)
+                .build();
+    }
+
+    public Player discardCards(int amountOfCards) {
+
+        Player player = this;
+        for(int iterator = 0; iterator < amountOfCards; iterator++) {
+            player = player.discardCard();
+        }
+
+        return player;
+    }
+
+    public Player drawCards(int amountOfCards) {
+
+        Player player = this;
+        for(int iterator = 0; iterator < amountOfCards; iterator++) {
+            player = player.drawCard();
+        }
+
+        return player;
+    }
+
+    public Optional<Card> findHandcard(String cardId) {
+        return getHandcards()
+                .filter(card -> cardId.equals(card.getId()))
+                .findFirst();
+    }
+
     Player removeHandcard(Card handcard) {
 
         val handcards = getHandcards()
                 .filter(ownHandcard -> !ownHandcard.equals(handcard))
                 .collect(Collectors.toList());
 
-        return this.toBuilder()
-                .clearHandcards()
-                .handcards(handcards)
-                .build();
+        return findHandcard(handcard)
+                .map(card -> this.toBuilder()
+                        .depositcard(card)
+                        .clearHandcards()
+                        .handcards(handcards)
+                        .build())
+                .orElse(this);
     }
 
     Player removeCreature(Creature creature) {
@@ -61,10 +104,13 @@ public class Player {
                 .map(spot -> spot.removeCreature(creature))
                 .collect(Collectors.toList());
 
-        return this.toBuilder()
-                .clearSpots()
-                .spots(spots)
-                .build();
+        return findCreature(creature)
+                .map(ownedCreature -> this.toBuilder()
+                        .depositcard(ownedCreature)
+                        .clearSpots()
+                        .spots(spots)
+                        .build())
+                .orElse(this);
     }
 
     Player updateCreature(Creature oldCreature, Creature newCreature) {
@@ -79,19 +125,17 @@ public class Player {
                 .build();
     }
 
+    Player reduceResources(int cost) {
+        return this.toBuilder()
+                .resources(resources - cost)
+                .build();
+    }
+
+    Stream<Card> getDepositcards() { return depositcards.stream(); }
+
     boolean hasCard(Card card) {
         return getHandcards()
                 .anyMatch(handcard -> handcard.equals(card));
-    }
-
-    public Player drawCards(int amountOfCards) {
-
-        Player player = this;
-        for(int iterator = 0; iterator < amountOfCards; iterator++) {
-            player = player.drawCard();
-        }
-
-        return player;
     }
 
     private Player drawCard() {
@@ -107,16 +151,6 @@ public class Player {
                 .build();
     }
 
-    public Player discardCards(int amountOfCards) {
-
-        Player player = this;
-        for(int iterator = 0; iterator < amountOfCards; iterator++) {
-            player = player.discardCard();
-        }
-
-        return player;
-    }
-
     private Player discardCard() {
 
         if(handcards.isEmpty()) {
@@ -129,27 +163,18 @@ public class Player {
                 .build();
     }
 
-    public Player updateSpot(Spot oldSpot, Spot newSpot) {
-
-        val spots = this.spots.stream()
-                .map(spot -> spot.equals(oldSpot) ? newSpot : spot)
-                .collect(Collectors.toList());
-
-        return this.toBuilder()
-                .clearSpots()
-                .spots(spots)
-                .build();
-    }
-
-    Player reduceResources(int cost) {
-        return this.toBuilder()
-                .resources(resources - cost)
-                .build();
-    }
-
-    public Optional<Card> findHandcard(String cardId) {
+    private Optional<Card> findHandcard(Card card) {
         return getHandcards()
-                .filter(card -> cardId.equals(card.getId()))
+                .filter(card::equals)
+                .findFirst();
+    }
+
+    private Optional<Creature> findCreature(final Creature creature) {
+        return getSpots()
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(creature::equals)
                 .findFirst();
     }
 }
