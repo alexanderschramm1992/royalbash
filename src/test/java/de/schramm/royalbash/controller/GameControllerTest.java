@@ -27,6 +27,7 @@ import static org.mockito.Mockito.verify;
 public class GameControllerTest {
 
     @Autowired
+    private
     MockMvc mockMvc;
 
     @MockBean

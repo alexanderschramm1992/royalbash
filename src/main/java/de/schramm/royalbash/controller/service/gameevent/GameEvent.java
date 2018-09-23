@@ -6,13 +6,15 @@ import de.schramm.royalbash.controller.service.core.Game;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
         property = "type"
 )
 @JsonSubTypes({
+        @JsonSubTypes.Type(value = CardDrawnEvent.class, name = "CARD_DRAWN"),
+        @JsonSubTypes.Type(value = CardPlayedOnPlayerEvent.class, name = "CARD_PLAYED_ON_PLAYER"),
+        @JsonSubTypes.Type(value = CreatureAttackedEvent.class, name = "CREATURE_ATTACKED"),
         @JsonSubTypes.Type(value = NoOpEvent.class, name = "NO_OP"),
         @JsonSubTypes.Type(value = PlayerAttackedEvent.class, name = "PLAYER_ATTACKED"),
-        @JsonSubTypes.Type(value = CreatureAttackedEvent.class, name = "CREATURE_ATTACKED")
+        @JsonSubTypes.Type(value = TurnEndedEvent.class, name = "TURN_ENDED")
 })
 public interface GameEvent {
     Game invoke(Game game);
