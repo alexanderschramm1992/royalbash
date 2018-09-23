@@ -8,7 +8,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class MockCard implements Card {
+public class CardMock implements Card {
 
     private final String id;
     private final String name;

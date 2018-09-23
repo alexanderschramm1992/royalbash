@@ -1,6 +1,6 @@
 package de.schramm.royalbash.controller.service.core;
 
-import de.schramm.royalbash.controller.service.core.card.MockCard;
+import de.schramm.royalbash.controller.service.core.card.CardMock;
 import de.schramm.royalbash.controller.service.core.card.creature.CreatureMock;
 import lombok.val;
 import org.assertj.core.data.Index;
@@ -47,7 +47,7 @@ public class PlayerTest {
     public void should_deliver_handcards() {
 
         // Given
-        val handcard = MockCard.builder().build();
+        val handcard = CardMock.builder().build();
         val testee = Player.builder()
                 .handcard(handcard)
                 .build();
@@ -65,10 +65,10 @@ public class PlayerTest {
     public void should_deliver_handcards_in_order() {
 
         // Given
-        val handcard1 = MockCard.builder()
+        val handcard1 = CardMock.builder()
                 .name("Card 1")
                 .build();
-        val handcard2 = MockCard.builder()
+        val handcard2 = CardMock.builder()
                 .name("Card 2")
                 .build();
         val testee = Player.builder()
@@ -89,7 +89,7 @@ public class PlayerTest {
     public void should_deliver_deposit() {
 
         // Given
-        val card = MockCard.builder().build();
+        val card = CardMock.builder().build();
         val testee = Player.builder()
                 .depositcard(card)
                 .build();
@@ -107,7 +107,7 @@ public class PlayerTest {
     public void should_remove_handcard_and_add_it_ro_deposit() {
 
         // Given
-        val card = MockCard.builder().build();
+        val card = CardMock.builder().build();
         val testee = Player.builder()
                 .handcard(card)
                 .build();
@@ -126,8 +126,8 @@ public class PlayerTest {
     public void should_not_remove_handcard_if_it_cannot_be_found() {
 
         // Given
-        val handcard1 = MockCard.builder().name("Card 1").build();
-        val handcard2 = MockCard.builder().name("Card 2").build();
+        val handcard1 = CardMock.builder().name("Card 1").build();
+        val handcard2 = CardMock.builder().name("Card 2").build();
         val testee = Player.builder()
                 .handcard(handcard1)
                 .build();
@@ -145,9 +145,9 @@ public class PlayerTest {
     public void should_retain_order_when_removing_card() {
 
         // Given
-        val handcard1 = MockCard.builder().name("Card 1").build();
-        val handcard2 = MockCard.builder().name("Card 2").build();
-        val handcard3 = MockCard.builder().name("Card 3").build();
+        val handcard1 = CardMock.builder().name("Card 1").build();
+        val handcard2 = CardMock.builder().name("Card 2").build();
+        val handcard3 = CardMock.builder().name("Card 3").build();
         val testee = Player.builder()
                 .handcard(handcard1)
                 .handcard(handcard2)

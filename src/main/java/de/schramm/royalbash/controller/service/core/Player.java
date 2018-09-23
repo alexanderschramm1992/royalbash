@@ -131,7 +131,7 @@ public class Player {
                 .build();
     }
 
-    Stream<Card> getDepositcards() { return depositcards.stream(); }
+    public Stream<Card> getDepositcards() { return depositcards.stream(); }
 
     boolean hasCard(Card card) {
         return getHandcards()
@@ -169,7 +169,7 @@ public class Player {
                 .findFirst();
     }
 
-    private Optional<Creature> findCreature(final Creature creature) {
+    public Optional<Creature> findCreature(final Creature creature) {
         return getSpots()
                 .map(Spot::getCreature)
                 .filter(Optional::isPresent)

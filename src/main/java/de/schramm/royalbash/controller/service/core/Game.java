@@ -101,20 +101,6 @@ public class Game {
                 .build();
     }
 
-    private State evaluateState(Player player1, Player player2) {
-        if(player1.getHitpoints() <= 0) {
-            return State.PLAYER_2_WON;
-        } else if(player2.getHitpoints() <= 0) {
-            return State.PLAYER_1_WON;
-        } else {
-            return state;
-        }
-    }
-
-    private Player getOpponent(Player player) {
-        return player1.equals(player) ? player2 : player1;
-    }
-
     public Game updatePlayer(Player oldPlayer, Player newPlayer) {
         return this.toBuilder()
                 .player1(player1.equals(oldPlayer) ? newPlayer : player1)
@@ -151,6 +137,16 @@ public class Game {
                 .findFirst();
     }
 
+    public Optional<Creature> findCreature(Creature creature) {
+        return Stream.of(player1, player2)
+                .flatMap(Player::getSpots)
+                .map(Spot::getCreature)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(creature::equals)
+                .findFirst();
+    }
+
     Stream<Player> getPlayers() {
         return Stream.of(player1, player2);
     }
@@ -177,6 +173,27 @@ public class Game {
 
         return this.toBuilder()
                 .state(state)
+                .build();
+    }
+
+    private State evaluateState(Player player1, Player player2) {
+        if(player1.getHitpoints() <= 0) {
+            return State.PLAYER_2_WON;
+        } else if(player2.getHitpoints() <= 0) {
+            return State.PLAYER_1_WON;
+        } else {
+            return state;
+        }
+    }
+
+    private Player getOpponent(Player player) {
+        return player1.equals(player) ? player2 : player1;
+    }
+
+    public Game removeCreature(Creature creature) {
+        return this.toBuilder()
+                .player1(player1.removeCreature(creature))
+                .player2(player2.removeCreature(creature))
                 .build();
     }
 }
