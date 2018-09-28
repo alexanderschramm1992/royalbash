@@ -44,3 +44,6 @@ secrets.yml
 /public/bundle.js
 /public/package-lock.json
 /public/npm-debug.log
+/node
+/npm-debug.log
+/package-lock.json
