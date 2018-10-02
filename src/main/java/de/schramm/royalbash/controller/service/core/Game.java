@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 @Builder(toBuilder = true)
 public class Game {
 
+    private final String id;
     private final State state;
     private final Player player1;
     private final Player player2;

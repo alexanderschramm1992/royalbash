@@ -6,6 +6,7 @@ import de.schramm.royalbash.controller.service.core.Player;
 import de.schramm.royalbash.controller.service.core.State;
 import de.schramm.royalbash.controller.service.gameevent.NoOpEvent;
 import lombok.val;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -18,6 +19,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -45,7 +49,7 @@ public class GameControllerTest {
                 .playerOnTurn(Player.builder().build())
                 .state(State.OPEN)
                 .build();
-        Mockito.when(gameService.retrieveGame(any())).thenReturn(game);
+        Mockito.when(gameService.retrieveGame(any())).thenReturn(Optional.of(game));
 
         val requestBuilder = MockMvcRequestBuilders
                 .get("/game/1")
@@ -59,6 +63,26 @@ public class GameControllerTest {
 
         // Then
         JSONAssert.assertEquals("{\"player1\": {\"name\": \"Player 1\"}}", result, false);
+    }
+
+    @Test
+    public void should_not_deliver_game_but_status_code_404() throws Exception {
+
+        // Given
+        Mockito.when(gameService.retrieveGame(any())).thenReturn(Optional.empty());
+
+        val requestBuilder = MockMvcRequestBuilders
+                .get("/game/1")
+                .accept(MediaType.APPLICATION_JSON);
+
+        // When
+        val statusCode = mockMvc.perform(requestBuilder)
+                .andReturn()
+                .getResponse()
+                .getStatus();
+
+        // Then
+        assertThat(statusCode).isEqualTo(404);
     }
 
     @Test

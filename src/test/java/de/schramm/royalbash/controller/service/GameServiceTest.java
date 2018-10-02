@@ -5,6 +5,9 @@ import de.schramm.royalbash.controller.service.gameevent.GameEvent;
 import lombok.val;
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -15,9 +18,11 @@ public class GameServiceTest {
 
         // Given
         val gameId = "Game Id";
-        val game = Game.builder().build();
+        val game = Game.builder()
+                .id(gameId)
+                .build();
         val repository = mock(GameRepository.class);
-        when(repository.findOne(gameId)).thenReturn(game);
+        when(repository.findAll()).thenReturn(Collections.singleton(game));
         val testee = GameService.builder()
                 .gameRepository(repository)
                 .build();
@@ -26,7 +31,9 @@ public class GameServiceTest {
         val retrievedGame = testee.retrieveGame(gameId);
 
         // Then
-        assertThat(retrievedGame).isEqualTo(game);
+        assertThat(retrievedGame)
+                .isPresent()
+                .hasValue(game);
     }
 
     @Test
@@ -36,8 +43,11 @@ public class GameServiceTest {
         val accountId1 = "Account 1";
         val accountId2 = "Account 2";
         val repository = mock(GameRepository.class);
+        val uuidGenerator = mock(UUIDGenerator.class);
+        when(uuidGenerator.generateUUID()).thenReturn(UUID.randomUUID());
         val testee = GameService.builder()
                 .gameRepository(repository)
+                .uuidGenerator(uuidGenerator)
                 .build();
 
         // When

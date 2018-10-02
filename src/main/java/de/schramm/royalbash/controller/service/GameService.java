@@ -8,24 +8,34 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
 @Builder
 @Service
 public class GameService {
 
+    private final UUIDGenerator uuidGenerator;
     private final GameRepository gameRepository;
 
     @Autowired
-    public GameService(GameRepository gameRepository) {
+    public GameService(final UUIDGenerator uuidGenerator, GameRepository gameRepository) {
+        this.uuidGenerator = uuidGenerator;
         this.gameRepository = gameRepository;
     }
 
-    public Game retrieveGame(String gameId) {
-        return gameRepository.findOne(gameId);
+    public Optional<Game> retrieveGame(String gameId) {
+
+        return StreamSupport.stream(gameRepository.findAll().spliterator(), false)
+                .filter(game -> gameId.equals(game.getId()))
+                .findFirst();
     }
 
     public Game createGame(String account1Id, String account2Id) {
 
         val game = Game.builder()
+                .id(uuidGenerator.generateUUID().toString())
                 .player1(Player.builder()
                         .name(account1Id)
                         .build())
