@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -26,7 +27,6 @@ public class GameService {
     }
 
     public Optional<Game> retrieveGame(String gameId) {
-
         return StreamSupport.stream(gameRepository.findAll().spliterator(), false)
                 .filter(game -> gameId.equals(game.getId()))
                 .findFirst();
@@ -49,7 +49,8 @@ public class GameService {
         return game;
     }
 
-    public Game commitGameEvent(String gameId, GameEvent gameEvent) {
-        return gameEvent.invoke(gameRepository.findOne(gameId));
+    public Optional<Game> commitGameEvent(String gameId, GameEvent gameEvent) {
+        return retrieveGame(gameId)
+            .map(gameEvent::invoke);
     }
 }

@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Optional;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -37,12 +39,13 @@ public class EventTranslationTest {
 
     @Before
     public void define_mock_behavior() {
-        Mockito.when(gameService.commitGameEvent(any(), any())).thenReturn(Game.builder()
-            .player1(Player.builder().build())
-            .player2(Player.builder().build())
-            .playerOnTurn(Player.builder().build())
-            .state(State.OPEN)
-            .build());
+        Mockito.when(gameService.commitGameEvent(any(), any()))
+            .thenReturn(Optional.of(Game.builder()
+                .player1(Player.builder().build())
+                .player2(Player.builder().build())
+                .playerOnTurn(Player.builder().build())
+                .state(State.OPEN)
+                .build()));
     }
 
     @Test

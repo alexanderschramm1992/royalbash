@@ -33,7 +33,9 @@ public class GameController {
 
     @PostMapping("/game/event")
     ExternalModel.Game commitEvent(@RequestBody CommitGameEventRequest request) {
-        return toExternalModel(gameService.commitGameEvent(request.getGameId(), request.getEvent()));
+        return gameService.commitGameEvent(request.getGameId(), request.getEvent())
+                .map(ExternalModel.Game::toExternalModel)
+                .orElseThrow(() -> new GameNotFoundException(request.getGameId()));
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

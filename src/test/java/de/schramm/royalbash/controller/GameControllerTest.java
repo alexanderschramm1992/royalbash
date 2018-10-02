@@ -6,7 +6,6 @@ import de.schramm.royalbash.controller.service.core.Player;
 import de.schramm.royalbash.controller.service.core.State;
 import de.schramm.royalbash.controller.service.gameevent.NoOpEvent;
 import lombok.val;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -66,7 +65,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void should_not_deliver_game_but_status_code_404() throws Exception {
+    public void should_not_deliver_game_but_status_code_404_if_game_not_found() throws Exception {
 
         // Given
         Mockito.when(gameService.retrieveGame(any())).thenReturn(Optional.empty());
@@ -138,7 +137,7 @@ public class GameControllerTest {
                 .playerOnTurn(Player.builder().build())
                 .state(State.OPEN)
                 .build();
-        Mockito.when(gameService.commitGameEvent(gameId, NoOpEvent.builder().build())).thenReturn(game);
+        Mockito.when(gameService.commitGameEvent(gameId, NoOpEvent.builder().build())).thenReturn(Optional.of(game));
         val requestBuilder = MockMvcRequestBuilders
                 .post("/game/event")
                 .content(String.format(
@@ -161,5 +160,30 @@ public class GameControllerTest {
                 result,
                 false
         );
+    }
+
+    @Test
+    public void should_not_resolve_event_but_return_status_code_404_if_game_not_found() throws Exception {
+
+        // Given
+        val gameId = "Id 1";
+        Mockito.when(gameService.commitGameEvent(gameId, NoOpEvent.builder().build())).thenReturn(Optional.empty());
+        val requestBuilder = MockMvcRequestBuilders
+                .post("/game/event")
+                .content(String.format(
+                        "{\"gameId\": \"%s\", \"event\": {\"type\": \"NO_OP\"}}",
+                        gameId
+                ))
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // When
+        val statusCode = mockMvc.perform(requestBuilder)
+                .andReturn()
+                .getResponse()
+                .getStatus();
+
+        // Then
+        assertThat(statusCode).isEqualTo(404);
     }
 }
