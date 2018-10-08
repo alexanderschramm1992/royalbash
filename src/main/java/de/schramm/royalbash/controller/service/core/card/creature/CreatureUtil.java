@@ -19,8 +19,4 @@ class CreatureUtil {
                         .orElse(game))
                 .orElse(game);
     }
-
-    static boolean isDead(Creature creature) {
-        return creature.getHitpoints() <= 0;
-    }
 }

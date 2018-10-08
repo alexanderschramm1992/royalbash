@@ -23,8 +23,4 @@ public class CardPlayedOnPlayerEvent implements GameEvent {
                     .orElse(game))
             .orElse(game);
     }
-
-    private Context buildContext(Game game) {
-        return Context.builder().build();
-    }
 }

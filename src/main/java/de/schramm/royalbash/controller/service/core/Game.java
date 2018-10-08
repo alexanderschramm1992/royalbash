@@ -25,11 +25,13 @@ public class Game {
                 .map(player -> player.removeHandcard(card))
                 .map(player -> updatePlayer(owner, player))
                 .map(game -> card.invoke(
-                        Context.builder()
-                            .game(game)
-                            .owner(owner)
-                            .targetPlayer(targetPlayer)
-                            .build()
+                        new Context(
+                                game,
+                                owner,
+                                targetPlayer,
+                                null,
+                                null
+                        )
                 ))
                 .orElse(this);
     }
