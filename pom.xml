@@ -6,7 +6,7 @@
 
 	<groupId>de.schramm</groupId>
 	<artifactId>royal-bash</artifactId>
-	<version>0.2</version>
+	<version>0.3</version>
 	<packaging>jar</packaging>
 
 	<name>royal-bash</name>
@@ -88,12 +88,6 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- Lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
 		<!-- MongoDB -->
 		<dependency>
 			<groupId>com.github.fakemongo</groupId>
@@ -116,6 +110,13 @@
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
+		<!-- Mockk -->
+		<dependency>
+			<groupId>io.mockk</groupId>
+			<artifactId>mockk</artifactId>
+            <version>1.8.9</version>
+            <scope>test</scope>
+		</dependency>
     </dependencies>
 
 	<build>

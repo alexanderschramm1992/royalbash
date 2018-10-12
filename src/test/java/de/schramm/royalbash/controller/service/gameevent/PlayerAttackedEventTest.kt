@@ -18,21 +18,11 @@ class PlayerAttackedEventTest {
                 "Id 1",
                 attack = 2
         )
-        val game = Game.builder()
-                .player1(Player.builder()
-                        .id("Id 2")
-                        .spot(Spot.builder()
-                                .creature(creature)
-                                .build())
-                        .build())
-                .player2(Player.builder()
-                        .hitpoints(5)
-                        .build())
-                .build()
-        val testee = PlayerAttackedEvent.builder()
-                .creatureId("Id 1")
-                .ownerId("Id 2")
-                .build()
+        val game = Game(
+                "Id 3",
+                player1 = Player("Id 2", spots = listOf(Spot(creature))),
+                player2 = Player("Id 4", hitpoints = 5))
+        val testee = PlayerAttackedEvent("Id 1", "Id 2")
 
         // When
         val updatedGame = testee.invoke(game)

@@ -3,10 +3,9 @@ package de.schramm.royalbash.controller.service.core.effect
 import de.schramm.royalbash.controller.service.core.Context
 import de.schramm.royalbash.controller.service.core.Game
 import de.schramm.royalbash.controller.service.core.Player
-import de.schramm.royalbash.controller.service.core.card.NoOpCard
-import org.junit.Test
-
+import de.schramm.royalbash.controller.service.core.card.CardMock
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
 
 class DiscardHandcardsEffectTest {
 
@@ -15,15 +14,9 @@ class DiscardHandcardsEffectTest {
 
         // Given
         val testee = DiscardHandcardsEffect(2)
-        val player1 = Player.builder()
-                .handcard(NoOpCard.builder().build())
-                .handcard(NoOpCard.builder().build())
-                .build()
-        val player2 = Player.builder().build()
-        val game = Game.builder()
-                .player1(player1)
-                .player2(player2)
-                .build()
+        val player1 = Player("Id 1", handcards = listOf(CardMock("Id 2"), CardMock("Id 3")))
+        val player2 = Player("Id 4")
+        val game = Game("Id 5", player1 = player1, player2 = player2)
         val context = Context(
                 game,
                 player2,
@@ -42,12 +35,9 @@ class DiscardHandcardsEffectTest {
 
         // Given
         val testee = DiscardHandcardsEffect(2)
-        val player1 = Player.builder().build()
-        val player2 = Player.builder().build()
-        val game = Game.builder()
-                .player1(player1)
-                .player2(player2)
-                .build()
+        val player1 = Player("Id 1")
+        val player2 = Player("Id 2")
+        val game = Game("Id 3", player1 = player1, player2 = player2)
         val context = Context(
                 game,
                 player2,

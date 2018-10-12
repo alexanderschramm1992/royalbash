@@ -13,17 +13,10 @@ class DealDamageToPlayerEffectTest {
     fun should_deal_damage_to_target_player() {
 
         // Given
-        val testee = DealDamageToPlayerEffect.builder()
-                .amountOfDamage(2)
-                .build()
-        val player1 = Player.builder().build()
-        val player2 = Player.builder()
-                .hitpoints(20)
-                .build()
-        val game = Game.builder()
-                .player1(player1)
-                .player2(player2)
-                .build()
+        val testee = DealDamageToPlayerEffect(2)
+        val player1 = Player("Id 1")
+        val player2 = Player("Id 2", hitpoints = 20)
+        val game = Game("Id 3", player1 = player1, player2 = player2)
         val context = Context(
                 game,
                 player1,

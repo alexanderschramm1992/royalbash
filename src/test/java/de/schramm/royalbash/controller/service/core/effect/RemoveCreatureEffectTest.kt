@@ -14,18 +14,13 @@ class RemoveCreatureEffectTest {
     fun should_remove_target_creature_from_spot_an_add_it_to_deposit() {
 
         // Given
-        val testee = RemoveCreatureEffect.builder().build()
+        val testee = RemoveCreatureEffect()
         val creature = CreatureMock("Id 1")
-        val owner = Player.builder()
-                .spot(Spot.builder()
-                        .creature(creature)
-                        .build())
-                .build()
-        val game = Game.builder()
-                .player1(owner)
-                .player2(Player.builder().build())
-                .build()
-        val context = Context(game, owner, targetCreature = creature)
+        val spot = Spot(creature)
+        val owner = Player("Id 2", spots = listOf(spot))
+        val player2 = Player("Id 3")
+        val game = Game("Id 4", player1 = owner, player2 = player2)
+        val context = Context(game = game, owner = owner, targetCreature = creature)
 
         // When
         val updatedGame = testee.invoke(context)

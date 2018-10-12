@@ -4,10 +4,9 @@ import de.schramm.royalbash.controller.service.core.Context
 import de.schramm.royalbash.controller.service.core.Game
 import de.schramm.royalbash.controller.service.core.Player
 import de.schramm.royalbash.controller.service.core.Spot
-import de.schramm.royalbash.controller.service.core.card.NoOpCard
-import org.junit.Test
-
+import de.schramm.royalbash.controller.service.core.card.CardMock
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
 
 
 class GoblinRaiderTest {
@@ -20,26 +19,16 @@ class GoblinRaiderTest {
                 "Id 1",
                 hitpoints = 1,
                 attack = 1,
-                cost = 1
-        )
-        val spot = Spot.builder().build()
-        val player1 = Player.builder()
-                .spot(spot)
-                .build()
-        val player2 = Player.builder()
-                .handcard(NoOpCard.builder().build())
-                .handcard(NoOpCard.builder().build())
-                .build()
-        val game = Game.builder()
-                .player1(player1)
-                .player2(player2)
-                .build()
+                cost = 1)
+        val spot = Spot()
+        val player1 = Player("Id 2", spots = listOf(spot))
+        val player2 = Player("Id 3", handcards = listOf(CardMock("Id 4"), CardMock("Id 5")))
+        val game = Game("Id 6", player1 = player1, player2 = player2)
         val context = Context(
                 game,
                 player1,
                 targetPlayer = player2,
-                targetSpot = spot
-        )
+                targetSpot = spot)
 
         // When
         val updatedGame = testee.invoke(context)

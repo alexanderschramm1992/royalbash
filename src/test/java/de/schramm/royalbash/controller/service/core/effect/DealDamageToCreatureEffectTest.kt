@@ -16,27 +16,16 @@ class DealDamageToCreatureEffectTest {
     fun should_deal_damage_to_target_creature() {
 
         // Given
-        val testee = DealDamageToCreatureEffect.builder()
-                .amountOfDamage(2)
-                .build()
-        val creature = CreatureMock(
-                "Id 1",
-                hitpoints = 5
-        )
-        val owner = Player.builder().build()
-        val game = Game.builder()
-                .player1(Player.builder()
-                        .spot(Spot.builder()
-                                .creature(creature)
-                                .build())
-                        .build())
-                .player2(owner)
-                .build()
+        val testee = DealDamageToCreatureEffect(2)
+        val creature = CreatureMock("Id 1", hitpoints = 5)
+        val owner = Player("Id 2")
+        val spot = Spot(creature)
+        val player1 = Player("Id 3", spots = listOf(spot))
+        val game = Game("Id 3", player1 = player1, player2 = owner)
         val context = Context(
                 game,
                 owner,
-                targetCreature = creature
-        )
+                targetCreature = creature)
 
         // When
         val updatedGame = testee.invoke(context)

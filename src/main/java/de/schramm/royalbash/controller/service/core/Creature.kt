@@ -5,7 +5,7 @@ interface Creature : Card {
     val hitpoints: Int
     val attack: Int
 
-    override val isPlaceableOnSpot: Boolean
+    override val placeableOnSpot: Boolean
         get() = true
 
     fun isDead(): Boolean {

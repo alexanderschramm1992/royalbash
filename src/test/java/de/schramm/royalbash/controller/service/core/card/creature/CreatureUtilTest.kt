@@ -15,26 +15,21 @@ class CreatureUtilTest {
 
         // Given
         val card = CreatureMock("Id 1")
-        val targetSpot = Spot.builder().build()
-        val owner = Player.builder()
-                .handcard(card)
-                .spot(targetSpot)
-                .build()
-        val player2 = Player.builder().build()
-        val game = Game.builder()
-                .player1(owner)
-                .player2(player2)
-                .build()
+        val targetSpot = Spot()
+        val owner = Player("Id 2", handcards = listOf(card), spots = listOf(targetSpot))
+        val player2 = Player("Id 3")
+        val game = Game("Id 4", player1 = owner, player2 = player2)
         val context = Context(game, owner, targetSpot = targetSpot)
 
         // When
         val updatedGame = CreatureUtil.spawnCreature(card, context)
 
         // Then
-        val cardInSpot = updatedGame.player1.spots
-                .findFirst()
-                .map { spot -> spot.creature }
-                .map { optional -> optional.get() }
+        val cardInSpot = updatedGame
+                .player1
+                .spots
+                .first()
+                .getCreature()
         Assertions.assertThat(cardInSpot)
                 .isPresent
                 .isEqualTo(Optional.of(card))

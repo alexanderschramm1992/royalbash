@@ -5,7 +5,7 @@ interface Card {
     val name: String
     val cost: Int
 
-    val isPlaceableOnSpot: Boolean
+    val placeableOnSpot: Boolean
         get() = false
 
     operator fun invoke(context: Context): Game

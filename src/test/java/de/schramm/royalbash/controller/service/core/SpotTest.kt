@@ -12,13 +12,13 @@ class SpotTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val testee = Spot.builder().build()
+        val testee = Spot()
 
         // When
         val spot = testee.place(creature)
 
         // Then
-        assertThat(spot.creature).isEqualTo(Optional.of(creature))
+        assertThat(spot.getCreature()).isEqualTo(Optional.of(creature))
     }
 
     @Test
@@ -27,15 +27,13 @@ class SpotTest {
         // Given
         val creature = CreatureMock("Id 1")
         val otherCreature = creature.copy(hitpoints = 15)
-        val testee = Spot.builder()
-                .creature(creature)
-                .build()
+        val testee = Spot(creature)
 
         // When
         val spot = testee.updateCreature(creature, otherCreature)
 
         // Then
-        assertThat(spot.creature).isEqualTo(Optional.of(otherCreature))
+        assertThat(spot.getCreature()).isEqualTo(Optional.of(otherCreature))
     }
 
     @Test
@@ -43,13 +41,13 @@ class SpotTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val testee = Spot.builder().build()
+        val testee = Spot()
 
         // When
         val spot = testee.updateCreature(creature, creature)
 
         // Then
-        assertThat(spot.creature).isNotPresent
+        assertThat(spot.getCreature()).isNotPresent
     }
 
     @Test
@@ -57,15 +55,13 @@ class SpotTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val testee = Spot.builder()
-                .creature(creature)
-                .build()
+        val testee = Spot(creature)
 
         // When
         val spot = testee.removeCreature(creature)
 
         // Then
-        assertThat(spot.creature).isNotPresent
+        assertThat(spot.getCreature()).isNotPresent
     }
 
     @Test
@@ -74,14 +70,12 @@ class SpotTest {
         // Given
         val creature = CreatureMock("Id 1")
         val otherCreature = CreatureMock("Id 2", hitpoints = 15)
-        val testee = Spot.builder()
-                .creature(creature)
-                .build()
+        val testee = Spot(creature)
 
         // When
         val spot = testee.removeCreature(otherCreature)
 
         // Then
-        assertThat(spot.creature).isEqualTo(Optional.of(creature))
+        assertThat(spot.getCreature()).isEqualTo(Optional.of(creature))
     }
 }

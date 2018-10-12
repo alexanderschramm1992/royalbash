@@ -5,7 +5,7 @@ import de.schramm.royalbash.controller.service.core.card.creature.CreatureMock
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Index
 import org.junit.Test
-import java.util.stream.Collectors
+import java.util.*
 
 class PlayerTest {
 
@@ -13,9 +13,7 @@ class PlayerTest {
     fun should_deliver_hitpoints() {
 
         // Given
-        val testee = Player.builder()
-                .hitpoints(30)
-                .build()
+        val testee = Player("Id 1", hitpoints = 30)
 
         // When
         val hitpoints = testee.hitpoints
@@ -28,9 +26,7 @@ class PlayerTest {
     fun should_change_hitpoints() {
 
         // Given
-        val testee = Player.builder()
-                .hitpoints(30)
-                .build()
+        val testee = Player("Id 1", hitpoints = 30)
 
         // When
         val player = testee.setHitpoints(10)
@@ -44,9 +40,7 @@ class PlayerTest {
 
         // Given
         val handcard = CardMock("Id 1")
-        val testee = Player.builder()
-                .handcard(handcard)
-                .build()
+        val testee = Player("Id 1", handcards = listOf(handcard))
 
         // When
         val cards = testee.handcards
@@ -63,13 +57,10 @@ class PlayerTest {
         // Given
         val handcard1 = CardMock("Id 1")
         val handcard2 = CardMock("Id 2")
-        val testee = Player.builder()
-                .handcard(handcard1)
-                .handcard(handcard2)
-                .build()
+        val testee = Player("Id 3", handcards = listOf(handcard1, handcard2))
 
         // When
-        val cards = testee.handcards.collect(Collectors.toList())
+        val cards = testee.handcards
 
         // Then
         assertThat(cards)
@@ -82,9 +73,7 @@ class PlayerTest {
 
         // Given
         val card = CardMock("Id 1")
-        val testee = Player.builder()
-                .depositcard(card)
-                .build()
+        val testee = Player("Id 2", depositcards = listOf(card))
 
         // When
         val cards = testee.depositcards
@@ -100,9 +89,7 @@ class PlayerTest {
 
         // Given
         val card = CardMock("Id 1")
-        val testee = Player.builder()
-                .handcard(card)
-                .build()
+        val testee = Player("Id 2", handcards = listOf(card))
 
         // When
         val player = testee.removeHandcard(card)
@@ -120,9 +107,7 @@ class PlayerTest {
         // Given
         val handcard1 = CardMock("Id 1")
         val handcard2 = CardMock("Id 2")
-        val testee = Player.builder()
-                .handcard(handcard1)
-                .build()
+        val testee = Player("Id 3", handcards = listOf(handcard1))
 
         // When
         val player = testee.removeHandcard(handcard2)
@@ -140,11 +125,7 @@ class PlayerTest {
         val handcard1 = CardMock("Id 1")
         val handcard2 = CardMock("Id 2")
         val handcard3 = CardMock("Id 3")
-        val testee = Player.builder()
-                .handcard(handcard1)
-                .handcard(handcard2)
-                .handcard(handcard3)
-                .build()
+        val testee = Player("Id 4", handcards = listOf(handcard1, handcard2, handcard3))
 
         // When
         val player = testee.removeHandcard(handcard2)
@@ -161,22 +142,17 @@ class PlayerTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val spot = Spot.builder()
-                .creature(creature)
-                .build()
-        val testee = Player.builder()
-                .spot(spot)
-                .build()
+        val spot = Spot(creature)
+        val testee = Player("Id 2", spots = listOf(spot))
 
         // When
         val player = testee.removeCreature(creature)
 
         // Then
         val creaturesOfPlayer = player.spots
-                .map { it.creature }
+                .map { it.getCreature() }
                 .filter { it.isPresent }
                 .map { it.get() }
-                .collect(Collectors.toList())
         assertThat(creaturesOfPlayer).isEmpty()
         assertThat(player.depositcards)
                 .hasSize(1)
@@ -188,22 +164,17 @@ class PlayerTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val spot = Spot.builder()
-                .creature(creature)
-                .build()
-        val testee = Player.builder()
-                .spot(spot)
-                .build()
+        val spot = Spot(creature)
+        val testee = Player("Id 2", spots = listOf(spot))
 
         // When
         val player = testee.removeCreature(CreatureMock("Id 2"))
 
         // Then
         val creaturesOfPlayer = player.spots
-                .map { it.creature }
+                .map { it.getCreature() }
                 .filter { it.isPresent }
                 .map { it.get() }
-                .collect(Collectors.toList())
         assertThat(creaturesOfPlayer)
                 .hasSize(1)
                 .contains(creature)
@@ -214,26 +185,18 @@ class PlayerTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val spot = Spot.builder()
-                .creature(creature)
-                .build()
-        val testee = Player.builder()
-                .spot(spot)
-                .build()
-        val updatedCreature = CreatureMock(
-                "Id 1",
-                hitpoints = 12
-        )
+        val spot = Spot(creature)
+        val testee = Player("Id 2", spots = listOf(spot))
+        val updatedCreature = CreatureMock("Id 1", hitpoints = 12)
 
         // When
         val player = testee.updateCreature(creature, updatedCreature)
 
         // Then
         val creaturesOfPlayer = player.spots
-                .map { it.creature }
+                .map { it.getCreature() }
                 .filter { it.isPresent }
                 .map { it.get() }
-                .collect(Collectors.toList())
         assertThat(creaturesOfPlayer)
                 .contains(updatedCreature)
                 .doesNotContain(creature)
@@ -244,50 +207,44 @@ class PlayerTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val spot = Spot.builder()
-                .build()
-        val testee = Player.builder()
-                .spot(spot)
-                .build()
+        val spot = Spot()
+        val testee = Player("Id 2", spots = listOf(spot))
 
         // When
         val player = testee.updateCreature(creature, creature)
 
         // Then
         val creaturesOfPlayer = player.spots
-                .map { it.creature }
+                .map { it.getCreature() }
                 .filter { it.isPresent }
                 .map { it.get() }
-                .collect(Collectors.toList())
         assertThat(creaturesOfPlayer).doesNotContain(creature)
     }
 
     @Test
-    @Throws(Exception::class)
     fun should_find_handcard() {
 
         // Given
         val card = CreatureMock("Id 1")
-        val testee = Player.builder()
-                .handcard(card)
-                .build()
+        val testee = Player("Id 2", handcards = listOf(card))
 
         // When
-        val foundCard = testee.findHandcard("Id 1")
-                .orElseThrow { Exception("Card not present") }
+        val cardOptional = testee.findHandcard("Id 1")
 
         // Then
-        assertThat(foundCard).isEqualTo(card)
+        assertThat(cardOptional)
+                .isPresent
+                .isEqualTo(Optional.of(card))
     }
 
     @Test
     fun should_not_find_handcard() {
 
         // Given
-        val testee = Player.builder().build()
+        val testee = Player("Id 1")
 
         // When
-        val card = testee.findHandcard("Id 1")
+        val card = testee.findHandcard("Id 2")
 
         // Then
         assertThat(card.isPresent).isFalse()

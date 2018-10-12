@@ -3,8 +3,6 @@ package de.schramm.royalbash.controller.service.core.card.creature
 import de.schramm.royalbash.controller.service.core.Context
 import de.schramm.royalbash.controller.service.core.Creature
 import de.schramm.royalbash.controller.service.core.Game
-import lombok.Builder
-import lombok.Value
 
 data class CreatureMock(
         override val id: String,
@@ -19,6 +17,6 @@ data class CreatureMock(
     }
 
     override fun invoke(context: Context): Game {
-        return Game.builder().build()
+        return context.game
     }
 }

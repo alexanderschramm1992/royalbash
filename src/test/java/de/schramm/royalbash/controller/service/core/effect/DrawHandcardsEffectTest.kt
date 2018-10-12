@@ -4,10 +4,8 @@ import de.schramm.royalbash.controller.service.core.Context
 import de.schramm.royalbash.controller.service.core.Game
 import de.schramm.royalbash.controller.service.core.Player
 import de.schramm.royalbash.controller.service.core.card.CardMock
-import de.schramm.royalbash.controller.service.core.card.NoOpCard
-import org.junit.Test
-
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
 
 class DrawHandcardsEffectTest {
 
@@ -15,18 +13,12 @@ class DrawHandcardsEffectTest {
     fun should_draw_handcards_for_target_player() {
 
         // Given
-        val testee = DrawHandcardsEffect.builder()
-                .amountOfCards(2)
-                .build()
-        val player1 = Player.builder()
-                .deckcard(CardMock("Id 1"))
-                .deckcard(NoOpCard.builder().build())
-                .build()
-        val player2 = Player.builder().build()
-        val game = Game.builder()
-                .player1(player1)
-                .player2(player2)
-                .build()
+        val testee = DrawHandcardsEffect(2)
+        val deckcard1 = CardMock("Id 2")
+        val deckcard2 = CardMock("Id 3")
+        val player1 = Player("Id 1", deckcards = listOf(deckcard1, deckcard2))
+        val player2 = Player("Id 4")
+        val game = Game("Id 5", player1 = player1, player2 = player2)
         val context = Context(game, player2, targetPlayer = player1)
 
         // When
@@ -35,22 +27,17 @@ class DrawHandcardsEffectTest {
         // Then
         assertThat(updatedGame.player1.handcards)
                 .hasSize(2)
-                .contains(NoOpCard.builder().build())
+                .contains(deckcard1)
     }
 
     @Test
     fun should_do_nothing_if_target_player_has_no_deckcards() {
 
         // Given
-        val testee = DrawHandcardsEffect.builder()
-                .amountOfCards(2)
-                .build()
-        val player1 = Player.builder().build()
-        val player2 = Player.builder().build()
-        val game = Game.builder()
-                .player1(player1)
-                .player2(player2)
-                .build()
+        val testee = DrawHandcardsEffect(2)
+        val player1 = Player("Id 1")
+        val player2 = Player("Id 2")
+        val game = Game("Id 3", player1 = player1, player2 = player2)
         val context = Context(
                 game,
                 player1
