@@ -50,7 +50,6 @@ describe("game picker component", () => {
         testee.handleClick();
 
         // Then
-        console.log(store.actions);
         expect(store.actions).deep.contains({type: "LOAD_GAME_REQUESTED", gameId: ""});
     });
 });

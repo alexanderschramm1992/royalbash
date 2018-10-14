@@ -39,4 +39,9 @@ constructor(
     open fun commitGameEvent(gameId: String, gameEvent: GameEvent): Optional<Game> {
         return retrieveGame(gameId).map { gameEvent.invoke(it) }
     }
+
+    fun retrieveGameIds(): List<String> {
+        return gameRepository.findAll()
+                .map { it.id }
+    }
 }

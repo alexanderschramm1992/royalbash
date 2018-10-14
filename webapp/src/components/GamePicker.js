@@ -10,12 +10,19 @@ class GamePicker extends React.Component {
         };
         this.handleClick = this.handleClick.bind(this);
         this.setGameId = this.setGameId.bind(this);
-        props.store.dispatch({type: "LOAD_GAME_IDS_REQUESTED"});
-        props.store.subscribe(() => this.setState({gameIds: props.store.getState().gameIds}))
+        this.store = props.store;
+        this.store.subscribe(() => this.setState({
+            gameId: props.store.getState().gameIds[0],
+            gameIds: props.store.getState().gameIds
+        }))
+    }
+
+    componentDidMount() {
+        this.store.dispatch({type: "LOAD_GAME_IDS_REQUESTED"});
     }
 
     handleClick() {
-        this.props.store.dispatch({type: "LOAD_GAME_REQUESTED", gameId: this.state.gameId});
+        this.store.dispatch({type: "LOAD_GAME_REQUESTED", gameId: this.state.gameId});
     }
 
     setGameId(event) {
@@ -25,9 +32,8 @@ class GamePicker extends React.Component {
     render() {
         return (
             <div className="GamePicker">
-                <input type="text" value={this.state.inputValue} onChange={this.setGameId}/>
                 <select value={this.state.gameId} onChange={this.setGameId}>
-                    {this.state.gameIds.map((gameId) => <li>{gameId}</li>)}
+                    {this.state.gameIds.map((gameId) => <option value={gameId} key={gameId}>{gameId}</option>)}
                 </select>
                 <button onClick={this.handleClick}>
                     Load

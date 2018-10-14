@@ -1,6 +1,8 @@
 import { createStore } from 'redux';
 
 const initialState = {
+    gameRequested: false,
+    gameIdsRequested: false,
     gameIds: []
 };
 

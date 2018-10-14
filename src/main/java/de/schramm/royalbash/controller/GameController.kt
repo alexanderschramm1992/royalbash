@@ -17,6 +17,11 @@ constructor(private val gameService: GameService) {
                 .orElseThrow { GameNotFoundException(gameId) }
     }
 
+    @GetMapping("/game/id")
+    internal fun retrieveGameIds(): Array<String> {
+        return gameService.retrieveGameIds().toTypedArray()
+    }
+
     @PostMapping("/game")
     internal fun createGame(@RequestBody request: CreateGameRequest): ExternalModel.Game {
         return toExternalModel(gameService.createGame(request.accountId1, request.accountId2))

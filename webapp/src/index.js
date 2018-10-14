@@ -5,5 +5,5 @@ import App from "./components/App";
 import registerAjaxController from "./ajax";
 import {Store} from "./store";
 
-ReactDOM.render(<App store={Store}/>, document.getElementById("root"));
 registerAjaxController();
+ReactDOM.render(<App store={Store}/>, document.getElementById("root"));
