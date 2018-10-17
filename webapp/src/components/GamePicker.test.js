@@ -4,7 +4,7 @@ import React from "react";
 import Enzyme from "enzyme";
 import { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({adapter: new Adapter()});
 // Jest
 let { describe, it } = global;
 // Chai
@@ -41,7 +41,19 @@ describe("game picker component", () => {
         expect(testee.state.gameId).to.equal("123qwe");
     });
 
-    it("should trigger load game requested action", () => {
+    it("should set chosenPlayer", () => {
+
+        // Given
+        let testee = mount(<GamePicker store={store}/>).instance();
+
+        // When
+        testee.setPlayer({target: {value: "player2"}});
+
+        // Then
+        expect(testee.state.chosenPlayer).to.equal("player2");
+    });
+
+    it("should trigger LOAD_GAME_REQUESTED action", () => {
 
         // Given
         let testee = mount(<GamePicker store={store}/>).instance();
@@ -51,5 +63,6 @@ describe("game picker component", () => {
 
         // Then
         expect(store.actions).deep.contains({type: "LOAD_GAME_REQUESTED", gameId: ""});
+        expect(store.actions).deep.contains({type: "PLAYER_CHOSEN", player: "player1"})
     });
 });

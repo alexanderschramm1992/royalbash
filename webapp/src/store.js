@@ -3,7 +3,10 @@ import { createStore } from 'redux';
 const initialState = {
     gameRequested: false,
     gameIdsRequested: false,
-    gameIds: []
+    endTurnRequested: false,
+    drawCardRequested: false,
+    gameIds: [],
+    chosenPlayer: "player1"
 };
 
 function storeModel(state = initialState, action) {
@@ -12,29 +15,53 @@ function storeModel(state = initialState, action) {
             console.debug("Load Game requested");
             state.gameRequested = true;
             state.gameId = action.gameId;
-            return state;
+            break;
         case "LOAD_GAME_ACCEPTED":
             state.gameRequested = false;
             state.game = action.game;
-            return state;
+            break;
         case "LOAD_GAME_DECLINED":
             state.gameRequested = false;
             state.errorMessage = action.errorMessage;
-            return state;
+            break;
         case "LOAD_GAME_IDS_REQUESTED":
             state.gameIdsRequested = true;
-            return state;
+            break;
         case "LOAD_GAME_IDS_ACCEPTED":
             state.gameIdsRequested = false;
             state.gameIds = action.gameIds;
-            return state;
+            break;
         case "LOAD_GAME_IDS_DECLINED":
             state.gameIdsRequested = false;
             state.errorMessage = action.errorMessage;
-            return state;
-        default:
-            return state;
+            break;
+        case "PLAYER_CHOSEN":
+            state.chosenPlayer = action.chosenPlayerKey;
+            break;
+        case "END_TURN_REQUESTED":
+            state.endTurnRequested = true;
+            break;
+        case "END_TURN_ACCEPTED":
+            state.endTurnRequested = false;
+            state.game = action.game;
+            break;
+        case "END_TURN_DECLINED":
+            state.endTurnRequested = false;
+            state.errorMessage = action.errorMessage;
+            break;
+        case "DRAW_CARD_REQUESTED":
+            state.drawCardRequested = true;
+            break;
+        case "DRAW_CARD_ACCEPTED":
+            state.drawCardRequested = false;
+            state.game = action.game;
+            break;
+        case "DRAW_CARD_DECLINED":
+            state.drawCardRequested = false;
+            state.errorMessage = action.errorMessage;
+            break;
     }
+    return state;
 }
 
 export const Store = createStore(

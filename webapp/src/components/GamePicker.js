@@ -6,6 +6,7 @@ class GamePicker extends React.Component {
         super(props);
         this.state = {
             gameId: "",
+            chosenPlayer: "player1",
             gameIds: []
         };
         this.handleClick = this.handleClick.bind(this);
@@ -22,6 +23,7 @@ class GamePicker extends React.Component {
     }
 
     handleClick() {
+        this.store.dispatch({type: "PLAYER_CHOSEN", player: this.state.chosenPlayer});
         this.store.dispatch({type: "LOAD_GAME_REQUESTED", gameId: this.state.gameId});
     }
 
@@ -29,12 +31,23 @@ class GamePicker extends React.Component {
         this.setState({gameId: event.target.value});
     }
 
+    setPlayer(event) {
+        this.setState({chosenPlayer: event.target.value});
+    }
+
     render() {
         return (
             <div className="GamePicker">
+                <h1>Game:</h1>
                 <select value={this.state.gameId} onChange={this.setGameId}>
                     {this.state.gameIds.map((gameId) => <option value={gameId} key={gameId}>{gameId}</option>)}
                 </select>
+                <h1>Player:</h1>
+                <select value={this.state.chosenPlayer} onChange={this.setPlayer}>
+                    <option value="player1" key="player1">Player 1</option>
+                    <option value="player2" key="player2">Player 2</option>
+                </select>
+                <br/>
                 <button onClick={this.handleClick}>
                     Load
                 </button>
