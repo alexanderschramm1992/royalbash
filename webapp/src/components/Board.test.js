@@ -22,7 +22,11 @@ describe("board component", () => {
         subscribe: function(methodToTrigger) {
 
         },
-        chosenPlayer: "player1",
+        getState: function() {
+            return {
+                chosenPlayer: "player1"
+            }
+        },
         actions: []
     };
 

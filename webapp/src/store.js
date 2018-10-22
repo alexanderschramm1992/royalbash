@@ -6,6 +6,7 @@ const initialState = {
     endTurnRequested: false,
     drawCardRequested: false,
     gameIds: [],
+    game: {},
     chosenPlayer: "player1"
 };
 
