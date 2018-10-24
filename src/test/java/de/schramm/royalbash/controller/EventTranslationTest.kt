@@ -1,5 +1,6 @@
 package de.schramm.royalbash.controller
 
+import de.schramm.royalbash.controller.service.GameRepository
 import de.schramm.royalbash.controller.service.GameService
 import de.schramm.royalbash.controller.service.core.Game
 import de.schramm.royalbash.controller.service.core.Player
@@ -7,7 +8,6 @@ import de.schramm.royalbash.controller.service.core.State.OPEN
 import de.schramm.royalbash.controller.service.gameevent.*
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.slot
 import io.mockk.verify
 import org.junit.Before
 import org.junit.Test
@@ -30,9 +30,11 @@ class EventTranslationTest {
     open class ControllerTestConfig {
         @Bean
         open fun gameService() = mockk<GameService>()
+        @Bean
+        open fun gameRepository() = mockk<GameRepository>(relaxed = true)
     }
 
-    private val gameId = "Id 1"
+    private val gameId = "1"
 
     @Autowired
     private lateinit var mockMvc: MockMvc
@@ -58,14 +60,13 @@ class EventTranslationTest {
     fun should_translate_CardDrawnEvent() {
 
         // Given
-        val json = String.format(
-                "{\"gameId\": \"%s\", \"event\": {" +
-                        "\"type\": \"CARD_DRAWN\", " +
-                        "\"amountOfCards\": 1, " +
-                        "\"playerId\": \"Player Id\"}" +
-                        "}",
-                gameId
-        )
+        val json = """{
+            "event": {
+                "type": "CARD_DRAWN",
+                "amountOfCards": 1,
+                "playerId": "Player Id"
+            }
+        }"""
         val expectedEvent = CardDrawnEvent("Player Id", 1)
 
         // When Then
@@ -77,15 +78,12 @@ class EventTranslationTest {
     fun should_translate_CardPlayedOnPlayerEvent() {
 
         // Given
-        val json = String.format(
-                "{\"gameId\": \"%s\", \"event\": {" +
+        val json = "{\"event\": {" +
                         "\"type\": \"CARD_PLAYED_ON_PLAYER\", " +
                         "\"cardId\": \"Card Id\", " +
                         "\"ownerId\": \"Owner Id\", " +
                         "\"targetPlayerId\": \"Target Player Id\"}" +
-                        "}",
-                gameId
-        )
+                        "}"
         val expectedEvent = CardPlayedOnPlayerEvent(
                 "Card Id",
                 "Owner Id",
@@ -100,15 +98,12 @@ class EventTranslationTest {
     fun should_translate_CreatureAttackedEvent() {
 
         // Given
-        val json = String.format(
-                "{\"gameId\": \"%s\", \"event\": {" +
+        val json = "{\"event\": {" +
                         "\"type\": \"CREATURE_ATTACKED\", " +
                         "\"attackerId\": \"Attacker Id\", " +
                         "\"defenderId\": \"Defender Id\", " +
                         "\"ownerId\": \"Owner Id\"}" +
-                        "}",
-                gameId
-        )
+                        "}"
         val expectedEvent = CreatureAttackedEvent(
                 attackerId = "Attacker Id",
                 defenderId = "Defender Id",
@@ -124,7 +119,7 @@ class EventTranslationTest {
 
         // Given
         val json = String.format(
-                "{\"gameId\": \"%s\", \"event\": {\"type\": \"NO_OP\"}}",
+                "{\"event\": {\"type\": \"NO_OP\"}}",
                 gameId
         )
         val expectedEvent = NoOpEvent()
@@ -138,14 +133,11 @@ class EventTranslationTest {
     fun should_translate_PlayerAttackedEvent() {
 
         // Given
-        val json = String.format(
-                "{\"gameId\": \"%s\", \"event\": {" +
+        val json = "{\"event\": {" +
                         "\"type\": \"PLAYER_ATTACKED\", " +
                         "\"creatureId\": \"Creature Id\", " +
                         "\"ownerId\": \"Owner Id\"}" +
-                        "}",
-                gameId
-        )
+                        "}"
         val expectedEvent = PlayerAttackedEvent("Creature Id", "Owner Id")
 
         // When Then
@@ -158,7 +150,7 @@ class EventTranslationTest {
 
         // Given
         val json = String.format(
-                "{\"gameId\": \"%s\", \"event\": {" +
+                "{\"event\": {" +
                         "\"type\": \"TURN_ENDED\", " +
                         "\"playerId\": \"Player Id\"}" +
                         "}",
@@ -175,7 +167,7 @@ class EventTranslationTest {
 
         // Given
         val requestBuilder = MockMvcRequestBuilders
-                .post("/game/event")
+                .post("/game/1/event")
                 .content(json)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)

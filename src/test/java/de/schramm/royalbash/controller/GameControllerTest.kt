@@ -141,7 +141,7 @@ class GameControllerTest {
     fun should_resolve_event_and_return_updated_game() {
 
         // Given
-        val gameId = "Id 1"
+        val gameId = "1"
         val game = Game(
                 gameId,
                 player1 = Player("Id 2"),
@@ -152,11 +152,8 @@ class GameControllerTest {
         every { gameService.commitGameEvent(gameId, NoOpEvent()) } returns Optional.of(game)
 
         val requestBuilder = MockMvcRequestBuilders
-                .post("/game/event")
-                .content("""{
-                    "gameId": "Id 1",
-                    "event": {"type": "NO_OP"}
-                }""")
+                .post("/game/1/event")
+                .content("""{"event": {"type": "NO_OP"}}""")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
 
@@ -180,12 +177,11 @@ class GameControllerTest {
     fun should_not_resolve_event_but_return_status_code_404_if_game_not_found() {
 
         // Given
-        val gameId = "Id 1"
+        val gameId = "1"
         every { gameService.commitGameEvent(gameId, NoOpEvent()) } returns Optional.empty()
         val requestBuilder = MockMvcRequestBuilders
-                .post("/game/event")
+                .post("/game/1/event")
                 .content("""{
-                    "gameId": "Id 1",
                     "event": {"type": "NO_OP"}
                 }""")
                 .accept(MediaType.APPLICATION_JSON)

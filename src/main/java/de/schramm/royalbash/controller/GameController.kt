@@ -27,11 +27,13 @@ constructor(private val gameService: GameService) {
         return toExternalModel(gameService.createGame(request.accountId1, request.accountId2))
     }
 
-    @PostMapping("/game/event")
-    internal fun commitEvent(@RequestBody request: CommitGameEventRequest): ExternalModel.Game {
-        return gameService.commitGameEvent(request.gameId, request.event)
+    @PostMapping("/game/{gameId}/event")
+    internal fun commitEvent(
+            @PathVariable gameId: String,
+            @RequestBody request: CommitGameEventRequest): ExternalModel.Game {
+        return gameService.commitGameEvent(gameId, request.event)
                 .map { toExternalModel(it) }
-                .orElseThrow { GameNotFoundException(request.gameId) }
+                .orElseThrow { GameNotFoundException(gameId) }
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
