@@ -21,9 +21,9 @@ class Board extends React.Component {
 
     createSpots() {
         let spots = getSpots(this.state.store);
-        return spots.map((spot) => <div className="Spot">
+        return spots.map((spot) => <div key={spot.id} className="Spot">
             {spot.creature &&
-            <div className="Creature">
+            <div key={spot.creature.id} className="Creature">
                 <div className="name">{spot.creature.name}</div>
                 <div className="cost">{spot.creature.cost}</div>
                 <div className="attack">{spot.creature.attack}</div>
@@ -35,7 +35,7 @@ class Board extends React.Component {
 
     createHandcards() {
         let handcards = getHandcards(this.state.store);
-        return handcards.map((card) => <div className="Card">
+        return handcards.map((card) => <div key={card.id} className="Card">
             <div className="name">{card.name}</div>
             <div className="cost">{card.cost}</div>
         </div>);

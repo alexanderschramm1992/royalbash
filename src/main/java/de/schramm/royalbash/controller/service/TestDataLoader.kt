@@ -3,6 +3,7 @@ package de.schramm.royalbash.controller.service
 import de.schramm.royalbash.controller.service.core.Game
 import de.schramm.royalbash.controller.service.core.Player
 import de.schramm.royalbash.controller.service.core.State
+import de.schramm.royalbash.controller.service.core.card.Fireball
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import javax.annotation.PostConstruct
@@ -13,17 +14,21 @@ open class TestDataLoader @Autowired constructor(private val repository: GameRep
     @PostConstruct
     fun loadTestData() {
 
+        val card = Fireball(
+                id = "fireball",
+                cost = 2)
+        val player1 = Player(
+            id = "player1",
+            name = "Player 1",
+            handcards = listOf(card))
+        val player2 = Player(
+            id = "player2",
+            name = "Player 2")
         val game = Game(
                 id = "1",
-                player1 = Player(
-                        id = "2",
-                        name = "Player 1"),
-                player2 = Player(
-                        id = "3",
-                        name = "Player 2"),
-                playerOnTurn = Player(
-                        id = "2",
-                        name = "Player 1"),
+                player1 = player1,
+                player2 = player2,
+                playerOnTurn = player1,
                 state = State.OPEN)
 
         repository.save(game)

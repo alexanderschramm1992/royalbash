@@ -5,6 +5,7 @@ const initialState = {
     gameIdsRequested: false,
     endTurnRequested: false,
     drawCardRequested: false,
+    gameLoaded: false,
     gameIds: [],
     game: {},
     chosenPlayer: "player1"
@@ -13,31 +14,33 @@ const initialState = {
 function storeModel(state = initialState, action) {
     switch (action.type) {
         case "LOAD_GAME_REQUESTED":
-            console.debug("Load Game requested");
-            state.gameRequested = true;
             state.gameId = action.gameId;
+            state.gameRequested = true;
+            state.gameLoaded = false;
             break;
         case "LOAD_GAME_ACCEPTED":
-            state.gameRequested = false;
             state.game = action.game;
+            state.gameRequested = false;
+            state.gameLoaded = true;
             break;
         case "LOAD_GAME_DECLINED":
             state.gameRequested = false;
+            state.gameLoaded = false;
             state.errorMessage = action.errorMessage;
             break;
         case "LOAD_GAME_IDS_REQUESTED":
             state.gameIdsRequested = true;
             break;
         case "LOAD_GAME_IDS_ACCEPTED":
-            state.gameIdsRequested = false;
             state.gameIds = action.gameIds;
+            state.gameIdsRequested = false;
             break;
         case "LOAD_GAME_IDS_DECLINED":
             state.gameIdsRequested = false;
             state.errorMessage = action.errorMessage;
             break;
         case "PLAYER_CHOSEN":
-            state.chosenPlayer = action.chosenPlayerKey;
+            state.chosenPlayer = action.player;
             break;
         case "END_TURN_REQUESTED":
             state.endTurnRequested = true;
@@ -61,6 +64,8 @@ function storeModel(state = initialState, action) {
             state.drawCardRequested = false;
             state.errorMessage = action.errorMessage;
             break;
+        default:
+            console.log("Missing reducer for action type " + action.type);
     }
     return state;
 }
