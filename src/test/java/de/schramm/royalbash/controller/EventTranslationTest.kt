@@ -1,6 +1,7 @@
 package de.schramm.royalbash.controller
 
 import de.schramm.royalbash.controller.service.GameRepository
+import de.schramm.royalbash.controller.service.GameRepositoryMock
 import de.schramm.royalbash.controller.service.GameService
 import de.schramm.royalbash.controller.service.core.Game
 import de.schramm.royalbash.controller.service.core.Player
@@ -31,7 +32,7 @@ class EventTranslationTest {
         @Bean
         open fun gameService() = mockk<GameService>()
         @Bean
-        open fun gameRepository() = mockk<GameRepository>(relaxed = true)
+        open fun gameRepository() = GameRepositoryMock()
     }
 
     private val gameId = "1"
