@@ -16,7 +16,7 @@ class RemoveCreatureEffectTest {
         // Given
         val testee = RemoveCreatureEffect()
         val creature = CreatureMock("Id 1")
-        val spot = Spot(creature)
+        val spot = Spot(id = "spot", creature = creature)
         val owner = Player("Id 2", spots = listOf(spot))
         val player2 = Player("Id 3")
         val game = Game("Id 4", player1 = owner, player2 = player2)

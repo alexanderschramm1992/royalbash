@@ -7,6 +7,7 @@ import de.schramm.royalbash.controller.service.core.Game
 data class CreatureMock(
         override val id: String,
         override val name: String = "Creature Mock",
+        override val text: String = "Creature Mock Text",
         override val hitpoints: Int = 0,
         override val attack: Int = 0,
         override val cost: Int = 0

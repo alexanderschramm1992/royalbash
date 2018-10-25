@@ -12,7 +12,7 @@ class SpotTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val testee = Spot()
+        val testee = Spot(id = "spot")
 
         // When
         val spot = testee.place(creature)
@@ -27,7 +27,7 @@ class SpotTest {
         // Given
         val creature = CreatureMock("Id 1")
         val otherCreature = creature.copy(hitpoints = 15)
-        val testee = Spot(creature)
+        val testee = Spot(id = "spot", creature = creature)
 
         // When
         val spot = testee.updateCreature(creature, otherCreature)
@@ -41,7 +41,7 @@ class SpotTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val testee = Spot()
+        val testee = Spot(id = "spot")
 
         // When
         val spot = testee.updateCreature(creature, creature)
@@ -55,7 +55,7 @@ class SpotTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val testee = Spot(creature)
+        val testee = Spot(id = "spot", creature = creature)
 
         // When
         val spot = testee.removeCreature(creature)
@@ -70,7 +70,7 @@ class SpotTest {
         // Given
         val creature = CreatureMock("Id 1")
         val otherCreature = CreatureMock("Id 2", hitpoints = 15)
-        val testee = Spot(creature)
+        val testee = Spot(id = "spot", creature = creature)
 
         // When
         val spot = testee.removeCreature(otherCreature)

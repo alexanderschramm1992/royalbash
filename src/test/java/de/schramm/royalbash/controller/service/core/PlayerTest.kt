@@ -142,7 +142,7 @@ class PlayerTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val spot = Spot(creature)
+        val spot = Spot(id = "spot", creature = creature)
         val testee = Player("Id 2", spots = listOf(spot))
 
         // When
@@ -164,7 +164,7 @@ class PlayerTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val spot = Spot(creature)
+        val spot = Spot(id = "spot", creature = creature)
         val testee = Player("Id 2", spots = listOf(spot))
 
         // When
@@ -185,7 +185,7 @@ class PlayerTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val spot = Spot(creature)
+        val spot = Spot(id = "spot", creature = creature)
         val testee = Player("Id 2", spots = listOf(spot))
         val updatedCreature = CreatureMock("Id 1", hitpoints = 12)
 
@@ -207,7 +207,7 @@ class PlayerTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val spot = Spot()
+        val spot = Spot(id = "spot")
         val testee = Player("Id 2", spots = listOf(spot))
 
         // When

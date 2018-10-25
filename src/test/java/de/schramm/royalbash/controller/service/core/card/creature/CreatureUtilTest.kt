@@ -15,7 +15,7 @@ class CreatureUtilTest {
 
         // Given
         val card = CreatureMock("Id 1")
-        val targetSpot = Spot()
+        val targetSpot = Spot(id = "spot")
         val owner = Player("Id 2", handcards = listOf(card), spots = listOf(targetSpot))
         val player2 = Player("Id 3")
         val game = Game("Id 4", player1 = owner, player2 = player2)

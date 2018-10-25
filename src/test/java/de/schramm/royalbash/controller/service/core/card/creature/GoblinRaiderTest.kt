@@ -20,7 +20,7 @@ class GoblinRaiderTest {
                 hitpoints = 1,
                 attack = 1,
                 cost = 1)
-        val spot = Spot()
+        val spot = Spot(id = "spot")
         val player1 = Player("Id 2", spots = listOf(spot))
         val player2 = Player("Id 3", handcards = listOf(CardMock("Id 4"), CardMock("Id 5")))
         val game = Game("Id 6", player1 = player1, player2 = player2)

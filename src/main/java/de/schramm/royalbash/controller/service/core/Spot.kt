@@ -2,7 +2,9 @@ package de.schramm.royalbash.controller.service.core
 
 import java.util.*
 
-data class Spot(private val creature: Creature? = null) {
+data class Spot(
+        val id: String,
+        private val creature: Creature? = null) {
 
     fun getCreature(): Optional<Creature> {
         return Optional.ofNullable(creature)

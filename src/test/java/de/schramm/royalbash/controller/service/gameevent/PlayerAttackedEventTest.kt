@@ -20,7 +20,7 @@ class PlayerAttackedEventTest {
         )
         val game = Game(
                 "Id 3",
-                player1 = Player("Id 2", spots = listOf(Spot(creature))),
+                player1 = Player("Id 2", spots = listOf(Spot(id = "spot", creature = creature))),
                 player2 = Player("Id 4", hitpoints = 5))
         val testee = PlayerAttackedEvent("Id 1", "Id 2")
 

@@ -11,6 +11,7 @@ data class MemoryLeak(
 ) : Card {
 
     override val name = "Memory Leak"
+    override val text = "Target player discards 2 handcards."
 
     val effect = DiscardHandcardsEffect(2)
 

@@ -11,6 +11,7 @@ data class LightningBolt (
 ) : Card {
 
     override val name = "Lightning Bolt"
+    override val text = ""
 
     val effect = DealDamageToCreatureEffect(2)
 

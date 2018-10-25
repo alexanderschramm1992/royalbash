@@ -3,6 +3,7 @@ package de.schramm.royalbash.controller.service.core
 interface Card {
     val id: String
     val name: String
+    val text: String
     val cost: Int
 
     val placeableOnSpot: Boolean

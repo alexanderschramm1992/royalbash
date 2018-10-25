@@ -143,8 +143,8 @@ class GameTest {
                 "Id 2",
                 hitpoints = 1,
                 attack = 1)
-        val spot1 = Spot(attacker)
-        val spot2 = Spot(defender)
+        val spot1 = Spot(id = "spot1", creature = attacker)
+        val spot2 = Spot(id = "spot2", creature = defender)
         val player1 = Player("Id 3", spots = listOf(spot1))
         val player2 = Player("Id 4", spots = listOf(spot2))
         val testee = Game("Id 5", player1 = player1, player2 = player2)
@@ -169,8 +169,8 @@ class GameTest {
                 "Id 2",
                 hitpoints = 1,
                 attack = 1)
-        val spot1 = Spot(attacker)
-        val spot2 = Spot(defender)
+        val spot1 = Spot(id = "spot1", creature = attacker)
+        val spot2 = Spot(id = "spot2", creature = defender)
         val player1 = Player("Id 3", spots = listOf(spot1))
         val player2 = Player("Id 4", spots = listOf(spot2))
         val testee = Game("Id 5", player1 = player1, player2 = player2)
@@ -191,7 +191,7 @@ class GameTest {
 
         // Given
         val creature = CreatureMock("Id 1", attack = 5)
-        val spot = Spot(creature)
+        val spot = Spot(id = "spot", creature = creature)
         val player1 = Player("Id 2", spots = listOf(spot))
         val player2 = Player("Id 3", hitpoints = 20)
         val testee = Game("Id 4", player1 = player1, player2 = player2)
@@ -208,7 +208,7 @@ class GameTest {
 
         // Given
         val creature = CreatureMock("Id 1", attack = 5)
-        val spot = Spot(creature)
+        val spot = Spot(id = "spot", creature = creature)
         val player1 = Player("Id 2", hitpoints = 1, spots = listOf(spot))
         val player2 = Player("Id 3", hitpoints = 5)
         val testee = Game("Id 4", OPEN, player1 = player1, player2 = player2)
@@ -257,7 +257,7 @@ class GameTest {
 
         // Given
         val creature = CreatureMock("Id 1")
-        val spot = Spot(creature)
+        val spot = Spot(id = "spot", creature = creature)
         val player1 = Player("Id 2", spots = listOf(spot))
         val player2 = Player("Id 3")
         val testee = Game("Id 4", player1 = player1, player2 = player2)

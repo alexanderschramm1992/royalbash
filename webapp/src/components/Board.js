@@ -34,9 +34,13 @@ class Board extends React.Component {
     }
 
     createHandcards() {
+        let cardStyle = {
+            border: "1px solid black"
+        };
         let handcards = getHandcards(this.state.store);
-        return handcards.map((card) => <div key={card.id} className="Card">
+        return handcards.map((card) => <div key={card.id} className="Card" style={cardStyle}>
             <div className="name">{card.name}</div>
+            <div className="text">{card.text}</div>
             <div className="cost">{card.cost}</div>
         </div>);
     }

@@ -30,8 +30,8 @@ class CreatureAttackedEventTest {
                 attack = 1)
         val game = Game(
                 "Id 4",
-                player1 = Player("Id 2", spots = listOf(Spot(attacker))),
-                player2 = Player("Id 5", spots = listOf(Spot(defender))))
+                player1 = Player("Id 2", spots = listOf(Spot(id = "spot1", creature = attacker))),
+                player2 = Player("Id 5", spots = listOf(Spot(id = "spot2", creature = defender))))
 
         // When
         val updatedGame = testee.invoke(game)

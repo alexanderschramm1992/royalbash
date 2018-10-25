@@ -52,6 +52,8 @@ internal class ExternalModel {
 
     internal class Card(
             @ApiModelProperty(required = true) val id: String,
+            @ApiModelProperty(required = true) val name: String,
+            @ApiModelProperty(required = true) val text: String,
             @ApiModelProperty(required = true) val cost: Int = 0,
             @ApiModelProperty(required = true) val placeableOnSpot: Boolean
     ) {
@@ -61,6 +63,8 @@ internal class ExternalModel {
             fun toExternalModel(card: de.schramm.royalbash.controller.service.core.Card): Card {
                 return Card(
                         id = card.id,
+                        name = card.name,
+                        text = card.text,
                         cost = card.cost,
                         placeableOnSpot = card.placeableOnSpot)
             }
