@@ -8,7 +8,8 @@ const initialState = {
     gameLoaded: false,
     gameIds: [],
     game: {},
-    chosenPlayer: "player1"
+    chosenPlayer: "player1",
+    chosenPlayerId: ""
 };
 
 function storeModel(state = initialState, action) {
@@ -20,6 +21,7 @@ function storeModel(state = initialState, action) {
             break;
         case "LOAD_GAME_ACCEPTED":
             state.game = action.game;
+            state.chosenPlayerId = state.game[state.chosenPlayer].id;
             state.gameRequested = false;
             state.gameLoaded = true;
             break;

@@ -249,4 +249,14 @@ class PlayerTest {
         // Then
         assertThat(card.isPresent).isFalse()
     }
+
+    @Test
+    fun `should automatically contain five spots`() {
+
+        // Given
+        val testee = Player(id = "player")
+
+        // When Then
+        assertThat(testee.getSpots()).hasSize(5)
+    }
 }

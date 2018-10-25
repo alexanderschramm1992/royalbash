@@ -7,13 +7,19 @@ import java.util.stream.Stream
 
 data class Player (
         val id: String,
+        val uuidGenerator: UUIDGenerator = UUIDGenerator(),
         val name: String = "Player",
         val hitpoints: Int = 0,
         val resources: Int = 0,
         val handcards: List<Card> = emptyList(),
         val deckcards: List<Card> = emptyList(),
         val depositcards: List<Card> = emptyList(),
-        val spots: List<Spot> = emptyList()
+        val spots: List<Spot> = listOf(
+                Spot(id = uuidGenerator.generateId()),
+                Spot(id = uuidGenerator.generateId()),
+                Spot(id = uuidGenerator.generateId()),
+                Spot(id = uuidGenerator.generateId()),
+                Spot(id = uuidGenerator.generateId()))
 ) {
 
     fun setHitpoints(hitpoints: Int): Player {

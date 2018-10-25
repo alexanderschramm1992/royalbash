@@ -3,6 +3,7 @@ package de.schramm.royalbash.controller.service
 import de.schramm.royalbash.controller.service.core.Game
 import de.schramm.royalbash.controller.service.core.Player
 import de.schramm.royalbash.controller.service.core.State.OPEN
+import de.schramm.royalbash.controller.service.core.UUIDGenerator
 import de.schramm.royalbash.controller.service.gameevent.GameEvent
 import io.mockk.every
 import io.mockk.mockk
@@ -41,18 +42,10 @@ class GameServiceTest {
         // Given
         val accountId1 = "Account 1"
         val accountId2 = "Account 2"
-        val id = UUID.randomUUID()
-        val expectedGame = Game(
-                id = id.toString(),
-                player1 = Player(id = id.toString(), name = accountId1),
-                player2 = Player(id = id.toString(), name = accountId2),
-                playerOnTurn = Player(id = id.toString(), name = accountId1),
-                state = OPEN
-        )
-        val repository = mockk<GameRepository>(relaxed = true)
-        every { repository.save(expectedGame) } returns expectedGame
+        val id = UUID.randomUUID().toString()
+        val repository = GameRepositoryMock()
         val uuidGenerator = mockk<UUIDGenerator>()
-        every { uuidGenerator.generateUUID() } returns id
+        every { uuidGenerator.generateId() } returns id
         val testee = GameService(uuidGenerator, repository)
 
         // When
@@ -62,7 +55,7 @@ class GameServiceTest {
         assertThat(game).isNotNull
         assertThat(game.player1.name).isEqualTo(accountId1)
         assertThat(game.player2.name).isEqualTo(accountId2)
-        verify { repository.save(game) }
+        assertThat(repository.exists(id)).isTrue()
     }
 
     @Test

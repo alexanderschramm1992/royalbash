@@ -71,14 +71,18 @@ internal class ExternalModel {
         }
     }
 
-    internal class Spot(@ApiModelProperty(required = false) val creature: Creature? = null) {
+    internal class Spot(
+        @ApiModelProperty(required = false) val id: String,
+        @ApiModelProperty(required = false) val creature: Creature? = null) {
 
         companion object {
 
             fun toExternalModel(spot: de.schramm.royalbash.controller.service.core.Spot): Spot {
-                return Spot( creature = spot.getCreature()
-                        .map { Creature.toExternalModel(it) }
-                        .orElse(null))
+                return Spot(
+                        id = spot.id,
+                        creature = spot.getCreature()
+                            .map { Creature.toExternalModel(it) }
+                            .orElse(null))
             }
         }
     }

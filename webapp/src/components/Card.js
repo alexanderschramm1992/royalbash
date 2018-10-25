@@ -2,16 +2,29 @@ import React from "react";
 import image from "../images/eager_cadet.png";
 import './Card.css';
 
-function Card(props){
-    return (
-        <div className="Card">
-            <header className="Card-header">
-                <img src={image} className="Card-image" alt="Eager Cadet"/>
-                <h1 className="Card-name">{props.name}</h1>
-            </header>
-            <p className="Card-text">{props.text}</p>
-        </div>
-    );
+class Card extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+
+        let card = this.props.card;
+
+        let cardStyle = {
+            border: "1px solid black"
+        };
+
+        return (
+            <div className="Card" draggable="true" style={cardStyle}>
+                <div className="name">{card.name}</div>
+                <div className="text">{card.text}</div>
+                <div className="cost">{card.cost}</div>
+                <div className="image"><img src={card.image ? card.image : image} alt={card.name}/></div>
+            </div>
+        );
+    }
 }
 
 export default Card;

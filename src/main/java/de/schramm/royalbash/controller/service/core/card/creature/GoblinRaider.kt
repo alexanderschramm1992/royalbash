@@ -13,7 +13,7 @@ data class GoblinRaider(
 ) : Creature {
 
     override val name: String = "Goblin Raider"
-    override val text = ""
+    override val text = "When Goblin Raider enters the battlefield, target player discards a card."
 
     val effect = DiscardHandcardsEffect(1)
 

@@ -2,6 +2,7 @@ package de.schramm.royalbash.controller.service
 
 import de.schramm.royalbash.controller.service.core.Game
 import de.schramm.royalbash.controller.service.core.Player
+import de.schramm.royalbash.controller.service.core.UUIDGenerator
 import de.schramm.royalbash.controller.service.gameevent.GameEvent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -23,11 +24,11 @@ constructor(
 
     fun createGame(account1Id: String, account2Id: String): Game {
 
-        val player1Id = uuidGenerator.generateUUID().toString()
-        val player2Id = uuidGenerator.generateUUID().toString()
+        val player1Id = uuidGenerator.generateId()
+        val player2Id = uuidGenerator.generateId()
 
         val game = Game(
-                id = uuidGenerator.generateUUID().toString(),
+                id = uuidGenerator.generateId(),
                 player1 = Player(id = player1Id, name = account1Id),
                 player2 = Player(id = player2Id, name = account2Id))
 

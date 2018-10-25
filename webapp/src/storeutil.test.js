@@ -13,7 +13,8 @@ describe("store util", () => {
         let store = {
             getState: () => { return {
                 game: {player1: "foo"},
-                chosenPlayer: "player1"
+                chosenPlayer: "player1",
+                gameLoaded: true
             }}
         };
 
@@ -46,7 +47,8 @@ describe("store util", () => {
                         handcards: "bar"
                     }
                 },
-                chosenPlayer: "player1"
+                chosenPlayer: "player1",
+                gameLoaded: true
             }}
         };
 
@@ -79,7 +81,8 @@ describe("store util", () => {
                         spots: "foo"
                     }
                 },
-                chosenPlayer: "player1"
+                chosenPlayer: "player1",
+                gameLoaded: true
             }}
         };
 

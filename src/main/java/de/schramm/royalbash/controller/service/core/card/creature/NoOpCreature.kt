@@ -12,7 +12,7 @@ data class NoOpCreature(
 ) : Creature {
 
     override val name: String = "NoOpCreature"
-    override val text = ""
+    override val text = "NoOp Creature Text"
 
     override fun invoke(context: Context): Game {
         return CreatureUtil.spawnCreature(this, context)

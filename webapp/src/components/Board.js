@@ -1,14 +1,15 @@
 import React from "react";
 import {getSpots, getHandcards, getChosenPlayer} from "../storeutil";
+import Card from "./Card";
 
 class Board extends React.Component {
 
     constructor(props) {
         super();
         this.state = {store: props.store};
-        props.store.subscribe(() => this.setState({game: props.store.getState().game}));
         this.handleDrawCardButton = this.handleDrawCardButton.bind(this);
         this.handleEndTurnButton = this.handleEndTurnButton.bind(this);
+        props.store.subscribe(() => this.setState({game: props.store.getState().game}));
     }
 
     handleEndTurnButton() {
@@ -34,15 +35,8 @@ class Board extends React.Component {
     }
 
     createHandcards() {
-        let cardStyle = {
-            border: "1px solid black"
-        };
         let handcards = getHandcards(this.state.store);
-        return handcards.map((card) => <div key={card.id} className="Card" style={cardStyle}>
-            <div className="name">{card.name}</div>
-            <div className="text">{card.text}</div>
-            <div className="cost">{card.cost}</div>
-        </div>);
+        return handcards.map((card) => <Card key={card.id} card={card}/>);
     }
 
     render() {

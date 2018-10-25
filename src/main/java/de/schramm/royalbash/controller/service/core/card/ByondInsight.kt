@@ -11,7 +11,7 @@ data class ByondInsight(
 ) : Card {
 
     override val name = "Beyond Insight"
-    override val text = ""
+    override val text = "Target player draws two cards."
     val effect = DrawHandcardsEffect(2)
 
     override fun invoke(context: Context): Game {

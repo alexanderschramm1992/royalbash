@@ -7,7 +7,7 @@ import de.schramm.royalbash.controller.service.core.Game
 class NoOpCard (
         override val id: String,
         override val name: String = "NoOp Card",
-        override val text: String = "",
+        override val text: String = "NoOp Card Text",
         override val cost: Int = 0
 ) : Card {
 
