@@ -6,6 +6,7 @@ const initialState = {
     endTurnRequested: false,
     drawCardRequested: false,
     gameLoaded: false,
+    onTurn: false,
     gameIds: [],
     game: {},
     chosenPlayer: "player1",
@@ -22,6 +23,7 @@ function storeModel(state = initialState, action) {
         case "LOAD_GAME_ACCEPTED":
             state.game = action.game;
             state.chosenPlayerId = state.game[state.chosenPlayer].id;
+            state.onTurn = state.game.playerOnTurn === state.chosenPlayerId;
             state.gameRequested = false;
             state.gameLoaded = true;
             break;
@@ -50,6 +52,7 @@ function storeModel(state = initialState, action) {
         case "END_TURN_ACCEPTED":
             state.endTurnRequested = false;
             state.game = action.game;
+            state.onTurn = false;
             break;
         case "END_TURN_DECLINED":
             state.endTurnRequested = false;

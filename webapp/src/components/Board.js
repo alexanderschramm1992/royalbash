@@ -6,22 +6,20 @@ class Board extends React.Component {
 
     constructor(props) {
         super();
-        this.state = {store: props.store};
         this.handleDrawCardButton = this.handleDrawCardButton.bind(this);
         this.handleEndTurnButton = this.handleEndTurnButton.bind(this);
-        props.store.subscribe(() => this.setState({game: props.store.getState().game}));
     }
 
     handleEndTurnButton() {
-        this.state.store.dispatch({type: "END_TURN_REQUESTED", player: this.state.store.getState().chosenPlayer});
+        this.props.store.dispatch({type: "END_TURN_REQUESTED", player: this.props.store.getState().chosenPlayer});
     }
 
     handleDrawCardButton() {
-        this.state.store.dispatch({type: "DRAW_CARD_REQUESTED", player: this.state.store.getState().chosenPlayer});
+        this.props.store.dispatch({type: "DRAW_CARD_REQUESTED", player: this.props.store.getState().chosenPlayer});
     }
 
     createSpots() {
-        let spots = getSpots(this.state.store);
+        let spots = getSpots(this.props.store);
         return spots.map((spot) => <div key={spot.id} className="Spot">
             {spot.creature &&
             <div key={spot.creature.id} className="Creature">
@@ -35,12 +33,12 @@ class Board extends React.Component {
     }
 
     createHandcards() {
-        let handcards = getHandcards(this.state.store);
-        return handcards.map((card) => <Card key={card.id} card={card}/>);
+        let handcards = getHandcards(this.props.store);
+        return handcards.map((card) => <Card key={card.id} card={card} store={this.props.store}/>);
     }
 
     render() {
-        let player = getChosenPlayer(this.state.store);
+        let player = getChosenPlayer(this.props.store);
         return (
             <div className="Board">
                 <div className="Spots">
