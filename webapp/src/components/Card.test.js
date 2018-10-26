@@ -14,16 +14,31 @@ const expect = chai.expect;
 
 describe("card component", () => {
 
+    const card = {
+        name: "name",
+        text: "text",
+        cost: 0
+    };
+
+    const store = {getState: () => {return {onTurn: true}}};
+
     it("renders without crashing", () => {
+        mount(<Card key="key" card={card} store={store}/>).unmount();
+    });
+
+    it("creates a drag event with respective payload and type", () => {
 
         // Given
-        let card = {
-            name: "name",
-            text: "text",
-            cost: 0
-        };
+        let testee = mount(<Card key="key" card={card} store={store}/>).instance();
+        let event = {dataTransfer: {
+            setData: function(key, data) {this[key] = data}
+        }};
 
-        // When Then
-        mount(<Card key="key" card={card}/>).unmount();
-    });
+        // When
+        testee.handleDragStart(event);
+
+        // Then
+        expect(event.dataTransfer.type).to.equal("card");
+        expect(event.dataTransfer.payload).to.equal(card);
+    })
 });
