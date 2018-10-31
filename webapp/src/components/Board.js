@@ -1,6 +1,7 @@
 import React from "react";
 import {getSpots, getHandcards, getChosenPlayer} from "../storeutil";
 import Card from "./Card";
+import Player from "./Player";
 
 class Board extends React.Component {
 
@@ -52,6 +53,7 @@ class Board extends React.Component {
                         Draw
                     </button>
                 </div>
+                <Player/>
                 <div className="Hitpoints">
                     {player ? player.hitpoints : 0}
                 </div>

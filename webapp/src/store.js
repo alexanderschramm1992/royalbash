@@ -5,6 +5,10 @@ const initialState = {
     gameIdsRequested: false,
     endTurnRequested: false,
     drawCardRequested: false,
+    playCardRequested: false,
+    playedCardId: "",
+    playedCardOwnerId: "",
+    playedCardTargetPlayerId: "",
     gameLoaded: false,
     onTurn: false,
     gameIds: [],
@@ -67,6 +71,26 @@ function storeModel(state = initialState, action) {
             break;
         case "DRAW_CARD_DECLINED":
             state.drawCardRequested = false;
+            state.errorMessage = action.errorMessage;
+            break;
+        case "PLAY_CARD_ON_PLAYER_REQUESTED":
+            state.playCardRequested = true;
+            state.playedCardId = action.cardId;
+            state.playedCardOwnerId = action.ownerId;
+            state.playedCardTargetPlayerId = action.playerId;
+            break;
+        case "PLAY_CARD_ON_PLAYER_ACCEPTED":
+            state.playCardRequested = false;
+            state.playedCardId = "";
+            state.playedCardOwnerId = "";
+            state.playedCardTargetPlayerId = "";
+            state.game = action.game;
+            break;
+        case "PLAY_CARD_ON_PLAYER_DECLINED":
+            state.playCardRequested = false;
+            state.playedCardId = "";
+            state.playedCardOwnerId = "";
+            state.playedCardTargetPlayerId = "";
             state.errorMessage = action.errorMessage;
             break;
         default:
