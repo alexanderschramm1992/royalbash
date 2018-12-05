@@ -5,10 +5,17 @@ const initialState = {
     gameIdsRequested: false,
     endTurnRequested: false,
     drawCardRequested: false,
-    playCardRequested: false,
-    playedCardId: "",
-    playedCardOwnerId: "",
-    playedCardTargetPlayerId: "",
+    playCardOnPlayerRequested: false,
+    playCardOnSpotRequested: false,
+    playCard: {
+        id: "",
+        ownerId: "",
+        target: {
+            playerId: "",
+            spotId: "",
+            creatureId: ""
+        }
+    },
     gameLoaded: false,
     onTurn: false,
     gameIds: [],
@@ -18,6 +25,17 @@ const initialState = {
 };
 
 function storeModel(state = initialState, action) {
+    state = choosePlayer(state, action);
+    state = loadGame(state, action);
+    state = loadGameIds(state, action);
+    state = endTurn(state, action);
+    state = drawCard(state, action);
+    state = playCardOnPlayer(state, action);
+    state = playCardOnSpot(state, action);
+    return state;
+}
+
+export function loadGame(state, action) {
     switch (action.type) {
         case "LOAD_GAME_REQUESTED":
             state.gameId = action.gameId;
@@ -36,6 +54,12 @@ function storeModel(state = initialState, action) {
             state.gameLoaded = false;
             state.errorMessage = action.errorMessage;
             break;
+    }
+    return state;
+}
+
+export function loadGameIds(state, action) {
+    switch (action.type) {
         case "LOAD_GAME_IDS_REQUESTED":
             state.gameIdsRequested = true;
             break;
@@ -47,9 +71,12 @@ function storeModel(state = initialState, action) {
             state.gameIdsRequested = false;
             state.errorMessage = action.errorMessage;
             break;
-        case "PLAYER_CHOSEN":
-            state.chosenPlayer = action.player;
-            break;
+    }
+    return state;
+}
+
+export function endTurn(state, action) {
+    switch (action.type) {
         case "END_TURN_REQUESTED":
             state.endTurnRequested = true;
             break;
@@ -62,6 +89,12 @@ function storeModel(state = initialState, action) {
             state.endTurnRequested = false;
             state.errorMessage = action.errorMessage;
             break;
+    }
+    return state;
+}
+
+export function drawCard(state, action) {
+    switch (action.type) {
         case "DRAW_CARD_REQUESTED":
             state.drawCardRequested = true;
             break;
@@ -73,28 +106,85 @@ function storeModel(state = initialState, action) {
             state.drawCardRequested = false;
             state.errorMessage = action.errorMessage;
             break;
+    }
+    return state;
+}
+
+export function playCardOnPlayer(state, action) {
+    let reset = {
+        ...state,
+        playCardOnPlayerRequested: false,
+        playCard : {
+            id: "",
+            ownerId: "",
+            target: {
+                playerId: ""
+            }
+        }
+    };
+    switch (action.type) {
         case "PLAY_CARD_ON_PLAYER_REQUESTED":
-            state.playCardRequested = true;
-            state.playedCardId = action.cardId;
-            state.playedCardOwnerId = action.ownerId;
-            state.playedCardTargetPlayerId = action.playerId;
+            state.playCard = {
+                requested: true,
+                id: action.cardId,
+                ownerId: action.ownerId,
+                target: {
+                    playerId: action.playerId
+                }
+            };
             break;
-        case "PLAY_CARD_ON_PLAYER_ACCEPTED":
-            state.playCardRequested = false;
-            state.playedCardId = "";
-            state.playedCardOwnerId = "";
-            state.playedCardTargetPlayerId = "";
+        case "PLAY_CARD_ON_PLAYER_ACCEPTED" :
+            state = reset;
             state.game = action.game;
             break;
         case "PLAY_CARD_ON_PLAYER_DECLINED":
-            state.playCardRequested = false;
-            state.playedCardId = "";
-            state.playedCardOwnerId = "";
-            state.playedCardTargetPlayerId = "";
+            state = reset;
             state.errorMessage = action.errorMessage;
             break;
-        default:
-            console.log("Missing reducer for action type " + action.type);
+    }
+    return state;
+}
+
+export function playCardOnSpot(state, action) {
+    let reset = {
+        ...state,
+        playCardOnSpotRequested: false,
+        playCard : {
+            id: "",
+            ownerId: "",
+            target: {
+                spotId: ""
+            }
+        }
+    };
+    switch (action.type) {
+        case "PLAY_CARD_ON_SPOT_REQUESTED":
+            state.playCard = {
+                requested: true,
+                id: action.cardId,
+                ownerId: action.ownerId,
+                target: {
+                    spotId: action.spotId
+                }
+            };
+            break;
+        case "PLAY_CARD_ON_SPOT_ACCEPTED":
+            state = reset;
+            state.game = action.game;
+            break;
+        case "PLAY_CARD_ON_SPOT_DECLINED":
+            state = reset;
+            state.errorMessage = action.errorMessage;
+            break;
+    }
+    return state;
+}
+
+export function choosePlayer(state, action) {
+    switch (action.type) {
+        case "PLAYER_CHOSEN":
+            state.chosenPlayer = action.player;
+            break;
     }
     return state;
 }

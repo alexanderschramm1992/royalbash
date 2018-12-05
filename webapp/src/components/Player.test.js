@@ -23,7 +23,24 @@ describe("player component", () => {
     };
 
     it("renders without crashing", () => {
-        mount(<Player/>).unmount();
+        mount(<Player store={store} id="Player Id"/>).unmount();
+    });
+
+    it("should not trigger PLAY_CARD_ON_PLAYER_REQUESTED action", () => {
+
+        // Given
+        let testee = mount(<Player store={store} id="Player Id"/>).instance();
+        let event = {
+            dataTransfer: {
+                getData: () => {return "banana";}
+            }
+        };
+
+        // When
+        testee.handleDrop(event);
+
+        // Then
+        expect(store.actions).to.be.empty;
     });
 
     it("should trigger PLAY_CARD_ON_PLAYER_REQUESTED action", () => {
@@ -43,12 +60,11 @@ describe("player component", () => {
         testee.handleDrop(event);
 
         // Then
-        console.log(store);
         expect(store.actions).deep.contains({
             type: "PLAY_CARD_ON_PLAYER_REQUESTED",
             cardId: "Card Id",
             ownerId: "Owner Id",
             playerId: "Player Id"
         });
-    })
+    });
 });

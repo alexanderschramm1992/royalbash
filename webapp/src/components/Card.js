@@ -11,6 +11,7 @@ class Card extends React.Component {
     handleDragStart(event) {
         event.dataTransfer.setData("type", "card");
         event.dataTransfer.setData("payload", this.props.card);
+        console.log(this.props.card.name + " is being dragged");
     }
 
     render() {
@@ -18,7 +19,8 @@ class Card extends React.Component {
         let card = this.props.card;
 
         let cardStyle = {
-            border: "1px solid black"
+            height: "100%",
+            width: "100%"
         };
 
         return (

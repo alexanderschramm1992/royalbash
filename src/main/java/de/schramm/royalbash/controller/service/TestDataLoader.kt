@@ -3,7 +3,9 @@ package de.schramm.royalbash.controller.service
 import de.schramm.royalbash.controller.service.core.Game
 import de.schramm.royalbash.controller.service.core.Player
 import de.schramm.royalbash.controller.service.core.State
+import de.schramm.royalbash.controller.service.core.card.ByondInsight
 import de.schramm.royalbash.controller.service.core.card.Fireball
+import de.schramm.royalbash.controller.service.core.card.LightningBolt
 import de.schramm.royalbash.controller.service.core.card.MemoryLeak
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
@@ -22,11 +24,21 @@ open class TestDataLoader @Autowired constructor(private val repository: GameRep
                 id = "memoryleak",
                 cost = 2
         )
+        val byondInsight = ByondInsight(
+                id = "byondInsight",
+                cost = 2
+        )
+        val lightningBolt = LightningBolt(
+                id = "lightningBolt",
+                cost = 2
+        )
         val player1 = Player(
                 id = "player1",
                 name = "Player 1",
                 hitpoints = 25,
-                handcards = listOf(fireball, memoryLeak))
+                handcards = listOf(fireball, memoryLeak),
+                deckcards = listOf(byondInsight),
+                depositcards = listOf(lightningBolt))
         val player2 = Player(
                 id = "player2",
                 name = "Player 2")

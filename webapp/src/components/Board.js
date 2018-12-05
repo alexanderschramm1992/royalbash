@@ -1,12 +1,14 @@
 import React from "react";
-import {getSpots, getHandcards, getChosenPlayer} from "../storeutil";
+import {getSpots, getHandcards} from "../storeutil";
 import Card from "./Card";
 import Player from "./Player";
+import Spot from "./Spot";
+import Handcards from "./Handcards";
 
 class Board extends React.Component {
 
     constructor(props) {
-        super();
+        super(props);
         this.handleDrawCardButton = this.handleDrawCardButton.bind(this);
         this.handleEndTurnButton = this.handleEndTurnButton.bind(this);
     }
@@ -21,42 +23,40 @@ class Board extends React.Component {
 
     createSpots() {
         let spots = getSpots(this.props.store);
-        return spots.map((spot) => <div key={spot.id} className="Spot">
-            {spot.creature &&
-            <div key={spot.creature.id} className="Creature">
-                <div className="name">{spot.creature.name}</div>
-                <div className="cost">{spot.creature.cost}</div>
-                <div className="attack">{spot.creature.attack}</div>
-                <div className="hitpoints">{spot.creature.hitpoints}</div>
-            </div>
-            }
-        </div> );
+        return spots.map((spot) => <Spot key={spot.id} store={this.props.store}/>);
     }
 
     createHandcards() {
+
         let handcards = getHandcards(this.props.store);
-        return handcards.map((card) => <Card key={card.id} card={card} store={this.props.store}/>);
+
+        let cardStyle = {
+            width: 100/handcards.length + "%",
+            height: "100%",
+            display: "inline-block"
+        };
+
+        return handcards.map((card) => <Card
+            key={card.id}
+            card={card}
+            store={this.props.store}
+            style={cardStyle}
+        />);
     }
 
     render() {
-        let player = getChosenPlayer(this.props.store);
         return (
             <div className="Board">
                 <div className="Spots">
                     {this.createSpots()}
                 </div>
-                <div className="Handcards">
-                    {this.createHandcards()}
-                </div>
+                <Handcards store={this.props.store}/>
                 <div className="Deckcards">
                     <button onClick={this.handleDrawCardButton}>
                         Draw
                     </button>
                 </div>
-                <Player/>
-                <div className="Hitpoints">
-                    {player ? player.hitpoints : 0}
-                </div>
+                <Player store={this.props.store}/>
                 <div className="EndTurn">
                     <button onClick={this.handleEndTurnButton}>
                         End Turn

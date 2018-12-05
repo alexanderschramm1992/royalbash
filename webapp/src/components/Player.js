@@ -6,6 +6,7 @@ class Player extends React.Component {
     constructor(props) {
         super(props);
         this.handleDrop = this.handleDrop.bind(this);
+        this.allowDrop = this.allowDrop.bind(this);
     }
 
     handleDrop(event) {
@@ -19,12 +20,32 @@ class Player extends React.Component {
                 });
                 break;
             default:
-                console.log("Something weird was dropped on player: " + event);
+                console.log("Something weird has been dropped onto " + getChosenPlayer(this.props.store).name);
         }
     }
 
+    allowDrop(event) {
+        event.preventDefault();
+    }
+
     render() {
-        return <div className="Player" onDrop={this.handleDrop}/>
+
+        let style = {
+            border: "1px solid black"
+        };
+
+        let player = getChosenPlayer(this.props.store);
+
+        if(player) {
+
+            return <div className="Player" onDrop={this.handleDrop} onDragOver={this.allowDrop} style={style}>
+                <div className="Name">player.name</div>
+                <img src={player.image} alt={player.name}/>
+                <div className="Hitpoints">player.hitpoints</div>
+            </div>
+        } else {
+            return <div/>;
+        }
     }
 }
 

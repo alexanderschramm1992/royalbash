@@ -38,6 +38,7 @@ constructor(
     }
 
     open fun commitGameEvent(gameId: String, gameEvent: GameEvent): Optional<Game> {
+        println("""Received event $gameEvent for game $gameId""")
         return retrieveGame(gameId).map { gameEvent.invoke(it) }
     }
 
