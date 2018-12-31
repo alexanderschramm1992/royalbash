@@ -4,7 +4,7 @@ let { describe, it } = global;
 import * as chai from "chai";
 const expect = chai.expect;
 // Internals
-import {endTurn, loadGame, loadGameIds} from "./store";
+import {drawCard, endTurn, loadGame, loadGameIds} from "./store";
 
 describe("store handling LOAD_GAME events", () => {
 
@@ -161,5 +161,56 @@ describe("store handling END_TURN events", () => {
             endTurnRequested: false,
             errorMessage: "Error Message"
         });
-    })
+    });
+});
+
+describe("store handling DRAW_CARD events", () => {
+
+    it("should commit DRAW_CARD_REQUESTED", () => {
+
+        // Given
+        let store = {};
+        let action = {type: "DRAW_CARD_REQUESTED"};
+
+        // When
+        let updatedStore = drawCard(store, action);
+
+        // Then
+        expect(updatedStore).deep.equal({
+            drawCardRequested: true
+        });
+    });
+
+    it("should commit DRAW_CARD_ACCEPTED", () => {
+
+        // Given
+        let store = {};
+        let game = "Some Game";
+        let action = {type: "DRAW_CARD_ACCEPTED", game: game};
+
+        // When
+        let updatedStore = drawCard(store, action);
+
+        // Then
+        expect(updatedStore).deep.equal({
+            drawCardRequested: false,
+            game: game
+        });
+    });
+
+    it("should commit DRAW_CARD_DECLINED", () => {
+
+        // Given
+        let store = {};
+        let action = {type: "DRAW_CARD_DECLINED", errorMessage: "Error Message"};
+
+        // When
+        let updatedStore = drawCard(store, action);
+
+        // Then
+        expect(updatedStore).deep.equal({
+            drawCardRequested: false,
+            errorMessage: "Error Message"
+        });
+    });
 });
