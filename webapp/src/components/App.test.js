@@ -1,5 +1,4 @@
 import React from 'react';
-let { describe, it } = global;
 import ReactDOM from 'react-dom';
 import App from './App';
 

@@ -1,8 +1,3 @@
-// Jest
-let { describe, it } = global;
-// Chai
-import * as chai from "chai";
-const expect = chai.expect;
 // Internals
 import {drawCard, endTurn, loadGame, loadGameIds} from "./store";
 
@@ -18,7 +13,7 @@ describe("store handling LOAD_GAME events", () => {
         let updatedStore = loadGame(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             gameId: "Game Id",
             gameRequested: true,
             gameLoaded: false,
@@ -36,7 +31,7 @@ describe("store handling LOAD_GAME events", () => {
         let updatedStore = loadGame(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             ...store,
             game: game,
             gameRequested: false,
@@ -54,7 +49,7 @@ describe("store handling LOAD_GAME events", () => {
         let updatedStore = loadGame(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             gameRequested: false,
             gameLoaded: false,
             errorMessage: "Error Message"
@@ -74,7 +69,7 @@ describe("store handling LOAD_GAME_IDS events", () => {
         let updatedStore = loadGameIds(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             gameIdsRequested: true
         });
     });
@@ -89,7 +84,7 @@ describe("store handling LOAD_GAME_IDS events", () => {
         let updatedStore = loadGameIds(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             gameIds: ["Id"],
             gameIdsRequested: false
         });
@@ -105,7 +100,7 @@ describe("store handling LOAD_GAME_IDS events", () => {
         let updatedStore = loadGameIds(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             errorMessage: "Error Message",
             gameIdsRequested: false
         });
@@ -124,7 +119,7 @@ describe("store handling END_TURN events", () => {
         let updatedStore = endTurn(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             endTurnRequested: true
         });
     });
@@ -140,7 +135,7 @@ describe("store handling END_TURN events", () => {
         let updatedStore = endTurn(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             endTurnRequested: false,
             game: game,
             onTurn: false
@@ -157,7 +152,7 @@ describe("store handling END_TURN events", () => {
         let updatedStore = endTurn(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             endTurnRequested: false,
             errorMessage: "Error Message"
         });
@@ -176,7 +171,7 @@ describe("store handling DRAW_CARD events", () => {
         let updatedStore = drawCard(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             drawCardRequested: true
         });
     });
@@ -192,7 +187,7 @@ describe("store handling DRAW_CARD events", () => {
         let updatedStore = drawCard(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             drawCardRequested: false,
             game: game
         });
@@ -208,7 +203,7 @@ describe("store handling DRAW_CARD events", () => {
         let updatedStore = drawCard(store, action);
 
         // Then
-        expect(updatedStore).deep.equal({
+        expect(updatedStore).toEqual({
             drawCardRequested: false,
             errorMessage: "Error Message"
         });

@@ -1,8 +1,3 @@
-// Jest
-let { describe, it } = global;
-// Chai
-import * as chai from "chai";
-const expect = chai.expect;
 // Internals
 import {getChosenPlayer, getHandcards} from "./storeutil";
 
@@ -22,7 +17,7 @@ describe("store util", () => {
         let result = getChosenPlayer(store);
 
         // Then
-        expect(result).to.equal("foo");
+        expect(result).toBe("foo");
     });
 
     it("should get undefined if chosen player not defined", () => {
@@ -35,7 +30,7 @@ describe("store util", () => {
         let result = getChosenPlayer(store);
 
         // Then
-        expect(result).to.be.undefined;
+        expect(result).toBeFalsy();
     });
 
     it("should get handcards of chosen player", () => {
@@ -56,7 +51,7 @@ describe("store util", () => {
         let result = getHandcards(store);
 
         // Then
-        expect(result).to.equal("bar");
+        expect(result).toBe("bar");
     });
 
     it("should get empty array if chosen player handcards are not available", () => {
@@ -69,6 +64,6 @@ describe("store util", () => {
         let result = getHandcards(store);
 
         // Then
-        expect(result).to.be.empty;
+        expect(result).toHaveLength(0);
     });
 });

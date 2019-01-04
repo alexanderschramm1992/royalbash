@@ -5,12 +5,8 @@ import Enzyme from "enzyme";
 import { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 Enzyme.configure({adapter: new Adapter()});
-// Jest
-let { describe, it } = global;
-// Chai
-import * as chai from "chai";
+// Internals
 import Card from "./Card";
-const expect = chai.expect;
 
 describe("card component", () => {
 
@@ -38,7 +34,7 @@ describe("card component", () => {
         testee.handleDragStart(event);
 
         // Then
-        expect(event.dataTransfer.type).to.equal("card");
-        expect(event.dataTransfer.payload).to.equal(card);
+        expect(event.dataTransfer.type).toBe("card");
+        expect(event.dataTransfer.payload).toBe(card);
     })
 });

@@ -5,11 +5,6 @@ import Enzyme from "enzyme";
 import { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 Enzyme.configure({adapter: new Adapter()});
-// Jest
-let { describe, it } = global;
-// Chai
-import * as chai from "chai";
-const expect = chai.expect;
 // Internals
 import Board from "./Board";
 
@@ -43,7 +38,7 @@ describe("board component", () => {
         testee.handleEndTurnButton();
 
         // Then
-        expect(store.actions).deep.contains({type: "END_TURN_REQUESTED", player: "player1"});
+        expect(store.actions).toContainEqual({type: "END_TURN_REQUESTED", player: "player1"});
     });
 
     it("should trigger DRAW_CARD_REQUESTED action", () => {
@@ -55,6 +50,6 @@ describe("board component", () => {
         testee.handleDrawCardButton();
 
         // Then
-        expect(store.actions).deep.contains({type: "DRAW_CARD_REQUESTED", player: "player1"});
+        expect(store.actions).toContainEqual({type: "DRAW_CARD_REQUESTED", player: "player1"});
     });
 });
