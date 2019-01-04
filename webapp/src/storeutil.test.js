@@ -4,7 +4,7 @@ let { describe, it } = global;
 import * as chai from "chai";
 const expect = chai.expect;
 // Internals
-import {getChosenPlayer, getHandcards, getSpots} from "./storeutil";
+import {getChosenPlayer, getHandcards} from "./storeutil";
 
 describe("store util", () => {
 
@@ -67,40 +67,6 @@ describe("store util", () => {
 
         // When
         let result = getHandcards(store);
-
-        // Then
-        expect(result).to.be.empty;
-    });
-
-    it("should get spots of chosen player", () => {
-        // Given
-        let store = {
-            getState: () => { return {
-                game: {
-                    player1: {
-                        spots: "foo"
-                    }
-                },
-                chosenPlayer: "player1",
-                gameLoaded: true
-            }}
-        };
-
-        // When
-        let result = getSpots(store);
-
-        // Then
-        expect(result).to.equal("foo");
-    });
-
-    it("should get empty array if chosen player spots are not available", () => {
-        // Given
-        let store = {
-            getState: () => { return {}}
-        };
-
-        // When
-        let result = getSpots(store);
 
         // Then
         expect(result).to.be.empty;

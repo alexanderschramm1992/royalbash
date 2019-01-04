@@ -37,7 +37,7 @@ class Spot extends React.Component {
 
         if(chosenPlayer) {
 
-            let spot = getChosenPlayer(this.props.store).spots
+            let spot = chosenPlayer.spots
                 .filter((spot) => spot.id === this.props.id);
 
             return <div className="Spot" onDrop={this.handeDrop} style={style}>

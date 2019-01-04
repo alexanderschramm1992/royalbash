@@ -37,11 +37,10 @@ class Player extends React.Component {
         let player = getChosenPlayer(this.props.store);
 
         if(player) {
-
             return <div className="Player" onDrop={this.handleDrop} onDragOver={this.allowDrop} style={style}>
-                <div className="Name">player.name</div>
+                <div className="Name">{player.name}</div>
                 <img src={player.image} alt={player.name}/>
-                <div className="Hitpoints">player.hitpoints</div>
+                <div className="Hitpoints">{player.hitpoints}</div>
             </div>
         } else {
             return <div/>;

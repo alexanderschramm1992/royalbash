@@ -8,21 +8,26 @@ class Handcards extends React.Component {
 
         let style = {
             height: "100%",
-            width: 100 / handcards.length + "%",
+            width: "15%",
             display: "inline-block"
         };
 
         return handcards.map((handcard) =>
-            <div className="Handcards-Wrapper" key={handcard.id} style={style}>
+            <div className="Handcard-Wrapper" key={handcard.id} style={style}>
                 <Card card={handcard} store={this.props.store}/>
             </div>);
     }
 
     render() {
 
+        let style = {
+            height: "20%",
+            width: "100%"
+        };
+
         let player = getChosenPlayer(this.props.store);
 
-        return <div className="Handcards">
+        return <div className="Handcards" style={style}>
             {player && player.handcards && this.createHandcards(player.handcards)}
         </div>
     }
