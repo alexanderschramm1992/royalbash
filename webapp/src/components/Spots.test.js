@@ -5,11 +5,6 @@ import Enzyme from "enzyme";
 import { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 Enzyme.configure({adapter: new Adapter()});
-// Jest
-let { describe, it } = global;
-// Chai
-import * as chai from "chai";
-const expect = chai.expect;
 // Internals
 import Spots from "./Spots";
 
@@ -46,7 +41,7 @@ describe("spots component", () => {
         let result = testee.getSpots();
 
         // Then
-        expect(result).deep.contains({id: "foo"});
+        expect(result).toContainEqual({id: "foo"});
     });
 
     it("should get empty array if chosen player spots are not available", () => {
@@ -60,6 +55,6 @@ describe("spots component", () => {
         let result = testee.getSpots();
 
         // Then
-        expect(result).to.be.empty;
+        expect(result).toHaveLength(0);
     });
 });
