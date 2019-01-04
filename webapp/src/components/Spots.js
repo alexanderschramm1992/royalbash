@@ -4,10 +4,6 @@ import Spot from "./Spot";
 
 class Spots extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     createSpots() {
         let spots = this.getSpots();
         return spots

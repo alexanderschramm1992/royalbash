@@ -41,73 +41,77 @@ export function loadGame(state, action) {
             state.gameId = action.gameId;
             state.gameRequested = true;
             state.gameLoaded = false;
-            break;
+            return state;
         case "LOAD_GAME_ACCEPTED":
             state.game = action.game;
             state.chosenPlayerId = state.game[state.chosenPlayer].id;
             state.onTurn = state.game.playerOnTurn === state.chosenPlayerId;
             state.gameRequested = false;
             state.gameLoaded = true;
-            break;
+            return state;
         case "LOAD_GAME_DECLINED":
             state.gameRequested = false;
             state.gameLoaded = false;
             state.errorMessage = action.errorMessage;
-            break;
+            return state;
+        default:
+            return state;
     }
-    return state;
 }
 
 export function loadGameIds(state, action) {
     switch (action.type) {
         case "LOAD_GAME_IDS_REQUESTED":
             state.gameIdsRequested = true;
-            break;
+            return state;
         case "LOAD_GAME_IDS_ACCEPTED":
             state.gameIds = action.gameIds;
             state.gameIdsRequested = false;
-            break;
+            return state;
         case "LOAD_GAME_IDS_DECLINED":
             state.gameIdsRequested = false;
             state.errorMessage = action.errorMessage;
-            break;
+            return state;
+        default:
+            return state;
     }
-    return state;
 }
 
 export function endTurn(state, action) {
     switch (action.type) {
         case "END_TURN_REQUESTED":
             state.endTurnRequested = true;
-            break;
+            return state;
         case "END_TURN_ACCEPTED":
             state.endTurnRequested = false;
             state.game = action.game;
             state.onTurn = false;
-            break;
+            return state;
         case "END_TURN_DECLINED":
             state.endTurnRequested = false;
             state.errorMessage = action.errorMessage;
-            break;
+            return state;
+        default:
+            return state;
     }
-    return state;
 }
 
 export function drawCard(state, action) {
     switch (action.type) {
         case "DRAW_CARD_REQUESTED":
             state.drawCardRequested = true;
-            break;
+            return state;
         case "DRAW_CARD_ACCEPTED":
             state.drawCardRequested = false;
             state.game = action.game;
-            break;
+            return state;
         case "DRAW_CARD_DECLINED":
             state.drawCardRequested = false;
             state.errorMessage = action.errorMessage;
-            break;
+            return state;
+        default:
+            return state;
     }
-    return state;
 }
 
 export function playCardOnPlayer(state, action) {
@@ -132,17 +136,18 @@ export function playCardOnPlayer(state, action) {
                     playerId: action.playerId
                 }
             };
-            break;
+            return state;
         case "PLAY_CARD_ON_PLAYER_ACCEPTED" :
             state = reset;
             state.game = action.game;
-            break;
+            return state;
         case "PLAY_CARD_ON_PLAYER_DECLINED":
             state = reset;
             state.errorMessage = action.errorMessage;
-            break;
+            return state;
+        default:
+            return state;
     }
-    return state;
 }
 
 export function playCardOnSpot(state, action) {
@@ -167,26 +172,28 @@ export function playCardOnSpot(state, action) {
                     spotId: action.spotId
                 }
             };
-            break;
+            return state;
         case "PLAY_CARD_ON_SPOT_ACCEPTED":
             state = reset;
             state.game = action.game;
-            break;
+            return state;
         case "PLAY_CARD_ON_SPOT_DECLINED":
             state = reset;
             state.errorMessage = action.errorMessage;
-            break;
+            return state;
+        default:
+            return state;
     }
-    return state;
 }
 
 export function choosePlayer(state, action) {
     switch (action.type) {
         case "PLAYER_CHOSEN":
             state.chosenPlayer = action.player;
-            break;
+            return state;
+        default:
+            return state;
     }
-    return state;
 }
 
 export const Store = createStore(
