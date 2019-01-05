@@ -17,7 +17,13 @@ class Spots extends React.Component {
     }
 
     render() {
-        return <div className="Spots">
+
+        let style = {
+            height: "20%",
+            width: "100%"
+        };
+
+        return <div className="Spots" style={style}>
             {this.createSpots()}
         </div>
     }
