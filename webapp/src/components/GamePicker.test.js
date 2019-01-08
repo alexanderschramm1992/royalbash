@@ -1,14 +1,10 @@
 // React
 import React from "react";
-// Enzyme
-import Enzyme from "enzyme";
-import { mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-Enzyme.configure({adapter: new Adapter()});
+import ReactDOM from 'react-dom';
 // Internals
 import GamePicker from "./GamePicker";
 
-describe("game picker component", () => {
+describe("Game Picker", () => {
 
     const store = {
         dispatch: function(action) {
@@ -21,13 +17,15 @@ describe("game picker component", () => {
     };
 
     it("renders without crashing", () => {
-        mount(<GamePicker store={store}/>).unmount();
+        const div = document.createElement('div');
+        ReactDOM.render(<GamePicker store={store}/>, div);
+        ReactDOM.unmountComponentAtNode(div);
     });
 
-    it("should set gameId", () => {
+    it("sets gameId", () => {
 
         // Given
-        let testee = mount(<GamePicker store={store}/>).instance();
+        const testee = ReactDOM.render(<GamePicker store={store}/>, document.createElement('div'));
 
         // When
         testee.setGameId({target: {value: "123qwe"}});
@@ -36,10 +34,10 @@ describe("game picker component", () => {
         expect(testee.state.gameId).toBe("123qwe");
     });
 
-    it("should set chosenPlayer", () => {
+    it("sets chosenPlayer", () => {
 
         // Given
-        let testee = mount(<GamePicker store={store}/>).instance();
+        const testee = ReactDOM.render(<GamePicker store={store}/>, document.createElement('div'));
 
         // When
         testee.setPlayer({target: {value: "player2"}});
@@ -48,10 +46,10 @@ describe("game picker component", () => {
         expect(testee.state.chosenPlayer).toBe("player2");
     });
 
-    it("should trigger LOAD_GAME_REQUESTED action", () => {
+    it("triggers LOAD_GAME_REQUESTED action", () => {
 
         // Given
-        let testee = mount(<GamePicker store={store}/>).instance();
+        const testee = ReactDOM.render(<GamePicker store={store}/>, document.createElement('div'));
 
         // When
         testee.handleClick();
