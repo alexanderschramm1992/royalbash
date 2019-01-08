@@ -1,7 +1,5 @@
-// React
 import React from "react";
 import ReactDOM from 'react-dom';
-// Internals
 import GamePicker from "./GamePicker";
 
 describe("Game Picker", () => {

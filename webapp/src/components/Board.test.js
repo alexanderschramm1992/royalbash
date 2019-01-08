@@ -1,14 +1,8 @@
-// React
 import React from "react";
-// Enzyme
-import Enzyme from "enzyme";
-import { mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-Enzyme.configure({adapter: new Adapter()});
-// Internals
+import ReactDOM from "react-dom";
 import Board from "./Board";
 
-describe("board component", () => {
+describe("Board", () => {
 
     const store = {
         dispatch: function(action) {
@@ -26,13 +20,15 @@ describe("board component", () => {
     };
 
     it("renders without crashing", () => {
-        mount(<Board store={store}/>).unmount();
+        const div = document.createElement('div');
+        ReactDOM.render(<Board store={store}/>, div);
+        ReactDOM.unmountComponentAtNode(div);
     });
 
-    it("should trigger END_TURN_REQUESTED action", () => {
+    it("triggers END_TURN_REQUESTED action", () => {
 
         // Given
-        let testee = mount(<Board store={store}/>).instance();
+        const testee = ReactDOM.render(<Board store={store}/>, document.createElement('div'));
 
         // When
         testee.handleEndTurnButton();
@@ -41,10 +37,10 @@ describe("board component", () => {
         expect(store.actions).toContainEqual({type: "END_TURN_REQUESTED", player: "player1"});
     });
 
-    it("should trigger DRAW_CARD_REQUESTED action", () => {
+    it("triggers DRAW_CARD_REQUESTED action", () => {
 
         // Given
-        let testee = mount(<Board store={store}/>).instance();
+        const testee = ReactDOM.render(<Board store={store}/>, document.createElement('div'));
 
         // When
         testee.handleDrawCardButton();
