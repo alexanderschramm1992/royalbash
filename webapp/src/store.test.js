@@ -1,4 +1,3 @@
-// Internals
 import {drawCard, endTurn, loadGame, loadGameIds} from "./store";
 
 describe("store handling LOAD_GAME events", () => {

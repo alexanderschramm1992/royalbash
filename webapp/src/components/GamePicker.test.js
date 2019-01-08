@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import GamePicker from "./GamePicker";
 
-describe("Game Picker", () => {
+describe("Game Picker Component", () => {
 
     const store = {
         dispatch: function(action) {

@@ -1,14 +1,8 @@
-// React
 import React from "react";
-// Enzyme
-import Enzyme from "enzyme";
-import { mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-Enzyme.configure({adapter: new Adapter()});
-// Internals
+import ReactDOM from "react-dom";
 import Card from "./Card";
 
-describe("card component", () => {
+describe("Card Component", () => {
 
     const card = {
         name: "name",
@@ -19,13 +13,15 @@ describe("card component", () => {
     const store = {getState: () => {return {onTurn: true}}};
 
     it("renders without crashing", () => {
-        mount(<Card key="key" card={card} store={store}/>).unmount();
+        const div = document.createElement('div');
+        ReactDOM.render(<Card key="key" card={card} store={store}/>, div);
+        ReactDOM.unmountComponentAtNode(div);
     });
 
     it("creates a drag event with respective payload and type", () => {
 
         // Given
-        let testee = mount(<Card key="key" card={card} store={store}/>).instance();
+        let testee = ReactDOM.render(<Card key="key" card={card} store={store}/>, document.createElement('div'));
         let event = {dataTransfer: {
             setData: function(key, data) {this[key] = data}
         }};

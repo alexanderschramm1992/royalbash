@@ -1,4 +1,3 @@
-// Internals
 import {getChosenPlayer, getHandcards} from "./storeutil";
 
 describe("store util", () => {

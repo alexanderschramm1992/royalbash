@@ -1,14 +1,8 @@
-// React
 import React from "react";
-// Enzyme
-import Enzyme from "enzyme";
-import { mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-Enzyme.configure({adapter: new Adapter()});
-// Internals
+import ReactDOM from "react-dom";
 import Spots from "./Spots";
 
-describe("spots component", () => {
+describe("Spots Component", () => {
 
     const store = {
         getState: function () {
@@ -19,12 +13,14 @@ describe("spots component", () => {
     };
 
     it("renders without crashing", () => {
-        mount(<Spots store={store}/>).unmount();
+        const div = document.createElement('div');
+        ReactDOM.render(<Spots store={store}/>, div);
+        ReactDOM.unmountComponentAtNode(div);
     });
 
-    it("should get spots of chosen player", () => {
+    it("gets spots of chosen player", () => {
         // Given
-        let store = {
+        const store = {
             getState: () => { return {
                 game: {
                     player1: {
@@ -35,24 +31,24 @@ describe("spots component", () => {
                 gameLoaded: true
             }}
         };
-        let testee = mount(<Spots store={store}/>).instance();
+        const testee = ReactDOM.render(<Spots store={store}/>, document.createElement('div'));
 
         // When
-        let result = testee.getSpots();
+        const result = testee.getSpots();
 
         // Then
         expect(result).toContainEqual({id: "foo"});
     });
 
-    it("should get empty array if chosen player spots are not available", () => {
+    it("gets empty array if chosen player spots are not available", () => {
         // Given
-        let store = {
+        const store = {
             getState: () => { return {}}
         };
-        let testee = mount(<Spots store={store}/>).instance();
+        const testee = ReactDOM.render(<Spots store={store}/>, document.createElement('div'));
 
         // When
-        let result = testee.getSpots();
+        const result = testee.getSpots();
 
         // Then
         expect(result).toHaveLength(0);

@@ -1,14 +1,8 @@
-// React
 import React from "react";
-// Enzyme
-import Enzyme from "enzyme";
-import { mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-Enzyme.configure({adapter: new Adapter()});
-// Internals
+import ReactDOM from "react-dom";
 import Player from "./Player";
 
-describe("player component", () => {
+describe("Player Component", () => {
 
     const store = {
         dispatch: function(action) {this.actions.push(action);},
@@ -18,14 +12,16 @@ describe("player component", () => {
     };
 
     it("renders without crashing", () => {
-        mount(<Player store={store} id="Player Id"/>).unmount();
+        const div = document.createElement('div');
+        ReactDOM.render(<Player store={store} id="Player Id"/>, div);
+        ReactDOM.unmountComponentAtNode(div);
     });
 
-    it("should not trigger PLAY_CARD_ON_PLAYER_REQUESTED action", () => {
+    it("does not trigger PLAY_CARD_ON_PLAYER_REQUESTED action", () => {
 
         // Given
-        let testee = mount(<Player store={store} id="Player Id"/>).instance();
-        let event = {
+        const testee = ReactDOM.render(<Player store={store} id="Player Id"/>, document.createElement('div'));
+        const event = {
             dataTransfer: {
                 getData: () => {return "banana";}
             }
@@ -38,11 +34,11 @@ describe("player component", () => {
         expect(store.actions).toHaveLength(0);
     });
 
-    it("should trigger PLAY_CARD_ON_PLAYER_REQUESTED action", () => {
+    it("triggers PLAY_CARD_ON_PLAYER_REQUESTED action", () => {
 
         // Given
-        let testee = mount(<Player store={store} id="Player Id"/>).instance();
-        let event = {
+        const testee = ReactDOM.render(<Player store={store} id="Player Id"/>, document.createElement('div'));
+        const event = {
             dataTransfer: {
                 getData: (key) => {
                     if(key === "type") {return "card";}

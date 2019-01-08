@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Board from "./Board";
 
-describe("Board", () => {
+describe("Board Component", () => {
 
     const store = {
         dispatch: function(action) {
