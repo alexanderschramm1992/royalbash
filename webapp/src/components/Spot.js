@@ -10,6 +10,7 @@ class Spot extends React.Component {
     }
 
     handleDrop(event) {
+        event.preventDefault();
         switch(event.dataTransfer.getData("type")) {
             case "card":
                 this.props.store.dispatch({
@@ -38,9 +39,14 @@ class Spot extends React.Component {
             const spot = chosenPlayer.spots
                 .filter((spot) => spot.id === this.props.id);
 
-            return <div className="Spot" onDrop={this.handeDrop} style={style}>
+            return <div className="Spot"
+                        onDrop={this.handleDrop}
+                        onDragOver={(event) => event.preventDefault()}
+                        style={style}>
                 {spot && spot.creature &&
-                <Card key={spot.creature.id} card={spot.creature} store={this.props.store}/>}
+                <Card key={spot.creature.id}
+                      card={spot.creature}
+                      store={this.props.store}/>}
             </div>;
         } else {
             return <div/>;

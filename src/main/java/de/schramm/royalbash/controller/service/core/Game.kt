@@ -28,6 +28,20 @@ data class Game(
                 .orElse(this)
     }
 
+    fun playCard(card: Card, owner: Player, targetSpot: Spot): Game {
+        return players
+                .filter { player -> player == owner }
+                .filter { player -> player.hasCard(card) }
+                .findFirst()
+                .map { player -> player.removeHandcard(card) }
+                .map { player -> updatePlayer(owner, player) }
+                .map { game -> card.invoke(Context(
+                        game,
+                        owner,
+                        targetSpot = targetSpot)) }
+                .orElse(this)
+    }
+
     fun combat(attacker: Creature, owner: Player, defender: Creature): Game {
 
         val opponent = getOpponent(owner)
@@ -138,6 +152,13 @@ data class Game(
                 .filter { it.isPresent }
                 .map { it.get() }
                 .filter { it == creature }
+                .findFirst()
+    }
+
+    fun findSpot(spotId: String): Optional<Spot> {
+        return Stream.of<Player>(player1, player2)
+                .flatMap { it.getSpots() }
+                .filter { it.id == spotId }
                 .findFirst()
     }
 

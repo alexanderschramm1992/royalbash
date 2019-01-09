@@ -8,6 +8,7 @@ import de.schramm.royalbash.controller.service.core.Game
 @JsonSubTypes(
         JsonSubTypes.Type(value = CardDrawnEvent::class, name = "CARD_DRAWN"),
         JsonSubTypes.Type(value = CardPlayedOnPlayerEvent::class, name = "CARD_PLAYED_ON_PLAYER"),
+        JsonSubTypes.Type(value = CardPlayedOnSpotEvent::class, name = "CARD_PLAYED_ON_SPOT"),
         JsonSubTypes.Type(value = CreatureAttackedEvent::class, name = "CREATURE_ATTACKED"),
         JsonSubTypes.Type(value = NoOpEvent::class, name = "NO_OP"),
         JsonSubTypes.Type(value = PlayerAttackedEvent::class, name = "PLAYER_ATTACKED"),

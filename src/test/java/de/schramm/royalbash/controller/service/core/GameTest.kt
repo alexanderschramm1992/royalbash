@@ -116,7 +116,7 @@ class GameTest {
     }
 
     @Test
-    fun should_remove_played_card_from_handcards() {
+    fun should_remove_played_card_from_handcards_after_played_on_player() {
 
         // Given
         val card = CardMock("Id 1")
@@ -126,6 +126,23 @@ class GameTest {
 
         // When
         val game = testee.playCard(card, player1, player2)
+
+        // Then
+        assertThat(game.player1.handcards).isEmpty()
+    }
+
+    @Test
+    fun should_remove_played_card_from_handcards_after_played_on_spot() {
+
+        // Given
+        val card = CardMock("Id 1")
+        val player1 = Player("Id 2", handcards = listOf(card))
+        val player2 = Player("Id 3")
+        val spot = Spot("Id 4")
+        val testee = Game("Id 5", player1 = player1, player2 = player2)
+
+        // When
+        val game = testee.playCard(card, player1, spot)
 
         // Then
         assertThat(game.player1.handcards).isEmpty()
@@ -281,6 +298,39 @@ class GameTest {
 
         // When
         val optional = testee.findCreature("Id 1")
+
+        // Then
+        assertThat(optional.isPresent).isFalse()
+    }
+
+    @Test
+    fun should_deliver_spot_with_given_id() {
+
+        // Given
+        val spot = Spot(id = "Id 1")
+        val player1 = Player("Id 2", spots = listOf(spot))
+        val player2 = Player("Id 3")
+        val testee = Game("Id 4", player1 = player1, player2 = player2)
+
+        // When
+        val optional = testee.findSpot("Id 1")
+
+        // Then
+        assertThat(optional)
+                .isPresent
+                .isEqualTo(Optional.of(spot))
+    }
+
+    @Test
+    fun should_deliver_optional_empty_if_spot_id_cannot_be_found() {
+
+        // Given
+        val player1 = Player("Id 1")
+        val player2 = Player("Id 2")
+        val testee = Game("Id 3", player1 = player1, player2 = player2)
+
+        // When
+        val optional = testee.findSpot("Id 1")
 
         // Then
         assertThat(optional.isPresent).isFalse()

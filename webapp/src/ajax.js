@@ -94,11 +94,11 @@ function requestGame() {
             doEndTurnCall();
         } else if(state.drawCardRequested) {
             doDrawCardCall();
-        } else if(state.playCard.requested && state.playCard.target.player) {
+        } else if(state.playCard.requested && state.playCard.target.playerId) {
             doPlayCardOnPlayerCall();
-        } else if(state.playCard.requested && state.playCard.target.spot) {
+        } else if(state.playCard.requested && state.playCard.target.spotId) {
             doPlayCardOnSpotCall();
-        } else if(state.playCard.requested && state.playCard.target.creature) {
+        } else if(state.playCard.requested && state.playCard.target.creatureId) {
             doPlayCardOnCreatureCall();
         } else {
             console.log("Something happened that does not concern ajax.js");

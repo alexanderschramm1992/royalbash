@@ -19,6 +19,9 @@ class GamePicker extends React.Component {
         this.requestLoadGameIds();
     }
 
+    componentWillUnmount() {
+    }
+
     requestLoadGameIds() {
         this.store.dispatch({type: "LOAD_GAME_IDS_REQUESTED"});
     }
