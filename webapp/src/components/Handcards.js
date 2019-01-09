@@ -7,8 +7,9 @@ class Handcards extends React.Component {
     createHandcards(handcards) {
 
         let style = {
-            height: "100%",
-            width: "15%",
+            height: "97%",
+            width: "18%",
+            padding: "1%",
             display: "inline-block"
         };
 

@@ -25,19 +25,17 @@ class Spot extends React.Component {
     }
 
     render() {
-
-        let style = {
-            height: "100%",
-            width: "20%",
-            display: "inline-block",
-            background: "gray"
-        };
-
-        let chosenPlayer = getChosenPlayer(this.props.store);
+        const chosenPlayer = getChosenPlayer(this.props.store);
 
         if(chosenPlayer) {
 
-            let spot = chosenPlayer.spots
+            const style = {
+                width: "100%",
+                height: "100%",
+                background: "lightgray"
+            };
+
+            const spot = chosenPlayer.spots
                 .filter((spot) => spot.id === this.props.id);
 
             return <div className="Spot" onDrop={this.handeDrop} style={style}>

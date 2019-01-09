@@ -21,15 +21,23 @@ class Board extends React.Component {
 
     render() {
 
-        let style = {
+        const style = {
             height: "800px",
             width: "1280px",
-            display: "inline-block"
+            display: "inline-block",
+            textAlign: "center"
+        };
+
+        const gapStyle = {
+            width: "100%",
+            height: "5%"
         };
 
         return (
             <div className="Board" style={style}>
+                <div className="Gap" style={gapStyle}/>
                 <Spots store={this.props.store}/>
+                <div className="Gap" style={gapStyle}/>
                 <Handcards store={this.props.store}/>
                 <div className="Deckcards">
                     <button onClick={this.handleDrawCardButton}>

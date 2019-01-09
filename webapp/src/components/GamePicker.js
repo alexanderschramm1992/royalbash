@@ -7,7 +7,7 @@ class GamePicker extends React.Component {
         this.state = {
             gameId: "",
             chosenPlayer: "player1",
-            gameIds: []
+            gameIds: [],
         };
         this.handleClick = this.handleClick.bind(this);
         this.setGameId = this.setGameId.bind(this);
@@ -50,8 +50,12 @@ class GamePicker extends React.Component {
     }
 
     render() {
+        const style = {
+            textAlign: "center"
+        };
+
         return (
-            <div className="GamePicker">
+            <div className="GamePicker" style={style}>
                 <h1>Game:</h1>
                 <select value={this.state.gameId} onChange={this.setGameId}>
                     {this.state.gameIds.map((gameId) => <option value={gameId} key={gameId}>{gameId}</option>)}

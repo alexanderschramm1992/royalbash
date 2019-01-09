@@ -5,20 +5,29 @@ import Spot from "./Spot";
 class Spots extends React.Component {
 
     createSpots() {
-        let spots = this.getSpots();
+        const style = {
+            height: "97%",
+            width: "18%",
+            padding: "1%",
+            display: "inline-block"
+        };
+
+        const spots = this.getSpots();
         return spots
             .filter((spot) => spot !== undefined)
-            .map((spot) => <Spot key={spot.id} id={spot.id} store={this.props.store}/>);
+            .map((spot) => <div className="Spot-Wrapper" key={spot.id} style={style}>
+                    <Spot id={spot.id} store={this.props.store}/>
+                </div>);
     }
 
     getSpots() {
-        let store = this.props.store;
+        const store = this.props.store;
         return store.getState().gameLoaded ? getChosenPlayer(store).spots : [];
     }
 
     render() {
 
-        let style = {
+        const style = {
             height: "20%",
             width: "100%"
         };

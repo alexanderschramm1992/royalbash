@@ -15,17 +15,18 @@ class Card extends React.Component {
 
     render() {
 
-        let card = this.props.card;
+        const card = this.props.card;
 
-        let cardStyle = {
+        const style = {
+            width: "100%",
             height: "100%",
-            width: "100%"
+            background: "lightgray"
         };
 
         return (
             <div className="Card"
                  draggable={this.props.store.getState().onTurn}
-                 style={cardStyle}
+                 style={style}
                  onDragStart={this.handleDragStart}>
                 <div className="name">{card.name}</div>
                 <div className="text">{card.text}</div>
