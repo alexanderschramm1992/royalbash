@@ -33,14 +33,11 @@ jobs:
 
       - run: mvn dependency:go-offline
 
-      - run: mvn compile
+      - run: mvn verify
 
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
         
-      - run: mvn verify
-
-      - store_test_results:
-          path: /target/surfire-reports
+      - run: mvn install
