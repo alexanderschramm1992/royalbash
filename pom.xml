@@ -7,7 +7,7 @@
 	<groupId>de.schramm</groupId>
 	<artifactId>royal-bash</artifactId>
 	<version>0.3</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>royal-bash</name>
 	<description>the royalest of bashes</description>
