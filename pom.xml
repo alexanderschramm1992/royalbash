@@ -66,13 +66,19 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
 			<scope>test</scope>
 		</dependency>
-		<!-- Code-Assert Test -->
+		<!-- Architecture Tests -->
 		<dependency>
-			<groupId>guru.nidi</groupId>
-			<artifactId>code-assert</artifactId>
-			<version>0.9.3</version>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit</artifactId>
+			<version>0.9.1</version>
 			<scope>test</scope>
 		</dependency>
         <!-- AssertJ -->
@@ -116,6 +122,25 @@
 			<artifactId>mockk</artifactId>
             <version>1.8.9</version>
             <scope>test</scope>
+		</dependency>
+		<!-- J-Unit -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>5.2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.2.0</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
