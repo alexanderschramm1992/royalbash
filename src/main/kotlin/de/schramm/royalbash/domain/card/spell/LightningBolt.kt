@@ -1,19 +1,19 @@
-package de.schramm.royalbash.domain.card
+package de.schramm.royalbash.domain.card.spell
 
 import de.schramm.royalbash.domain.Card
 import de.schramm.royalbash.domain.Context
 import de.schramm.royalbash.domain.Game
-import de.schramm.royalbash.domain.effect.DiscardHandcardsEffect
+import de.schramm.royalbash.domain.effect.DealDamageToCreatureEffect
 
-data class MemoryLeak(
+data class LightningBolt (
         override val id: String,
         override val cost: Int
 ) : Card {
 
-    override val name = "Memory Leak"
-    override val text = "Target player discards 2 handcards."
+    override val name = "Lightning Bolt"
+    override val text = "Deal 2 damage to target creature."
 
-    val effect = DiscardHandcardsEffect(2)
+    val effect = DealDamageToCreatureEffect(2)
 
     override fun invoke(context: Context): Game {
         return effect.invoke(context)

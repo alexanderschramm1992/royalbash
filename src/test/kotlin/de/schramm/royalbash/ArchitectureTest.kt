@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test
 
 class ArchitectureTest {
 
+    private val domain = "..domain.."
+    private val application = "..application.."
+    private val infrastructure = "..infrastructure.."
+    private val api = "..api.."
     private val classes = ClassFileImporter()
             .withImportOption(ImportOption.Predefined.DONT_INCLUDE_TESTS)
             .importPackages("de.schramm.royalbash")
@@ -26,20 +30,20 @@ class ArchitectureTest {
     fun `domain has no dependencies to other packages`() {
         ArchRuleDefinition.noClasses()
                 .that()
-                .resideInAPackage("..domain..")
+                .resideInAPackage(domain)
                 .should()
-                .resideOutsideOfPackages("..domain..", "java..", "javax..", "kotlin..", "com..", "org..")
+                .resideOutsideOfPackages(domain, "java..", "javax..", "kotlin..", "com..", "org..")
                 .check(classes)}
 
     @Test
     fun `no packages depend on api`() {
         ArchRuleDefinition.classes()
                 .that()
-                .resideInAPackage("..api..")
+                .resideInAPackage(api)
                 .should()
                 .onlyBeAccessed()
                 .byClassesThat()
-                .resideInAPackage("..api..")
+                .resideInAPackage(api)
                 .check(classes)}
 
     @Test
@@ -50,13 +54,13 @@ class ArchitectureTest {
     fun `onion architecture is obeyed`() {
         Architectures.layeredArchitecture()
                 .layer("Infrastructure")
-                .definedBy("..infrastructure..")
+                .definedBy(infrastructure)
                 .layer("Application")
-                .definedBy("..application..")
+                .definedBy(application)
                 .layer("Domain")
-                .definedBy("..domain..")
+                .definedBy(domain)
                 .layer("Api")
-                .definedBy("..api..")
+                .definedBy(api)
                 .whereLayer("Infrastructure")
                 .mayNotBeAccessedByAnyLayer()
                 .whereLayer("Api")

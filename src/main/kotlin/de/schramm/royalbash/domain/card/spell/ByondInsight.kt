@@ -1,4 +1,4 @@
-package de.schramm.royalbash.domain.card
+package de.schramm.royalbash.domain.card.spell
 
 import de.schramm.royalbash.domain.Card
 import de.schramm.royalbash.domain.Context
