@@ -7,13 +7,13 @@ import de.schramm.royalbash.application.gameevent.GameEvent
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.util.*
 
 class GameServiceTest {
 
     @Test
-    fun should_retrieve_stored_game() {
+    fun `retrieves stored game`() {
 
         // Given
         val gameId = "Game Id"
@@ -35,7 +35,7 @@ class GameServiceTest {
     }
 
     @Test
-    fun should_create_and_store_game() {
+    fun `creates and stores game`() {
 
         // Given
         val accountId1 = "Account 1"
@@ -53,11 +53,11 @@ class GameServiceTest {
         assertThat(game).isNotNull
         assertThat(game.player1.name).isEqualTo(accountId1)
         assertThat(game.player2.name).isEqualTo(accountId2)
-        assertThat(repository.exists(id)).isTrue()
+        assertThat(repository.existsById(id)).isTrue()
     }
 
     @Test
-    fun should_retrieve_game_after_event_is_committed() {
+    fun `retrieves game after event is committed`() {
 
         // Given
         val gameId = "Id 1"
