@@ -4,7 +4,7 @@ import de.schramm.royalbash.domain.card.CardMock
 import de.schramm.royalbash.domain.card.creature.CreatureMock
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Index
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.util.*
 
 class PlayerTest {

@@ -5,7 +5,7 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.card.CardMock
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class DiscardHandcardsEffectTest {
 

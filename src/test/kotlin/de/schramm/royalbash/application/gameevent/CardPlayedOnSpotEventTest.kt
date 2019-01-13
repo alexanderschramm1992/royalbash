@@ -5,7 +5,7 @@ import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
 import de.schramm.royalbash.domain.card.CardMock
 import org.assertj.core.api.Assertions
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class CardPlayedOnSpotEventTest {
 

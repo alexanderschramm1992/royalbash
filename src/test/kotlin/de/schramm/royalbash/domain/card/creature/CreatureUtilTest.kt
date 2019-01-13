@@ -5,7 +5,7 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
 import org.assertj.core.api.Assertions
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.util.*
 
 class CreatureUtilTest {

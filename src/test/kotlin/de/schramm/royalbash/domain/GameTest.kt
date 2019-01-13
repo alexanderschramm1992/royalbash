@@ -5,13 +5,13 @@ import de.schramm.royalbash.domain.card.CardMock
 import de.schramm.royalbash.domain.card.creature.CreatureMock
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.util.*
 
 class GameTest {
 
     @Test
-    fun should_deliver_players() {
+    fun `delivers players`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -28,7 +28,7 @@ class GameTest {
     }
 
     @Test
-    fun should_determine_whos_turn_it_is() {
+    fun `determines who's turn it is`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -43,7 +43,7 @@ class GameTest {
     }
 
     @Test
-    fun should_switch_turn_to_next() {
+    fun `switches to next turn`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -58,7 +58,7 @@ class GameTest {
     }
 
     @Test
-    fun should_switch_turn_to_next_twice() {
+    fun `switches to next turn twice`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -73,7 +73,7 @@ class GameTest {
     }
 
     @Test
-    fun should_deliver_game_state() {
+    fun `delivers game state`() {
 
         // Given
         val testee = Game("Id 1", OPEN, Player("Id 2"), Player("Id 3"))
@@ -86,7 +86,7 @@ class GameTest {
     }
 
     @Test
-    fun should_change_state() {
+    fun `changes game state`() {
 
         // Given
         val testee = Game("Id 1", OPEN, Player("Id 2"), Player("Id 3"))
@@ -99,7 +99,7 @@ class GameTest {
     }
 
     @Test
-    fun should_check_win_conditions() {
+    fun `checks win condition`() {
 
         // Given
         val testee = Game(
@@ -116,7 +116,7 @@ class GameTest {
     }
 
     @Test
-    fun should_remove_played_card_from_handcards_after_played_on_player() {
+    fun `removes played card from handcards after played on player`() {
 
         // Given
         val card = CardMock("Id 1")
@@ -132,7 +132,7 @@ class GameTest {
     }
 
     @Test
-    fun should_remove_played_card_from_handcards_after_played_on_spot() {
+    fun `removes played card from handcards after played on spot`() {
 
         // Given
         val card = CardMock("Id 1")
@@ -149,7 +149,7 @@ class GameTest {
     }
 
     @Test
-    fun should_remove_dead_creature_after_combat() {
+    fun `removes dead creature after combat`() {
 
         // Given
         val attacker = CreatureMock(
@@ -175,7 +175,7 @@ class GameTest {
     }
 
     @Test
-    fun should_deal_damage_to_creature_in_combat() {
+    fun `deals damage to creature in combat`() {
 
         // Given
         val attacker = CreatureMock(
@@ -204,7 +204,7 @@ class GameTest {
     }
 
     @Test
-    fun should_deal_damage_to_player_in_combat() {
+    fun `deals damage to player in combat`() {
 
         // Given
         val creature = CreatureMock("Id 1", attack = 5)
@@ -221,7 +221,7 @@ class GameTest {
     }
 
     @Test
-    fun should_set_game_state_when_player_dies_in_combat() {
+    fun `sets game state when player dies in combat`() {
 
         // Given
         val creature = CreatureMock("Id 1", attack = 5)
@@ -238,7 +238,7 @@ class GameTest {
     }
 
     @Test
-    fun should_deliver_player_with_given_id() {
+    fun `delivers player with given id`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -255,7 +255,7 @@ class GameTest {
     }
 
     @Test
-    fun should_deliver_optional_empty_if_player_id_cannot_be_found() {
+    fun `delivers optional empty if player id cannot be found`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -270,7 +270,7 @@ class GameTest {
     }
 
     @Test
-    fun should_deliver_creature_with_given_id() {
+    fun `delivers creature with given id`() {
 
         // Given
         val creature = CreatureMock("Id 1")
@@ -289,7 +289,7 @@ class GameTest {
     }
 
     @Test
-    fun should_deliver_optional_empty_if_creature_id_cannot_be_found() {
+    fun `delivers optional empty if creature id cannot be found`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -304,7 +304,7 @@ class GameTest {
     }
 
     @Test
-    fun should_deliver_spot_with_given_id() {
+    fun `delivers spot with given id`() {
 
         // Given
         val spot = Spot(id = "Id 1")
@@ -322,7 +322,7 @@ class GameTest {
     }
 
     @Test
-    fun should_deliver_optional_empty_if_spot_id_cannot_be_found() {
+    fun `delivers optional empty if spot id cannot be found`() {
 
         // Given
         val player1 = Player("Id 1")
