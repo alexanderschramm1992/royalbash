@@ -1,28 +1,28 @@
 package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameService
+import de.schramm.royalbash.application.gameevent.NoOpEvent
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
-import de.schramm.royalbash.application.gameevent.NoOpEvent
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.extension.ExtendWith
 import org.skyscreamer.jsonassert.JSONAssert
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.http.MediaType
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import java.util.*
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @WebMvcTest(GameController::class)
 class GameControllerTest {
 
@@ -39,8 +39,7 @@ class GameControllerTest {
     private lateinit var gameService: GameService
 
     @Test
-    @Throws(Exception::class)
-    fun should_deliver_game() {
+    fun `delivers game`() {
 
         // Given
         val game = Game(
@@ -72,8 +71,7 @@ class GameControllerTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun should_not_deliver_game_but_status_code_404_if_game_not_found() {
+    fun `does not deliver game but status code 404 if game not found`() {
 
         // Given
         every { gameService.retrieveGame("1") } returns Optional.empty()
@@ -93,8 +91,7 @@ class GameControllerTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun should_deliver_new_game() {
+    fun `delivers new game`() {
 
         // Given
         val accountId1 = "Account 1"
@@ -137,8 +134,7 @@ class GameControllerTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun should_resolve_event_and_return_updated_game() {
+    fun `resolves event and returns updated game`() {
 
         // Given
         val gameId = "1"
@@ -173,8 +169,7 @@ class GameControllerTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun should_not_resolve_event_but_return_status_code_404_if_game_not_found() {
+    fun `does not resolve event but returns status code 404 if game not found`() {
 
         // Given
         val gameId = "1"

@@ -155,11 +155,10 @@ data class Game(
                 .findFirst()
     }
 
-    fun findSpot(spotId: String): Optional<Spot> {
-        return Stream.of<Player>(player1, player2)
-                .flatMap { it.getSpots() }
-                .filter { it.id == spotId }
-                .findFirst()
+    fun findSpot(spotId: String): Spot? {
+        return listOf(player1.spots, player2.spots)
+                .flatten()
+                .find { spot -> spot.id == spotId }
     }
 
     internal fun nextTurn(): Game {

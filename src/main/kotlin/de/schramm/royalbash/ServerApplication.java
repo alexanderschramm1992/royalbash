@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"de.schramm.royalbash"})
 public class ServerApplication {
 
     public static final Logger logger = LogManager.getLogger(ServerApplication.class);

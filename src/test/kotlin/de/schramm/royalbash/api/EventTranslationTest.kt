@@ -2,10 +2,10 @@ package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameRepositoryMock
 import de.schramm.royalbash.application.GameService
+import de.schramm.royalbash.application.gameevent.*
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
-import de.schramm.royalbash.application.gameevent.*
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -17,9 +17,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.http.MediaType
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.util.*
 
 @ExtendWith(SpringExtension::class)

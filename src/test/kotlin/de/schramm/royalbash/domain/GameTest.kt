@@ -11,7 +11,7 @@ import java.util.*
 class GameTest {
 
     @Test
-    fun `delivers players`() {
+    fun `returns players`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -28,7 +28,7 @@ class GameTest {
     }
 
     @Test
-    fun `determines who's turn it is`() {
+    fun `returns who's turn it is`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -73,7 +73,7 @@ class GameTest {
     }
 
     @Test
-    fun `delivers game state`() {
+    fun `returns game state`() {
 
         // Given
         val testee = Game("Id 1", OPEN, Player("Id 2"), Player("Id 3"))
@@ -238,7 +238,7 @@ class GameTest {
     }
 
     @Test
-    fun `delivers player with given id`() {
+    fun `returns player with given id`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -255,7 +255,7 @@ class GameTest {
     }
 
     @Test
-    fun `delivers optional empty if player id cannot be found`() {
+    fun `returns optional empty if player id cannot be found`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -270,7 +270,7 @@ class GameTest {
     }
 
     @Test
-    fun `delivers creature with given id`() {
+    fun `returns creature with given id`() {
 
         // Given
         val creature = CreatureMock("Id 1")
@@ -289,7 +289,7 @@ class GameTest {
     }
 
     @Test
-    fun `delivers optional empty if creature id cannot be found`() {
+    fun `returns optional empty if creature id cannot be found`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -304,7 +304,7 @@ class GameTest {
     }
 
     @Test
-    fun `delivers spot with given id`() {
+    fun `returns spot with given id`() {
 
         // Given
         val spot = Spot(id = "Id 1")
@@ -313,16 +313,14 @@ class GameTest {
         val testee = Game("Id 4", player1 = player1, player2 = player2)
 
         // When
-        val optional = testee.findSpot("Id 1")
+        val maybeSpot = testee.findSpot("Id 1")
 
         // Then
-        assertThat(optional)
-                .isPresent
-                .isEqualTo(Optional.of(spot))
+        assertThat(maybeSpot).isEqualTo(spot)
     }
 
     @Test
-    fun `delivers optional empty if spot id cannot be found`() {
+    fun `returns null if spot id cannot be found`() {
 
         // Given
         val player1 = Player("Id 1")
@@ -330,9 +328,9 @@ class GameTest {
         val testee = Game("Id 3", player1 = player1, player2 = player2)
 
         // When
-        val optional = testee.findSpot("Id 1")
+        val maybeSpot = testee.findSpot("Id 1")
 
         // Then
-        assertThat(optional.isPresent).isFalse()
+        assertThat(maybeSpot).isNull()
     }
 }
