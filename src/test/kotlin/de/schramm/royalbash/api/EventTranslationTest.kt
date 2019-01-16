@@ -1,11 +1,11 @@
 package de.schramm.royalbash.api
 
-import de.schramm.royalbash.application.GameRepositoryMock
 import de.schramm.royalbash.application.GameService
 import de.schramm.royalbash.application.gameevent.*
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
+import de.schramm.royalbash.infrastructure.database.InMemoryRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -31,7 +31,7 @@ class EventTranslationTest {
         @Bean
         open fun gameService() = mockk<GameService>()
         @Bean
-        open fun gameRepository() = GameRepositoryMock()
+        open fun gameRepository() = InMemoryRepository()
     }
 
     private val gameId = "1"
