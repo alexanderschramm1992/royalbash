@@ -1,6 +1,5 @@
 package de.schramm.royalbash.domain
 
-import java.util.*
 import java.util.Collections.emptyList
 import java.util.stream.Collectors
 
@@ -21,9 +20,7 @@ data class Player (
                 Spot(id = uuidGenerator.generateId()))
 ) {
 
-    fun setHitpoints(hitpoints: Int): Player {
-        return copy(hitpoints = hitpoints)
-    }
+    fun setHitpoints(hitpoints: Int) = copy(hitpoints = hitpoints)
 
     fun updateSpot(oldSpot: Spot, newSpot: Spot): Player {
 
@@ -37,20 +34,14 @@ data class Player (
     fun discardCards(amountOfCards: Int): Player {
 
         var player = this
-        for (iterator in 0 until amountOfCards) {
-            player = player.discardCard()
-        }
-
+        for (iterator in 0 until amountOfCards) { player = player.discardCard() }
         return player
     }
 
     fun drawCards(amountOfCards: Int): Player {
 
         var player = this
-        for (iterator in 0 until amountOfCards) {
-            player = player.drawCard()
-        }
-
+        for (iterator in 0 until amountOfCards) { player = player.drawCard() }
         return player
     }
 
@@ -70,11 +61,8 @@ data class Player (
         val spots = spots.map { it.removeCreature(creature) }
 
         return findCreature(creature)
-                .map { ownedCreature -> copy(
-                        depositcards = depositcards.plus(ownedCreature),
-                        spots = spots
-                ) }
-                .orElse(this)
+            ?.let { copy(depositcards = depositcards.plus(it), spots = spots) }
+            ?: this
     }
 
     internal fun updateCreature(oldCreature: Creature, newCreature: Creature): Player {
@@ -103,11 +91,9 @@ data class Player (
 
     private fun findHandcard(card: Card) = handcards.find { card == it }
 
-    fun findCreature(creature: Creature): Optional<Creature> {
-        return Optional.ofNullable(spots
-                .map { it.getCreature() }
-                .filter { it.isPresent }
-                .map { it.get() }
-                .firstOrNull { creature == it })
-    }
+    fun findCreature(creature: Creature) = spots
+        .map { it.getCreature() }
+        .filter { it.isPresent }
+        .map { it.get() }
+        .firstOrNull { creature == it }
 }

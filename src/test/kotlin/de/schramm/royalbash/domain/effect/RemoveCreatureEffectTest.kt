@@ -27,7 +27,7 @@ class RemoveCreatureEffectTest {
 
         // Then
         assertThat(updatedGame).isNotNull
-        assertThat(updatedGame.player1.findCreature(creature)).isNotPresent
+        assertThat(updatedGame.player1.findCreature(creature)).isNull()
         assertThat(updatedGame.player1.depositcards)
                 .hasSize(1)
                 .contains(creature)
