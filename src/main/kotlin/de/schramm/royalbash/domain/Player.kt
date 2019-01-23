@@ -61,11 +61,8 @@ data class Player (
         val handcards = handcards.filter { it != handcard }
 
         return findHandcard(handcard)
-                .map { card -> copy(
-                        handcards = handcards,
-                        depositcards = depositcards.plus(card)
-                ) }
-                .orElse(this)
+                ?.let { copy(handcards = handcards, depositcards = depositcards.plus(it)) }
+                ?: this
     }
 
     internal fun removeCreature(creature: Creature): Player {
@@ -104,7 +101,7 @@ data class Player (
         } else copy(handcards = handcards.subList(1, handcards.size))
     }
 
-    private fun findHandcard(card: Card) = Optional.ofNullable(handcards.find { card == it })
+    private fun findHandcard(card: Card) = handcards.find { card == it }
 
     fun findCreature(creature: Creature): Optional<Creature> {
         return Optional.ofNullable(spots
