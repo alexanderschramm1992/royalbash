@@ -5,7 +5,6 @@ import de.schramm.royalbash.domain.card.creature.CreatureMock
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.data.Index
 import org.junit.jupiter.api.Test
-import java.util.*
 
 class PlayerTest {
 
@@ -229,16 +228,16 @@ class PlayerTest {
         val testee = Player("Id 2", handcards = listOf(card))
 
         // When
-        val cardOptional = testee.findHandcard("Id 1")
+        val cardFound = testee.findHandcard("Id 1")
 
         // Then
-        assertThat(cardOptional)
-                .isPresent
-                .isEqualTo(Optional.of(card))
+        assertThat(cardFound)
+                .isNotNull
+                .isEqualTo(card)
     }
 
     @Test
-    fun should_not_find_handcard() {
+    fun `returns no card`() {
 
         // Given
         val testee = Player("Id 1")
@@ -247,7 +246,7 @@ class PlayerTest {
         val card = testee.findHandcard("Id 2")
 
         // Then
-        assertThat(card.isPresent).isFalse()
+        assertThat(card).isNull()
     }
 
     @Test

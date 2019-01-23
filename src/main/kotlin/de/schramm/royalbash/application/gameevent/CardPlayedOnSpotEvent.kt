@@ -12,7 +12,7 @@ data class CardPlayedOnSpotEvent(
 
     override fun invoke(game: Game): Game {
         return game.findPlayer(ownerId)
-                .map { owner -> owner.findHandcard(cardId)
+                .map { owner -> Optional.ofNullable(owner.findHandcard(cardId))
                         .map { card -> Optional.ofNullable(game.findSpot(targetSpotId))
                                 .map { targetSpot -> game.playCard(card, owner, targetSpot) }
                                 .orElse(game)

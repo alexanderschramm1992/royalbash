@@ -54,7 +54,7 @@ data class Player (
         return player
     }
 
-    fun findHandcard(cardId: String) = Optional.ofNullable(handcards.firstOrNull { cardId == it.id })
+    fun findHandcard(cardId: String) = handcards.firstOrNull { cardId == it.id }
 
     internal fun removeHandcard(handcard: Card): Player {
 

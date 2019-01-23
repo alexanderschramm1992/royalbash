@@ -1,6 +1,7 @@
 package de.schramm.royalbash.application.gameevent
 
 import de.schramm.royalbash.domain.Game
+import java.util.*
 
 data class CardPlayedOnPlayerEvent(
         val cardId: String,
@@ -12,7 +13,7 @@ data class CardPlayedOnPlayerEvent(
 
     override fun invoke(game: Game): Game {
         return game.findPlayer(ownerId)
-                .map { owner -> owner.findHandcard(cardId)
+                .map { owner -> Optional.ofNullable(owner.findHandcard(cardId))
                         .map { card -> game.findPlayer(targetPlayerId)
                                 .map { targetPlayer -> game.playCard(card, owner, targetPlayer) }
                                 .orElse(game) }
