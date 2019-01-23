@@ -92,8 +92,6 @@ data class Player (
     private fun findHandcard(card: Card) = handcards.find { card == it }
 
     fun findCreature(creature: Creature) = spots
-        .map { it.getCreature() }
-        .filter { it.isPresent }
-        .map { it.get() }
+        .mapNotNull { it.creature }
         .firstOrNull { creature == it }
 }

@@ -18,7 +18,7 @@ class SpotTest {
         val spot = testee.place(creature)
 
         // Then
-        assertThat(spot.getCreature()).isEqualTo(Optional.of(creature))
+        assertThat(spot.creature).isEqualTo(creature)
     }
 
     @Test
@@ -33,7 +33,7 @@ class SpotTest {
         val spot = testee.updateCreature(creature, otherCreature)
 
         // Then
-        assertThat(spot.getCreature()).isEqualTo(Optional.of(otherCreature))
+        assertThat(spot.creature).isEqualTo(otherCreature)
     }
 
     @Test
@@ -47,7 +47,7 @@ class SpotTest {
         val spot = testee.updateCreature(creature, creature)
 
         // Then
-        assertThat(spot.getCreature()).isNotPresent
+        assertThat(spot.creature).isNull()
     }
 
     @Test
@@ -61,13 +61,13 @@ class SpotTest {
         val spot = testee.removeCreature(creature)
 
         // Then
-        assertThat(spot.getCreature()).isNotPresent
+        assertThat(spot.creature).isNull()
     }
 
     @Test
     fun should_not_remove_creature() {
 
-        // Given
+        // Given+ßjn0m
         val creature = CreatureMock("Id 1")
         val otherCreature = CreatureMock("Id 2", hitpoints = 15)
         val testee = Spot(id = "spot", creature = creature)
@@ -76,6 +76,6 @@ class SpotTest {
         val spot = testee.removeCreature(otherCreature)
 
         // Then
-        assertThat(spot.getCreature()).isEqualTo(Optional.of(creature))
+        assertThat(spot.creature).isEqualTo(creature)
     }
 }

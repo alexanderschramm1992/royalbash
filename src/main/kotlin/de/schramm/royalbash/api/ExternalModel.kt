@@ -80,9 +80,7 @@ internal class ExternalModel {
             fun toExternalModel(spot: de.schramm.royalbash.domain.Spot): Spot {
                 return Spot(
                         id = spot.id,
-                        creature = spot.getCreature()
-                            .map { Creature.toExternalModel(it) }
-                            .orElse(null))
+                        creature = spot.creature?.let { Creature.toExternalModel(it) })
             }
         }
     }

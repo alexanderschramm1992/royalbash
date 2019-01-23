@@ -6,7 +6,6 @@ import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import java.util.*
 
 class CreatureUtilTest {
 
@@ -29,9 +28,9 @@ class CreatureUtilTest {
                 .player1
                 .spots
                 .first()
-                .getCreature()
+                .creature
         Assertions.assertThat(cardInSpot)
-                .isPresent
-                .isEqualTo(Optional.of(card))
+                .isNotNull
+                .isEqualTo(card)
     }
 }

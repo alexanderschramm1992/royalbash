@@ -171,7 +171,7 @@ class GameTest {
 
         // Then
         val spotsOfPlayer2 = game.player2.spots
-        assertThat(spotsOfPlayer2[0].getCreature()).isNotPresent
+        assertThat(spotsOfPlayer2[0].creature).isNull()
     }
 
     @Test
@@ -197,10 +197,10 @@ class GameTest {
 
         // Then
         val spotsOfPlayer1 = game.player1.spots
-        assertThat(spotsOfPlayer1[0].getCreature())
-                .isPresent
-                .map { it.hitpoints }
-                .isEqualTo(Optional.of(1))
+        assertThat(spotsOfPlayer1[0].creature)
+                .isNotNull
+                .extracting { it?.hitpoints }
+                .isEqualTo(1)
     }
 
     @Test

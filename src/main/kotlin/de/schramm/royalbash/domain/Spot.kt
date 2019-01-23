@@ -1,14 +1,8 @@
 package de.schramm.royalbash.domain
 
-import java.util.*
-
 data class Spot(
         val id: String,
-        private val creature: Creature? = null) {
-
-    fun getCreature(): Optional<Creature> {
-        return Optional.ofNullable(creature)
-    }
+        val creature: Creature? = null) {
 
     fun place(creature: Creature): Spot {
         return if (!creature.placeableOnSpot) {
@@ -18,9 +12,7 @@ data class Spot(
 
     internal fun updateCreature(oldCreature: Creature, newCreature: Creature): Spot {
 
-        val updatedCreature = getCreature()
-                .map { creature -> if (creature == oldCreature) newCreature else creature }
-                .orElse(null)
+        val updatedCreature = creature?.let { if (it == oldCreature) newCreature else it }
 
         return copy(creature = updatedCreature)
     }

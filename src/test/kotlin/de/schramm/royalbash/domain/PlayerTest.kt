@@ -148,10 +148,7 @@ class PlayerTest {
         val player = testee.removeCreature(creature)
 
         // Then
-        val creaturesOfPlayer = player.spots
-                .map { it.getCreature() }
-                .filter { it.isPresent }
-                .map { it.get() }
+        val creaturesOfPlayer = player.spots.mapNotNull { it.creature }
         assertThat(creaturesOfPlayer).isEmpty()
         assertThat(player.depositcards)
                 .hasSize(1)
@@ -170,10 +167,7 @@ class PlayerTest {
         val player = testee.removeCreature(CreatureMock("Id 2"))
 
         // Then
-        val creaturesOfPlayer = player.spots
-                .map { it.getCreature() }
-                .filter { it.isPresent }
-                .map { it.get() }
+        val creaturesOfPlayer = player.spots.mapNotNull { it.creature }
         assertThat(creaturesOfPlayer)
                 .hasSize(1)
                 .contains(creature)
@@ -192,10 +186,7 @@ class PlayerTest {
         val player = testee.updateCreature(creature, updatedCreature)
 
         // Then
-        val creaturesOfPlayer = player.spots
-                .map { it.getCreature() }
-                .filter { it.isPresent }
-                .map { it.get() }
+        val creaturesOfPlayer = player.spots.mapNotNull { it.creature }
         assertThat(creaturesOfPlayer)
                 .contains(updatedCreature)
                 .doesNotContain(creature)
@@ -213,10 +204,7 @@ class PlayerTest {
         val player = testee.updateCreature(creature, creature)
 
         // Then
-        val creaturesOfPlayer = player.spots
-                .map { it.getCreature() }
-                .filter { it.isPresent }
-                .map { it.get() }
+        val creaturesOfPlayer = player.spots.mapNotNull { it.creature }
         assertThat(creaturesOfPlayer).doesNotContain(creature)
     }
 
