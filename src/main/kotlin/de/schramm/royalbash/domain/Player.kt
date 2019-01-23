@@ -30,18 +30,6 @@ data class Player (
         return spots.stream()
     }
 
-    fun getHandcards(): Stream<Card> {
-        return handcards.stream()
-    }
-
-    fun getDeckcards(): Stream<Card> {
-        return deckcards.stream()
-    }
-
-    fun getDepositcards(): Stream<Card> {
-        return depositcards.stream()
-    }
-
     fun updateSpot(oldSpot: Spot, newSpot: Spot): Player {
 
         val spots = this.spots.stream()
@@ -71,17 +59,11 @@ data class Player (
         return player
     }
 
-    fun findHandcard(cardId: String): Optional<Card> {
-        return getHandcards()
-                .filter { card -> cardId == card.id }
-                .findFirst()
-    }
+    fun findHandcard(cardId: String) = Optional.ofNullable(handcards.firstOrNull { cardId == it.id })
 
     internal fun removeHandcard(handcard: Card): Player {
 
-        val handcards = getHandcards()
-                .filter { ownHandcard -> ownHandcard != handcard }
-                .collect(Collectors.toList())
+        val handcards = handcards.filter { it != handcard }
 
         return findHandcard(handcard)
                 .map { card -> copy(
@@ -114,14 +96,7 @@ data class Player (
         return copy(spots = spots)
     }
 
-    internal fun reduceResources(cost: Int): Player {
-        return copy(resources = resources - cost)
-    }
-
-    internal fun hasCard(card: Card): Boolean {
-        return getHandcards()
-                .anyMatch { handcard -> handcard == card }
-    }
+    internal fun hasCard(card: Card) = handcards.any { card == it }
 
     private fun drawCard(): Player {
         return if (deckcards.isEmpty()) {
@@ -138,11 +113,7 @@ data class Player (
         } else copy(handcards = handcards.subList(1, handcards.size))
     }
 
-    private fun findHandcard(card: Card): Optional<Card> {
-        return getHandcards()
-                .filter { card == it }
-                .findFirst()
-    }
+    private fun findHandcard(card: Card) = Optional.ofNullable(handcards.find { card == it })
 
     fun findCreature(creature: Creature): Optional<Creature> {
         return getSpots()

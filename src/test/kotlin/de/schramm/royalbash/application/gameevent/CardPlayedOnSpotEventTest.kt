@@ -28,10 +28,7 @@ class CardPlayedOnSpotEventTest {
         val updatedGame = testee.invoke(game)
 
         // Then
-        Assertions.assertThat(updatedGame)
-                .isNotNull
-        Assertions.assertThat(updatedGame.player1.getHandcards().count())
-                .describedAs("Number of Handcards")
-                .isEqualTo(0)
+        Assertions.assertThat(updatedGame).isNotNull
+        Assertions.assertThat(updatedGame.player1.handcards).hasSize(0)
     }
 }

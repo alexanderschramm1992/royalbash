@@ -27,6 +27,6 @@ class CardPlayedOnPlayerEventTest {
 
         // Then
         assertThat(updatedGame).isNotNull
-        assertThat(updatedGame.player1.getHandcards().count()).isEqualTo(0)
+        assertThat(updatedGame.player1.handcards).hasSize(0)
     }
 }
