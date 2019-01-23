@@ -46,30 +46,24 @@ data class Game(
 
         val opponent = getOpponent(owner)
 
-        val attackerOptional = owner.getSpots()
+        val attackerOptional = Optional.ofNullable(owner.spots
                 .map { it.getCreature() }
                 .filter { it.isPresent }
                 .map { it.get() }
-                .filter { creature -> creature == attacker }
-                .findFirst()
+                .firstOrNull{ it == attacker })
 
-        val defenderOptional = opponent.getSpots()
+        val defenderOptional = Optional.ofNullable(opponent.spots
                 .map { it.getCreature() }
                 .filter { it .isPresent }
                 .map { it.get() }
-                .filter { creature -> creature == defender }
-                .findFirst()
+                .firstOrNull { it == defender })
 
         val updatedAttacker = attackerOptional
-                .flatMap({ actualAttacker ->
-                    defenderOptional.map { actualDefender -> actualAttacker.damage(actualDefender.attack) }
-                })
+                .flatMap { actualAttacker -> defenderOptional.map { actualAttacker.damage(it.attack) } }
                 .orElse(attacker)
 
         val updatedDefender = defenderOptional
-                .flatMap({ actualDefender ->
-                    attackerOptional.map { actualAttacker -> actualDefender.damage(actualAttacker.attack) }
-                })
+                .flatMap { actualDefender -> attackerOptional.map { actualDefender.damage(it.attack) } }
                 .orElse(defender)
 
         val updatedOwner = if (updatedAttacker.isDead())
@@ -91,15 +85,14 @@ data class Game(
 
         val opponent = getOpponent(owner)
 
-        val attackerOptional = owner.getSpots()
+        val attackerOptional = Optional.ofNullable(owner.spots
                 .map { it.getCreature() }
                 .filter { it.isPresent }
                 .map { it.get() }
-                .filter { creature -> creature == attacker }
-                .findFirst()
+                .firstOrNull { it == attacker })
 
         val updatedOpponent = attackerOptional
-                .map { actualAttacker -> opponent.setHitpoints(opponent.hitpoints - actualAttacker.attack) }
+                .map { opponent.setHitpoints(opponent.hitpoints - it.attack) }
                 .orElse(opponent)
 
         val player1 = if (player1 == opponent) updatedOpponent else player1
@@ -125,7 +118,7 @@ data class Game(
 
     fun findPlayer(player: Player): Optional<Player> {
         return players
-                .filter { ownPlayer -> ownPlayer == player }
+                .filter { player == it }
                 .findFirst()
     }
 
@@ -136,23 +129,21 @@ data class Game(
     }
 
     fun findCreature(creatureId: String): Optional<Creature> {
-        return Stream.of<Player>(player1, player2)
-                .flatMap { it.getSpots() }
+        return Optional.ofNullable(listOf(player1, player2)
+                .flatMap { it.spots }
                 .map { it.getCreature() }
                 .filter { it.isPresent }
                 .map { it.get() }
-                .filter { it.id == creatureId }
-                .findFirst()
+                .firstOrNull { it.id == creatureId })
     }
 
     fun findCreature(creature: Creature): Optional<Creature> {
-        return Stream.of<Player>(player1, player2)
-                .flatMap { it.getSpots() }
+        return Optional.ofNullable(listOf(player1, player2)
+                .flatMap { it.spots }
                 .map { it.getCreature() }
                 .filter { it.isPresent }
                 .map { it.get() }
-                .filter { it == creature }
-                .findFirst()
+                .firstOrNull { it == creature })
     }
 
     fun findSpot(spotId: String): Spot? {

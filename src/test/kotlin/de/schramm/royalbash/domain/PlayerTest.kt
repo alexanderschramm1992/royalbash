@@ -257,6 +257,6 @@ class PlayerTest {
         val testee = Player(id = "player")
 
         // When Then
-        assertThat(testee.getSpots()).hasSize(5)
+        assertThat(testee.spots).hasSize(5)
     }
 }

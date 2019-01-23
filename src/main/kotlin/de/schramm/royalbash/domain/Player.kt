@@ -3,7 +3,6 @@ package de.schramm.royalbash.domain
 import java.util.*
 import java.util.Collections.emptyList
 import java.util.stream.Collectors
-import java.util.stream.Stream
 
 data class Player (
         val id: String,
@@ -24,10 +23,6 @@ data class Player (
 
     fun setHitpoints(hitpoints: Int): Player {
         return copy(hitpoints = hitpoints)
-    }
-
-    fun getSpots(): Stream<Spot> {
-        return spots.stream()
     }
 
     fun updateSpot(oldSpot: Spot, newSpot: Spot): Player {
@@ -75,9 +70,7 @@ data class Player (
 
     internal fun removeCreature(creature: Creature): Player {
 
-        val spots = getSpots()
-                .map { spot -> spot.removeCreature(creature) }
-                .collect(Collectors.toList())
+        val spots = spots.map { it.removeCreature(creature) }
 
         return findCreature(creature)
                 .map { ownedCreature -> copy(
@@ -89,9 +82,7 @@ data class Player (
 
     internal fun updateCreature(oldCreature: Creature, newCreature: Creature): Player {
 
-        val spots = getSpots()
-                .map { spot -> spot.updateCreature(oldCreature, newCreature) }
-                .collect(Collectors.toList())
+        val spots = spots.map { it.updateCreature(oldCreature, newCreature) }
 
         return copy(spots = spots)
     }
@@ -116,11 +107,10 @@ data class Player (
     private fun findHandcard(card: Card) = Optional.ofNullable(handcards.find { card == it })
 
     fun findCreature(creature: Creature): Optional<Creature> {
-        return getSpots()
+        return Optional.ofNullable(spots
                 .map { it.getCreature() }
                 .filter { it.isPresent }
                 .map { it.get() }
-                .filter { creature == it }
-                .findFirst()
+                .firstOrNull { creature == it })
     }
 }
