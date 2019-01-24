@@ -2,7 +2,6 @@ package de.schramm.royalbash.domain.effect
 
 import de.schramm.royalbash.domain.Context
 import de.schramm.royalbash.domain.Game
-import java.util.*
 
 data class DiscardHandcardsEffect(val amountOfCards: Int) {
 
@@ -10,12 +9,11 @@ data class DiscardHandcardsEffect(val amountOfCards: Int) {
 
         val game = context.game
 
-        return context.getTargetPlayer()
-                .flatMap { targetPlayer ->
-                    Optional.ofNullable(game.findPlayer(targetPlayer)
+        return context.targetPlayer
+                ?.let { targetPlayer -> game.findPlayer(targetPlayer)
                             ?.discardCards(amountOfCards)
-                            ?.let { game.updatePlayer(targetPlayer, it) })
+                            ?.let { game.updatePlayer(targetPlayer, it) }
                 }
-                .orElse(game)
+                ?: game
     }
 }

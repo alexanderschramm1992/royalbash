@@ -11,11 +11,11 @@ internal object CreatureUtil {
         val game = context.game
         val owner = context.owner
 
-        return context.getTargetSpot()
-                .map { targetSpot -> game.findPlayer(owner)
+        return context.targetSpot
+                ?.let { targetSpot -> game.findPlayer(owner)
                         ?.let { it.updateSpot(targetSpot, targetSpot.place(creature)) }
                         ?.let { game.updatePlayer(owner, it) }
-                        ?: game}
-                .orElse(game)
+                        ?: game }
+                ?: game
     }
 }

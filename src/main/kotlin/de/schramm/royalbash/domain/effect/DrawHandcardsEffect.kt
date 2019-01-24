@@ -10,10 +10,11 @@ data class DrawHandcardsEffect(private val amountOfCards: Int) {
 
         val game = context.game
 
-        return context.getTargetPlayer()
-                .flatMap { targetPlayer -> Optional.ofNullable(game.findPlayer(targetPlayer)
+        return context.targetPlayer
+                ?.let { targetPlayer -> game.findPlayer(targetPlayer)
                         ?.drawCards(amountOfCards)
-                        ?.let { game.updatePlayer(targetPlayer, it) })}
-                .orElse(game)
+                        ?.let { game.updatePlayer(targetPlayer, it) }
+                }
+                ?: game
     }
 }

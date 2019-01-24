@@ -9,8 +9,8 @@ data class DealDamageToCreatureEffect(private val amountOfDamage: Int) {
 
         val game = context.game
 
-        return context.getTargetCreature()
-                .map { creature -> game.updateCreature(creature, creature.damage(amountOfDamage)) }
-                .orElse(game)
+        return context.targetCreature
+                ?.let { game.updateCreature(it, it.damage(amountOfDamage)) }
+                ?: game
     }
 }
