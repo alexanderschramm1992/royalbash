@@ -85,10 +85,10 @@ data class Game(val id: String, val state: State = State.OPEN, val player1: Play
                 .mapNotNull { it.creature }
                 .firstOrNull { it.id == creatureId }
 
-    fun findCreature(creature: Creature): Optional<Creature> {
-        return Optional.ofNullable(
-                listOf(player1, player2).flatMap { it.spots }.mapNotNull { it.creature }.firstOrNull { it == creature })
-    }
+    fun findCreature(creature: Creature) = listOf(player1, player2)
+            .flatMap { it.spots }
+            .mapNotNull { it.creature }
+            .firstOrNull { it == creature }
 
     fun findSpot(spotId: String): Spot? {
         return listOf(player1.spots, player2.spots).flatten()
