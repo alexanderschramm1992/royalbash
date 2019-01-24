@@ -13,9 +13,9 @@ internal object CreatureUtil {
 
         return context.getTargetSpot()
                 .map { targetSpot -> game.findPlayer(owner)
-                        .map { player -> player.updateSpot(targetSpot, targetSpot.place(creature)) }
-                        .map { player -> game.updatePlayer(owner, player) }
-                        .orElse(game) }
+                        ?.let { it.updateSpot(targetSpot, targetSpot.place(creature)) }
+                        ?.let { game.updatePlayer(owner, it) }
+                        ?: game}
                 .orElse(game)
     }
 }

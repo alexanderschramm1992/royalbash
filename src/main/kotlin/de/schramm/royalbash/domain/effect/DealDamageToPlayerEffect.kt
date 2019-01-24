@@ -11,9 +11,9 @@ data class DealDamageToPlayerEffect (private val amountOfDamage: Int) {
                 .map { targetPlayer ->
                     context.game
                             .findPlayer(targetPlayer)
-                            .map { player -> player.setHitpoints(player.hitpoints - amountOfDamage) }
-                            .map { player -> updateTargetPlayer(player, context) }
-                            .orElse(context.game)
+                            ?.let { it.setHitpoints(it.hitpoints - amountOfDamage) }
+                            ?.let { updateTargetPlayer(it, context) }
+                            ?: context.game
                 }
                 .orElse(context.game)
     }

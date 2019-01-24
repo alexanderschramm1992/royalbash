@@ -102,10 +102,8 @@ data class Game(
                 player2 = player2.updateCreature(oldCreature, newCreature))
     }
 
-    fun findPlayer(player: Player): Optional<Player> {
-        return Optional.ofNullable(players
-                .filter { player == it }
-                .firstOrNull())
+    fun findPlayer(player: Player): Player? {
+        return players.firstOrNull { player == it }
     }
 
     fun findPlayer(playerId: String): Optional<Player> {
