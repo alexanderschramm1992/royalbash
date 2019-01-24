@@ -11,35 +11,27 @@ data class Game(
         val playerOnTurn: Player = player1
 ) {
 
-    val players: Stream<Player>
-        get() = Stream.of(player1, player2)
+    val players: List<Player>
+        get() = listOf(player1, player2)
 
     fun playCard(card: Card, owner: Player, targetPlayer: Player): Game {
         return players
-                .filter { player -> player == owner }
-                .filter { player -> player.hasCard(card) }
-                .findFirst()
-                .map { player -> player.removeHandcard(card) }
-                .map { player -> updatePlayer(owner, player) }
-                .map { game -> card.invoke(Context(
-                    game,
-                    owner,
-                    targetPlayer = targetPlayer)) }
-                .orElse(this)
+                .filter { it == owner }
+                .firstOrNull { it.hasCard(card) }
+                ?.removeHandcard(card)
+                ?.let { updatePlayer(owner, it) }
+                ?.let { card.invoke(Context(it, owner, targetPlayer = targetPlayer)) }
+                ?: this
     }
 
     fun playCard(card: Card, owner: Player, targetSpot: Spot): Game {
         return players
                 .filter { player -> player == owner }
-                .filter { player -> player.hasCard(card) }
-                .findFirst()
-                .map { player -> player.removeHandcard(card) }
-                .map { player -> updatePlayer(owner, player) }
-                .map { game -> card.invoke(Context(
-                        game,
-                        owner,
-                        targetSpot = targetSpot)) }
-                .orElse(this)
+                .firstOrNull { player -> player.hasCard(card) }
+                ?.removeHandcard(card)
+                ?.let { updatePlayer(owner, it) }
+                ?.let { card.invoke(Context(it, owner, targetSpot = targetSpot)) }
+                ?: this
     }
 
     fun combat(attacker: Creature, owner: Player, defender: Creature): Game {
@@ -111,9 +103,9 @@ data class Game(
     }
 
     fun findPlayer(player: Player): Optional<Player> {
-        return players
+        return Optional.ofNullable(players
                 .filter { player == it }
-                .findFirst()
+                .firstOrNull())
     }
 
     fun findPlayer(playerId: String): Optional<Player> {
