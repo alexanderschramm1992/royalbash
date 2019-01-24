@@ -13,8 +13,8 @@ data class PlayerAttackedEvent(
         return game
                 .findPlayer(ownerId)
                 ?.let { game.findCreature(creatureId)
-                            .map { creature -> game .combat(creature, it) }
-                            .orElse(game) }
+                        ?.let { creature -> game .combat(creature, it) }
+                        ?: game }
                 ?: game
     }
 }

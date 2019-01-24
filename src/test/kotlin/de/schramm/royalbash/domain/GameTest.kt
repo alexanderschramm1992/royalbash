@@ -6,7 +6,6 @@ import de.schramm.royalbash.domain.card.creature.CreatureMock
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.*
 
 class GameTest {
 
@@ -280,12 +279,12 @@ class GameTest {
         val testee = Game("Id 4", player1 = player1, player2 = player2)
 
         // When
-        val optional = testee.findCreature("Id 1")
+        val actualCreature = testee.findCreature("Id 1")
 
         // Then
-        assertThat(optional)
-                .isPresent
-                .isEqualTo(Optional.of(creature))
+        assertThat(actualCreature)
+                .isNotNull
+                .isEqualTo(creature)
     }
 
     @Test
@@ -297,10 +296,10 @@ class GameTest {
         val testee = Game("Id 3", player1 = player1, player2 = player2)
 
         // When
-        val optional = testee.findCreature("Id 1")
+        val creature = testee.findCreature("Id 1")
 
         // Then
-        assertThat(optional.isPresent).isFalse()
+        assertThat(creature).isNull()
     }
 
     @Test

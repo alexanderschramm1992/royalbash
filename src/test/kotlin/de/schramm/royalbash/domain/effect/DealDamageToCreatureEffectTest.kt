@@ -32,8 +32,7 @@ class DealDamageToCreatureEffectTest {
 
         // Then
         assertThat(updatedGame).isNotNull
-        val updatedCreature = updatedGame.findCreature("Id 1")
-                .orElseThrow { Exception("Creature not present") }
+        val updatedCreature = updatedGame.findCreature("Id 1")?: throw Exception("Creature not present")
         assertThat(updatedCreature.hitpoints).isEqualTo(3)
     }
 }

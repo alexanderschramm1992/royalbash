@@ -38,10 +38,10 @@ class CreatureAttackedEventTest {
 
         // Then
         val updatedAttacker = updatedGame.findCreature("Id 1")
-                .orElseThrow { Exception("Attacker not present") }
+                ?: throw Exception("Attacker not present")
         assertThat(updatedAttacker.hitpoints).isEqualTo(2)
         val updatedDefender = updatedGame.findCreature("Id 3")
-                .orElseThrow { Exception("Defender not present") }
+                ?: throw Exception("Defender not present")
         assertThat(updatedDefender.hitpoints).isEqualTo(1)
     }
 }

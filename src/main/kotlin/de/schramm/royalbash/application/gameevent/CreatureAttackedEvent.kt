@@ -14,11 +14,10 @@ data class CreatureAttackedEvent(
         return game
                 .findPlayer(ownerId)
                 ?.let { game.findCreature(attackerId)
-                            .map { attacker -> game
-                                    .findCreature(defenderId)
-                                    .map { defender -> game.combat(attacker, it, defender) }
-                                    .orElse(game) }
-                            .orElse(game) }
+                        ?.let { attacker -> game.findCreature(defenderId)
+                                ?.let { defender -> game.combat(attacker, it, defender) }
+                        }
+                }
                 ?: game
     }
 }
