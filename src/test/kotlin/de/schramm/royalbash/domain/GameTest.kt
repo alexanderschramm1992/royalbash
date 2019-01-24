@@ -246,12 +246,12 @@ class GameTest {
         val testee = Game("Id 3", player1 = player1, player2 = player2)
 
         // When
-        val playerOptional = testee.findPlayer("Id 1")
+        val player = testee.findPlayer("Id 1")
 
         // Then
-        assertThat(playerOptional)
-                .isPresent
-                .isEqualTo(Optional.of(player1))
+        assertThat(player)
+                .isNotNull
+                .isEqualTo(player1)
     }
 
     @Test
@@ -263,10 +263,10 @@ class GameTest {
         val testee = Game("Id 3", player1 = player1, player2 = player2)
 
         // When
-        val optional = testee.findPlayer("Id 4")
+        val player = testee.findPlayer("Id 4")
 
         // Then
-        assertThat(optional.isPresent).isFalse()
+        assertThat(player).isNull()
     }
 
     @Test

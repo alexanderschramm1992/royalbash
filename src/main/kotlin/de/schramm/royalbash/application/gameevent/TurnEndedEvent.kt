@@ -8,8 +8,8 @@ data class TurnEndedEvent(val playerId: String) : GameEvent {
 
     override fun invoke(game: Game): Game {
         return game.findPlayer(playerId)
-                .filter { player -> game.playerOnTurn == player }
-                .map { player -> game.copy(playerOnTurn = if (player == game.player1) game.player2 else game.player1) }
-                .orElse(game)
+                ?.takeIf { game.playerOnTurn == it }
+                ?.let { game.copy(playerOnTurn = if (it == game.player1) game.player2 else game.player1) }
+                ?: game
     }
 }

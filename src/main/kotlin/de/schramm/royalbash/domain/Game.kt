@@ -1,7 +1,6 @@
 package de.schramm.royalbash.domain
 
 import java.util.*
-import java.util.stream.Stream
 
 data class Game(
         val id: String,
@@ -106,11 +105,7 @@ data class Game(
         return players.firstOrNull { player == it }
     }
 
-    fun findPlayer(playerId: String): Optional<Player> {
-        return Stream.of<Player>(player1, player2)
-                .filter { it.id == playerId }
-                .findFirst()
-    }
+    fun findPlayer(playerId: String) = listOf(player1, player2).firstOrNull { it.id == playerId }
 
     fun findCreature(creatureId: String): Optional<Creature> {
         return Optional.ofNullable(listOf(player1, player2)

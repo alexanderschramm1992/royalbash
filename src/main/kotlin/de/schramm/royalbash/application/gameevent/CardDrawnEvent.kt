@@ -11,7 +11,7 @@ data class CardDrawnEvent(
 
     override fun invoke(game: Game): Game {
         return game.findPlayer(playerId)
-                .map { player -> game.updatePlayer(player, player.drawCards(amountOfCards)) }
-                .orElse(game)
+                ?.let { game.updatePlayer(it, it.drawCards(amountOfCards)) }
+                ?: game
     }
 }

@@ -13,11 +13,11 @@ data class CardPlayedOnPlayerEvent(
 
     override fun invoke(game: Game): Game {
         return game.findPlayer(ownerId)
-                .map { owner -> Optional.ofNullable(owner.findHandcard(cardId))
-                        .map { card -> game.findPlayer(targetPlayerId)
-                                .map { targetPlayer -> game.playCard(card, owner, targetPlayer) }
-                                .orElse(game) }
-                        .orElse(game) }
-                .orElse(game)
+                ?.let { Optional.ofNullable(it.findHandcard(cardId))
+                            .map { card -> game.findPlayer(targetPlayerId)
+                                    ?.let { targetPlayer -> game.playCard(card, it, targetPlayer) }
+                                    ?:game }
+                            .orElse(game) }
+                ?: game
     }
 }

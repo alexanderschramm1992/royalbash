@@ -13,12 +13,12 @@ data class CreatureAttackedEvent(
     override fun invoke(game: Game): Game {
         return game
                 .findPlayer(ownerId)
-                .map { owner -> game.findCreature(attackerId)
-                        .map { attacker -> game
-                                .findCreature(defenderId)
-                                .map { defender -> game.combat(attacker, owner, defender) }
-                                .orElse(game) }
-                        .orElse(game) }
-                .orElse(game)
+                ?.let { game.findCreature(attackerId)
+                            .map { attacker -> game
+                                    .findCreature(defenderId)
+                                    .map { defender -> game.combat(attacker, it, defender) }
+                                    .orElse(game) }
+                            .orElse(game) }
+                ?: game
     }
 }

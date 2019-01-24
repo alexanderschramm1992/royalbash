@@ -12,9 +12,9 @@ data class PlayerAttackedEvent(
     override fun invoke(game: Game): Game {
         return game
                 .findPlayer(ownerId)
-                .map { player -> game.findCreature(creatureId)
-                        .map { creature -> game .combat(creature, player) }
-                        .orElse(game) }
-                .orElse(game)
+                ?.let { game.findCreature(creatureId)
+                            .map { creature -> game .combat(creature, it) }
+                            .orElse(game) }
+                ?: game
     }
 }
