@@ -10,9 +10,9 @@ data class DiscardHandcardsEffect(val amountOfCards: Int) {
         val game = context.game
 
         return context.targetPlayer
-                ?.let { targetPlayer -> game.findPlayer(targetPlayer)
+                ?.let { game.findPlayer(it)
                             ?.discardCards(amountOfCards)
-                            ?.let { game.updatePlayer(targetPlayer, it) }
+                            ?.updateInGame(game, it)
                 }
                 ?: game
     }

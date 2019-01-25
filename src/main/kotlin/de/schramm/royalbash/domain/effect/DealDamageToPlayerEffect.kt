@@ -15,7 +15,4 @@ data class DealDamageToPlayerEffect (private val amountOfDamage: Int) {
                             ?.updateInGame(context.game, context.targetPlayer) }
                 ?: context.game
     }
-
-    private fun Player.updateInGame(game: Game, oldPlayer: Player): Game = game.updatePlayer(oldPlayer, this)
-
 }
