@@ -7,23 +7,15 @@ import de.schramm.royalbash.domain.Player
 data class DealDamageToPlayerEffect (private val amountOfDamage: Int) {
 
     operator fun invoke(context: Context): Game {
+
         return context.targetPlayer
-                ?.let { targetPlayer ->
-                    context.game
-                            .findPlayer(targetPlayer)
-                            ?.let { it.setHitpoints(it.hitpoints - amountOfDamage) }
-                            ?.let { updateTargetPlayer(it, context) }
-                            ?: context.game
-                }
+                ?.let { context.game
+                            .findPlayer(it)
+                            ?.setHitpoints(it.hitpoints - amountOfDamage)
+                            ?.updateInGame(context.game, context.targetPlayer) }
                 ?: context.game
     }
 
-    private fun updateTargetPlayer(updatedPlayer: Player, context: Context): Game {
+    private fun Player.updateInGame(game: Game, oldPlayer: Player): Game = game.updatePlayer(oldPlayer, this)
 
-        val game = context.game
-
-        return context.targetPlayer
-                ?.let { game.updatePlayer(it, updatedPlayer) }
-                ?: game
-    }
 }
