@@ -1,7 +1,7 @@
 package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameService
-import de.schramm.royalbash.application.gameevent.NoOpEvent
+import de.schramm.royalbash.infrastructure.gameevent.NoOpEventDTO
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
@@ -145,7 +145,7 @@ class GameControllerTest {
                 playerOnTurn = Player("Id 2"),
                 state = OPEN
         )
-        every { gameService.commitGameEvent(gameId, NoOpEvent()) } returns Optional.of(game)
+        every { gameService.commitGameEvent(gameId, NoOpEventDTO()) } returns Optional.of(game)
 
         val requestBuilder = MockMvcRequestBuilders
                 .post("/game/1/event")
@@ -160,7 +160,7 @@ class GameControllerTest {
                 .contentAsString
 
         // Then
-        verify { gameService.commitGameEvent(gameId, NoOpEvent()) }
+        verify { gameService.commitGameEvent(gameId, NoOpEventDTO()) }
         JSONAssert.assertEquals(
                 "{}",
                 result,
@@ -173,7 +173,7 @@ class GameControllerTest {
 
         // Given
         val gameId = "1"
-        every { gameService.commitGameEvent(gameId, NoOpEvent()) } returns Optional.empty()
+        every { gameService.commitGameEvent(gameId, NoOpEventDTO()) } returns Optional.empty()
         val requestBuilder = MockMvcRequestBuilders
                 .post("/game/1/event")
                 .content("""{

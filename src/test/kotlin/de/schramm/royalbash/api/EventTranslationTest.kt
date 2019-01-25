@@ -1,7 +1,7 @@
 package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameService
-import de.schramm.royalbash.application.gameevent.*
+import de.schramm.royalbash.infrastructure.gameevent.*
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
@@ -67,7 +67,7 @@ class EventTranslationTest {
                 "playerId": "Player Id"
             }
         }"""
-        val expectedEvent = CardDrawnEvent("Player Id", 1)
+        val expectedEvent = CardDrawnEventDTO("Player Id", 1)
 
         // When Then
         test(json, expectedEvent)
@@ -84,7 +84,7 @@ class EventTranslationTest {
                         "\"ownerId\": \"Owner Id\", " +
                         "\"targetPlayerId\": \"Target Player Id\"}" +
                         "}"
-        val expectedEvent = CardPlayedOnPlayerEvent(
+        val expectedEvent = CardPlayedOnPlayerEventDTO(
                 "Card Id",
                 "Owner Id",
                 "Target Player Id")
@@ -104,7 +104,7 @@ class EventTranslationTest {
                         "\"defenderId\": \"Defender Id\", " +
                         "\"ownerId\": \"Owner Id\"}" +
                         "}"
-        val expectedEvent = CreatureAttackedEvent(
+        val expectedEvent = CreatureAttackedEventDTO(
                 attackerId = "Attacker Id",
                 defenderId = "Defender Id",
                 ownerId = "Owner Id")
@@ -122,7 +122,7 @@ class EventTranslationTest {
                 "{\"event\": {\"type\": \"NO_OP\"}}",
                 gameId
         )
-        val expectedEvent = NoOpEvent()
+        val expectedEvent = NoOpEventDTO()
 
         // When Then
         test(json, expectedEvent)
@@ -138,7 +138,7 @@ class EventTranslationTest {
                         "\"creatureId\": \"Creature Id\", " +
                         "\"ownerId\": \"Owner Id\"}" +
                         "}"
-        val expectedEvent = PlayerAttackedEvent("Creature Id", "Owner Id")
+        val expectedEvent = PlayerAttackedEventDTO("Creature Id", "Owner Id")
 
         // When Then
         test(json, expectedEvent)
@@ -156,14 +156,14 @@ class EventTranslationTest {
                         "}",
                 gameId
         )
-        val expectedEvent = TurnEndedEvent("Player Id")
+        val expectedEvent = TurnEndedEventDTO("Player Id")
 
         // When Then
         test(json, expectedEvent)
     }
 
     @Throws(Exception::class)
-    private fun test(json: String, expectedEvent: GameEvent) {
+    private fun test(json: String, expectedEvent: GameEventDTO) {
 
         // Given
         val requestBuilder = MockMvcRequestBuilders

@@ -1,4 +1,4 @@
-package de.schramm.royalbash.application.gameevent
+package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
@@ -13,7 +13,7 @@ class CardPlayedOnSpotEventTest {
     fun should_invoke_play_card() {
 
         // Given
-        val testee = CardPlayedOnSpotEvent(
+        val testee = CardPlayedOnSpotEventDTO(
                 cardId = "Id 1",
                 ownerId = "Id 2",
                 targetSpotId = "Id 3")

@@ -36,36 +36,27 @@ class ArchitectureTest {
                 .check(classes)}
 
     @Test
-    fun `no packages depend on api`() {
-        ArchRuleDefinition.classes()
-                .that()
-                .resideInAPackage(api)
-                .should()
-                .onlyBeAccessed()
-                .byClassesThat()
-                .resideInAPackage(api)
-                .check(classes)}
-
-    @Test
     fun `classes do not throw generic exceptions`() {
         GeneralCodingRules.NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS.check(classes)}
 
     @Test
     fun `onion architecture is obeyed`() {
         Architectures.layeredArchitecture()
+                .layer("Api")
+                .definedBy(api)
                 .layer("Infrastructure")
                 .definedBy(infrastructure)
                 .layer("Application")
                 .definedBy(application)
                 .layer("Domain")
                 .definedBy(domain)
-                .layer("Api")
-                .definedBy(api)
-                .whereLayer("Infrastructure")
-                .mayNotBeAccessedByAnyLayer()
                 .whereLayer("Api")
-                .mayOnlyBeAccessedByLayers("Infrastructure")
+                .mayNotBeAccessedByAnyLayer()
+                .whereLayer("Infrastructure")
+                .mayOnlyBeAccessedByLayers("Api")
                 .whereLayer("Application")
                 .mayOnlyBeAccessedByLayers("Api", "Infrastructure")
+                .whereLayer("Domain")
+                .mayOnlyBeAccessedByLayers("Api", "Infrastructure", "Application")
                 .check(classes)}
 }

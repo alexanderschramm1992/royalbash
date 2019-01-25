@@ -1,11 +1,11 @@
-package de.schramm.royalbash.application.gameevent
+package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
 
-data class CardDrawnEvent(
+data class CardDrawnEventDTO(
         var playerId: String,
         var amountOfCards: Int
-) : GameEvent {
+                            ) : GameEventDTO {
 
     constructor(): this(playerId = "", amountOfCards = 0)
 

@@ -1,4 +1,4 @@
-package de.schramm.royalbash.application.gameevent
+package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
@@ -16,7 +16,7 @@ class CreatureAttackedEventTest {
     fun should_invoke_attack_on_creature() {
 
         // Given
-        val testee = CreatureAttackedEvent(
+        val testee = CreatureAttackedEventDTO(
                 attackerId = "Id 1",
                 ownerId = "Id 2",
                 defenderId = "Id 3")

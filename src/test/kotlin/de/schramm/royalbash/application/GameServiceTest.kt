@@ -3,7 +3,7 @@ package de.schramm.royalbash.application
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
-import de.schramm.royalbash.application.gameevent.GameEvent
+import de.schramm.royalbash.infrastructure.gameevent.GameEventDTO
 import de.schramm.royalbash.infrastructure.database.InMemoryRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -66,7 +66,7 @@ class GameServiceTest {
                 gameId,
                 player1 = Player("Id 2"),
                 player2 = Player("Id 3"))
-        val gameEvent = mockk<GameEvent>()
+        val gameEvent = mockk<GameEventDTO>()
         every { gameEvent.invoke(game) } returns game
         val repository = mockk<GameRepository>()
         every { repository.findAll() } returns setOf(game)

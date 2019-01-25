@@ -1,4 +1,4 @@
-package de.schramm.royalbash.application.gameevent
+package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
@@ -18,7 +18,7 @@ class CardDrawnEventTest {
                 "Id 3",
                 player1 = player1,
                 player2 = Player("Id 4"))
-        val testee = CardDrawnEvent("Id 2", 1)
+        val testee = CardDrawnEventDTO("Id 2", 1)
 
         // When
         val updatedGame = testee.invoke(game)

@@ -3,7 +3,7 @@ package de.schramm.royalbash.application
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
-import de.schramm.royalbash.application.gameevent.GameEvent
+import de.schramm.royalbash.infrastructure.gameevent.GameEventDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*

@@ -1,4 +1,4 @@
-package de.schramm.royalbash.application.gameevent
+package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
@@ -19,7 +19,7 @@ class TurnEndedEventTest {
                 player2 = player2,
                 playerOnTurn = player1
         )
-        val testee = TurnEndedEvent("Id 1")
+        val testee = TurnEndedEventDTO("Id 1")
 
         // When
         val updatedGame = testee.invoke(game)
