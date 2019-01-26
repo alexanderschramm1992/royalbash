@@ -1,6 +1,6 @@
 package de.schramm.royalbash.infrastructure.database
 
-import de.schramm.royalbash.application.GameRepository
+import de.schramm.royalbash.application.Games
 import de.schramm.royalbash.domain.Game
 import org.springframework.context.annotation.Profile
 import org.springframework.data.mongodb.repository.MongoRepository
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 
 @Profile("persistent")
 @Component
-class MongoRepository: GameRepository {
+class MongoRepository: Games {
 
     lateinit var repository: MongoRepository<GameDTO, String>
 

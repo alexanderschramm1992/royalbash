@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration
 import javax.annotation.PostConstruct
 
 @Configuration
-open class TestDataLoader @Autowired constructor(private val repository: GameRepository) {
+open class TestDataLoader @Autowired constructor(private val repository: Games) {
 
     @PostConstruct
     fun loadTestData() {

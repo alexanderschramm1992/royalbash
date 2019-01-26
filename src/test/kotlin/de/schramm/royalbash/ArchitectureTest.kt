@@ -1,7 +1,9 @@
 package de.schramm.royalbash
 
+import com.tngtech.archunit.base.DescribedPredicate
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption
+import com.tngtech.archunit.core.importer.ImportOptions
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition
 import com.tngtech.archunit.library.Architectures
 import com.tngtech.archunit.library.GeneralCodingRules
@@ -14,9 +16,13 @@ class ArchitectureTest {
     private val application = "..application.."
     private val infrastructure = "..infrastructure.."
     private val api = "..api.."
-    private val classes = ClassFileImporter()
+    private val royalBashClasses = ClassFileImporter()
             .withImportOption(ImportOption.Predefined.DONT_INCLUDE_TESTS)
             .importPackages("de.schramm.royalbash")
+    private val springClasses = ClassFileImporter()
+            .withImportOption(ImportOption.Predefined.DONT_INCLUDE_TESTS)
+            .importPackages("org.springframework")
+    private val spring = "..springframework.."
 
     @Test
     fun `packages do not have cyclic dependencies`() {
@@ -24,7 +30,7 @@ class ArchitectureTest {
                 .matching("de.schramm.royalbash.(*)..")
                 .should()
                 .beFreeOfCycles()
-                .check(classes)}
+                .check(royalBashClasses)}
 
     @Test
     fun `domain has no dependencies to other packages`() {
@@ -33,11 +39,11 @@ class ArchitectureTest {
                 .resideInAPackage(domain)
                 .should()
                 .resideOutsideOfPackages(domain, "java..", "javax..", "kotlin..", "com..", "org..")
-                .check(classes)}
+                .check(royalBashClasses)}
 
     @Test
     fun `classes do not throw generic exceptions`() {
-        GeneralCodingRules.NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS.check(classes)}
+        GeneralCodingRules.NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS.check(royalBashClasses)}
 
     @Test
     fun `onion architecture is obeyed`() {
@@ -58,5 +64,5 @@ class ArchitectureTest {
                 .mayOnlyBeAccessedByLayers("Api", "Infrastructure")
                 .whereLayer("Domain")
                 .mayOnlyBeAccessedByLayers("Api", "Infrastructure", "Application")
-                .check(classes)}
+                .check(royalBashClasses)}
 }

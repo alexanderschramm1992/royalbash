@@ -22,7 +22,7 @@ class GameServiceTest {
                 gameId,
                 player1 = Player("Id 1"),
                 player2 = Player("Id 2"))
-        val repository = mockk<GameRepository>()
+        val repository = mockk<Games>()
         every { repository.findAll() } returns setOf(game)
         val testee = GameService(UUIDGenerator(), repository)
 
@@ -68,7 +68,7 @@ class GameServiceTest {
                 player2 = Player("Id 3"))
         val gameEvent = mockk<GameEventDTO>()
         every { gameEvent.invoke(game) } returns game
-        val repository = mockk<GameRepository>()
+        val repository = mockk<Games>()
         every { repository.findAll() } returns setOf(game)
         val testee = GameService(UUIDGenerator(), repository)
 

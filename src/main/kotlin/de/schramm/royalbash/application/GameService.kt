@@ -3,7 +3,6 @@ package de.schramm.royalbash.application
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
-import de.schramm.royalbash.infrastructure.gameevent.GameEventDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
@@ -13,11 +12,11 @@ import java.util.stream.StreamSupport
 open class GameService @Autowired
 constructor(
         private val uuidGenerator: UUIDGenerator,
-        private val gameRepository: GameRepository
+        private val games: Games
 ) {
 
     fun retrieveGame(gameId: String): Optional<Game> {
-        return StreamSupport.stream(gameRepository.findAll().spliterator(), false)
+        return StreamSupport.stream(games.findAll().spliterator(), false)
                 .filter { game -> gameId == game.id }
                 .findFirst()
     }
@@ -32,7 +31,7 @@ constructor(
                 player1 = Player(id = player1Id, name = account1Id),
                 player2 = Player(id = player2Id, name = account2Id))
 
-        gameRepository.save(game)
+        games.save(game)
 
         return game
     }
@@ -43,7 +42,7 @@ constructor(
     }
 
     fun retrieveGameIds(): List<String> {
-        return gameRepository.findAll()
+        return games.findAll()
                 .map { it.id }
     }
 }
