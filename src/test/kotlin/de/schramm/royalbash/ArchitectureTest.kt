@@ -1,9 +1,7 @@
 package de.schramm.royalbash
 
-import com.tngtech.archunit.base.DescribedPredicate
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption
-import com.tngtech.archunit.core.importer.ImportOptions
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition
 import com.tngtech.archunit.library.Architectures
 import com.tngtech.archunit.library.GeneralCodingRules
@@ -19,10 +17,6 @@ class ArchitectureTest {
     private val royalBashClasses = ClassFileImporter()
             .withImportOption(ImportOption.Predefined.DONT_INCLUDE_TESTS)
             .importPackages("de.schramm.royalbash")
-    private val springClasses = ClassFileImporter()
-            .withImportOption(ImportOption.Predefined.DONT_INCLUDE_TESTS)
-            .importPackages("org.springframework")
-    private val spring = "..springframework.."
 
     @Test
     fun `packages do not have cyclic dependencies`() {

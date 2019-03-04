@@ -3,8 +3,9 @@ package de.schramm.royalbash.application
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
+import de.schramm.royalbash.infrastructure.database.GamePersistenceMapper
 import de.schramm.royalbash.infrastructure.gameevent.GameEventDTO
-import de.schramm.royalbash.infrastructure.database.InMemoryRepository
+import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
@@ -42,7 +43,7 @@ class GameServiceTest {
         val accountId1 = "Account 1"
         val accountId2 = "Account 2"
         val id = UUID.randomUUID().toString()
-        val repository = InMemoryRepository()
+        val repository = GamePersistenceMapper(InMemoryGamePersistenceOperations())
         val uuidGenerator = mockk<UUIDGenerator>()
         every { uuidGenerator.generateId() } returns id
         val testee = GameService(uuidGenerator, repository)

@@ -1,38 +1,27 @@
 package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameService
-import de.schramm.royalbash.infrastructure.gameevent.*
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
-import de.schramm.royalbash.infrastructure.database.InMemoryRepository
+import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations
+import de.schramm.royalbash.infrastructure.gameevent.*
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.http.MediaType
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import java.util.*
 
-@ExtendWith(SpringExtension::class)
-@WebMvcTest(value = [(GameController::class)], secure = false)
+@WebMvcTest(GameController::class, secure = false)
 class EventTranslationTest {
-
-    @TestConfiguration
-    open class ControllerTestConfig {
-        @Bean
-        open fun gameService() = mockk<GameService>()
-        @Bean
-        open fun gameRepository() = InMemoryRepository()
-    }
 
     private val gameId = "1"
 
@@ -180,5 +169,13 @@ class EventTranslationTest {
 
         // Then
         verify { gameService.commitGameEvent(gameId, expectedEvent) }
+    }
+
+    @TestConfiguration
+    open class ControllerTestConfig {
+        @Bean
+        open fun gameService() = mockk<GameService>()
+        @Bean
+        open fun gameRepository() = InMemoryGamePersistenceOperations()
     }
 }
