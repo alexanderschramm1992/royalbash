@@ -3,14 +3,10 @@ package de.schramm.royalbash.application
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
 import java.util.*
 import java.util.stream.StreamSupport
 
-@Service
-open class GameService @Autowired
-constructor(
+class GameService(
         private val uuidGenerator: UUIDGenerator,
         private val games: Games
 ) {
@@ -36,7 +32,7 @@ constructor(
         return game
     }
 
-    open fun commitGameEvent(gameId: String, gameEvent: GameEvent): Optional<Game> {
+    fun commitGameEvent(gameId: String, gameEvent: GameEvent): Optional<Game> {
         println("""Received event $gameEvent for game $gameId""")
         return retrieveGame(gameId).map { gameEvent.invoke(it) }
     }
