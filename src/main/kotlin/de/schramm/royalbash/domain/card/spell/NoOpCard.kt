@@ -8,6 +8,7 @@ class NoOpCard (
         override val id: String,
         override val name: String = "NoOp Card",
         override val text: String = "NoOp Card Text",
+        override val image: String? = "NoOp Image URL",
         override val cost: Int = 0
 ) : Card {
 

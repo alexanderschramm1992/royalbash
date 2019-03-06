@@ -12,21 +12,21 @@ data class GoblinRaider(
         override val cost: Int
 ) : Creature {
 
-    override val name: String = "Goblin Raider"
+    override val name = "Goblin Raider"
     override val text = "When Goblin Raider enters the battlefield, target player discards a card."
+    override val image: String? = null
 
     val effect = DiscardHandcardsEffect(1)
 
     override fun invoke(context: Context): Game {
 
-        val updatedGame = CreatureUtil.spawnCreature(this, context);
+        val updatedGame = CreatureUtil.spawnCreature(this, context)
 
         val updatedContext = context.copy(game = updatedGame)
 
         return effect.invoke(updatedContext)
     }
 
-    override fun damage(amountOfDamage: Int): Creature {
-        return this.copy(hitpoints = hitpoints - amountOfDamage)
-    }
+    override fun damage(amountOfDamage: Int): Creature =
+            this.copy(hitpoints = hitpoints - amountOfDamage)
 }

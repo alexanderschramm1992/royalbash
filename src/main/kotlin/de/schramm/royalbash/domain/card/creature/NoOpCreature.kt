@@ -11,8 +11,9 @@ data class NoOpCreature(
         override val cost: Int
 ) : Creature {
 
-    override val name: String = "NoOpCreature"
+    override val name = "NoOpCreature"
     override val text = "NoOp Creature Text"
+    override val image = "NoOp Image URL"
 
     override fun invoke(context: Context): Game {
         return CreatureUtil.spawnCreature(this, context)

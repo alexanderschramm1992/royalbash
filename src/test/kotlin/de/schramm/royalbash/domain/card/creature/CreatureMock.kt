@@ -8,6 +8,7 @@ data class CreatureMock(
         override val id: String,
         override val name: String = "Creature Mock",
         override val text: String = "Creature Mock Text",
+        override val image: String? = "Creature Mock Image URL",
         override val hitpoints: Int = 0,
         override val attack: Int = 0,
         override val cost: Int = 0

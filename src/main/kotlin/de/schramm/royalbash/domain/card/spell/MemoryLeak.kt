@@ -12,7 +12,7 @@ data class MemoryLeak(
 
     override val name = "Memory Leak"
     override val text = "Target player discards 2 handcards."
-
+    override val image: String? = null
     val effect = DiscardHandcardsEffect(2)
 
     override fun invoke(context: Context): Game {

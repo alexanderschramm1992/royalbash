@@ -6,8 +6,9 @@ module.exports = {
     devServer: {
         port: 3000,
         proxy: {
-            '/game': 'http://localhost:8080'
-        }
+            "/game": "http://localhost:8080"
+        },
+        contentBase: __dirname + "/public",
     },
     module: {
         rules: [

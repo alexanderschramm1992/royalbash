@@ -12,7 +12,7 @@ class Fireball (
 
     override val name = "Fireball"
     override val text = "Deal 2 damage to target player."
-
+    override val image: String? = null
     val effect = DealDamageToPlayerEffect(2)
 
     override fun invoke(context: Context): Game {

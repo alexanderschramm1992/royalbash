@@ -55,7 +55,8 @@ internal class ExternalModel {
             @ApiModelProperty(required = true) val name: String,
             @ApiModelProperty(required = true) val text: String,
             @ApiModelProperty(required = true) val cost: Int = 0,
-            @ApiModelProperty(required = true) val placeableOnSpot: Boolean
+            @ApiModelProperty(required = true) val placeableOnSpot: Boolean,
+            @ApiModelProperty(required = false) val image: String? = null
     ) {
 
         companion object {
@@ -66,7 +67,8 @@ internal class ExternalModel {
                         name = card.name,
                         text = card.text,
                         cost = card.cost,
-                        placeableOnSpot = card.placeableOnSpot)
+                        placeableOnSpot = card.placeableOnSpot,
+                        image = card.image)
             }
         }
     }

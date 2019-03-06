@@ -5,6 +5,7 @@ interface Card {
     val name: String
     val text: String
     val cost: Int
+    val image: String?
 
     val placeableOnSpot: Boolean
         get() = false
