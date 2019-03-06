@@ -59,8 +59,11 @@ class Card extends React.Component {
                          top: "0"
                      }}/>
                 <div className="name" style={{
+                    WebkitTextStroke: "1px black",
                     textAlign: "center",
                     lineHeight: "15px",
+                    fontSize: "20px",
+                    fontFamily: "'Luckiest Guy', cursive",
                     zIndex: "5",
                     width: cardWidth - 40 + "px",
                     position: "absolute",
@@ -74,7 +77,7 @@ class Card extends React.Component {
     static costView(card, cardWidth) {
         return (
             <div className="cost-wrapper" style={{
-                height: "30px",
+                height: "25px",
                 position: "relative"
             }}>
                 <img src="images/guimegapack/Adventure_UI/background/banner_01.png"
@@ -109,11 +112,11 @@ class Card extends React.Component {
                      }}/>
                 <div className="cost" style={{
                     color: "white",
-                    webkitTextStroke: "1px black",
+                    WebkitTextStroke: "1px black",
                     textAlign: "center",
                     lineHeight: "40px",
                     fontSize: "20px",
-                    fontWeight: "bold",
+                    fontFamily: "'Luckiest Guy', cursive",
                     zIndex: "5",
                     width: "20px",
                     position: "absolute",
