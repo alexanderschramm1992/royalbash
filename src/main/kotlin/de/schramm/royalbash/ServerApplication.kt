@@ -1,13 +1,14 @@
 package de.schramm.royalbash
 
-import org.apache.logging.log4j.LogManager
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
 class ServerApplication {
     companion object {
         @JvmStatic
-        private val logger = LogManager.getLogger(ServerApplication::class.java)
+        val logger: Logger = LoggerFactory.getLogger(ServerApplication::class.java)
     }
 }
 

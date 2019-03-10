@@ -38,12 +38,6 @@ the<DependencyManagementExtension>().apply {
     }
 }
 
-configurations {
-    "implementation" {
-        exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
-    }
-}
-
 dependencies {
     // Swagger
     implementation("io.springfox:springfox-swagger2:$swaggerVersion")
@@ -52,7 +46,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
-    implementation("org.springframework.boot:spring-boot-starter-log4j2")
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
