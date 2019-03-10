@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-open class InMemoryDatabaseConfig {
+class InMemoryDatabaseConfig {
 
     private val gamePersistenceOperations = InMemoryGamePersistenceOperations()
 
     @Bean
-    open fun gamePersistenceOperations(): GamePersistenceOperations = gamePersistenceOperations
+    fun gamePersistenceOperations(): GamePersistenceOperations = gamePersistenceOperations
 }

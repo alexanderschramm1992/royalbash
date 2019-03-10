@@ -172,10 +172,10 @@ class EventTranslationTest {
     }
 
     @TestConfiguration
-    open class ControllerTestConfig {
+    class ControllerTestConfig {
         @Bean
-        open fun gameService() = mockk<GameService>()
+        fun gameService() = mockk<GameService>()
         @Bean
-        open fun gameRepository() = InMemoryGamePersistenceOperations()
+        fun gameRepository() = InMemoryGamePersistenceOperations()
     }
 }

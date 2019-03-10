@@ -24,9 +24,9 @@ import java.util.*
 class GameControllerTest {
 
     @TestConfiguration
-    open class ControllerTestConfig {
+    class ControllerTestConfig {
         @Bean
-        open fun gameService() = mockk<GameService>()
+        fun gameService() = mockk<GameService>()
     }
 
     @Autowired
