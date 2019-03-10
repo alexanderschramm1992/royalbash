@@ -1,8 +1,7 @@
 package de.schramm.royalbash.domain
 
 import org.springframework.stereotype.Component
-
-import java.util.UUID
+import java.util.*
 
 @Component
 class UUIDGenerator {

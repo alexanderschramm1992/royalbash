@@ -4,8 +4,8 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
 import de.schramm.royalbash.infrastructure.database.GamePersistenceMapper
-import de.schramm.royalbash.infrastructure.gameevent.GameEventDTO
 import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations
+import de.schramm.royalbash.infrastructure.gameevent.GameEventDTO
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat

@@ -3,7 +3,6 @@ package de.schramm.royalbash.domain
 import de.schramm.royalbash.domain.card.creature.CreatureMock
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.*
 
 class SpotTest {
 

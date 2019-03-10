@@ -4,9 +4,8 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
 import de.schramm.royalbash.domain.card.creature.CreatureMock
-import org.junit.jupiter.api.Test
-
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 
 class CreatureAttackedEventTest {
 

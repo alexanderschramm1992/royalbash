@@ -9,11 +9,11 @@ CircleCI  [![CircleCI](https://circleci.com/gh/alexanderschramm1992/royalbash.sv
  * Suggested IDE is [IntelliJ](https://www.jetbrains.com/idea/download/#section=windows) for backend and [VS Code](https://code.visualstudio.com/) for frontend
 
 ## Getting started
- * Run `./gradlew clean build` to build the backend
-   * The resulting artifact will be in `build/libs`
- * Run `npm install` to download dependencies of the frontend
- * Run `npm start` to compile and pack the frontend (keeps running)
- * Run `./gradlew bootRun`
+ * Run `./gradlew clean build` to compile backend and npm-install frontend
+ * If *not* on Windows, run `./gradlew webapp:npmStart`
+ * Otherwise:
+   * In `webapp` run `npm start` to compile and pack the frontend (keeps running)
+   * In root directory run `./gradlew backend:bootRun`
 
 ## Endpoints
  * In your browser, navigate to [localhost:8080](http://localhost:3000) to find the app

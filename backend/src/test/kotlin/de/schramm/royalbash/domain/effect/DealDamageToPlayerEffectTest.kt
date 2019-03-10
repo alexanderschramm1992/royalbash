@@ -3,9 +3,8 @@ package de.schramm.royalbash.domain.effect
 import de.schramm.royalbash.domain.Context
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
-import org.junit.jupiter.api.Test
-
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 
 class DealDamageToPlayerEffectTest {
 

@@ -4,9 +4,8 @@ import de.schramm.royalbash.domain.Context
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.card.spell.NoOpCard
-import org.junit.jupiter.api.Test
-
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 
 class NoOpCardTest {
 
