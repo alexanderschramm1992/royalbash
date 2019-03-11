@@ -38,4 +38,4 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
         
-      - run: ./gradlew jar
+      - run: ./gradlew build
