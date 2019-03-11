@@ -1,1 +1,4 @@
 rootProject.name = "royalbash"
+
+include("backend")
+include("webapp")
