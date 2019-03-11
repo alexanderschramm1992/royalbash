@@ -57,6 +57,7 @@ secrets.yml
 
 # production
 /build
+/backend/out
 
 # misc
 .DS_Store
