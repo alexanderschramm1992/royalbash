@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-jvm:
+  build:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk-node
@@ -19,10 +19,10 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "backend/build.gradle.kts" }}
+          - v1-dependencies-{{ checksum "webapp/build.gradle.kts" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
@@ -35,31 +35,9 @@ jobs:
 
       - run: ./gradlew build --info -x test
 
-  build-node:
-    docker:
-      - image: circleci/openjdk:8-jdk-node
-
-    working_directory: ~/repo
-
-    steps:
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "webapp/build.gradle.kts" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
       - run: ./gradlew npmInstall
 
       - save_cache:
           paths:
             - ~/repo/webapp/node_modules
           key: v1-dependencies-{{ checksum "webapp/build.gradle.kts" }}
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build-jvm
-      - build-node:
-          requires:
-            - build-jvm
