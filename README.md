@@ -9,7 +9,7 @@ CircleCI  [![CircleCI](https://circleci.com/gh/alexanderschramm1992/royalbash.sv
  * Suggested IDE is [IntelliJ](https://www.jetbrains.com/idea/download/#section=windows) for backend and [VS Code](https://code.visualstudio.com/) for frontend
 
 ## Getting started
- * Run `./gradlew clean build` to compile backend and npm-install frontend
+ * Run `./gradlew clean buildAll` to compile backend and npm-install frontend
  * If *not* on Windows, run `./gradlew webapp:npmStart`
  * Otherwise:
    * In `webapp` run `npm start` to compile and pack the frontend (keeps running)
