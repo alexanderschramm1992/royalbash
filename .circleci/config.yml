@@ -22,7 +22,6 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "backend/build.gradle.kts" }}
-          - v1-dependencies-{{ checksum "webapp/build.gradle.kts" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
@@ -33,7 +32,11 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "backend/build.gradle.kts" }}
 
-      - run: ./gradlew build --info -x test
+      - run: ./gradlew build -x test
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "webapp/build.gradle.kts" }}
 
       - run: ./gradlew npmInstall
 
