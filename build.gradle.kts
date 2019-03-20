@@ -27,7 +27,7 @@ subprojects {
     }
 }
 
-tasks.register("build") {
+tasks.register("buildAll") {
     dependsOn(
             project("backend").tasks["build"],
             project("webapp").tasks["npmInstall"]

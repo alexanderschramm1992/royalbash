@@ -1,13 +1,9 @@
-# Java Maven CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:8-jdk-node
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -18,16 +14,14 @@ jobs:
 
     environment:
       # Customize the JVM maximum heap limit
-      MAVEN_OPTS: -Xms512m -Xmx3200m
       JAVA_OPTS: -Xms512m -Xmx3072m
     
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle.kts" }}
+          - v1-dependencies-{{ checksum "backend/build.gradle.kts" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
@@ -36,6 +30,17 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle.kts" }}
-        
-      - run: ./gradlew build --info
+          key: v1-dependencies-{{ checksum "backend/build.gradle.kts" }}
+
+      - run: ./gradlew build -x test
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "webapp/package.json" }}
+
+      - run: ./gradlew npmInstall
+
+      - save_cache:
+          paths:
+            - ~/repo/webapp/node_modules
+          key: v1-dependencies-{{ checksum "webapp/package.json" }}

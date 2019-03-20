@@ -6,7 +6,7 @@ plugins {
 }
 
 node {
-    download = true
+    download = false
 }
 
 tasks.register<NpmTask>("npmStart") {
