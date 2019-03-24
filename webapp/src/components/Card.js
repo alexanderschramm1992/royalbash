@@ -18,97 +18,60 @@ class Card extends React.Component {
             <div className="card-content-wrapper" style={{
                 position: "relative"
             }}>
-                <img src="images/guimegapack/Adventure_UI/background/background_01.png"
+                <img src="images/tcgcarddesign/gray_wood/card_title/frame_grey_wood.png"
                      alt="card-content-background"
                      style={{
+                         zIndex: "2",
                          width: cardWidth + "px",
                          height: cardHeight + "px",
                          position: "absolute",
                          left: "0",
                          top: "0"
                      }}/>
+                <div className="name" style={{
+                        WebkitTextStroke: "1px black",
+                        textAlign: "center",
+                        lineHeight: "15px",
+                        fontSize: "20px",
+                        fontFamily: "'Luckiest Guy', cursive",
+                        zIndex: "5",
+                        width: cardWidth - 20 + "px",
+                        position: "absolute",
+                        left: "10px",
+                        top: "210px"
+                    }}>{card.name}</div>
                 <div className="card-content" style={{
-                    width: cardWidth - 20 + "px",
-                    height: cardHeight - 30 + "px",
+                    width: cardWidth - 10 + "px",
+                    height: cardHeight - 10 + "px",
                     position: "absolute",
-                    top: "15px",
-                    left: "10px"
+                    top: "5px",
+                    left: "5px"
                 }}>
-                    {Card.nameView(card, cardWidth)}
                     {Card.costView(card, cardWidth)}
                     {Card.imageView(card, cardWidth)}
+                    {Card.statsView(card, cardWidth)}
                 </div>
             </div>
         )
     }
 
-    static nameView(card, cardWidth) {
-        return (
-            <div className="name-wrapper" style={{
-                height: "30px",
-                position: "relative"
-            }}>
-                <img src="images/guimegapack/Adventure_UI/frame/die_03.png"
-                     alt="name-frame"
-                     style={{
-                         zIndex: "4",
-                         width: cardWidth - 40 + "px",
-                         height: "30px",
-                         position: "absolute",
-                         left: "10px",
-                         top: "0"
-                     }}/>
-                <div className="name" style={{
-                    WebkitTextStroke: "1px black",
-                    textAlign: "center",
-                    lineHeight: "15px",
-                    fontSize: "20px",
-                    fontFamily: "'Luckiest Guy', cursive",
-                    zIndex: "5",
-                    width: cardWidth - 40 + "px",
-                    position: "absolute",
-                    left: "10px",
-                    top: "7px"
-                }}>{card.name}</div>
-            </div>
-        )
-    }
-
     static costView(card, cardWidth) {
+        const paddingLeft = "-5px";
+        const paddingTop = "-5px";
         return (
             <div className="cost-wrapper" style={{
-                height: "25px",
+                height: "0",
                 position: "relative"
             }}>
-                <img src="images/guimegapack/Adventure_UI/background/banner_01.png"
+                <img src="images/tcgcarddesign/gray_wood/card_title/slot_grey_wood.png"
                      alt="cost-frame"
                      style={{
-                         zIndex: "3",
-                         width: cardWidth - 80 + "px",
-                         height: "60px",
-                         position: "absolute",
-                         left: "30px",
-                         top: "0"
-                     }}/>
-                <img src="images/guimegapack/FantasyButtons/fantasy_buttons_png/ring_bg/frame/ring_frame.PNG"
-                     alt="cost-glass-button"
-                     style={{
-                         zIndex: "4",
+                         zIndex: "1",
                          width: "40px",
                          height: "40px",
                          position: "absolute",
-                         left: "80px",
-                         top: "10px"
-                     }}/>
-                <img src="images/guimegapack/FantasyButtons/fantasy_buttons_png/ring_bg/bg/r_bg2.PNG"
-                     alt="cost-glass-button"
-                     style={{
-                         zIndex: "3",
-                         width: "40px",
-                         height: "40px",
-                         position: "absolute",
-                         left: "80px",
-                         top: "10px"
+                         left: paddingLeft,
+                         top: paddingTop
                      }}/>
                 <div className="cost" style={{
                     color: "white",
@@ -118,10 +81,10 @@ class Card extends React.Component {
                     fontSize: "20px",
                     fontFamily: "'Luckiest Guy', cursive",
                     zIndex: "5",
-                    width: "20px",
+                    width: "40px",
                     position: "absolute",
-                    left: "90px",
-                    top: "10px"
+                    left: paddingLeft,
+                    top: paddingTop
                 }}>{card.cost}</div>
             </div>
         )
@@ -130,25 +93,77 @@ class Card extends React.Component {
     static imageView(card, cardWidth) {
         return (
             <div className="image-wrapper" style={{
-                position: "relative"
+                position: "relative",
+                height: "0"
             }}>
                 <img src={"images/cards/fantasycharacters/" + card.image}
                      alt={card.name}
                      style={{
-                         marginTop: "5px",
-                         width: cardWidth - 40 + "px",
+                         width: cardWidth - 10 + "px",
                          height: "220px"
                      }}
                 />
-                <img src="images/guimegapack/Adventure_UI/frame/frame.png"
-                     alt="image-frame"
+            </div>
+        )
+    }
+
+    static statsView(card, cardWidth) {
+
+        const attackLeftPadding = "5px";
+        const healthLeftPadding = "145px";
+        const topPadding = "245px";
+        const zIndex = "3";
+        const width = "40px";
+        const height = "40px";
+        return (
+            <div className="stats-wrapper" style={{
+                position: "relative",
+                height: "0"
+            }}>
+                <img src="images/tcgcarddesign/gray_wood/card_title/slot_grey_wood.png"
+                     alt="attack-frame"
                      style={{
-                         width: cardWidth - 30 + "px",
-                         height: "230px",
+                         zIndex: zIndex,
+                         width: width,
+                         height: height,
                          position: "absolute",
-                         left: "5px",
-                         top: "0"
+                         left: attackLeftPadding,
+                         top: topPadding
                      }}/>
+                <div className="attack" style={{
+                    color: "white",
+                    WebkitTextStroke: "1px black",
+                    textAlign: "center",
+                    lineHeight: height,
+                    fontSize: "20px",
+                    fontFamily: "'Luckiest Guy', cursive",
+                    width: width,
+                    position: "absolute",
+                    left: attackLeftPadding,
+                    top: topPadding
+                }}>{card.attack}</div>
+                <img src="images/tcgcarddesign/gray_wood/card_title/slot_grey_wood.png"
+                     alt="health-frame"
+                     style={{
+                         zIndex: zIndex,
+                         width: width,
+                         height: height,
+                         position: "absolute",
+                         left: healthLeftPadding,
+                         top: topPadding
+                     }}/>
+                <div className="attack" style={{
+                    color: "white",
+                    WebkitTextStroke: "1px black",
+                    textAlign: "center",
+                    lineHeight: height,
+                    fontSize: "20px",
+                    fontFamily: "'Luckiest Guy', cursive",
+                    width: width,
+                    position: "absolute",
+                    left: healthLeftPadding,
+                    top: topPadding
+                }}>{card.health}</div>
             </div>
         )
     }
@@ -157,8 +172,8 @@ class Card extends React.Component {
 
         const card = this.props.card;
 
-        const cardWidth = 220;
-        const cardHeight = 330;
+        const cardWidth = 200;
+        const cardHeight = 300;
 
         return (
             <div className="Card"
