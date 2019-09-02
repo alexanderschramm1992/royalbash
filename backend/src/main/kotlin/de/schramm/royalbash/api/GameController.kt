@@ -12,8 +12,8 @@ constructor(private val gameService: GameService) {
     @GetMapping("/game/{gameId}")
     internal fun retrieveGame(@PathVariable gameId: String): ExternalModel.Game {
         return gameService.retrieveGame(gameId)
-                .map { it.toExternalModel() }
-                .orElseThrow { GameNotFoundException(gameId) }
+                       ?.toExternalModel()
+               ?: throw GameNotFoundException(gameId)
     }
 
     @GetMapping("/game/id")
@@ -36,6 +36,6 @@ constructor(private val gameService: GameService) {
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    private inner class GameNotFoundException internal constructor(gameId: String) : RuntimeException(
+    private inner class GameNotFoundException internal constructor(gameId: String): RuntimeException(
             "No game for id $gameId")
 }

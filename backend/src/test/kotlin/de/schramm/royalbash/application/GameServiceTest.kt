@@ -31,9 +31,7 @@ class GameServiceTest {
         val retrievedGame = testee.retrieveGame(gameId)
 
         // Then
-        assertThat(retrievedGame)
-                .isPresent
-                .hasValue(game)
+        assertThat(retrievedGame).isEqualTo(game)
     }
 
     @Test

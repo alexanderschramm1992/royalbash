@@ -4,17 +4,14 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
 import java.util.*
-import java.util.stream.StreamSupport
 
 class GameService(
         private val uuidGenerator: UUIDGenerator,
         private val games: Games
 ) {
 
-    fun retrieveGame(gameId: String): Optional<Game> {
-        return StreamSupport.stream(games.findAll().spliterator(), false)
-                .filter { game -> gameId == game.id }
-                .findFirst()
+    fun retrieveGame(gameId: String): Game? {
+        return games.findAll().firstOrNull { game -> gameId == game.id }
     }
 
     fun createGame(account1Id: String, account2Id: String): Game {
@@ -34,7 +31,7 @@ class GameService(
 
     fun commitGameEvent(gameId: String, gameEvent: GameEvent): Optional<Game> {
         println("""Received event $gameEvent for game $gameId""")
-        return retrieveGame(gameId).map { gameEvent.invoke(it) }
+        return Optional.ofNullable(retrieveGame(gameId)).map { gameEvent.invoke(it) }
     }
 
     fun retrieveGameIds(): List<String> {

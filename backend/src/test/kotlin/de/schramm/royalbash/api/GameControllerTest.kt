@@ -45,7 +45,7 @@ class GameControllerTest {
                 player2 = Player("Id 3"),
                 playerOnTurn = Player("Id 3"),
                 state = OPEN)
-        every { gameService.retrieveGame("1") } returns Optional.of(game)
+        every { gameService.retrieveGame("1") } returns game
 
         val requestBuilder = MockMvcRequestBuilders
                 .get("/game/1")
@@ -71,7 +71,7 @@ class GameControllerTest {
     fun `does not deliver game but status code 404 if game not found`() {
 
         // Given
-        every { gameService.retrieveGame("1") } returns Optional.empty()
+        every { gameService.retrieveGame("1") } returns null
 
         val requestBuilder = MockMvcRequestBuilders
                 .get("/game/1")
