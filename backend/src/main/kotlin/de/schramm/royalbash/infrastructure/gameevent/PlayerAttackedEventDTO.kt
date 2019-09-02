@@ -4,10 +4,7 @@ import de.schramm.royalbash.domain.Game
 
 data class PlayerAttackedEventDTO(
         val creatureId: String,
-        val ownerId: String
-                                 ) : GameEventDTO {
-
-    constructor(): this(creatureId = "", ownerId = "")
+        val ownerId: String) : GameEventDTO {
 
     override fun invoke(game: Game): Game {
 

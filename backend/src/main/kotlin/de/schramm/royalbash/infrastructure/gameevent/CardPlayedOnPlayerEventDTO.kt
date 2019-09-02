@@ -2,9 +2,9 @@ package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
 
-data class CardPlayedOnPlayerEventDTO(val cardId: String, val ownerId: String, val targetPlayerId: String): GameEventDTO {
-
-    constructor(): this(cardId = "", ownerId = "", targetPlayerId = "")
+data class CardPlayedOnPlayerEventDTO(val cardId: String,
+                                      val ownerId: String,
+                                      val targetPlayerId: String): GameEventDTO {
 
     override fun invoke(game: Game): Game {
 

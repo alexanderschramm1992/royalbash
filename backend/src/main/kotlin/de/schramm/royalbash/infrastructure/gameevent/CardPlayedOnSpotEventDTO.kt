@@ -7,8 +7,6 @@ data class CardPlayedOnSpotEventDTO(
         val ownerId: String,
         val targetSpotId: String) : GameEventDTO {
 
-    constructor(): this(cardId = "", ownerId = "", targetSpotId = "")
-
     override fun invoke(game: Game): Game {
 
         val owner = game.findPlayer(ownerId)
