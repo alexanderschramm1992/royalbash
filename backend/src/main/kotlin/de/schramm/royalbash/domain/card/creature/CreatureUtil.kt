@@ -1,8 +1,6 @@
 package de.schramm.royalbash.domain.card.creature
 
-import de.schramm.royalbash.domain.Context
-import de.schramm.royalbash.domain.Creature
-import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.*
 
 internal object CreatureUtil {
 
@@ -13,8 +11,8 @@ internal object CreatureUtil {
 
         return context.targetSpot
                 ?.let { targetSpot -> game.findPlayer(owner)
-                        ?.let { it.updateSpot(targetSpot, targetSpot.place(creature)) }
-                        ?.let { game.updatePlayer(owner, it) }
+                        ?.let { it.updateSpot(targetSpot to targetSpot.place(creature)) }
+                        ?.let { game.updatePlayer(owner to it) }
                         ?: game }
                 ?: game
     }

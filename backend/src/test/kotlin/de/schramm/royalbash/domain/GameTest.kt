@@ -91,7 +91,7 @@ class GameTest {
         val testee = Game("Id 1", OPEN, Player("Id 2"), Player("Id 3"))
 
         // When
-        val game = testee.setState(PLAYER_1_WON)
+        val game = testee.withState(PLAYER_1_WON)
 
         // Then
         assertThat(game.state).isEqualTo(PLAYER_1_WON)
@@ -108,7 +108,7 @@ class GameTest {
                 Player("Id 3", hitpoints = 1))
 
         // When
-        val game = testee.updateStateAccordingToWinContitions()
+        val game = testee.updateStateAccordingToWinConditions()
 
         // Then
         assertThat(game.state).isEqualTo(PLAYER_2_WON)

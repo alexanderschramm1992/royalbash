@@ -1,7 +1,8 @@
 package de.schramm.royalbash.domain.effect
 
-import de.schramm.royalbash.domain.Context
-import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.*
+import de.schramm.royalbash.domain.discardCards
+import de.schramm.royalbash.domain.findPlayer
 
 data class DiscardHandcardsEffect(val amountOfCards: Int) {
 

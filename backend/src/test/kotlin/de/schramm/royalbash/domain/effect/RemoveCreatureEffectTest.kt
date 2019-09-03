@@ -1,9 +1,6 @@
 package de.schramm.royalbash.domain.effect
 
-import de.schramm.royalbash.domain.Context
-import de.schramm.royalbash.domain.Game
-import de.schramm.royalbash.domain.Player
-import de.schramm.royalbash.domain.Spot
+import de.schramm.royalbash.domain.*
 import de.schramm.royalbash.domain.card.creature.CreatureMock
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

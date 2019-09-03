@@ -1,6 +1,9 @@
 package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.findHandcard
+import de.schramm.royalbash.domain.findPlayer
+import de.schramm.royalbash.domain.playCard
 
 data class CardPlayedOnPlayerEventDTO(val cardId: String,
                                       val ownerId: String,
@@ -12,8 +15,8 @@ data class CardPlayedOnPlayerEventDTO(val cardId: String,
         val card = owner?.findHandcard(cardId)
         val targetPlayer = game.findPlayer(targetPlayerId)
 
-        return if (owner != null && card != null && targetPlayer != null) {
+        return if (owner != null && card != null && targetPlayer != null)
             game.playCard(card, owner, targetPlayer)
-        } else game
+        else game
     }
 }

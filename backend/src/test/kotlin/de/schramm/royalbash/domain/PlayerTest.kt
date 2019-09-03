@@ -28,7 +28,7 @@ class PlayerTest {
         val testee = Player("Id 1", hitpoints = 30)
 
         // When
-        val player = testee.setHitpoints(10)
+        val player = testee.withHitpoints(10)
 
         // Then
         assertThat(player.hitpoints).isEqualTo(10)
@@ -183,7 +183,7 @@ class PlayerTest {
         val updatedCreature = CreatureMock("Id 1", hitpoints = 12)
 
         // When
-        val player = testee.updateCreature(creature, updatedCreature)
+        val player = testee.updateCreature(creature to updatedCreature)
 
         // Then
         val creaturesOfPlayer = player.spots.mapNotNull { it.creature }
@@ -201,7 +201,7 @@ class PlayerTest {
         val testee = Player("Id 2", spots = listOf(spot))
 
         // When
-        val player = testee.updateCreature(creature, creature)
+        val player = testee.updateCreature(creature to creature)
 
         // Then
         val creaturesOfPlayer = player.spots.mapNotNull { it.creature }
