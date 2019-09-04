@@ -4,6 +4,7 @@ import de.schramm.royalbash.domain.Context
 import de.schramm.royalbash.domain.Creature
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.effect.DiscardHandcardsEffect
+import de.schramm.royalbash.domain.spawnCreature
 
 data class GoblinRaider(
         override val id: String,
@@ -20,7 +21,7 @@ data class GoblinRaider(
 
     override fun invoke(context: Context): Game {
 
-        val updatedGame = CreatureUtil.spawnCreature(this, context)
+        val updatedGame = this.spawnCreature(context)
 
         val updatedContext = context.copy(game = updatedGame)
 

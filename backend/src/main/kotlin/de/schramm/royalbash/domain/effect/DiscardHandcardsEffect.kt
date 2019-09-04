@@ -9,12 +9,11 @@ data class DiscardHandcardsEffect(val amountOfCards: Int) {
     operator fun invoke(context: Context): Game {
 
         val game = context.game
+        val actualPlayer = context.targetPlayer?.let(game::findPlayer)
 
-        return context.targetPlayer
-                ?.let { game.findPlayer(it)
-                            ?.discardCards(amountOfCards)
-                            ?.updateInGame(game, it)
-                }
-                ?: game
+        return if (actualPlayer != null) {
+            val updatedPlayer = actualPlayer.discardCards(amountOfCards)
+            game.updatePlayer(actualPlayer to updatedPlayer)
+        } else game
     }
 }

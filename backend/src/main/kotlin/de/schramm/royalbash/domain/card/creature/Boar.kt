@@ -3,6 +3,7 @@ package de.schramm.royalbash.domain.card.creature
 import de.schramm.royalbash.domain.Context
 import de.schramm.royalbash.domain.Creature
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.spawnCreature
 
 data class Boar(
         override val id: String,
@@ -17,5 +18,5 @@ data class Boar(
     override fun damage(amountOfDamage: Int) =
             this.copy(hitpoints = hitpoints - amountOfDamage)
 
-    override fun invoke(context: Context): Game = CreatureUtil.spawnCreature(this, context)
+    override fun invoke(context: Context): Game = this.spawnCreature(context)
 }

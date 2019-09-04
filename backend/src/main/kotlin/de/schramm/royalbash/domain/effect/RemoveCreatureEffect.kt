@@ -10,10 +10,9 @@ class RemoveCreatureEffect {
     operator fun invoke(context: Context): Game {
 
         val game = context.game
+        val actualCreature = context.targetCreature?.let(game::findCreature)
 
-        return context.targetCreature
-                ?.let { game.findCreature(it) }
-                ?.let { game.removeCreature(it) }
-                ?: game
+        return if (actualCreature != null) game.removeCreature(actualCreature)
+        else game
     }
 }

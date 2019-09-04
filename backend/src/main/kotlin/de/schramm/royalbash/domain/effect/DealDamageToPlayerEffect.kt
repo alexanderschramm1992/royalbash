@@ -8,11 +8,12 @@ data class DealDamageToPlayerEffect (private val amountOfDamage: Int) {
 
     operator fun invoke(context: Context): Game {
 
-        return context.targetPlayer
-                ?.let { context.game
-                            .findPlayer(it)
-                            ?.withHitpoints(it.hitpoints - amountOfDamage)
-                            ?.updateInGame(context.game, context.targetPlayer) }
-                ?: context.game
+        val game = context.game
+        val actualPlayer = context.targetPlayer?.let(game::findPlayer)
+
+        return if (actualPlayer != null) {
+            val updatedPlayer = actualPlayer.withHitpoints(actualPlayer.hitpoints - amountOfDamage)
+            game.updatePlayer(actualPlayer to updatedPlayer)
+        } else game
     }
 }

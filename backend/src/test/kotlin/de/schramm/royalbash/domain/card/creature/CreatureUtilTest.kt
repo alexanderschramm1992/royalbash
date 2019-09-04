@@ -1,9 +1,6 @@
 package de.schramm.royalbash.domain.card.creature
 
-import de.schramm.royalbash.domain.Context
-import de.schramm.royalbash.domain.Game
-import de.schramm.royalbash.domain.Player
-import de.schramm.royalbash.domain.Spot
+import de.schramm.royalbash.domain.*
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -21,7 +18,7 @@ class CreatureUtilTest {
         val context = Context(game, owner, targetSpot = targetSpot)
 
         // When
-        val updatedGame = CreatureUtil.spawnCreature(card, context)
+        val updatedGame = card.spawnCreature(context)
 
         // Then
         val cardInSpot = updatedGame

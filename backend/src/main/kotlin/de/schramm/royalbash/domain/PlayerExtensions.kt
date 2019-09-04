@@ -44,7 +44,7 @@ internal fun Player.removeCreature(creature: Creature): Player {
 }
 
 internal fun Player.updateCreature(oldToNew: Pair<Creature, Creature>): Player =
-        copy(spots = this.spots.map { it.updateCreature(oldToNew.old, oldToNew.new) })
+        copy(spots = this.spots.map { it.updateCreature(oldToNew) })
 
 internal fun Player.hasCard(card: Card) = handcards.any { card == it }
 

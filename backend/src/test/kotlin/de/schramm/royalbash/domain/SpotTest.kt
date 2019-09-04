@@ -29,7 +29,7 @@ class SpotTest {
         val testee = Spot(id = "spot", creature = creature)
 
         // When
-        val spot = testee.updateCreature(creature, otherCreature)
+        val spot = testee.updateCreature(creature to otherCreature)
 
         // Then
         assertThat(spot.creature).isEqualTo(otherCreature)
@@ -43,7 +43,7 @@ class SpotTest {
         val testee = Spot(id = "spot")
 
         // When
-        val spot = testee.updateCreature(creature, creature)
+        val spot = testee.updateCreature(creature to creature)
 
         // Then
         assertThat(spot.creature).isNull()
