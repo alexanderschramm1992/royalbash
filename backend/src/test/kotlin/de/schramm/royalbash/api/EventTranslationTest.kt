@@ -2,13 +2,14 @@ package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameService
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
 import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations
 import de.schramm.royalbash.infrastructure.gameevent.*
+import de.schramm.royalbash.verifyThat
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -39,7 +40,8 @@ class EventTranslationTest {
                 player1 = Player("Id 2"),
                 player2 = Player("Id 3"),
                 playerOnTurn = Player("Id 2"),
-                state = OPEN))
+                state = OPEN,
+                log = Log()))
 
         every { gameService.commitGameEvent(any(), any()) } returns gameOptional
     }
@@ -68,11 +70,11 @@ class EventTranslationTest {
 
         // Given
         val json = "{\"event\": {" +
-                        "\"type\": \"CARD_PLAYED_ON_PLAYER\", " +
-                        "\"cardId\": \"Card Id\", " +
-                        "\"ownerId\": \"Owner Id\", " +
-                        "\"targetPlayerId\": \"Target Player Id\"}" +
-                        "}"
+                   "\"type\": \"CARD_PLAYED_ON_PLAYER\", " +
+                   "\"cardId\": \"Card Id\", " +
+                   "\"ownerId\": \"Owner Id\", " +
+                   "\"targetPlayerId\": \"Target Player Id\"}" +
+                   "}"
         val expectedEvent = CardPlayedOnPlayerEventDTO(
                 "Card Id",
                 "Owner Id",
@@ -88,11 +90,11 @@ class EventTranslationTest {
 
         // Given
         val json = "{\"event\": {" +
-                        "\"type\": \"CREATURE_ATTACKED\", " +
-                        "\"attackerId\": \"Attacker Id\", " +
-                        "\"defenderId\": \"Defender Id\", " +
-                        "\"ownerId\": \"Owner Id\"}" +
-                        "}"
+                   "\"type\": \"CREATURE_ATTACKED\", " +
+                   "\"attackerId\": \"Attacker Id\", " +
+                   "\"defenderId\": \"Defender Id\", " +
+                   "\"ownerId\": \"Owner Id\"}" +
+                   "}"
         val expectedEvent = CreatureAttackedEventDTO(
                 attackerId = "Attacker Id",
                 defenderId = "Defender Id",
@@ -110,7 +112,7 @@ class EventTranslationTest {
         val json = String.format(
                 "{\"event\": {\"type\": \"NO_OP\"}}",
                 gameId
-        )
+                                )
         val expectedEvent = NoOpEventDTO()
 
         // When Then
@@ -123,10 +125,10 @@ class EventTranslationTest {
 
         // Given
         val json = "{\"event\": {" +
-                        "\"type\": \"PLAYER_ATTACKED\", " +
-                        "\"creatureId\": \"Creature Id\", " +
-                        "\"ownerId\": \"Owner Id\"}" +
-                        "}"
+                   "\"type\": \"PLAYER_ATTACKED\", " +
+                   "\"creatureId\": \"Creature Id\", " +
+                   "\"ownerId\": \"Owner Id\"}" +
+                   "}"
         val expectedEvent = PlayerAttackedEventDTO("Creature Id", "Owner Id")
 
         // When Then
@@ -140,11 +142,11 @@ class EventTranslationTest {
         // Given
         val json = String.format(
                 "{\"event\": {" +
-                        "\"type\": \"TURN_ENDED\", " +
-                        "\"playerId\": \"Player Id\"}" +
-                        "}",
+                "\"type\": \"TURN_ENDED\", " +
+                "\"playerId\": \"Player Id\"}" +
+                "}",
                 gameId
-        )
+                                )
         val expectedEvent = TurnEndedEventDTO("Player Id")
 
         // When Then
@@ -162,19 +164,34 @@ class EventTranslationTest {
                 .contentType(MediaType.APPLICATION_JSON)
 
         // When
-        mockMvc.perform(requestBuilder)
+        val response = mockMvc.perform(requestBuilder)
                 .andReturn()
                 .response
                 .contentAsString
 
         // Then
-        verify { gameService.commitGameEvent(gameId, expectedEvent) }
+        try {
+            verifyThat("commitGameEvent() is called at all") {
+                gameService.commitGameEvent(any(), any())
+            }
+            verifyThat("commitGameEvent() is called with expected Game Id") {
+                gameService.commitGameEvent(gameId, any())
+            }
+            verifyThat("commitGameEvent() is called with expected Game Id and Event") {
+                gameService.commitGameEvent(gameId, expectedEvent)
+            }
+        } catch (error: AssertionError) {
+            throw AssertionError("Event Translation failed \nHttp Response: [ \n$response \n]\n${error.message}",
+                                 error)
+        }
     }
 
     @TestConfiguration
     class ControllerTestConfig {
+
         @Bean
         fun gameService() = mockk<GameService>()
+
         @Bean
         fun gameRepository() = InMemoryGamePersistenceOperations()
     }

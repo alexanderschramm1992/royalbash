@@ -1,6 +1,7 @@
 package de.schramm.royalbash.application
 
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
 import de.schramm.royalbash.infrastructure.database.GamePersistenceMapper
@@ -19,10 +20,10 @@ class GameServiceTest {
 
         // Given
         val gameId = "Game Id"
-        val game = Game(
-                gameId,
-                player1 = Player("Id 1"),
-                player2 = Player("Id 2"))
+        val game = Game(gameId,
+                        player1 = Player("Id 1"),
+                        player2 = Player("Id 2"),
+                        log = Log())
         val repository = mockk<Games>()
         every { repository.findAll() } returns setOf(game)
         val testee = GameService(UUIDGenerator(), repository)
@@ -61,10 +62,10 @@ class GameServiceTest {
 
         // Given
         val gameId = "Id 1"
-        val game = Game(
-                gameId,
-                player1 = Player("Id 2"),
-                player2 = Player("Id 3"))
+        val game = Game(gameId,
+                        player1 = Player("Id 2"),
+                        player2 = Player("Id 3"),
+                        log = Log())
         val gameEvent = mockk<GameEventDTO>()
         every { gameEvent.invoke(game) } returns game
         val repository = mockk<Games>()

@@ -2,6 +2,7 @@ package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameService
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
 import de.schramm.royalbash.infrastructure.gameevent.NoOpEventDTO
@@ -44,7 +45,8 @@ class GameControllerTest {
                 player1 = Player("Id 2"),
                 player2 = Player("Id 3"),
                 playerOnTurn = Player("Id 3"),
-                state = OPEN)
+                state = OPEN,
+                log = Log())
         every { gameService.retrieveGame("1") } returns game
 
         val requestBuilder = MockMvcRequestBuilders
@@ -98,7 +100,8 @@ class GameControllerTest {
                 player1 = Player("Id 2", name = accountId1),
                 player2 = Player("Id 3", name = accountId2),
                 playerOnTurn = Player("Id 2"),
-                state = OPEN)
+                state = OPEN,
+                log = Log())
         every { gameService.createGame(accountId1, accountId2) } returns game
 
         val requestBuilder = MockMvcRequestBuilders
@@ -140,8 +143,8 @@ class GameControllerTest {
                 player1 = Player("Id 2"),
                 player2 = Player("Id 3"),
                 playerOnTurn = Player("Id 2"),
-                state = OPEN
-        )
+                state = OPEN,
+                log = Log())
         every { gameService.commitGameEvent(gameId, NoOpEventDTO()) } returns Optional.of(game)
 
         val requestBuilder = MockMvcRequestBuilders

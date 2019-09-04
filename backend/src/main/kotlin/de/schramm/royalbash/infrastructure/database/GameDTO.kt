@@ -1,27 +1,26 @@
 package de.schramm.royalbash.infrastructure.database
 
-import de.schramm.royalbash.domain.Game
-import de.schramm.royalbash.domain.Player
-import de.schramm.royalbash.domain.State
+import de.schramm.royalbash.domain.*
 
-data class GameDTO (
+data class GameDTO(
         val id: String,
         val state: State,
         val player1: Player,
         val player2: Player,
-        val playerOnTurn: String) {
+        val playerOnTurn: String,
+        val log: List<Entry>) {
 
-    fun toGame() = Game(
-                this.id,
-                this.state,
-                this.player1,
-                this.player2,
-                if(this.player1.id == this.playerOnTurn) this.player1 else this.player2)
+    fun toGame() = Game(id,
+                        state,
+                        player1,
+                        player2,
+                        if (player1.id == playerOnTurn) player1 else player2,
+                        Log(log))
 }
 
-fun Game.toDTO() = GameDTO(
-    this.id,
-    this.state,
-    this.player1,
-    this.player2,
-    this.playerOnTurn.id)
+fun Game.toDTO() = GameDTO(id,
+                           state,
+                           player1,
+                           player2,
+                           playerOnTurn.id,
+                           log.entries)

@@ -1,6 +1,7 @@
 package de.schramm.royalbash.application
 
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State
 import de.schramm.royalbash.domain.card.creature.Boar
@@ -42,7 +43,8 @@ class TestDataLoader @Autowired constructor(private val repository: Games) {
                 player1 = player1,
                 player2 = player2,
                 playerOnTurn = player1,
-                state = State.OPEN)
+                state = State.OPEN,
+                log = Log())
 
         repository.save(game)
     }

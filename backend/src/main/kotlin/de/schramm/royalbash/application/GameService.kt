@@ -1,6 +1,7 @@
 package de.schramm.royalbash.application
 
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
 import java.util.*
@@ -22,7 +23,8 @@ class GameService(
         val game = Game(
                 id = uuidGenerator.generateId(),
                 player1 = Player(id = player1Id, name = account1Id),
-                player2 = Player(id = player2Id, name = account2Id))
+                player2 = Player(id = player2Id, name = account2Id),
+                log = Log())
 
         games.save(game)
 
