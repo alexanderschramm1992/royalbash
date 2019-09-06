@@ -31,9 +31,9 @@ class GameService(
         return game
     }
 
-    fun commitGameEvent(gameId: String, gameEvent: GameEvent): Optional<Game> {
+    fun commitGameEvent(gameId: String, gameEvent: GameEvent): Game? {
         println("""Received event $gameEvent for game $gameId""")
-        return Optional.ofNullable(retrieveGame(gameId)).map { gameEvent.invoke(it) }
+        return retrieveGame(gameId)?.let(gameEvent::invoke)
     }
 
     fun retrieveGameIds(): List<String> {

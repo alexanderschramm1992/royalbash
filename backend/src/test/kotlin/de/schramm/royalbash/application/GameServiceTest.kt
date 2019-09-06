@@ -76,8 +76,6 @@ class GameServiceTest {
         val updatedGame = testee.commitGameEvent(gameId, gameEvent)
 
         // Then
-        assertThat(updatedGame)
-                .isPresent
-                .hasValue(game)
+        assertThat(updatedGame).isEqualTo(game)
     }
 }

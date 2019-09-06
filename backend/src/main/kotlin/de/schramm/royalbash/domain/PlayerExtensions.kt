@@ -1,11 +1,11 @@
 package de.schramm.royalbash.domain
 
-internal fun Player.withHitpoints(hitpoints: Int) = copy(hitpoints = hitpoints)
+fun Player.withHitpoints(hitpoints: Int) = copy(hitpoints = hitpoints)
 
-internal fun Player.updateSpot(oldToNew: Pair<Spot, Spot>): Player =
+fun Player.updateSpot(oldToNew: Pair<Spot, Spot>): Player =
         copy(spots = this.spots.map { if (it == oldToNew.old) oldToNew.new else it })
 
-internal fun Player.discardCards(amountOfCards: Int): Player {
+fun Player.discardCards(amountOfCards: Int): Player {
 
     var player = this
     for (iterator in 0 until amountOfCards) {
@@ -14,7 +14,7 @@ internal fun Player.discardCards(amountOfCards: Int): Player {
     return player
 }
 
-internal fun Player.drawCards(amountOfCards: Int): Player {
+fun Player.drawCards(amountOfCards: Int): Player {
 
     var player = this
     for (iterator in 0 until amountOfCards) {
@@ -23,9 +23,9 @@ internal fun Player.drawCards(amountOfCards: Int): Player {
     return player
 }
 
-internal fun Player.findHandcard(cardId: String) = handcards.firstOrNull { cardId == it.id }
+fun Player.findHandcard(cardId: String) = handcards.firstOrNull { cardId == it.id }
 
-internal fun Player.removeHandcard(handcard: Card): Player {
+fun Player.removeHandcard(handcard: Card): Player {
 
     val handcards = handcards.filter { it != handcard }
 
@@ -34,7 +34,7 @@ internal fun Player.removeHandcard(handcard: Card): Player {
            ?: this
 }
 
-internal fun Player.removeCreature(creature: Creature): Player {
+fun Player.removeCreature(creature: Creature): Player {
 
     val spots = spots.map { it.removeCreature(creature) }
 
@@ -43,10 +43,10 @@ internal fun Player.removeCreature(creature: Creature): Player {
            ?: this
 }
 
-internal fun Player.updateCreature(oldToNew: Pair<Creature, Creature>): Player =
+fun Player.updateCreature(oldToNew: Pair<Creature, Creature>): Player =
         copy(spots = this.spots.map { it.updateCreature(oldToNew) })
 
-internal fun Player.hasCard(card: Card) = handcards.any { card == it }
+fun Player.hasCard(card: Card) = handcards.any { card == it }
 
 private fun Player.drawCard(): Player {
     return if (deckcards.isEmpty()) this
@@ -61,8 +61,8 @@ private fun Player.discardCard(): Player {
 
 private fun Player.findHandcard(card: Card) = handcards.find { card == it }
 
-internal fun Player.findCreature(creature: Creature) = spots
+fun Player.findCreature(creature: Creature) = spots
         .mapNotNull { it.creature }
         .firstOrNull { creature == it }
 
-internal fun Player.updateInGame(game: Game, oldPlayer: Player): Game = game.updatePlayer(oldPlayer to this)
+fun Player.updateInGame(game: Game, oldPlayer: Player): Game = game.updatePlayer(oldPlayer to this)

@@ -145,7 +145,7 @@ class GameControllerTest {
                 playerOnTurn = Player("Id 2"),
                 state = OPEN,
                 log = Log())
-        every { gameService.commitGameEvent(gameId, NoOpEventDTO()) } returns Optional.of(game)
+        every { gameService.commitGameEvent(gameId, NoOpEventDTO()) } returns game
 
         val requestBuilder = MockMvcRequestBuilders
                 .post("/game/1/event")
@@ -173,7 +173,7 @@ class GameControllerTest {
 
         // Given
         val gameId = "1"
-        every { gameService.commitGameEvent(gameId, NoOpEventDTO()) } returns Optional.empty()
+        every { gameService.commitGameEvent(gameId, NoOpEventDTO()) } returns null
         val requestBuilder = MockMvcRequestBuilders
                 .post("/game/1/event")
                 .content("""{

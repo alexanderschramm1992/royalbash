@@ -5,7 +5,6 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
-import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations
 import de.schramm.royalbash.infrastructure.gameevent.*
 import de.schramm.royalbash.verifyThat
 import io.mockk.every
@@ -19,7 +18,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import java.util.*
 
 @WebMvcTest(GameController::class, secure = false)
 class EventTranslationTest {
@@ -35,19 +33,18 @@ class EventTranslationTest {
     @BeforeEach
     fun define_mock_behavior() {
 
-        val gameOptional = Optional.of(Game(
+        val game = Game(
                 gameId,
                 player1 = Player("Id 2"),
                 player2 = Player("Id 3"),
                 playerOnTurn = Player("Id 2"),
                 state = OPEN,
-                log = Log()))
+                log = Log())
 
-        every { gameService.commitGameEvent(any(), any()) } returns gameOptional
+        every { gameService.commitGameEvent(any(), any()) } returns game
     }
 
     @Test
-    @Throws(Exception::class)
     fun should_translate_CardDrawnEvent() {
 
         // Given
@@ -65,7 +62,6 @@ class EventTranslationTest {
     }
 
     @Test
-    @Throws(Exception::class)
     fun should_translate_CardPlayedOnPlayerEvent() {
 
         // Given
@@ -85,7 +81,6 @@ class EventTranslationTest {
     }
 
     @Test
-    @Throws(Exception::class)
     fun should_translate_CreatureAttackedEvent() {
 
         // Given
@@ -105,14 +100,10 @@ class EventTranslationTest {
     }
 
     @Test
-    @Throws(Exception::class)
     fun should_translate_NoOpEvent() {
 
         // Given
-        val json = String.format(
-                "{\"event\": {\"type\": \"NO_OP\"}}",
-                gameId
-                                )
+        val json = """{"event": {"type": "NO_OP"}}"""
         val expectedEvent = NoOpEventDTO()
 
         // When Then
@@ -120,15 +111,14 @@ class EventTranslationTest {
     }
 
     @Test
-    @Throws(Exception::class)
     fun should_translate_PlayerAttackedEvent() {
 
         // Given
-        val json = "{\"event\": {" +
-                   "\"type\": \"PLAYER_ATTACKED\", " +
-                   "\"creatureId\": \"Creature Id\", " +
-                   "\"ownerId\": \"Owner Id\"}" +
-                   "}"
+        val json = """{"event": {
+                           "type": "PLAYER_ATTACKED", 
+                           "creatureId": "Creature Id", 
+                           "ownerId": "Owner Id"
+                      }}"""
         val expectedEvent = PlayerAttackedEventDTO("Creature Id", "Owner Id")
 
         // When Then
@@ -136,24 +126,19 @@ class EventTranslationTest {
     }
 
     @Test
-    @Throws(Exception::class)
     fun should_translate_TurnEndedEvent() {
 
         // Given
-        val json = String.format(
-                "{\"event\": {" +
-                "\"type\": \"TURN_ENDED\", " +
-                "\"playerId\": \"Player Id\"}" +
-                "}",
-                gameId
-                                )
+        val json = """{"event": {
+                        "type": "TURN_ENDED", 
+                        "playerId": "Player Id"
+                      }}"""
         val expectedEvent = TurnEndedEventDTO("Player Id")
 
         // When Then
         test(json, expectedEvent)
     }
-
-    @Throws(Exception::class)
+    
     private fun test(json: String, expectedEvent: GameEventDTO) {
 
         // Given
@@ -191,8 +176,5 @@ class EventTranslationTest {
 
         @Bean
         fun gameService() = mockk<GameService>()
-
-        @Bean
-        fun gameRepository() = InMemoryGamePersistenceOperations()
     }
 }

@@ -1,6 +1,6 @@
 package de.schramm.royalbash.domain
 
-internal fun Game.playCard(card: Card, owner: Player, targetPlayer: Player): Game =
+fun Game.playCard(card: Card, owner: Player, targetPlayer: Player): Game =
         players[owner]
                 ?.takeIf { it.hasCard(card) }
                 ?.removeHandcard(card)
@@ -8,7 +8,7 @@ internal fun Game.playCard(card: Card, owner: Player, targetPlayer: Player): Gam
                 ?.let { card.invoke(Context(it, owner, targetPlayer = targetPlayer)) }
         ?: this
 
-internal fun Game.playCard(card: Card, owner: Player, targetSpot: Spot): Game =
+fun Game.playCard(card: Card, owner: Player, targetSpot: Spot): Game =
         players[owner]
                 ?.takeIf { it.hasCard(card) }
                 ?.removeHandcard(card)
@@ -16,7 +16,7 @@ internal fun Game.playCard(card: Card, owner: Player, targetSpot: Spot): Game =
                 ?.let { card.invoke(Context(it, owner, targetSpot = targetSpot)) }
         ?: this
 
-internal fun Game.combat(attacker: Creature, owner: Player, defender: Creature): Game {
+fun Game.combat(attacker: Creature, owner: Player, defender: Creature): Game {
 
     val opponent = opponentOf(owner)
 
@@ -44,7 +44,7 @@ internal fun Game.combat(attacker: Creature, owner: Player, defender: Creature):
             .updatePlayer(opponent to updatedOpponent)
 }
 
-internal fun Game.combat(attacker: Creature, owner: Player): Game {
+fun Game.combat(attacker: Creature, owner: Player): Game {
 
     val opponent = opponentOf(owner)
 
@@ -62,39 +62,39 @@ internal fun Game.combat(attacker: Creature, owner: Player): Game {
     return copy(player1 = player1, player2 = player2, state = evaluateState(player1, player2))
 }
 
-internal fun Game.updatePlayer(oldToNew: Pair<Player, Player>): Game = copy(
+fun Game.updatePlayer(oldToNew: Pair<Player, Player>): Game = copy(
         player1 = if (player1 == oldToNew.old) oldToNew.new else player1,
         player2 = if (player2 == oldToNew.old) oldToNew.new else player2)
 
-internal fun Game.updateCreature(oldToNew: Pair<Creature, Creature>): Game = copy(
+fun Game.updateCreature(oldToNew: Pair<Creature, Creature>): Game = copy(
         player1 = player1.updateCreature(oldToNew),
         player2 = player2.updateCreature(oldToNew))
 
-internal fun Game.findPlayer(player: Player) = players.firstOrNull { player == it }
+fun Game.findPlayer(player: Player) = players.firstOrNull { player == it }
 
-internal fun Game.findPlayer(playerId: String) = players.firstOrNull { it.id == playerId }
+fun Game.findPlayer(playerId: String) = players.firstOrNull { it.id == playerId }
 
-internal fun Game.findCreature(creatureId: String) = players
+fun Game.findCreature(creatureId: String) = players
         .flatMap { it.spots }
         .mapNotNull { it.creature }
         .firstOrNull { it.id == creatureId }
 
-internal fun Game.findCreature(creature: Creature) = players
+fun Game.findCreature(creature: Creature) = players
         .flatMap { it.spots }
         .mapNotNull { it.creature }
         .firstOrNull { it == creature }
 
-internal fun Game.findSpot(spotId: String): Spot? = players
+fun Game.findSpot(spotId: String): Spot? = players
         .flatMap { it.spots }
         .find { it.id == spotId }
 
-internal fun Game.opponentOf(player: Player): Player = if (player1 == player) player2 else player1
+fun Game.opponentOf(player: Player): Player = if (player1 == player) player2 else player1
 
-internal fun Game.nextTurn(): Game = copy(playerOnTurn = if (playerOnTurn == player1) player2 else player1)
+fun Game.nextTurn(): Game = copy(playerOnTurn = if (playerOnTurn == player1) player2 else player1)
 
-internal fun Game.withState(state: State): Game = copy(state = state)
+fun Game.withState(state: State): Game = copy(state = state)
 
-internal fun Game.updateStateAccordingToWinConditions(): Game = withState(evaluateState(player1, player2))
+fun Game.updateStateAccordingToWinConditions(): Game = withState(evaluateState(player1, player2))
 
 fun Game.removeCreature(creature: Creature): Game =
         copy(player1 = player1.removeCreature(creature), player2 = player2.removeCreature(creature))
@@ -109,3 +109,4 @@ private fun Game.evaluateState(player1: Player, player2: Player): State = when {
 }
 
 private operator fun List<Player>.get(player: Player) = this.firstOrNull { it == player }
+fun Game.switchPlayerOnTurn() = copy(playerOnTurn = if (playerOnTurn == player1) player2 else player1)
