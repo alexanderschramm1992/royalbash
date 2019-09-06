@@ -1,4 +1,4 @@
-package de.schramm.royalbash.infrastructure.gameevent
+package de.schramm.royalbash.infrastructure.controller.gameevent
 
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.combat

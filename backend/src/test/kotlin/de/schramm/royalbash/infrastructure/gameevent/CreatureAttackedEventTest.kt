@@ -5,6 +5,7 @@ import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
 import de.schramm.royalbash.domain.card.creature.CreatureMock
 import de.schramm.royalbash.domain.findCreature
+import de.schramm.royalbash.infrastructure.controller.gameevent.CreatureAttackedEventDTO
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

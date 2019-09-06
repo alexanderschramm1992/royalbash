@@ -1,4 +1,4 @@
-package de.schramm.royalbash.infrastructure.gameevent
+package de.schramm.royalbash.infrastructure.controller.gameevent
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo

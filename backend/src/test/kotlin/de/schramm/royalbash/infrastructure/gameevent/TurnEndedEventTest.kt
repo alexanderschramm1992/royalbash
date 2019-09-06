@@ -2,6 +2,7 @@ package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
+import de.schramm.royalbash.infrastructure.controller.gameevent.TurnEndedEventDTO
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

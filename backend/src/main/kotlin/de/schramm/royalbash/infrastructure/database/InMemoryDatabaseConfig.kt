@@ -1,4 +1,4 @@
-package de.schramm.royalbash.infrastructure
+package de.schramm.royalbash.infrastructure.database
 
 import de.schramm.royalbash.infrastructure.database.GamePersistenceOperations
 import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations

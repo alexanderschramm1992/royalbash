@@ -1,5 +1,6 @@
-package de.schramm.royalbash.api
+package de.schramm.royalbash.infrastructure.controller
 
+import de.schramm.royalbash.api.ExternalModel
 import de.schramm.royalbash.application.GameService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -12,7 +13,6 @@ constructor(private val gameService: GameService) {
     @GetMapping("/game/{gameId}")
     fun retrieveGame(@PathVariable gameId: String): ExternalModel.Game {
         return gameService.retrieveGame(gameId)
-                       ?.toExternalModel()
                ?: throw GameNotFoundException(gameId)
     }
 
@@ -23,14 +23,14 @@ constructor(private val gameService: GameService) {
 
     @PostMapping("/game")
     fun createGame(@RequestBody request: CreateGameRequest): ExternalModel.Game {
-        return gameService.createGame(request.accountId1, request.accountId2).toExternalModel()
+        return gameService.createGame(request.accountId1, request.accountId2)
     }
 
     @PostMapping("/game/{gameId}/event")
     fun commitEvent(
             @PathVariable gameId: String,
             @RequestBody request: CommitGameEventRequest): ExternalModel.Game {
-        return gameService.commitGameEvent(gameId, request.event)?.toExternalModel()
+        return gameService.commitGameEvent(gameId, request.event)
                ?: throw GameNotFoundException(gameId)
     }
 

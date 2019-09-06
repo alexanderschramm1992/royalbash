@@ -1,5 +1,6 @@
-package de.schramm.royalbash.api
+package de.schramm.royalbash.application
 
+import de.schramm.royalbash.api.ExternalModel
 import de.schramm.royalbash.domain.*
 
 fun Game.toExternalModel() = ExternalModel.Game(

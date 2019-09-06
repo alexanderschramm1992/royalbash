@@ -6,7 +6,7 @@ import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.UUIDGenerator
 import de.schramm.royalbash.infrastructure.database.GamePersistenceMapper
 import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations
-import de.schramm.royalbash.infrastructure.gameevent.GameEventDTO
+import de.schramm.royalbash.infrastructure.controller.gameevent.GameEventDTO
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
@@ -32,7 +32,7 @@ class GameServiceTest {
         val retrievedGame = testee.retrieveGame(gameId)
 
         // Then
-        assertThat(retrievedGame).isEqualTo(game)
+        assertThat(retrievedGame).isEqualTo(game.toExternalModel())
     }
 
     @Test
@@ -76,6 +76,6 @@ class GameServiceTest {
         val updatedGame = testee.commitGameEvent(gameId, gameEvent)
 
         // Then
-        assertThat(updatedGame).isEqualTo(game)
+        assertThat(updatedGame).isEqualTo(game.toExternalModel())
     }
 }

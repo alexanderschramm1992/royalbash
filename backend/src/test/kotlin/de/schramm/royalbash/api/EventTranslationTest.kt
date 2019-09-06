@@ -1,11 +1,13 @@
 package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameService
+import de.schramm.royalbash.application.toExternalModel
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
-import de.schramm.royalbash.infrastructure.gameevent.*
+import de.schramm.royalbash.infrastructure.controller.GameController
+import de.schramm.royalbash.infrastructure.controller.gameevent.*
 import de.schramm.royalbash.verifyThat
 import io.mockk.every
 import io.mockk.mockk
@@ -41,7 +43,7 @@ class EventTranslationTest {
                 state = OPEN,
                 log = Log())
 
-        every { gameService.commitGameEvent(any(), any()) } returns game
+        every { gameService.commitGameEvent(any(), any()) } returns game.toExternalModel()
     }
 
     @Test
@@ -119,7 +121,9 @@ class EventTranslationTest {
                            "creatureId": "Creature Id", 
                            "ownerId": "Owner Id"
                       }}"""
-        val expectedEvent = PlayerAttackedEventDTO("Creature Id", "Owner Id")
+        val expectedEvent =
+                PlayerAttackedEventDTO("Creature Id",
+                                                                                                "Owner Id")
 
         // When Then
         test(json, expectedEvent)

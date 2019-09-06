@@ -4,6 +4,7 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
 import de.schramm.royalbash.domain.card.CardMock
+import de.schramm.royalbash.infrastructure.controller.gameevent.CardPlayedOnSpotEventDTO
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
