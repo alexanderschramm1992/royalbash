@@ -4,8 +4,7 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.findPlayer
 import de.schramm.royalbash.domain.switchPlayerOnTurn
 
-data class TurnEndedEventDTO(val playerId: String = ""):
-        GameEventDTO {
+data class TurnEndedEventDTO(val playerId: String = ""): GameEventDTO {
 
     override fun invoke(game: Game): Game {
 

@@ -4,7 +4,6 @@ import de.schramm.royalbash.domain.*
 import de.schramm.royalbash.domain.findPlayer
 import de.schramm.royalbash.domain.findSpot
 import de.schramm.royalbash.domain.playCard
-import de.schramm.royalbash.infrastructure.controller.gameevent.GameEventDTO
 
 data class CardPlayedOnSpotEventDTO(
         val cardId: String,
