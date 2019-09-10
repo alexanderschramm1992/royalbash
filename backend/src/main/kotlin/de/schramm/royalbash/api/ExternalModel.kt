@@ -13,7 +13,7 @@ sealed class ExternalModel {
 
     data class Player(
             @ApiModelProperty(required = true) val id: String,
-            @ApiModelProperty(required = true) val name: String = "",
+            @ApiModelProperty(required = true) val name: String,
             @ApiModelProperty(required = true) val hitpoints: Int = 0,
             @ApiModelProperty(required = true) val resources: Int = 0,
             @ApiModelProperty(required = true) val deckcards: List<Card> = listOf(),

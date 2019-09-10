@@ -36,6 +36,25 @@ class GameServiceTest {
     }
 
     @Test
+    fun `retrieves stored games`() {
+
+        // Given
+        val game = Game("Game Id",
+                        player1 = Player("Id 1"),
+                        player2 = Player("Id 2"),
+                        log = Log())
+        val repository = mockk<Games>()
+        every { repository.findAll() } returns setOf(game)
+        val testee = GameService(UUIDGenerator(), repository)
+
+        // When
+        val retrievedGame = testee.retrieveGames()
+
+        // Then
+        assertThat(retrievedGame).containsExactly(game.toExternalModel())
+    }
+
+    @Test
     fun `creates and stores game`() {
 
         // Given

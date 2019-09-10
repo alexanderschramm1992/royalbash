@@ -91,6 +91,57 @@ class GameControllerTest {
     }
 
     @Test
+    fun `delivers all games`() {
+        // Given
+        val game = Game(
+                "1",
+                player1 = Player("Id 2"),
+                player2 = Player("Id 3"),
+                playerOnTurn = Player("Id 3"),
+                state = OPEN,
+                log = Log())
+        every { gameService.retrieveGames() } returns listOf(game.toExternalModel())
+
+        val requestBuilder = MockMvcRequestBuilders
+                .get("/game")
+                .accept(MediaType.APPLICATION_JSON)
+
+        // When
+        val result = mockMvc.perform(requestBuilder)
+                .andReturn()
+                .response
+                .contentAsString
+
+        // Then
+        JSONAssert.assertEquals("""[{
+                "id": "1",
+                "player1": {"id": "Id 2"},
+                "player2": {"id": "Id 3"},
+                "playerOnTurn": "Id 3",
+                "state": "OPEN"
+            }]""", result, false)
+    }
+
+    @Test
+    fun `delivers empty list if no games are available`() {
+        // Given
+        every { gameService.retrieveGames() } returns emptyList()
+
+        val requestBuilder = MockMvcRequestBuilders
+                .get("/game")
+                .accept(MediaType.APPLICATION_JSON)
+
+        // When
+        val result = mockMvc.perform(requestBuilder)
+                .andReturn()
+                .response
+                .contentAsString
+
+        // Then
+        JSONAssert.assertEquals("""[]""", result, false)
+    }
+
+    @Test
     fun `delivers new game`() {
 
         // Given

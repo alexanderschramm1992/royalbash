@@ -21,6 +21,11 @@ constructor(private val gameService: GameService) {
         return gameService.retrieveGameIds().toTypedArray()
     }
 
+    @GetMapping("/game")
+    fun retrieveGames(): Array<ExternalModel.Game> {
+        return gameService.retrieveGames().toTypedArray()
+    }
+
     @PostMapping("/game")
     fun createGame(@RequestBody request: CreateGameRequest): ExternalModel.Game {
         return gameService.createGame(request.accountId1, request.accountId2)

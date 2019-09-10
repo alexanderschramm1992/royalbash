@@ -15,6 +15,10 @@ class GameService(
         return retrieveDomainGame(gameId)?.toExternalModel()
     }
 
+    fun retrieveGames(): List<ExternalModel.Game> {
+        return games.findAll().map(Game::toExternalModel)
+    }
+
     fun createGame(account1Id: String, account2Id: String): ExternalModel.Game {
 
         val player1Id = uuidGenerator.generateId()
