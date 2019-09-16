@@ -6,16 +6,16 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.effect.DiscardHandcardsEffect
 import de.schramm.royalbash.domain.spawnCreature
 
-data class GoblinRaider(
+data class GoblinGuard(
         override val id: String,
         override val hitpoints: Int,
         override val attack: Int,
         override val cost: Int
-) : Creature {
+                      ) : Creature {
 
-    override val name = "Goblin Raider"
-    override val text = "When Goblin Raider enters the battlefield, target player discards a card."
-    override val image: String? = null
+    override val name = "Goblin Guard"
+    override val text = "When Goblin Guard enters the battlefield, target player discards a card."
+    override val image = "FantasyCharacters_guard_goblin_bg.png"
 
     val effect = DiscardHandcardsEffect(1)
 

@@ -14,8 +14,8 @@ sealed class ExternalModel {
     data class Player(
             @ApiModelProperty(required = true) val id: String,
             @ApiModelProperty(required = true) val name: String,
-            @ApiModelProperty(required = true) val hitpoints: Int = 0,
-            @ApiModelProperty(required = true) val resources: Int = 0,
+            @ApiModelProperty(required = true) val hitpoints: Int,
+            @ApiModelProperty(required = true) val resources: Int,
             @ApiModelProperty(required = true) val deckcards: List<Card> = listOf(),
             @ApiModelProperty(required = true) val handcards: List<Card> = listOf(),
             @ApiModelProperty(required = true) val spots: List<Spot> = listOf()): ExternalModel()
@@ -24,9 +24,9 @@ sealed class ExternalModel {
             @ApiModelProperty(required = true) val id: String,
             @ApiModelProperty(required = true) val name: String,
             @ApiModelProperty(required = true) val text: String,
-            @ApiModelProperty(required = true) val cost: Int = 0,
+            @ApiModelProperty(required = true) val cost: Int,
             @ApiModelProperty(required = true) val placeableOnSpot: Boolean,
-            @ApiModelProperty(required = false) val image: String? = null): ExternalModel()
+            @ApiModelProperty(required = false) val image: String): ExternalModel()
 
     data class Spot(
             @ApiModelProperty(required = false) val id: String,
@@ -34,7 +34,9 @@ sealed class ExternalModel {
 
     data class Creature(
             @ApiModelProperty(required = true) val id: String,
-            @ApiModelProperty(required = true) val name: String = "",
-            @ApiModelProperty(required = true) val hitpoints: Int = 0,
-            @ApiModelProperty(required = true) val atttack: Int = 0): ExternalModel()
+            @ApiModelProperty(required = true) val name: String,
+            @ApiModelProperty(required = true) val text: String,
+            @ApiModelProperty(required = true) val hitpoints: Int,
+            @ApiModelProperty(required = true) val attack: Int,
+            @ApiModelProperty(required = false) val image: String): ExternalModel()
 }

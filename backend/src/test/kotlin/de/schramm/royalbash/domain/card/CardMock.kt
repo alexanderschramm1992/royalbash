@@ -8,7 +8,7 @@ class CardMock(
         override val id: String,
         override val name: String = "Card Mock",
         override val text: String = "Card Mock Text",
-        override val image: String? = "Card Image URL",
+        override val image: String = "Card Image URL",
         override val cost: Int = 0
 ) : Card {
 

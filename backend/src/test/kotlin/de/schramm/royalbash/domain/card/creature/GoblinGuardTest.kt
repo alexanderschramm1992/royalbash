@@ -9,13 +9,13 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 
-class GoblinRaiderTest {
+class GoblinGuardTest {
 
     @Test
     fun should_discard_a_card_of_traget_player_when_placed_on_spot() {
 
         // Given
-        val testee = GoblinRaider(
+        val testee = GoblinGuard(
                 "Id 1",
                 hitpoints = 1,
                 attack = 1,

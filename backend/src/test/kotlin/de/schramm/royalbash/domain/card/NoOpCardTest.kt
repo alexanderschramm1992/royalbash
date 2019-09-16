@@ -3,7 +3,6 @@ package de.schramm.royalbash.domain.card
 import de.schramm.royalbash.domain.Context
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
-import de.schramm.royalbash.domain.card.spell.NoOpCard
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -13,7 +12,7 @@ class NoOpCardTest {
     fun should_not_alter_game() {
 
         // Given
-        val testee = NoOpCard("Id 1")
+        val testee = CardMock("Id 1")
         val player1 = Player("Id 2", handcards = listOf(testee))
         val player2 = Player("Id 3")
         val game = Game("Id 4", player1 = player1, player2 = player2)

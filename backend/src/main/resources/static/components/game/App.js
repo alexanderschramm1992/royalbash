@@ -1,10 +1,13 @@
+const Board = () => import('./Board.js');
+
 export default {
     name: 'App',
     components: {
+        Board
     },
     template: `
     <div id="app">
-      <h1>Hello World</h1>
+      <board/>
     </div>
   `
 };

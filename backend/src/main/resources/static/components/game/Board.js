@@ -1,43 +1,86 @@
 import * as Ajax from "../../util/AjaxHandler.js"
+import {own, opponent} from "./GameUtil.js";
+import Card from "./Card.js";
+import Spot from "./Spot.js";
 
-export default {
-    name: "GamePicker",
+const template = `
+<div id="Board">
+    <v-container class="opponent-handcards">
+    <v-row justify="center">
+            <v-col cols="2"
+                   max-width="20%"
+                   v-for="handcard of opponentHandcards"
+                   v-bind:key="handcard.id">
+                <card v-bind:card="handcard"/>
+            </v-col>
+        </v-row>
+    </v-container>
+    <v-container class="own-spots">
+        <v-row justify="center">
+            <v-col cols="2"
+                   max-width="20%"
+                   v-for="spot of ownSpots"
+                   v-bind:key="spot.id">
+                <spot v-bind:spot="spot"/>
+            </v-col>
+        </v-row>
+    </v-container>
+    <v-container class="own-handcards">
+        <v-row justify="center">
+            <v-col cols="2"
+                   max-width="20%"
+                   v-for="handcard of ownHandcards"
+                   v-bind:key="handcard.id">
+                <card v-bind:card="handcard"/>
+            </v-col>
+        </v-row>
+    </v-container>
+</div>
+`;
+
+export default Vue.component('board', {
+    components: {
+        Card,
+        Spot
+    },
     data() {
         return {
-            board: []
+            ownHandcards: [],
+            ownSpots: [],
+            opponentHandcards: []
         }
     },
-    mounted() {
-        Ajax.get("/game/",
-            (response) => this.games = response.map(game => { return {
-                "name": "Game 2",
-                "id": game.id,
-                "status": game.state,
-                "player1": game.player1.name,
-                "player2": game.player2.name
-            }}),
-            (error) => console.log("Cannot fetch Game Ids from backend due to " + error));
+    created() {
+        this.fetchSessionContext();
+        this.fetchGame();
     },
-    template: `
-        <div id="game-picker">
-            <h1>Games</h1>
-            <v-list-item-group v-model="game" color="primary">
-                <v-list-item v-for="game in games" :key="game.id">
-                    <v-list-item-content>
-                        <v-card class="mx-auto">
-                            <v-card-title>{{ game.name }}</v-card-title>
-                            <v-card-text>
-                                <p>Status: {{ game.status }}</p>
-                                <p>Players: {{ game.player1 }}, {{ game.player2 }}</p>
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-btn :href="'/game.html?id=' + game.id" text>Proceed</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list-item-group>
-        </div>
-    `,
+    methods: {
+        fetchSessionContext: function() {
+            this.gameId = sessionStorage.getItem("gameId");
+            if (this.gameId === undefined || this.gameId === "") {
+                console.error("Missing Game Id");
+                window.location.href = "/"
+            }
 
-}
+            this.playerId = sessionStorage.getItem("playerId");
+            if (this.playerId === undefined || this.playerId === "") {
+                console.error("Player Id");
+                window.location.href = "/"
+            }
+        },
+        fetchGame: function() {
+            Ajax.get(`/game/${this.gameId}`,
+                    (response) => this.updateState(response),
+                    (error) => console.error(`Cannot fetch Game from Backend due to ${error}`));
+        },
+        updateState: function(game) {
+            this.game = game;
+            this.own = own(this.playerId, game);
+            this.ownHandcards = this.own.handcards;
+            this.ownSpots = this.own.spots;
+            this.opponent = opponent(this.playerId, game);
+            this.opponentHandcards = this.opponent.handcards;
+        },
+    },
+    template: template
+});

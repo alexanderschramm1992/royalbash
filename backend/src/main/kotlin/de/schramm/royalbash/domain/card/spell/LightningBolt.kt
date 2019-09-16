@@ -12,7 +12,7 @@ data class LightningBolt (
 
     override val name = "Lightning Bolt"
     override val text = "Deal 2 damage to target creature."
-    override val image: String? = null
+    override val image = "Tex_mana_storm.PNG"
     val effect = DealDamageToCreatureEffect(2)
 
     override fun invoke(context: Context): Game {

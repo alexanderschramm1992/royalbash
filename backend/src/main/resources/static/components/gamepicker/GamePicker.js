@@ -1,24 +1,44 @@
 import * as Ajax from "../../util/AjaxHandler.js"
 
-export default {
-    name: "GamePicker",
+const template = `
+<div id="game-picker">
+    <h1>Games</h1>
+    <v-list-item-group>
+        <v-list-item v-for="game of games" :key="game.id">
+            <v-list-item-content>
+                <v-card class="mx-auto">
+                    <v-card-title>Game {{ game.id }}</v-card-title>
+                    <v-card-text>
+                        <p>Status: {{ game.state }}</p>
+                        <p>Players: {{ game.player1.name }}, {{ game.player2.name }}</p>
+                        <p>Player on Turn: {{ nameOfPlayerOnTurn(game) }}</p>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn v-on:click="proceedGame(game.id, game.player1.id)" 
+                               text>Proceed as {{ game.player1.name }}</v-btn>
+                        <v-btn v-on:click="proceedGame(game.id, game.player2.id)" 
+                               text>Proceed as {{ game.player2.name }}</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-list-item-content>
+        </v-list-item>
+    </v-list-item-group>
+</div>
+`;
+
+export default Vue.component('game-picker', {
     data() {
-        return {
-            games: []
-        }
+        return { games: [] }
     },
-    mounted() {
-        Ajax.get("/game",
-            (response) => this.games = response.map(game => { return {
-                "name": "Game 2",
-                "id": game.id,
-                "status": game.state,
-                "player1": game.player1.name,
-                "player2": game.player2.name
-            }}),
-            (error) => console.log("Cannot fetch Game Ids from backend due to " + error));
+    created() {
+        this.fetchGames();
     },
     methods: {
+        fetchGames: function() {
+            Ajax.get("/game",
+                (response) => this.games = response,
+                (error) => console.error("Cannot fetch Games from Backend due to " + error));
+        },
         proceedGame: function (gameId, playerId) {
             sessionStorage.setItem("gameId", gameId);
             sessionStorage.setItem("playerId", playerId);
@@ -30,30 +50,5 @@ export default {
             else return "Unknown";
         }
     },
-    template: `
-        <div id="game-picker">
-            <h1>Games</h1>
-            <v-list-item-group v-model="games" color="primary">
-                <v-list-item v-for="game in games" :key="game.id">
-                    <v-list-item-content>
-                        <v-card class="mx-auto">
-                            <v-card-title>{{ game.id }}</v-card-title>
-                            <v-card-text>
-                                <p>Status: {{ game.status }}</p>
-                                <p>Players: {{ game.player1.name }}, {{ game.player2.name }}</p>
-                                <p>Player on Turn: {{ nameOfPlayerOnTurn(game) }}</p>
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-btn v-on:click="proceedGame(game.id, game.player1.id)" 
-                                       text>Proceed as {{ game.player1.name }}</v-btn>
-                                <v-btn v-on:click="proceedGame(game.id, game.player2.id)" 
-                                       text>Proceed as {{ game.player2.name }}</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list-item-group>
-        </div>
-    `,
-
-}
+    template: template
+});
