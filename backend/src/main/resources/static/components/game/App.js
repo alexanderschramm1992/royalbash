@@ -1,4 +1,4 @@
-const Board = () => import('./Board.js');
+import Board from "./Board.js";
 
 export default {
     name: 'App',

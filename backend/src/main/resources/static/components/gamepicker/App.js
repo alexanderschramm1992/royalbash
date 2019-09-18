@@ -1,4 +1,4 @@
-const GamePicker = () => import('./GamePicker.js');
+import GamePicker from "./GamePicker.js";
 
 export default {
   name: 'App',

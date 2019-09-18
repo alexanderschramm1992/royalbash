@@ -1,16 +1,16 @@
 const template = `
-<v-card class="mx-auto">
-    <v-container>
+<v-card class="mx-auto" outlined>
+    <v-responsive :aspect-ratio="2/3">
         <v-row>
             <v-col cols="9">
-                <v-card-title>{{ card.name }}</v-card-title>
+                <v-card-title class="subtitle-1">{{ card.name }}</v-card-title>
             </v-col>
             <v-col cols="3">
-                <v-card-title>{{ card.cost }}</v-card-title>
+                <v-card-title class="subtitle-1">{{ card.cost }}</v-card-title>
             </v-col>
         </v-row>
-        <v-row justify="center">
-            <v-col cols="11">
+        <v-row>
+            <v-col cols="12">
                 <v-img aspect-ratio="0.8" v-bind:src="'images/' + card.image"/>
             </v-col>
         </v-row>
@@ -19,12 +19,14 @@ const template = `
                 <v-card-text>{{ card.text }}</v-card-text>
             </v-col>
         </v-row>
-    </v-container>
+    </v-responsive>
 </v-card>
 `;
 
 
 export default Vue.component('card', {
-    props: ['card'],
+    props: {
+        card: Object
+    },
     template: template
 })

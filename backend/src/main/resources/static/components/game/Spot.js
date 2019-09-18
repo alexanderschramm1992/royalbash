@@ -11,9 +11,11 @@ const template = `
 `;
 
 export default Vue.component('spot', {
-    props: ['spot'],
     components: {
         Creature
+    },
+    props: {
+        spot: Object
     },
     template: template
 })
