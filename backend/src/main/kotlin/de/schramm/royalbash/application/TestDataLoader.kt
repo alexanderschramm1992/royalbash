@@ -35,13 +35,20 @@ class TestDataLoader @Autowired constructor(private val repository: Games) {
                 hitpoints = 25,
                 handcards = listOf(boar, fireball, goblinGuard, byondInsight, lightningBolt),
                 spots = listOf(Spot(id = "spot1", creature = boar),
-                               Spot(id = "spot2", creature = goblinGuard)),
+                               Spot(id = "spot2", creature = goblinGuard),
+                               Spot(id = "spot3"),
+                               Spot(id = "spot4"),
+                               Spot(id = "spot5")),
                 deckcards = listOf(byondInsight),
                 depositcards = listOf(lightningBolt))
         val player2 = Player(
                 id = "player2",
                 handcards = listOf(byondInsight, boar),
-                spots = listOf(Spot(id = "spot1", creature = goblinGuard)),
+                spots = listOf(Spot(id = "spot1", creature = goblinGuard),
+                               Spot(id = "spot2"),
+                               Spot(id = "spot3"),
+                               Spot(id = "spot4"),
+                               Spot(id = "spot5")),
                 name = "Player 2")
         val game = Game(
                 id = "1",
