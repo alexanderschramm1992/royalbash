@@ -9,7 +9,8 @@ sealed class ExternalModel {
             @ApiModelProperty(required = true) val player1: Player,
             @ApiModelProperty(required = true) val player2: Player,
             @ApiModelProperty(required = true) val playerOnTurn: String,
-            @ApiModelProperty(required = true) val state: String): ExternalModel()
+            @ApiModelProperty(required = true) val state: String,
+            @ApiModelProperty(required = true) val logs: List<Log>): ExternalModel()
 
     data class Player(
             @ApiModelProperty(required = true) val id: String,
@@ -39,4 +40,9 @@ sealed class ExternalModel {
             @ApiModelProperty(required = true) val hitpoints: Int,
             @ApiModelProperty(required = true) val attack: Int,
             @ApiModelProperty(required = false) val image: String): ExternalModel()
+
+    data class Log(
+            @ApiModelProperty(required = true) val id: String,
+            @ApiModelProperty(required = true) val timestamp: String,
+            @ApiModelProperty(required = true) val text: String): ExternalModel()
 }

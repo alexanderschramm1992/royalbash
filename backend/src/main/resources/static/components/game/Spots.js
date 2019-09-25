@@ -5,7 +5,11 @@ const template = `
     <v-col cols="2"
            v-for="spot of spots"
            v-bind:key="spot.id">
-        <spot v-bind:spot="spot"/>
+        <spot v-bind:gameId="gameId"
+              v-bind:ownerId="ownerId"
+              v-bind:spot="spot"
+              v-bind:handcards="handcards"
+              v-on:updateState="$emit($event)"/>
     </v-col>
 </v-row>
 `;
@@ -15,7 +19,10 @@ export default Vue.component('spots', {
         Spot
     },
     props: {
-        spots: Array
+        gameId: String,
+        ownerId: String,
+        spots: Array,
+        handcards: Array
     },
     template: template
 })

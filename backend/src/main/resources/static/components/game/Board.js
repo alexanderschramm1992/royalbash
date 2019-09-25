@@ -6,30 +6,54 @@ import Deck from "./Deck.js";
 
 const template = `
 <div id="Board">
-    <v-container class="opponent-deck" fluid>
-        <deck v-bind:gameId="gameId"
-              v-bind:playerId="opponent.id"
-              v-bind:deck="opponentDeck" 
-              v-on:updateState="updateState($event)"/>
-    </v-container>
-    <v-container class="opponent-handcards" fluid>
-        <handcards v-bind:handcards="opponentHandcards"/>
-    </v-container>
-    <v-container class="opponent-spots" fluid>
-        <handcards v-bind:spots="opponentSpots"/>
-    </v-container>
-    <v-container class="own-spots" fluid>
-        <spots v-bind:spots="ownSpots"/>
-    </v-container>
-    <v-container class="own-handcards" fluid>
-        <handcards v-bind:handcards="ownHandcards"/>
-    </v-container>
-    <v-container class="own-deck" fluid>
-        <deck v-bind:gameId="gameId"
-              v-bind:playerId="own.id"
-              v-bind:deck="ownDeck" 
-              v-on:updateState="updateState($event)"/>
-    </v-container>
+    <v-row justify="center">
+        <v-col cols="10">
+            <v-container class="opponent-deck" fluid>
+                <deck v-bind:gameId="gameId"
+                      v-bind:playerId="opponent.id"
+                      v-bind:deck="opponentDeck"
+                      v-on:updateState="updateState($event)"/>
+            </v-container>
+            <v-container class="opponent-handcards" fluid>
+                <handcards v-bind:handcards="opponentHandcards"/>
+            </v-container>
+            <v-container class="opponent-spots" fluid>
+                <spots v-bind:gameId="gameId"
+                       v-bind:ownerId="opponent.id"
+                       v-bind:spots="opponentSpots"
+                       v-bind:handcards="opponentHandcards"
+                       v-on:updateState="updateState($event)"/>
+            </v-container>
+            <v-container class="own-spots" fluid>
+                <spots v-bind:gameId="gameId"
+                       v-bind:ownerId="own.id"
+                       v-bind:spots="ownSpots"
+                       v-bind:handcards="ownHandcards"
+                       v-on:updateState="updateState($event)"/>
+            </v-container>
+            <v-container class="own-handcards" fluid>
+                <handcards v-bind:handcards="ownHandcards"/>
+            </v-container>
+            <v-container class="own-deck" fluid>
+                <deck v-bind:gameId="gameId"
+                      v-bind:playerId="own.id"
+                      v-bind:deck="ownDeck"
+                      v-on:updateState="updateState($event)"/>
+            </v-container>
+        </v-col>
+        <v-col cols="2">
+            <v-container class="log">
+                <h3>Game Log</h3>
+                <v-listItem v-for="log of logs"
+                            v-bind:key="log.id">
+                    <v-list-item-content>
+                        <v-list-item-title>{{ log.text }}</v-list-item-title>
+                        <v-list-item-subtitle>{{ log.timestamp }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                </v-listItem>
+            </v-container>
+        </v-col>
+    </v-row>
 </div>
 `;
 
@@ -41,6 +65,7 @@ export default Vue.component('board', {
     },
     data() {
         return {
+            log: [],
             own: {},
             ownHandcards: [],
             ownDeck: [],
