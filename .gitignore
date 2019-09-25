@@ -71,3 +71,6 @@ yarn-debug.log*
 yarn-error.log*
 
 !gradle/wrapper/gradle-wrapper.jar
+
+!.idea
+/webapp/public/images/
