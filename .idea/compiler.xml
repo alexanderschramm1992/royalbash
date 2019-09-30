@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="1.8">
       <module name="de.schramm.backend.main" target="1.8" />
       <module name="de.schramm.backend.test" target="1.8" />
+      <module name="de.schramm.royalbash.backend.main" target="1.8" />
+      <module name="de.schramm.royalbash.backend.test" target="1.8" />
       <module name="RoyalBash" target="1.8" />
       <module name="royalbash.backend.main" target="1.8" />
       <module name="royalbash.backend.test" target="1.8" />

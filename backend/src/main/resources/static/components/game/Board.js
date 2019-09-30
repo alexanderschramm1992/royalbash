@@ -40,13 +40,15 @@ const template = `
         <v-col cols="2">
             <v-container class="log">
                 <h3>Game Log</h3>
-                <v-listItem v-for="log of logs"
-                            v-bind:key="log.id">
-                    <v-list-item-content>
-                        <v-list-item-title>{{ log.text }}</v-list-item-title>
-                        <v-list-item-subtitle>{{ log.timestamp }}</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-listItem>
+                <v-list three-line>
+                    <v-listItem v-for="log of logs"
+                                v-bind:key="log.id">
+                        <v-list-item-content>
+                            <v-list-item-title style="white-space: initial;">{{ log.text }}</v-list-item-title>
+                            <v-list-item-subtitle>{{ log.timestamp }}</v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-listItem>
+                </v-list>
             </v-container>
         </v-col>
     </v-row>
@@ -77,7 +79,7 @@ export default Vue.component('board', {
         this.fetchGame();
     },
     mounted() {
-        this.$root.on("updateState", this.updateState)
+        this.$root.$on("updateState", this.updateState)
     },
     methods: {
         fetchSessionContext: function() {
@@ -100,6 +102,7 @@ export default Vue.component('board', {
         },
         updateState: function(game) {
             this.game = game;
+            this.logs = this.game.logs;
             this.own = own(this.playerId, game);
             this.ownHandcards = this.own.handcards;
             this.ownDeck = this.own.deck;

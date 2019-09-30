@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RoyalBash.royalbash.iml" filepath="$PROJECT_DIR$/.idea/modules/RoyalBash.royalbash.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/de.schramm.royalbash.iml" filepath="$PROJECT_DIR$/.idea/modules/de.schramm.royalbash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/de.schramm.royalbash.backend.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/de.schramm.royalbash.backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/de.schramm.royalbash.backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/de.schramm.royalbash.backend.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/de.schramm.royalbash.backend.test.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/de.schramm.royalbash.backend.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webapp/de.schramm.royalbash.webapp.iml" filepath="$PROJECT_DIR$/.idea/modules/webapp/de.schramm.royalbash.webapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/royalbash.iml" filepath="$PROJECT_DIR$/.idea/modules/royalbash.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/royalbash.backend.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/royalbash.backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/royalbash.backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/royalbash.backend.main.iml" />
