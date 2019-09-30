@@ -85,7 +85,7 @@ class GameServiceTest {
                         player1 = Player("Id 2"),
                         player2 = Player("Id 3"))
         val gameEvent = mockk<GameEventDTO> {
-            every { this@mockk.invoke(game) } returns game
+            every { this@mockk.invoke(game, RandomUUIDGenerator) } returns game
         }
         val repository = mockk<Games> {
             every { findAll() } returns setOf(game)

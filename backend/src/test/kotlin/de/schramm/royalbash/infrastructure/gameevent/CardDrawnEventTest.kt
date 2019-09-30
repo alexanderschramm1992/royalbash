@@ -1,9 +1,11 @@
 package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.card.CardMock
 import de.schramm.royalbash.infrastructure.controller.gameevent.CardDrawnEventDTO
+import de.schramm.royalbash.infrastructure.gameevent.UUIDGeneratorMock.MOCK_ID
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -22,10 +24,11 @@ class CardDrawnEventTest {
         val testee = CardDrawnEventDTO("Id 2", 1)
 
         // When
-        val updatedGame = testee.invoke(game)
+        val updatedGame = testee.invoke(game, UUIDGeneratorMock)
 
         // Then
         assertThat(updatedGame).isNotNull
         assertThat(updatedGame.player1.handcards).hasSize(1)
+        assertThat(updatedGame.logs).endsWith(Log(MOCK_ID, "${player1.name} has drawn a card"))
     }
 }

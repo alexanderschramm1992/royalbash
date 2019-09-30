@@ -23,7 +23,7 @@ class TurnEndedEventTest {
         val testee = TurnEndedEventDTO("Id 1")
 
         // When
-        val updatedGame = testee.invoke(game)
+        val updatedGame = testee.invoke(game, UUIDGeneratorMock)
 
         // Then
         assertThat(updatedGame).isNotNull

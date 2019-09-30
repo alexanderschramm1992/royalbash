@@ -37,7 +37,7 @@ class CreatureAttackedEventTest {
                 player2 = Player("Id 5", spots = listOf(Spot(id = "spot2", creature = defender))))
 
         // When
-        val updatedGame = testee.invoke(game)
+        val updatedGame = testee.invoke(game, UUIDGeneratorMock)
 
         // Then
         val updatedAttacker = updatedGame.findCreature("Id 1")

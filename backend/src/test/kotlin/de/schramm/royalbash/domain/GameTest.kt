@@ -337,4 +337,21 @@ class GameTest {
         // Then
         assertThat(maybeSpot).isNull()
     }
+
+    @Test
+    fun `logs event`() {
+
+        // Given
+        val player1 = Player("Id 1")
+        val player2 = Player("Id 2")
+        val testee = Game("Id 3", player1 = player1, player2 = player2)
+
+        val log = Log("Id 4", "Something has happened")
+
+        // When
+        val game = testee.log(log)
+
+        // Then
+        assertThat(game.logs).containsExactly(log)
+    }
 }

@@ -3,6 +3,7 @@ package de.schramm.royalbash.infrastructure.controller.gameevent
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import de.schramm.royalbash.application.GameEvent
+import de.schramm.royalbash.application.UUIDGenerator
 import de.schramm.royalbash.domain.Game
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
@@ -15,5 +16,5 @@ import de.schramm.royalbash.domain.Game
         JsonSubTypes.Type(value = PlayerAttackedEventDTO::class, name = "PLAYER_ATTACKED"),
         JsonSubTypes.Type(value = TurnEndedEventDTO::class, name = "TURN_ENDED"))
 interface GameEventDTO: GameEvent {
-    override fun invoke(game: Game): Game
+    override fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game
 }

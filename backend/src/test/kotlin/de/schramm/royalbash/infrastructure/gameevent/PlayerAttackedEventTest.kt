@@ -26,7 +26,7 @@ class PlayerAttackedEventTest {
         val testee = PlayerAttackedEventDTO("Id 1", "Id 2")
 
         // When
-        val updatedGame = testee.invoke(game)
+        val updatedGame = testee.invoke(game, UUIDGeneratorMock)
 
         // Then
         assertThat(updatedGame.player2.hitpoints).isEqualTo(3)

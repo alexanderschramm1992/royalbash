@@ -1,5 +1,6 @@
 package de.schramm.royalbash.infrastructure.controller.gameevent
 
+import de.schramm.royalbash.application.UUIDGenerator
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.findHandcard
 import de.schramm.royalbash.domain.findPlayer
@@ -10,7 +11,7 @@ data class CardPlayedOnPlayerEventDTO(val cardId: String,
                                       val targetPlayerId: String):
         GameEventDTO {
 
-    override fun invoke(game: Game): Game {
+    override fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game {
 
         val owner = game.findPlayer(ownerId)
         val card = owner?.findHandcard(cardId)

@@ -26,7 +26,7 @@ class CardPlayedOnSpotEventTest {
                 player2 = Player("Id 5"))
 
         // When
-        val updatedGame = testee.invoke(game)
+        val updatedGame = testee.invoke(game, UUIDGeneratorMock)
 
         // Then
         Assertions.assertThat(updatedGame).isNotNull
