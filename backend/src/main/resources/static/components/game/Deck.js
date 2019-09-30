@@ -23,7 +23,7 @@ export default Vue.component('deck', {
                         "amountOfCards": 1
                     }
                 },
-                (response) => this.$emit("updateState", response),
+                (response) => this.$root.$emit("updateState", response),
                 (error) => console.error(`Cannot commit 'drawCard' to Backend due to ${error}`));
         }
     }

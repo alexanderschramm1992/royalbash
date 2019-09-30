@@ -55,7 +55,7 @@ export default Vue.component('spot', {
                             "targetSpotId": this.spot.id
                         }
                     },
-                    (response) => this.$emit("updateState", response),
+                    (response) => this.$root.$emit("updateState", response),
                     (error) => console.error(`Cannot commit 'placeCreature' to Backend due to ${error}`));
 
                 this.place_creature_dialog = false;

@@ -1,12 +1,11 @@
 package de.schramm.royalbash.application
 
 import de.schramm.royalbash.domain.Game
-import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
-import de.schramm.royalbash.domain.UUIDGenerator
+import de.schramm.royalbash.infrastructure.RandomUUIDGenerator
+import de.schramm.royalbash.infrastructure.controller.gameevent.GameEventDTO
 import de.schramm.royalbash.infrastructure.database.GamePersistenceMapper
 import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations
-import de.schramm.royalbash.infrastructure.controller.gameevent.GameEventDTO
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
@@ -22,11 +21,11 @@ class GameServiceTest {
         val gameId = "Game Id"
         val game = Game(gameId,
                         player1 = Player("Id 1"),
-                        player2 = Player("Id 2"),
-                        log = Log())
-        val repository = mockk<Games>()
-        every { repository.findAll() } returns setOf(game)
-        val testee = GameService(UUIDGenerator(), repository)
+                        player2 = Player("Id 2"))
+        val repository = mockk<Games> {
+            every { findAll() } returns setOf(game)
+        }
+        val testee = GameService(RandomUUIDGenerator, repository)
 
         // When
         val retrievedGame = testee.retrieveGame(gameId)
@@ -41,11 +40,11 @@ class GameServiceTest {
         // Given
         val game = Game("Game Id",
                         player1 = Player("Id 1"),
-                        player2 = Player("Id 2"),
-                        log = Log())
-        val repository = mockk<Games>()
-        every { repository.findAll() } returns setOf(game)
-        val testee = GameService(UUIDGenerator(), repository)
+                        player2 = Player("Id 2"))
+        val repository = mockk<Games> {
+            every { findAll() } returns setOf(game)
+        }
+        val testee = GameService(RandomUUIDGenerator, repository)
 
         // When
         val retrievedGame = testee.retrieveGames()
@@ -62,8 +61,9 @@ class GameServiceTest {
         val accountId2 = "Account 2"
         val id = UUID.randomUUID().toString()
         val repository = GamePersistenceMapper(InMemoryGamePersistenceOperations())
-        val uuidGenerator = mockk<UUIDGenerator>()
-        every { uuidGenerator.generateId() } returns id
+        val uuidGenerator = mockk<UUIDGenerator> {
+            every { generateId() } returns id
+        }
         val testee = GameService(uuidGenerator, repository)
 
         // When
@@ -83,13 +83,14 @@ class GameServiceTest {
         val gameId = "Id 1"
         val game = Game(gameId,
                         player1 = Player("Id 2"),
-                        player2 = Player("Id 3"),
-                        log = Log())
-        val gameEvent = mockk<GameEventDTO>()
-        every { gameEvent.invoke(game) } returns game
-        val repository = mockk<Games>()
-        every { repository.findAll() } returns setOf(game)
-        val testee = GameService(UUIDGenerator(), repository)
+                        player2 = Player("Id 3"))
+        val gameEvent = mockk<GameEventDTO> {
+            every { this@mockk.invoke(game) } returns game
+        }
+        val repository = mockk<Games> {
+            every { findAll() } returns setOf(game)
+        }
+        val testee = GameService(RandomUUIDGenerator, repository)
 
         // When
         val updatedGame = testee.commitGameEvent(gameId, gameEvent)

@@ -7,7 +7,9 @@ export default {
   },
   template: `
     <div id="app">
-      <game-picker/>
+        <v-app>
+            <game-picker/>
+        </v-app>
     </div>
   `
 };

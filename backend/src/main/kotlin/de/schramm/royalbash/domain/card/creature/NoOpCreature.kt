@@ -7,6 +7,7 @@ import de.schramm.royalbash.domain.spawnCreature
 
 data class NoOpCreature(
         override val id: String,
+        override val instanceId: String,
         override val hitpoints: Int,
         override val attack: Int,
         override val cost: Int

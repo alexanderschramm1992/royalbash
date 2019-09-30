@@ -7,6 +7,7 @@ import de.schramm.royalbash.domain.effect.DealDamageToCreatureEffect
 
 data class LightningBolt (
         override val id: String,
+        override val instanceId: String,
         override val cost: Int
 ) : Card {
 

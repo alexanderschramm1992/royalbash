@@ -8,8 +8,7 @@ const template = `
         <spot v-bind:gameId="gameId"
               v-bind:ownerId="ownerId"
               v-bind:spot="spot"
-              v-bind:handcards="handcards"
-              v-on:updateState="$emit($event)"/>
+              v-bind:handcards="handcards"/>
     </v-col>
 </v-row>
 `;

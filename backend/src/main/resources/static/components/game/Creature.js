@@ -3,7 +3,7 @@ const template = `
     <v-responsive :aspect-ratio="2/3">
         <v-row>
             <v-col cols="12">
-                <v-card-title class="subtitle-1">{{ creature.name }}</v-card-title>
+                <v-card-title class="title">{{ creature.name }}</v-card-title>
             </v-col>
         </v-row>
         <v-row>

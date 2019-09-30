@@ -7,7 +7,9 @@ export default {
     },
     template: `
     <div id="app">
-      <board/>
+        <v-app>
+            <board/>
+        </v-app>
     </div>
   `
 };

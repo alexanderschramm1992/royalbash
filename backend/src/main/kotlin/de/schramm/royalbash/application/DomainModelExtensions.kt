@@ -2,13 +2,16 @@ package de.schramm.royalbash.application
 
 import de.schramm.royalbash.api.ExternalModel
 import de.schramm.royalbash.domain.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 fun Game.toExternalModel() = ExternalModel.Game(
         id = id,
         player1 = player1.toExternalModel(),
         player2 = player2.toExternalModel(),
         playerOnTurn = playerOnTurn.id,
-        state = state.name)
+        state = state.name,
+        logs = logs.map { it.toExternalModel() })
 
 fun Player.toExternalModel() = ExternalModel.Player(
         id = id,
@@ -21,6 +24,7 @@ fun Player.toExternalModel() = ExternalModel.Player(
 
 fun Card.toExternalModel() = ExternalModel.Card(
         id = id,
+        instanceId = instanceId,
         name = name,
         text = text,
         cost = cost,
@@ -33,8 +37,14 @@ fun Spot.toExternalModel() = ExternalModel.Spot(
 
 fun Creature.toExternalModel() = ExternalModel.Creature(
         id = id,
+        instanceId = instanceId,
         name = name,
         text = text,
         hitpoints = hitpoints,
         attack = attack,
         image = image)
+
+fun Log.toExternalModel() = ExternalModel.Log(
+        id = id,
+        timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+        text = text)

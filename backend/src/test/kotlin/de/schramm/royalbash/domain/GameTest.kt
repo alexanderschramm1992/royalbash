@@ -3,7 +3,6 @@ package de.schramm.royalbash.domain
 import de.schramm.royalbash.domain.State.*
 import de.schramm.royalbash.domain.card.CardMock
 import de.schramm.royalbash.domain.card.creature.CreatureMock
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -21,7 +20,7 @@ class GameTest {
         val players = testee.players
 
         // Then
-        Assertions.assertThat(players)
+        assertThat(players)
                 .contains(player1)
                 .contains(player2)
     }
@@ -81,7 +80,7 @@ class GameTest {
         val state = testee.state
 
         // Then
-        Assertions.assertThat(state).isEqualTo(OPEN)
+        assertThat(state).isEqualTo(OPEN)
     }
 
     @Test
@@ -118,7 +117,7 @@ class GameTest {
     fun `removes played card from handcards after played on player`() {
 
         // Given
-        val card = CardMock("Id 1")
+        val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")
         val player1 = Player("Id 2", handcards = listOf(card))
         val player2 = Player("Id 3")
         val testee = Game("Id 4", player1 = player1, player2 = player2)
@@ -134,7 +133,7 @@ class GameTest {
     fun `removes played card from handcards after played on spot`() {
 
         // Given
-        val card = CardMock("Id 1")
+        val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")
         val player1 = Player("Id 2", handcards = listOf(card))
         val player2 = Player("Id 3")
         val spot = Spot("Id 4")
@@ -152,11 +151,13 @@ class GameTest {
 
         // Given
         val attacker = CreatureMock(
-                "Id 1",
+                id = "Id 1",
+                instanceId = "Instance Id 1",
                 hitpoints = 2,
                 attack = 2)
         val defender = CreatureMock(
-                "Id 2",
+                id = "Id 2",
+                instanceId = "Instance Id 2",
                 hitpoints = 1,
                 attack = 1)
         val spot1 = Spot(id = "spot1", creature = attacker)
@@ -178,11 +179,13 @@ class GameTest {
 
         // Given
         val attacker = CreatureMock(
-                "Id 1",
+                id = "Id 1",
+                instanceId = "InstanceId 1",
                 hitpoints = 2,
                 attack = 2)
         val defender = CreatureMock(
-                "Id 2",
+                id = "Id 2",
+                instanceId = "InstanceId 2",
                 hitpoints = 1,
                 attack = 1)
         val spot1 = Spot(id = "spot1", creature = attacker)
@@ -206,7 +209,9 @@ class GameTest {
     fun `deals damage to player in combat`() {
 
         // Given
-        val creature = CreatureMock("Id 1", attack = 5)
+        val creature = CreatureMock(id = "Id 1",
+                                    instanceId = "InstanceId 1",
+                                    attack = 5)
         val spot = Spot(id = "spot", creature = creature)
         val player1 = Player("Id 2", spots = listOf(spot))
         val player2 = Player("Id 3", hitpoints = 20)
@@ -223,7 +228,7 @@ class GameTest {
     fun `sets game state when player dies in combat`() {
 
         // Given
-        val creature = CreatureMock("Id 1", attack = 5)
+        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId1", attack = 5)
         val spot = Spot(id = "spot", creature = creature)
         val player1 = Player("Id 2", hitpoints = 1, spots = listOf(spot))
         val player2 = Player("Id 3", hitpoints = 5)
@@ -272,7 +277,7 @@ class GameTest {
     fun `returns creature with given id`() {
 
         // Given
-        val creature = CreatureMock("Id 1")
+        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
         val spot = Spot(id = "spot", creature = creature)
         val player1 = Player("Id 2", spots = listOf(spot))
         val player2 = Player("Id 3")

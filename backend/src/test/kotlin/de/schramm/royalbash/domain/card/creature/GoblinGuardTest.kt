@@ -16,13 +16,15 @@ class GoblinGuardTest {
 
         // Given
         val testee = GoblinGuard(
-                "Id 1",
+                id = "Id 1",
+                instanceId = "InstanceId 1",
                 hitpoints = 1,
                 attack = 1,
                 cost = 1)
         val spot = Spot(id = "spot")
         val player1 = Player("Id 2", spots = listOf(spot))
-        val player2 = Player("Id 3", handcards = listOf(CardMock("Id 4"), CardMock("Id 5")))
+        val player2 = Player("Id 3", handcards = listOf(CardMock(id = "Id 1", instanceId = "InstanceId 1"),
+                                                        CardMock(id = "Id 5", instanceId = "InstanceId 5")))
         val game = Game("Id 6", player1 = player1, player2 = player2)
         val context = Context(
                 game,

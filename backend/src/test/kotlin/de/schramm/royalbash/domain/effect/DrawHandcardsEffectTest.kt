@@ -14,8 +14,8 @@ class DrawHandcardsEffectTest {
 
         // Given
         val testee = DrawHandcardsEffect(2)
-        val deckcard1 = CardMock("Id 2")
-        val deckcard2 = CardMock("Id 3")
+        val deckcard1 = CardMock(id = "Id 2", instanceId = "InstanceId 2")
+        val deckcard2 = CardMock(id = "Id 3", instanceId = "InstanceId 3")
         val player1 = Player("Id 1", deckcards = listOf(deckcard1, deckcard2))
         val player2 = Player("Id 4")
         val game = Game("Id 5", player1 = player1, player2 = player2)

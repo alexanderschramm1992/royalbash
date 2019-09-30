@@ -18,7 +18,7 @@ class CardPlayedOnSpotEventTest {
                 cardId = "Id 1",
                 ownerId = "Id 2",
                 targetSpotId = "Id 3")
-        val card = CardMock("Id 1")
+        val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")
         val spot = Spot("Id 3")
         val game = Game(
                 "Id 4",

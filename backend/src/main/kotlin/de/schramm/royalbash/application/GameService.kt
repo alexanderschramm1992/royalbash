@@ -1,10 +1,7 @@
 package de.schramm.royalbash.application
 
 import de.schramm.royalbash.api.ExternalModel
-import de.schramm.royalbash.domain.Game
-import de.schramm.royalbash.domain.Log
-import de.schramm.royalbash.domain.Player
-import de.schramm.royalbash.domain.UUIDGenerator
+import de.schramm.royalbash.domain.*
 
 class GameService(
         private val uuidGenerator: UUIDGenerator,
@@ -26,9 +23,10 @@ class GameService(
 
         val game = Game(
                 id = uuidGenerator.generateId(),
-                player1 = Player(id = player1Id, name = account1Id),
-                player2 = Player(id = player2Id, name = account2Id),
-                log = Log())
+                player1 = Player(id = player1Id, name = account1Id, spots = fillSpots(uuidGenerator)),
+                player2 = Player(id = player2Id, name = account2Id, spots = fillSpots(uuidGenerator)))
+                .let { it.copy(logs = listOf(Log(uuidGenerator.generateId(),
+                                                 "Started Match between ${it.player1.name} and ${it.player2.name}"))) }
 
         games.save(game)
 
@@ -49,5 +47,11 @@ class GameService(
 
     private fun retrieveDomainGame(gameId: String): Game? {
         return games.findAll().firstOrNull { game -> gameId == game.id }
+    }
+
+    private fun fillSpots(uuidGenerator: UUIDGenerator,
+                          spots: List<Spot> = emptyList()): List<Spot> {
+        val numberOfSpotsMissing = NUMBER_OF_SPOTS - spots.size
+        return spots + (0 until numberOfSpotsMissing).map { Spot(uuidGenerator.generateId()) }
     }
 }

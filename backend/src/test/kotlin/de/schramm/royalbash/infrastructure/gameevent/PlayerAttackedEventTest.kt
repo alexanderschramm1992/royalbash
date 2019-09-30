@@ -15,7 +15,8 @@ class PlayerAttackedEventTest {
 
         // Given
         val creature = CreatureMock(
-                "Id 1",
+                id = "Id 1",
+                instanceId = "InstanceId 1",
                 attack = 2
         )
         val game = Game(

@@ -13,7 +13,7 @@ class DealDamageToCreatureEffectTest {
 
         // Given
         val testee = DealDamageToCreatureEffect(2)
-        val creature = CreatureMock("Id 1", hitpoints = 5)
+        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1", hitpoints = 5)
         val owner = Player("Id 2")
         val spot = Spot(id = "spot", creature = creature)
         val player1 = Player("Id 3", spots = listOf(spot))

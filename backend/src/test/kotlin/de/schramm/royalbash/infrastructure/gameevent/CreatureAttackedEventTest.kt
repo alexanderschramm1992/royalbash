@@ -22,11 +22,13 @@ class CreatureAttackedEventTest {
                 ownerId = "Id 2",
                 defenderId = "Id 3")
         val attacker = CreatureMock(
-                "Id 1",
+                id = "Id 1",
+                instanceId = "InstamceId 1",
                 hitpoints = 3,
                 attack = 2)
         val defender = CreatureMock(
-                "Id 3",
+                id = "Id 3",
+                instanceId = "InstanceId 3",
                 hitpoints = 3,
                 attack = 1)
         val game = Game(

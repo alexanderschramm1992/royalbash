@@ -23,6 +23,7 @@ sealed class ExternalModel {
 
     data class Card(
             @ApiModelProperty(required = true) val id: String,
+            @ApiModelProperty(required = true) val instanceId: String,
             @ApiModelProperty(required = true) val name: String,
             @ApiModelProperty(required = true) val text: String,
             @ApiModelProperty(required = true) val cost: Int,
@@ -35,6 +36,7 @@ sealed class ExternalModel {
 
     data class Creature(
             @ApiModelProperty(required = true) val id: String,
+            @ApiModelProperty(required = true) val instanceId: String,
             @ApiModelProperty(required = true) val name: String,
             @ApiModelProperty(required = true) val text: String,
             @ApiModelProperty(required = true) val hitpoints: Int,

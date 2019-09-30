@@ -4,7 +4,7 @@ const template = `
 <v-row justify="center">
     <v-col cols="2"
            v-for="handcard of handcards"
-           v-bind:key="handcard.id">
+           v-bind:key="handcard.instanceId">
         <card v-bind:card="handcard"/>
     </v-col>
 </v-row>

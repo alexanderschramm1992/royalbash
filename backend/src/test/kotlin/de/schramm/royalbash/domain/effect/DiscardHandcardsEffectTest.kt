@@ -14,7 +14,8 @@ class DiscardHandcardsEffectTest {
 
         // Given
         val testee = DiscardHandcardsEffect(2)
-        val player1 = Player("Id 1", handcards = listOf(CardMock("Id 2"), CardMock("Id 3")))
+        val player1 = Player("Id 1", handcards = listOf(CardMock(id = "Id 2", instanceId = "InstanceId 2"),
+                                                        CardMock(id = "Id 3", instanceId = "InstanceId 3")))
         val player2 = Player("Id 4")
         val game = Game("Id 5", player1 = player1, player2 = player2)
         val context = Context(

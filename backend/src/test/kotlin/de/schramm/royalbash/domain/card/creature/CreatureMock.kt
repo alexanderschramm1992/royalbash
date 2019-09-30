@@ -6,6 +6,7 @@ import de.schramm.royalbash.domain.Game
 
 data class CreatureMock(
         override val id: String,
+        override val instanceId: String,
         override val name: String = "Creature Mock",
         override val text: String = "Creature Mock Text",
         override val image: String = "Creature Mock Image URL",

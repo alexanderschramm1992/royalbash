@@ -38,7 +38,7 @@ class PlayerTest {
     fun should_deliver_handcards() {
 
         // Given
-        val handcard = CardMock("Id 1")
+        val handcard = CardMock(id = "Id 1", instanceId = "InstanceId 1")
         val testee = Player("Id 1", handcards = listOf(handcard))
 
         // When
@@ -54,8 +54,8 @@ class PlayerTest {
     fun should_deliver_handcards_in_order() {
 
         // Given
-        val handcard1 = CardMock("Id 1")
-        val handcard2 = CardMock("Id 2")
+        val handcard1 = CardMock(id = "Id 1", instanceId = "InstanceId 1")
+        val handcard2 = CardMock(id = "Id 2", instanceId = "InstanceId 2")
         val testee = Player("Id 3", handcards = listOf(handcard1, handcard2))
 
         // When
@@ -71,7 +71,7 @@ class PlayerTest {
     fun should_deliver_deposit() {
 
         // Given
-        val card = CardMock("Id 1")
+        val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")
         val testee = Player("Id 2", depositcards = listOf(card))
 
         // When
@@ -87,7 +87,7 @@ class PlayerTest {
     fun should_remove_handcard_and_add_it_ro_deposit() {
 
         // Given
-        val card = CardMock("Id 1")
+        val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")
         val testee = Player("Id 2", handcards = listOf(card))
 
         // When
@@ -104,8 +104,8 @@ class PlayerTest {
     fun should_not_remove_handcard_if_it_cannot_be_found() {
 
         // Given
-        val handcard1 = CardMock("Id 1")
-        val handcard2 = CardMock("Id 2")
+        val handcard1 = CardMock(id = "Id 1", instanceId = "InstanceId 1")
+        val handcard2 = CardMock(id = "Id 2", instanceId = "InstanceId 2")
         val testee = Player("Id 3", handcards = listOf(handcard1))
 
         // When
@@ -121,9 +121,9 @@ class PlayerTest {
     fun should_retain_order_when_removing_card() {
 
         // Given
-        val handcard1 = CardMock("Id 1")
-        val handcard2 = CardMock("Id 2")
-        val handcard3 = CardMock("Id 3")
+        val handcard1 = CardMock(id = "Id 1", instanceId = "InstanceId 1")
+        val handcard2 = CardMock(id = "Id 2", instanceId = "InstanceId 2")
+        val handcard3 = CardMock(id = "Id 3", instanceId = "InstanceId 3")
         val testee = Player("Id 4", handcards = listOf(handcard1, handcard2, handcard3))
 
         // When
@@ -140,7 +140,7 @@ class PlayerTest {
     fun should_remove_creature_and_add_it_to_deposit() {
 
         // Given
-        val creature = CreatureMock("Id 1")
+        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
         val spot = Spot(id = "spot", creature = creature)
         val testee = Player("Id 2", spots = listOf(spot))
 
@@ -159,12 +159,12 @@ class PlayerTest {
     fun should_not_remove_creature() {
 
         // Given
-        val creature = CreatureMock("Id 1")
+        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
         val spot = Spot(id = "spot", creature = creature)
         val testee = Player("Id 2", spots = listOf(spot))
 
         // When
-        val player = testee.removeCreature(CreatureMock("Id 2"))
+        val player = testee.removeCreature(CreatureMock(id = "Id 2", instanceId = "InstanceId 2"))
 
         // Then
         val creaturesOfPlayer = player.spots.mapNotNull { it.creature }
@@ -177,10 +177,12 @@ class PlayerTest {
     fun should_update_creature() {
 
         // Given
-        val creature = CreatureMock("Id 1")
+        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
         val spot = Spot(id = "spot", creature = creature)
         val testee = Player("Id 2", spots = listOf(spot))
-        val updatedCreature = CreatureMock("Id 1", hitpoints = 12)
+        val updatedCreature = CreatureMock(id = "Id 1",
+                                           instanceId = "InstanceId 1",
+                                           hitpoints = 12)
 
         // When
         val player = testee.updateCreature(creature to updatedCreature)
@@ -196,7 +198,7 @@ class PlayerTest {
     fun should_not_update_creature() {
 
         // Given
-        val creature = CreatureMock("Id 1")
+        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
         val spot = Spot(id = "spot")
         val testee = Player("Id 2", spots = listOf(spot))
 
@@ -212,7 +214,7 @@ class PlayerTest {
     fun should_find_handcard() {
 
         // Given
-        val card = CreatureMock("Id 1")
+        val card = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
         val testee = Player("Id 2", handcards = listOf(card))
 
         // When
@@ -235,15 +237,5 @@ class PlayerTest {
 
         // Then
         assertThat(card).isNull()
-    }
-
-    @Test
-    fun `should automatically contain five spots`() {
-
-        // Given
-        val testee = Player(id = "player")
-
-        // When Then
-        assertThat(testee.spots).hasSize(5)
     }
 }

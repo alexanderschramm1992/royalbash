@@ -6,6 +6,7 @@ import de.schramm.royalbash.domain.Game
 
 class CardMock(
         override val id: String,
+        override val instanceId: String,
         override val name: String = "Card Mock",
         override val text: String = "Card Mock Text",
         override val image: String = "Card Image URL",

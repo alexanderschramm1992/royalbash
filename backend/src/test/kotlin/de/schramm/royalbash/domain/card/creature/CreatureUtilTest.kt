@@ -10,7 +10,7 @@ class CreatureUtilTest {
     fun should_put_creature_to_player_board() {
 
         // Given
-        val card = CreatureMock("Id 1")
+        val card = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
         val targetSpot = Spot(id = "spot")
         val owner = Player("Id 2", handcards = listOf(card), spots = listOf(targetSpot))
         val player2 = Player("Id 3")

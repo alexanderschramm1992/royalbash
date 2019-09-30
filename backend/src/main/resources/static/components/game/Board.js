@@ -11,8 +11,7 @@ const template = `
             <v-container class="opponent-deck" fluid>
                 <deck v-bind:gameId="gameId"
                       v-bind:playerId="opponent.id"
-                      v-bind:deck="opponentDeck"
-                      v-on:updateState="updateState($event)"/>
+                      v-bind:deck="opponentDeck"/>
             </v-container>
             <v-container class="opponent-handcards" fluid>
                 <handcards v-bind:handcards="opponentHandcards"/>
@@ -21,15 +20,13 @@ const template = `
                 <spots v-bind:gameId="gameId"
                        v-bind:ownerId="opponent.id"
                        v-bind:spots="opponentSpots"
-                       v-bind:handcards="opponentHandcards"
-                       v-on:updateState="updateState($event)"/>
+                       v-bind:handcards="opponentHandcards"/>
             </v-container>
             <v-container class="own-spots" fluid>
                 <spots v-bind:gameId="gameId"
                        v-bind:ownerId="own.id"
                        v-bind:spots="ownSpots"
-                       v-bind:handcards="ownHandcards"
-                       v-on:updateState="updateState($event)"/>
+                       v-bind:handcards="ownHandcards"/>
             </v-container>
             <v-container class="own-handcards" fluid>
                 <handcards v-bind:handcards="ownHandcards"/>
@@ -37,8 +34,7 @@ const template = `
             <v-container class="own-deck" fluid>
                 <deck v-bind:gameId="gameId"
                       v-bind:playerId="own.id"
-                      v-bind:deck="ownDeck"
-                      v-on:updateState="updateState($event)"/>
+                      v-bind:deck="ownDeck"/>
             </v-container>
         </v-col>
         <v-col cols="2">
@@ -65,7 +61,7 @@ export default Vue.component('board', {
     },
     data() {
         return {
-            log: [],
+            logs: [],
             own: {},
             ownHandcards: [],
             ownDeck: [],
@@ -79,6 +75,9 @@ export default Vue.component('board', {
     created() {
         this.fetchSessionContext();
         this.fetchGame();
+    },
+    mounted() {
+        this.$root.on("updateState", this.updateState)
     },
     methods: {
         fetchSessionContext: function() {

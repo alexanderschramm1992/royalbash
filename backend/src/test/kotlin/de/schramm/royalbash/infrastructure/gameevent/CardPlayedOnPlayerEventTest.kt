@@ -17,7 +17,7 @@ class CardPlayedOnPlayerEventTest {
                 cardId = "Id 1",
                 ownerId = "Id 2",
                 targetPlayerId = "Id 2")
-        val card = CardMock("Id 1")
+        val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")
         val game = Game(
                 "Id 3",
                 player1 = Player("Id 2", handcards = listOf(card)),

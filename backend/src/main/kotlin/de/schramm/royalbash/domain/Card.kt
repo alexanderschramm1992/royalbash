@@ -2,6 +2,7 @@ package de.schramm.royalbash.domain
 
 interface Card {
     val id: String
+    val instanceId: String
     val name: String
     val text: String
     val cost: Int

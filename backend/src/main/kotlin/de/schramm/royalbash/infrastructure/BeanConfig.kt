@@ -2,7 +2,7 @@ package de.schramm.royalbash.infrastructure
 
 import de.schramm.royalbash.application.GameService
 import de.schramm.royalbash.application.Games
-import de.schramm.royalbash.domain.UUIDGenerator
+import de.schramm.royalbash.application.UUIDGenerator
 import de.schramm.royalbash.infrastructure.database.GamePersistenceMapper
 import de.schramm.royalbash.infrastructure.database.GamePersistenceOperations
 import org.springframework.context.annotation.Bean
@@ -17,10 +17,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @Configuration
 class BeanConfig {
 
-    private val uuidGenerator = UUIDGenerator()
-
     @Bean
-    fun uuidGenerator(): UUIDGenerator = uuidGenerator
+    fun uuidGenerator(): UUIDGenerator = RandomUUIDGenerator
 
     @Bean
     fun games(persistenceOperations: GamePersistenceOperations): Games =
