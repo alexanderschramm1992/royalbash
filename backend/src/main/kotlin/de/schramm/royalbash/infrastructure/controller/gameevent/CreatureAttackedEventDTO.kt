@@ -1,10 +1,7 @@
 package de.schramm.royalbash.infrastructure.controller.gameevent
 
 import de.schramm.royalbash.application.UUIDGenerator
-import de.schramm.royalbash.domain.Game
-import de.schramm.royalbash.domain.combat
-import de.schramm.royalbash.domain.findCreature
-import de.schramm.royalbash.domain.findPlayer
+import de.schramm.royalbash.domain.*
 
 data class CreatureAttackedEventDTO(
         val attackerId: String,
@@ -19,6 +16,8 @@ data class CreatureAttackedEventDTO(
 
         return if (owner != null && attacker != null && defender != null)
             game.combat(attacker, owner, defender)
+                    .log(uuidGenerator.generateId(),
+                            "${attacker.name} of ${owner.name} has attacked ${defender.name} of ${game.opponentOf(owner).name}")
         else game
     }
 }

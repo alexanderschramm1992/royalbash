@@ -2,6 +2,8 @@ package de.schramm.royalbash.domain
 
 fun Game.log(log: Log): Game = copy(logs = logs + log)
 
+fun Game.log(id: String, message: String): Game = log(Log(id, message))
+
 fun Game.playCard(card: Card, owner: Player, targetPlayer: Player): Game =
         players[owner]
                 ?.takeIf { it.hasCard(card) }

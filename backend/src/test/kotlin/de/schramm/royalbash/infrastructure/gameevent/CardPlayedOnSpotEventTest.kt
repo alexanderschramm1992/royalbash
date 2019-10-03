@@ -1,11 +1,13 @@
 package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
 import de.schramm.royalbash.domain.card.CardMock
 import de.schramm.royalbash.infrastructure.controller.gameevent.CardPlayedOnSpotEventDTO
-import org.assertj.core.api.Assertions
+import de.schramm.royalbash.infrastructure.gameevent.UUIDGeneratorMock.MOCK_ID
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class CardPlayedOnSpotEventTest {
@@ -20,16 +22,18 @@ class CardPlayedOnSpotEventTest {
                 targetSpotId = "Id 3")
         val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")
         val spot = Spot("Id 3")
+        val player1 = Player("Id 2", handcards = listOf(card), spots = listOf(spot))
         val game = Game(
                 "Id 4",
-                player1 = Player("Id 2", handcards = listOf(card), spots = listOf(spot)),
+                player1 = player1,
                 player2 = Player("Id 5"))
 
         // When
         val updatedGame = testee.invoke(game, UUIDGeneratorMock)
 
         // Then
-        Assertions.assertThat(updatedGame).isNotNull
-        Assertions.assertThat(updatedGame.player1.handcards).hasSize(0)
+        assertThat(updatedGame).isNotNull
+        assertThat(updatedGame.player1.handcards).hasSize(0)
+        assertThat(updatedGame.logs).endsWith(Log(MOCK_ID, "${player1.name} has played ${card.name} on a spot"))
     }
 }

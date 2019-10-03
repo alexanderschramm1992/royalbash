@@ -1,11 +1,9 @@
 package de.schramm.royalbash.infrastructure.gameevent
 
-import de.schramm.royalbash.domain.Game
-import de.schramm.royalbash.domain.Player
-import de.schramm.royalbash.domain.Spot
+import de.schramm.royalbash.domain.*
 import de.schramm.royalbash.domain.card.creature.CreatureMock
-import de.schramm.royalbash.domain.findCreature
 import de.schramm.royalbash.infrastructure.controller.gameevent.CreatureAttackedEventDTO
+import de.schramm.royalbash.infrastructure.gameevent.UUIDGeneratorMock.MOCK_ID
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -31,10 +29,12 @@ class CreatureAttackedEventTest {
                 instanceId = "InstanceId 3",
                 hitpoints = 3,
                 attack = 1)
+        val player1 = Player("Id 2", spots = listOf(Spot(id = "spot1", creature = attacker)))
+        val player2 = Player("Id 5", spots = listOf(Spot(id = "spot2", creature = defender)))
         val game = Game(
                 "Id 4",
-                player1 = Player("Id 2", spots = listOf(Spot(id = "spot1", creature = attacker))),
-                player2 = Player("Id 5", spots = listOf(Spot(id = "spot2", creature = defender))))
+                player1 = player1,
+                player2 = player2)
 
         // When
         val updatedGame = testee.invoke(game, UUIDGeneratorMock)
@@ -46,5 +46,7 @@ class CreatureAttackedEventTest {
         val updatedDefender = updatedGame.findCreature("Id 3")
                 ?: throw Exception("Defender not present")
         assertThat(updatedDefender.hitpoints).isEqualTo(1)
+        assertThat(updatedGame.logs).endsWith(Log(MOCK_ID,
+                "${attacker.name} of ${player1.name} has attacked ${defender.name} of ${player2.name}"))
     }
 }

@@ -40,7 +40,7 @@ const template = `
         <v-col cols="2">
             <v-container class="log">
                 <h3>Game Log</h3>
-                <v-list three-line>
+                <v-list three-line dense>
                     <v-listItem v-for="log of logs"
                                 v-bind:key="log.id">
                         <v-list-item-content>
