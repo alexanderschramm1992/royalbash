@@ -9,6 +9,8 @@
       <module name="RoyalBash" target="1.8" />
       <module name="royalbash.backend.main" target="1.8" />
       <module name="royalbash.backend.test" target="1.8" />
+      <module name="royalbash.main" target="1.8" />
+      <module name="royalbash.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
