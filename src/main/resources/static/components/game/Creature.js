@@ -2,8 +2,11 @@ const template = `
 <v-card class="mx-auto" outlined>
     <v-responsive :aspect-ratio="2/3">
         <v-row>
-            <v-col cols="12">
-                <v-card-title class="title">{{ creature.name }}</v-card-title>
+            <v-col cols="9">
+                <v-card-title class="subtitle-1">{{ card.name }}</v-card-title>
+            </v-col>
+            <v-col cols="3">
+                <v-card-title class="subtitle-1">{{ card.cost }}</v-card-title>
             </v-col>
         </v-row>
         <v-row>
