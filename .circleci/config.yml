@@ -33,14 +33,3 @@ jobs:
           key: v1-dependencies-{{ checksum "backend/build.gradle.kts" }}
 
       - run: ./gradlew build -x test
-
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "webapp/package.json" }}
-
-      - run: ./gradlew npmInstall
-
-      - save_cache:
-          paths:
-            - ~/repo/webapp/node_modules
-          key: v1-dependencies-{{ checksum "webapp/package.json" }}
