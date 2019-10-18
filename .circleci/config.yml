@@ -4,7 +4,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk-node
-      
+
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -15,21 +15,34 @@ jobs:
     environment:
       # Customize the JVM maximum heap limit
       JAVA_OPTS: -Xms512m -Xmx3072m
-    
+
     steps:
       - checkout
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "backend/build.gradle.kts" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle.kts" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run: ./gradlew test
 
       - save_cache:
           paths:
             - ~/.gradle
-          key: v1-dependencies-{{ checksum "backend/build.gradle.kts" }}
+          key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
       - run: ./gradlew build -x test
+
+      - restore_cache:
+          keys:
+            - v2-dependencies.{{ checksum "./src/main/javascript/package.json" }}
+
+      - run: cd ~/src/main/javascript
+      - run: npm install
+      - run: cd ~/../../..
+
+      - save_cache:
+          paths:
+            - ~/src/main/javascript/node_modules
+          key: v2-dependencies.{{ checksum "./src/main/javascript/package.json" }}
