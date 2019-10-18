@@ -39,6 +39,7 @@ sealed class ExternalModel {
             @ApiModelProperty(required = true) val instanceId: String,
             @ApiModelProperty(required = true) val name: String,
             @ApiModelProperty(required = true) val text: String,
+            @ApiModelProperty(required = true) val cost: Int,
             @ApiModelProperty(required = true) val hitpoints: Int,
             @ApiModelProperty(required = true) val attack: Int,
             @ApiModelProperty(required = false) val image: String): ExternalModel()

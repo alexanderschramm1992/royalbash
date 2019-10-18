@@ -5,8 +5,9 @@ import de.schramm.royalbash.application.toExternalModel
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
+import de.schramm.royalbash.infrastructure.JacksonConfig
 import de.schramm.royalbash.infrastructure.controller.GameController
-import de.schramm.royalbash.infrastructure.controller.gameevent.*
+import de.schramm.royalbash.application.gameevent.*
 import de.schramm.royalbash.verifyThat
 import io.mockk.every
 import io.mockk.mockk
@@ -16,14 +17,24 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
-import org.springframework.http.MediaType
+import org.springframework.context.annotation.Import
+import org.springframework.http.MediaType.APPLICATION_JSON_UTF8
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 
+@TestConfiguration
+class ControllerTestConfig {
+    @Bean
+    fun gameService() = mockk<GameService>()
+}
+
+@Import(JacksonConfig::class, ControllerTestConfig::class)
 @WebMvcTest(GameController::class, secure = false)
 class EventTranslationTest {
 
-    private val gameId = "1"
+    companion object {
+        private const val gameId = "1"
+    }
 
     @Autowired
     private lateinit var mockMvc: MockMvc
@@ -34,12 +45,11 @@ class EventTranslationTest {
     @BeforeEach
     fun define_mock_behavior() {
 
-        val game = Game(
-                gameId,
-                player1 = Player("Id 2"),
-                player2 = Player("Id 3"),
-                playerOnTurn = Player("Id 2"),
-                state = OPEN)
+        val game = Game(gameId,
+                        player1 = Player("Id 2"),
+                        player2 = Player("Id 3"),
+                        playerOnTurn = Player("Id 2"),
+                        state = OPEN)
 
         every { gameService.commitGameEvent(any(), any()) } returns game.toExternalModel()
     }
@@ -103,8 +113,11 @@ class EventTranslationTest {
     fun should_translate_NoOpEvent() {
 
         // Given
-        val json = """{"event": {"type": "NO_OP"}}"""
-        val expectedEvent = NoOpEventDTO()
+        val json = """{"event": {
+                            "type": "NO_OP", 
+                            "noopValue": "value"
+                       }}"""
+        val expectedEvent = NoOpEventDTO("value")
 
         // When Then
         test(json, expectedEvent)
@@ -119,9 +132,7 @@ class EventTranslationTest {
                            "creatureId": "Creature Id", 
                            "ownerId": "Owner Id"
                       }}"""
-        val expectedEvent =
-                PlayerAttackedEventDTO("Creature Id",
-                                                                                                "Owner Id")
+        val expectedEvent = PlayerAttackedEventDTO("Creature Id", "Owner Id")
 
         // When Then
         test(json, expectedEvent)
@@ -140,43 +151,33 @@ class EventTranslationTest {
         // When Then
         test(json, expectedEvent)
     }
-    
+
     private fun test(json: String, expectedEvent: GameEventDTO) {
 
         // Given
         val requestBuilder = MockMvcRequestBuilders
                 .post("/game/1/event")
                 .content(json)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
+                .accept(APPLICATION_JSON_UTF8)
+                .contentType(APPLICATION_JSON_UTF8)
 
         // When
-        val response = mockMvc.perform(requestBuilder)
-                .andReturn()
-                .response
-                .contentAsString
+        val mvcResult = mockMvc.perform(requestBuilder).andReturn()
+        val resolvedException = mvcResult.resolvedException
 
         // Then
-        try {
-            verifyThat("commitGameEvent() is called at all") {
-                gameService.commitGameEvent(any(), any())
-            }
-            verifyThat("commitGameEvent() is called with expected Game Id") {
-                gameService.commitGameEvent(gameId, any())
-            }
-            verifyThat("commitGameEvent() is called with expected Game Id and Event") {
-                gameService.commitGameEvent(gameId, expectedEvent)
-            }
-        } catch (error: AssertionError) {
-            throw AssertionError("Event Translation failed \nHttp Response: [ \n$response \n]\n${error.message}",
-                                 error)
+        if (resolvedException != null) {
+            throw java.lang.AssertionError("Failed to resolve HTTP call", resolvedException)
         }
-    }
 
-    @TestConfiguration
-    class ControllerTestConfig {
-
-        @Bean
-        fun gameService() = mockk<GameService>()
+        verifyThat("commitGameEvent() is called at all") {
+            gameService.commitGameEvent(any(), any())
+        }
+        verifyThat("commitGameEvent() is called with expected Game Id") {
+            gameService.commitGameEvent(gameId, any())
+        }
+        verifyThat("commitGameEvent() is called with expected Game Id and Event") {
+            gameService.commitGameEvent(gameId, expectedEvent)
+        }
     }
 }

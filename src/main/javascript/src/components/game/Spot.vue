@@ -8,7 +8,7 @@
         </template>
         <v-card>
           <v-card-title>Select Creature from Handcards</v-card-title>
-          <v-divider />
+          <v-divider/>
           <v-card-text>
             <v-list>
               <v-list-item
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {post} from "./../util/AjaxHandler.js";
+import {COMMIT_EVENT} from "../../MutationTypes.js";
 import Creature from "./Creature.vue";
 
 export default {
@@ -46,26 +46,14 @@ export default {
       place_creature_dialog: false
     };
   },
-  template: template,
   methods: {
-    placeCreature: function (cardId) {
-      post(
-        `/game/${this.gameId}/event`,
-        {
-          event: {
-            type: "CARD_PLAYED_ON_SPOT",
-            cardId: cardId,
-            ownerId: this.ownerId,
-            targetSpotId: this.spot.id
-          }
-        },
-        response => this.$root.$emit("updateState", response),
-        error =>
-          console.error(
-            `Cannot commit 'placeCreature' to Backend due to ${error}`
-          )
-      );
-
+    placeCreature (cardId) {
+      this.$store.commit(COMMIT_EVENT, {
+        type: "CARD_PLAYED_ON_SPOT",
+        cardId: cardId,
+        ownerId: this.ownerId,
+        targetSpotId: this.spot.id
+      });
       this.place_creature_dialog = false;
     }
   }

@@ -5,7 +5,7 @@ import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
 import de.schramm.royalbash.domain.card.CardMock
-import de.schramm.royalbash.infrastructure.controller.gameevent.CardPlayedOnSpotEventDTO
+import de.schramm.royalbash.application.gameevent.CardPlayedOnSpotEventDTO
 import de.schramm.royalbash.infrastructure.gameevent.UUIDGeneratorMock.MOCK_ID
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test

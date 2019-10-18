@@ -1,33 +1,29 @@
 <template>
-  <v-card class="mx-auto" outlined>
-    <v-responsive :aspect-ratio="2/3">
-      <v-row>
-        <v-col cols="9">
-          <v-card-title class="subtitle-1">{{ card.name }}</v-card-title>
-        </v-col>
-        <v-col cols="3">
-          <v-card-title class="subtitle-1">{{ card.cost }}</v-card-title>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-img aspect-ratio="0.8" v-bind:src="'images/' + card.image" />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" class="text-center">
-          <v-card-text>{{ card.text }}</v-card-text>
-        </v-col>
-      </v-row>
-    </v-responsive>
-  </v-card>
+    <v-tooltip :disabled="!hasText" bottom>
+        <template v-slot:activator="{ on }">
+            <v-card outlined v-on="on">
+                <v-responsive :aspect-ratio="3/5" width="225">
+                    <v-card-title class="d-flex justify-space-between">
+                        <span class="subtitle-1">{{ card.name }}</span>
+                        <span class="subtitle-1">{{ card.cost }}</span>
+                    </v-card-title>
+                    <v-img :aspect-ratio="4/5" v-bind:src="'images/' + card.image"/>
+                </v-responsive>
+            </v-card>
+        </template>
+        <span>{{ card.text }}</span>
+    </v-tooltip>
 </template>
 
 <script>
-export default {
-    name: "card",
-    props: {
-        card: Object
+
+    export default {
+        name: "card",
+        props: {
+            card: Object
+        },
+        computed: {
+            hasText () { return this.card.text !== "" }
+        }
     }
-}
 </script>

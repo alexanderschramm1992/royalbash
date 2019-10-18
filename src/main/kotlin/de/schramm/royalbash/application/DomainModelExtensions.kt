@@ -40,6 +40,7 @@ fun Creature.toExternalModel() = ExternalModel.Creature(
         instanceId = instanceId,
         name = name,
         text = text,
+        cost = cost,
         hitpoints = hitpoints,
         attack = attack,
         image = image)

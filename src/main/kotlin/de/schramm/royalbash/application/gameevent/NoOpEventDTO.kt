@@ -1,4 +1,4 @@
-package de.schramm.royalbash.infrastructure.controller.gameevent
+package de.schramm.royalbash.application.gameevent
 
 import de.schramm.royalbash.application.UUIDGenerator
 import de.schramm.royalbash.domain.Game
