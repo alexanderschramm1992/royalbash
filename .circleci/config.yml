@@ -38,9 +38,7 @@ jobs:
           keys:
             - v2-dependencies.{{ checksum "./src/main/javascript/package.json" }}
 
-      - run: cd ./src/main/javascript
-      - run: npm install
-      - run: cd ./../../..
+      - run: npm install ./src/main/javascript
 
       - save_cache:
           paths:
