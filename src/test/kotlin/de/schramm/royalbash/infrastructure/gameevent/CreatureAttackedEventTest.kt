@@ -2,7 +2,7 @@ package de.schramm.royalbash.infrastructure.gameevent
 
 import de.schramm.royalbash.domain.*
 import de.schramm.royalbash.domain.card.creature.CreatureMock
-import de.schramm.royalbash.infrastructure.controller.gameevent.CreatureAttackedEventDTO
+import de.schramm.royalbash.application.gameevent.CreatureAttackedEventDTO
 import de.schramm.royalbash.infrastructure.gameevent.UUIDGeneratorMock.MOCK_ID
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

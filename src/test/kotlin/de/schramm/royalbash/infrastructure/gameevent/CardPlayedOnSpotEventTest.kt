@@ -1,13 +1,13 @@
 package de.schramm.royalbash.infrastructure.gameevent
 
+import de.schramm.royalbash.application.gameevent.CardPlayedOnSpotEventDTO
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
 import de.schramm.royalbash.domain.card.CardMock
-import de.schramm.royalbash.infrastructure.controller.gameevent.CardPlayedOnSpotEventDTO
 import de.schramm.royalbash.infrastructure.gameevent.UUIDGeneratorMock.MOCK_ID
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class CardPlayedOnSpotEventTest {
@@ -17,7 +17,7 @@ class CardPlayedOnSpotEventTest {
 
         // Given
         val testee = CardPlayedOnSpotEventDTO(
-                cardId = "Id 1",
+                cardInstanceId = "Id 1",
                 ownerId = "Id 2",
                 targetSpotId = "Id 3")
         val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")

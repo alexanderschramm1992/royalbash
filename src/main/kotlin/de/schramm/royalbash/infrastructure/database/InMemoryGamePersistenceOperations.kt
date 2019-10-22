@@ -14,4 +14,7 @@ class InMemoryGamePersistenceOperations: GamePersistenceOperations {
         games[game.id] = game
     }
 
+    override fun deleteById(id: String) {
+        games.remove(id)
+    }
 }

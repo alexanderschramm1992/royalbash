@@ -1,7 +1,7 @@
 package de.schramm.royalbash.infrastructure.controller
 
-import de.schramm.royalbash.infrastructure.controller.gameevent.GameEventDTO
-import de.schramm.royalbash.infrastructure.controller.gameevent.NoOpEventDTO
+import de.schramm.royalbash.application.gameevent.GameEventDTO
+import de.schramm.royalbash.application.gameevent.NoOpEventDTO
 
 data class CommitGameEventRequest(val event: GameEventDTO = NoOpEventDTO())
 

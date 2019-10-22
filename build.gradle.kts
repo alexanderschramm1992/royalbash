@@ -40,6 +40,7 @@ dependencies {
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     // Spring Boot
     runtimeOnly("org.springframework.boot:spring-boot-devtools")
     // Spring Boot Starter Test

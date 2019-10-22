@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {post} from "./../util/AjaxHandler.js";
+import {post} from "./../../util/AjaxHandler.js";
 
 export default {
     name: "deck",

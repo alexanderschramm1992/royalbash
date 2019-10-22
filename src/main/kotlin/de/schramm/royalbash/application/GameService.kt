@@ -1,6 +1,7 @@
 package de.schramm.royalbash.application
 
 import de.schramm.royalbash.api.ExternalModel
+import de.schramm.royalbash.application.gameevent.GameEventDTO
 import de.schramm.royalbash.domain.*
 
 class GameService(
@@ -33,10 +34,11 @@ class GameService(
         return game.toExternalModel()
     }
 
-    fun commitGameEvent(gameId: String, gameEvent: GameEvent): ExternalModel.Game? {
+    fun commitGameEvent(gameId: String, gameEvent: GameEventDTO): ExternalModel.Game? {
         println("""Received event $gameEvent for game $gameId""")
         return retrieveDomainGame(gameId)
                 ?.let { gameEvent.invoke(it, uuidGenerator) }
+                ?.also(games::save)
                 ?.toExternalModel()
     }
 

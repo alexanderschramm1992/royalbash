@@ -6,7 +6,8 @@ import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
 import de.schramm.royalbash.infrastructure.controller.GameController
-import de.schramm.royalbash.infrastructure.controller.gameevent.NoOpEventDTO
+import de.schramm.royalbash.application.gameevent.NoOpEventDTO
+import de.schramm.royalbash.infrastructure.JacksonConfig
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -17,10 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 
+@Import(JacksonConfig::class)
 @WebMvcTest(GameController::class, secure = false)
 class GameControllerTest {
 
@@ -197,7 +200,7 @@ class GameControllerTest {
 
         val requestBuilder = MockMvcRequestBuilders
                 .post("/game/1/event")
-                .content("""{"event": {"type": "NO_OP"}}""")
+                .content("""{"event": {"type": "NO_OP", "noopValue": ""}}""")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
 
@@ -222,12 +225,11 @@ class GameControllerTest {
 
         // Given
         val gameId = "1"
-        every { gameService.commitGameEvent(gameId,
-                                            NoOpEventDTO()) } returns null
+        every { gameService.commitGameEvent(gameId, NoOpEventDTO()) } returns null
         val requestBuilder = MockMvcRequestBuilders
                 .post("/game/1/event")
                 .content("""{
-                    "event": {"type": "NO_OP"}
+                    "event": {"type": "NO_OP", "noopValue": ""}
                 }""")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)

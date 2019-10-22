@@ -1,18 +1,19 @@
 <template>
-  <v-row justify="center">
-    <v-col cols="2" v-for="handcard of handcards" v-bind:key="handcard.instanceId">
-      <card v-bind:card="handcard" />
-    </v-col>
-  </v-row>
+    <div class="d-flex justify-space-around">
+        <card v-for="handcard of handcards"
+              :key="handcard.instanceId"
+              :card="handcard"/>
+    </div>
 </template>
 
 <script>
-import Card from "./Card.vue";
+    import Card from "./Card.vue";
 
-export default {
-    name: "handcards",
-    props: {
-        handcards: Array
+    export default {
+        name: "handcards",
+        components: { Card },
+        props: {
+            handcards: Array
+        }
     }
-}
 </script>
