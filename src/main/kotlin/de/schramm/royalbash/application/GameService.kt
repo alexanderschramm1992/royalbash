@@ -38,6 +38,7 @@ class GameService(
         println("""Received event $gameEvent for game $gameId""")
         return retrieveDomainGame(gameId)
                 ?.let { gameEvent.invoke(it, uuidGenerator) }
+                ?.also(games::save)
                 ?.toExternalModel()
     }
 

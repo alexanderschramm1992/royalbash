@@ -9,4 +9,6 @@ interface GamePersistenceOperations {
     fun findById(id: String): Optional<GameDTO>
 
     fun save(game: GameDTO)
+
+    fun deleteById(id: String)
 }

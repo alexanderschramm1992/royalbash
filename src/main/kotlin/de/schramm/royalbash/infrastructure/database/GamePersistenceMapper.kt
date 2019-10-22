@@ -15,4 +15,8 @@ class GamePersistenceMapper(private val gamePersistenceOperations: GamePersisten
     override fun save(game: Game) {
         gamePersistenceOperations.save(game.toDTO())
     }
+
+    override fun deleteById(id: String) {
+        gamePersistenceOperations.deleteById(id)
+    }
 }

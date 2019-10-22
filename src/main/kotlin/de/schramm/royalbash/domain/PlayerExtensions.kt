@@ -23,7 +23,7 @@ fun Player.drawCards(amountOfCards: Int): Player {
     return player
 }
 
-fun Player.findHandcard(cardId: String) = handcards.firstOrNull { cardId == it.id }
+fun Player.findHandcard(instanceId: String) = handcards.firstOrNull { instanceId == it.instanceId }
 
 fun Player.removeHandcard(handcard: Card): Player {
 
