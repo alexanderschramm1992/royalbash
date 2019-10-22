@@ -35,7 +35,6 @@ class GameService(
     }
 
     fun commitGameEvent(gameId: String, gameEvent: GameEventDTO): ExternalModel.Game? {
-        println("""Received event $gameEvent for game $gameId""")
         return retrieveDomainGame(gameId)
                 ?.let { gameEvent.invoke(it, uuidGenerator) }
                 ?.also(games::save)

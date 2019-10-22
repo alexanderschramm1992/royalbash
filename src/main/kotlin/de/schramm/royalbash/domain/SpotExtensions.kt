@@ -13,6 +13,6 @@ fun Spot.updateCreature(oldToNew: Pair<Creature, Creature>): Spot {
     return copy(creature = updatedCreature)
 }
 
-fun Spot.removeCreature(creature: Creature): Spot {
+fun Spot.buryCreature(creature: Creature): Spot {
     return copy(creature = if (creature == this.creature) null else this.creature)
 }

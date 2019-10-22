@@ -57,7 +57,7 @@ class SpotTest {
         val testee = Spot(id = "spot", creature = creature)
 
         // When
-        val spot = testee.removeCreature(creature)
+        val spot = testee.buryCreature(creature)
 
         // Then
         assertThat(spot.creature).isNull()
@@ -72,7 +72,7 @@ class SpotTest {
         val testee = Spot(id = "spot", creature = creature)
 
         // When
-        val spot = testee.removeCreature(otherCreature)
+        val spot = testee.buryCreature(otherCreature)
 
         // Then
         assertThat(spot.creature).isEqualTo(creature)

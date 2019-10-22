@@ -1,8 +1,11 @@
 package de.schramm.royalbash.domain
 
+import de.schramm.royalbash.application.UUIDGenerator
+
 data class Context(
+        val uuidGenerator: UUIDGenerator,
         val game: Game,
-        val owner: Player,
-        val targetPlayer: Player? = null,
-        val targetSpot: Spot? = null,
-        val targetCreature: Creature? = null)
+        val ownerId: String,
+        val targetPlayerId: String? = null,
+        val targetSpotId: String? = null,
+        val targetCreatureInstanceId: String? = null)

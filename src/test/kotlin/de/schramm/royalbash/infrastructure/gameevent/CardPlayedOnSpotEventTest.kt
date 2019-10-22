@@ -17,7 +17,7 @@ class CardPlayedOnSpotEventTest {
 
         // Given
         val testee = CardPlayedOnSpotEventDTO(
-                cardInstanceId = "Id 1",
+                cardInstanceId = "InstanceId 1",
                 ownerId = "Id 2",
                 targetSpotId = "Id 3")
         val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")

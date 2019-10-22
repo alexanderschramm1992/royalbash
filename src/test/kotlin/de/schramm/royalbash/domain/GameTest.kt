@@ -126,7 +126,7 @@ class GameTest {
         val game = testee.playCard(card, player1, player2)
 
         // Then
-        assertThat(game.player1.handcards).isEmpty()
+        assertThat(game?.player1?.handcards).isEmpty()
     }
 
     @Test

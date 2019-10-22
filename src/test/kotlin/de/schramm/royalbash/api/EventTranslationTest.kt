@@ -77,12 +77,12 @@ class EventTranslationTest {
         // Given
         val json = "{\"event\": {" +
                    "\"type\": \"CARD_PLAYED_ON_PLAYER\", " +
-                   "\"cardId\": \"Card Id\", " +
+                   "\"cardInstanceId\": \"Card InstanceId\", " +
                    "\"ownerId\": \"Owner Id\", " +
                    "\"targetPlayerId\": \"Target Player Id\"}" +
                    "}"
         val expectedEvent = CardPlayedOnPlayerEventDTO(
-                "Card Id",
+                "Card InstanceId",
                 "Owner Id",
                 "Target Player Id")
 

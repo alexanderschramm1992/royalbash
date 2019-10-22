@@ -16,7 +16,7 @@ class CardPlayedOnPlayerEventTest {
 
         // Given
         val testee = CardPlayedOnPlayerEventDTO(
-                cardId = "Id 1",
+                cardInstanceId = "InstanceId 1",
                 ownerId = "Id 2",
                 targetPlayerId = "Id 2")
         val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")

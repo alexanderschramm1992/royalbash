@@ -7,7 +7,9 @@ import de.schramm.royalbash.application.gameevent.GameEventDTO
 import de.schramm.royalbash.infrastructure.database.GamePersistenceMapper
 import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
+import io.mockk.runs
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.util.*
@@ -88,6 +90,7 @@ class GameServiceTest {
             every { this@mockk.invoke(game, RandomUUIDGenerator) } returns game
         }
         val repository = mockk<Games> {
+            every { save(any()) } just runs
             every { findAll() } returns setOf(game)
         }
         val testee = GameService(RandomUUIDGenerator, repository)

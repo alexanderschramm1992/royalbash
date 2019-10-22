@@ -1,14 +1,14 @@
 package de.schramm.royalbash.domain
 
-fun Creature.spawnCreature(context: Context): Context {
+fun Creature.spawnCreature(context: Context): Game? {
 
     val game = context.game
-    val owner = game.findPlayer(context.owner)
-    val targetSpot = context.targetSpot
+    val owner = game.findPlayer(context.ownerId)
+    val targetSpot = game.findSpot(context.targetSpotId)
 
     return if (targetSpot != null && owner != null && owner.resources >= this.cost) {
-        val updatedOwner = owner.copy(resources = owner.resources - this.cost)
-                .updateSpot(targetSpot to targetSpot.place(this))
-        context.copy(owner = updatedOwner, game = game.updatePlayer(owner to updatedOwner))
-    } else context
+        game.updatePlayer(owner to owner
+                .copy(resources = owner.resources - cost)
+                .updateSpot(targetSpot to targetSpot.place(this)))
+    } else null
 }

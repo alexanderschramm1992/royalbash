@@ -4,21 +4,26 @@ fun Game.log(log: Log): Game = copy(logs = logs + log)
 
 fun Game.log(id: String, message: String): Game = log(Log(id, message))
 
-fun Game.playCard(card: Card, owner: Player, targetPlayer: Player): Game =
-        players[owner]
-                ?.takeIf { it.hasCard(card) }
-                ?.removeHandcard(card)
-                ?.let { updatePlayer(owner to it) }
-                ?.let { card.invoke(Context(it, owner, targetPlayer = targetPlayer)) }
-        ?: this
+fun Game.playCard(card: Card, ownerId: String, targetPlayerId: String): Game? {
 
-fun Game.playCard(card: Card, owner: Player, targetSpot: Spot): Game =
-        players[owner]
-                ?.takeIf { it.hasCard(card) }
-                ?.removeHandcard(card)
-                ?.let { updatePlayer(owner to it) }
-                ?.let { card.invoke(Context(it, owner, targetSpot = targetSpot)) }
-        ?: this
+    val owner = findPlayer(ownerId)
+
+    return if (owner != null) findPlayer(ownerId)
+            ?.takeIf { it.hasCard(card) }
+            ?.discardHandcard(card)
+            ?.let { updatePlayer(owner to it) }
+            ?.let { card.invoke(Context(it, ownerId, targetPlayerId = targetPlayerId)) }
+    else null
+}
+
+fun Game.playCard(card: Card, owner: Player, targetSpot: Spot): Game {
+    return players[owner]
+            ?.takeIf { it.hasCard(card) }
+            ?.removeHandcard(card)
+            ?.let { updatePlayer(owner to it) }
+            ?.let { card.invoke(Context(it, owner, targetSpot = targetSpot)) }
+            ?: this
+}
 
 fun Game.combat(attacker: Creature, owner: Player, defender: Creature): Game {
 
@@ -38,10 +43,10 @@ fun Game.combat(attacker: Creature, owner: Player, defender: Creature): Game {
         axctualDefender.damage(actualAttacker.attack)
     else defender
 
-    val updatedOwner = if (updatedAttacker.isDead()) owner.removeCreature(attacker)
+    val updatedOwner = if (updatedAttacker.isDead()) owner.buryCreature(attacker)
     else owner.updateCreature(attacker to updatedAttacker)
 
-    val updatedOpponent = if (updatedDefender.isDead()) opponent.removeCreature(defender)
+    val updatedOpponent = if (updatedDefender.isDead()) opponent.buryCreature(defender)
     else opponent.updateCreature(defender to updatedDefender)
 
     return this.updatePlayer(owner to updatedOwner)
@@ -76,7 +81,7 @@ fun Game.updateCreature(oldToNew: Pair<Creature, Creature>): Game = copy(
 
 fun Game.findPlayer(player: Player) = players.firstOrNull { player == it }
 
-fun Game.findPlayer(playerId: String) = players.firstOrNull { it.id == playerId }
+fun Game.findPlayer(playerId: String?) = players.firstOrNull { it.id == playerId }
 
 fun Game.findCreature(creatureId: String) = players
         .flatMap { it.spots }
@@ -88,7 +93,7 @@ fun Game.findCreature(creature: Creature) = players
         .mapNotNull { it.creature }
         .firstOrNull { it == creature }
 
-fun Game.findSpot(spotId: String): Spot? = players
+fun Game.findSpot(spotId: String?): Spot? = players
         .flatMap { it.spots }
         .find { it.id == spotId }
 
@@ -100,8 +105,8 @@ fun Game.withState(state: State): Game = copy(state = state)
 
 fun Game.updateStateAccordingToWinConditions(): Game = withState(evaluateState(player1, player2))
 
-fun Game.removeCreature(creature: Creature): Game =
-        copy(player1 = player1.removeCreature(creature), player2 = player2.removeCreature(creature))
+fun Game.buryCreature(creature: Creature): Game =
+        copy(player1 = player1.buryCreature(creature), player2 = player2.buryCreature(creature))
 
 val Game.players: List<Player>
     get() = listOf(player1, player2)

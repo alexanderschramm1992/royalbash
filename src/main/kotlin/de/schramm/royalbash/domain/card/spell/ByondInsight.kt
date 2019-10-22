@@ -1,8 +1,6 @@
 package de.schramm.royalbash.domain.card.spell
 
-import de.schramm.royalbash.domain.Card
-import de.schramm.royalbash.domain.Context
-import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.*
 import de.schramm.royalbash.domain.effect.DrawHandcardsEffect
 
 data class ByondInsight(
@@ -12,11 +10,29 @@ data class ByondInsight(
 ) : Card {
 
     override val name = "Beyond Insight"
-    override val text = "Target player draws two cards."
+    override val text = "Draw two cards."
     override val image = "Tex_sight.PNG"
     val effect = DrawHandcardsEffect(2)
 
-    override fun invoke(context: Context): Game {
-        return effect.invoke(context)
+    override fun invoke(context: Context): Game = context.run {
+
+        val owner = game.findPlayer(ownerId)
+
+        if (owner == null) {
+            return game.log(uuidGenerator.generateId(), "Cannot invoke Boar due to missing owner")
+        }
+
+        if (targetSpot == null) {
+            return game.log(uuidGenerator.generateId(), "Cannot invoke Boar due to missing target spot")
+        }
+
+        if (owner.resources >= cost) {
+            return game.log(uuidGenerator.generateId(), "Cannot invoke Boar due to missing resources")
+        }
+
+        return if (owner != null) {
+            val updatedPlayer = owner.drawCards(effect.amountOfCards)
+            game.updatePlayer(owner to updatedPlayer)
+        } else game
     }
 }

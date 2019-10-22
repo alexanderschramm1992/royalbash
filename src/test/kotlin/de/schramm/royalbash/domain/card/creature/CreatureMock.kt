@@ -3,6 +3,7 @@ package de.schramm.royalbash.domain.card.creature
 import de.schramm.royalbash.domain.Context
 import de.schramm.royalbash.domain.Creature
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.spawnCreature
 
 data class CreatureMock(
         override val id: String,
@@ -19,7 +20,5 @@ data class CreatureMock(
         return this.copy(hitpoints = hitpoints - amountOfDamage)
     }
 
-    override fun invoke(context: Context): Game {
-        return context.game
-    }
+    override fun invoke(context: Context) = spawnCreature(context).game
 }

@@ -25,7 +25,7 @@ fun Player.drawCards(amountOfCards: Int): Player {
 
 fun Player.findHandcard(instanceId: String) = handcards.firstOrNull { instanceId == it.instanceId }
 
-fun Player.removeHandcard(handcard: Card): Player {
+fun Player.discardHandcard(handcard: Card): Player {
 
     val handcards = handcards.filter { it != handcard }
 
@@ -34,9 +34,11 @@ fun Player.removeHandcard(handcard: Card): Player {
            ?: this
 }
 
-fun Player.removeCreature(creature: Creature): Player {
+fun Player.removeHandcard(handcard: Card): Player = copy(handcards = this.handcards.filter { it != handcard })
 
-    val spots = spots.map { it.removeCreature(creature) }
+fun Player.buryCreature(creature: Creature): Player {
+
+    val spots = spots.map { it.buryCreature(creature) }
 
     return findCreature(creature)
                    ?.let { copy(depositcards = depositcards.plus(it), spots = spots) }
