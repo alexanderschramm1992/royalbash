@@ -19,15 +19,16 @@ class GameService(
 
     fun createGame(account1Id: String, account2Id: String): ExternalModel.Game {
 
-        val player1Id = uuidGenerator.generateId()
-        val player2Id = uuidGenerator.generateId()
+        val player1Id = uuidGenerator.id()
+        val player2Id = uuidGenerator.id()
 
         val game = Game(
-                id = uuidGenerator.generateId(),
+                id = uuidGenerator.id(),
                 player1 = Player(id = player1Id, name = account1Id, spots = fillSpots(uuidGenerator)),
                 player2 = Player(id = player2Id, name = account2Id, spots = fillSpots(uuidGenerator)))
-                .let { it.copy(logs = listOf(Log(uuidGenerator.generateId(),
-                                                 "Started Match between ${it.player1.name} and ${it.player2.name}"))) }
+                .let {
+                    it.copy(logs = listOf(Log(uuidGenerator.id(),
+                                              "Started Match between ${it.player1.name} and ${it.player2.name}"))) }
 
         games.save(game)
 
@@ -53,6 +54,6 @@ class GameService(
     private fun fillSpots(uuidGenerator: UUIDGenerator,
                           spots: List<Spot> = emptyList()): List<Spot> {
         val numberOfSpotsMissing = NUMBER_OF_SPOTS - spots.size
-        return spots + (0 until numberOfSpotsMissing).map { Spot(uuidGenerator.generateId()) }
+        return spots + (0 until numberOfSpotsMissing).map { Spot(uuidGenerator.id()) }
     }
 }

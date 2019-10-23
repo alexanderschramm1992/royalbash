@@ -4,5 +4,5 @@ import de.schramm.royalbash.application.UUIDGenerator
 
 object UUIDGeneratorMock: UUIDGenerator {
     const val MOCK_ID = "MOCK ID"
-    override fun generateId() = MOCK_ID
+    override fun id() = MOCK_ID
 }

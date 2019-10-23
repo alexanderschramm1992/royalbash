@@ -1,7 +1,10 @@
 package de.schramm.royalbash.application.gameevent
 
 import de.schramm.royalbash.application.UUIDGenerator
-import de.schramm.royalbash.domain.*
+import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.findHandcard
+import de.schramm.royalbash.domain.findPlayer
+import de.schramm.royalbash.domain.playCard
 
 data class CardPlayedOnPlayerEventDTO(val cardInstanceId: String,
                                       val ownerId: String,
@@ -16,7 +19,7 @@ data class CardPlayedOnPlayerEventDTO(val cardInstanceId: String,
 
         return if (owner != null && card != null && targetPlayer != null)
             game.playCard(card, owner, targetPlayer)
-                    ?.log(uuidGenerator.generateId(), "${owner.name} has played ${card.name} on ${targetPlayer.name}")
+                    ?.log(uuidGenerator.id(), "${owner.name} has played ${card.name} on ${targetPlayer.name}")
                     ?: game
         else game
     }

@@ -16,7 +16,7 @@ data class CardPlayedOnSpotEventDTO(
 
         return if (owner != null && card != null && targetSpot != null)
             game.playCard(card, owner, targetSpot)
-                    .log(uuidGenerator.generateId(), "${owner.name} has played ${card.name} on a spot")
+                    .log(uuidGenerator.id(), "${owner.name} has played ${card.name} on a spot")
         else game
     }
 }

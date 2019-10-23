@@ -14,8 +14,8 @@ data class PlayerAttackedEventDTO(val creatureId: String,
 
         return if (owner != null && creature != null)
             game.combat(creature, owner)
-                    .log(uuidGenerator.generateId(),
-                            "${creature.name} of ${owner.name} has attacked ${game.opponentOf(owner).name}")
+                    .log(uuidGenerator.id(),
+                         "${creature.name} of ${owner.name} has attacked ${game.opponentOf(owner).name}")
         else game
     }
 }

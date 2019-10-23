@@ -12,7 +12,7 @@ data class CardDrawnEventDTO(val playerId: String,
 
         return player
                 ?.let { game.updatePlayer(it to it.drawCards(amountOfCards)) }
-                ?.log(uuidGenerator.generateId(), "${player.name} has drawn a card")
+                       ?.log(uuidGenerator.id(), "${player.name} has drawn a card")
                 ?: game
     }
 }

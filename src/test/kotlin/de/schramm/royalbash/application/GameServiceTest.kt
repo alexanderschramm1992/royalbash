@@ -1,9 +1,9 @@
 package de.schramm.royalbash.application
 
+import de.schramm.royalbash.application.gameevent.GameEventDTO
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.infrastructure.RandomUUIDGenerator
-import de.schramm.royalbash.application.gameevent.GameEventDTO
 import de.schramm.royalbash.infrastructure.database.GamePersistenceMapper
 import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations
 import io.mockk.every
@@ -64,7 +64,7 @@ class GameServiceTest {
         val id = UUID.randomUUID().toString()
         val repository = GamePersistenceMapper(InMemoryGamePersistenceOperations())
         val uuidGenerator = mockk<UUIDGenerator> {
-            every { generateId() } returns id
+            every { id() } returns id
         }
         val testee = GameService(uuidGenerator, repository)
 

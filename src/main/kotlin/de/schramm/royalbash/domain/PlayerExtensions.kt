@@ -5,6 +5,10 @@ fun Player.withHitpoints(hitpoints: Int) = copy(hitpoints = hitpoints)
 fun Player.updateSpot(oldToNew: Pair<Spot, Spot>): Player =
         copy(spots = this.spots.map { if (it == oldToNew.old) oldToNew.new else it })
 
+fun Player.increaseResourcesBy(amount: Int): Player = copy(resources = resources + amount)
+
+fun Player.reduceResourcesBy(amount: Int): Player = copy(resources = resources - amount)
+
 fun Player.discardCards(amountOfCards: Int): Player {
 
     var player = this
@@ -22,6 +26,8 @@ fun Player.drawCards(amountOfCards: Int): Player {
     }
     return player
 }
+
+fun Player.damage(amount: Int) = copy(hitpoints = hitpoints - amount)
 
 fun Player.findHandcard(instanceId: String) = handcards.firstOrNull { instanceId == it.instanceId }
 

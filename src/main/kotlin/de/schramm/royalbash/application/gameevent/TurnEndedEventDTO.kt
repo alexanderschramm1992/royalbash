@@ -10,8 +10,9 @@ data class TurnEndedEventDTO(val playerId: String = ""): GameEventDTO {
         return game.findPlayer(playerId)
                 ?.takeIf { game.playerOnTurn == it }
                 ?.let { game.switchPlayerOnTurn() }
-                ?.log(uuidGenerator.generateId(),
-                        "${game.opponentOf(game.playerOnTurn).name} ended the turn, it is now ${game.playerOnTurn.name}'s turn")
+                       ?.log(uuidGenerator.id(),
+                             "${game.opponentOf(
+                                     game.playerOnTurn).name} ended the turn, it is now ${game.playerOnTurn.name}'s turn")
                 ?: game
     }
 }
