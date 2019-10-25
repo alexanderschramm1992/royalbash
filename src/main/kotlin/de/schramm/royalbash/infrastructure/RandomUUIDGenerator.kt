@@ -1,6 +1,6 @@
 package de.schramm.royalbash.infrastructure
 
-import de.schramm.royalbash.application.UUIDGenerator
+import de.schramm.royalbash.domain.UUIDGenerator
 import java.util.*
 
 object RandomUUIDGenerator: UUIDGenerator {

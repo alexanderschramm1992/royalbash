@@ -1,4 +1,4 @@
-package de.schramm.royalbash.application
+package de.schramm.royalbash.domain
 
 interface UUIDGenerator {
     fun id(): String

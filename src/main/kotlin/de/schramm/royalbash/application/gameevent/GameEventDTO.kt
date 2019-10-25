@@ -1,8 +1,8 @@
 package de.schramm.royalbash.application.gameevent
 
-import de.schramm.royalbash.application.UUIDGenerator
 import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.UUIDGenerator
 
 interface GameEventDTO {
-    fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game
+    operator fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game
 }

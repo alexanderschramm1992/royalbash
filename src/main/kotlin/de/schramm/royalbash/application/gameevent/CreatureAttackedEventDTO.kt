@@ -1,24 +1,40 @@
 package de.schramm.royalbash.application.gameevent
 
-import de.schramm.royalbash.application.UUIDGenerator
 import de.schramm.royalbash.domain.*
+import de.schramm.royalbash.domain.card.*
 
 data class CreatureAttackedEventDTO(
-        val attackerId: String,
+        val attackerInstanceId: String,
         val ownerId: String,
-        val defenderId: String) : GameEventDTO {
+        val defenderInstanceId: String): GameEventDTO {
 
-    override fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game {
+    override fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game = game.run {
+        val attacker = findCreature(attackerInstanceId)
+        val attackerOwner = findPlayer(ownerId)
+        val defender = findCreature(defenderInstanceId)
+        val defenderOwner = opponentOf(attackerOwner)
 
-        val owner = game.findPlayer(ownerId)
-        val attacker = game.findCreature(attackerId)?.takeIf { owner?.findCreature(it) == it }
-        val defender = game.findCreature(defenderId)?. takeUnless { owner?.findCreature(it) == it }
-
-        return if (owner != null && attacker != null && defender != null)
-            game.combat(attacker, owner, defender)
-                    .log(uuidGenerator.id(),
-                         "${attacker.name} of ${owner.name} has attacked ${defender.name} of ${game.opponentOf(
-                                 owner).name}")
-        else game
+        return when {
+            attacker == null                           -> logAttackerMissing(uuidGenerator)
+            defender == null                           -> logDefenderMissing(uuidGenerator, attacker)
+            attackerOwner == null                      -> logOwnerOfAttackerMissing(uuidGenerator, attacker)
+            defenderOwner == null                      -> logOwnerOfDefenderMissing(uuidGenerator, attacker, defender)
+            attackerOwner != playerOnTurn              -> logOwnerOfAttackerNotOnTurn(uuidGenerator, attacker,
+                                                                                      attackerOwner)
+            attackerOwner == defenderOwner             -> logOwnerIsDefender(uuidGenerator, attacker, attackerOwner)
+            defenderOwner != opponentOf(attackerOwner) -> logDefenderIsNotOpponent(uuidGenerator, attacker,
+                                                                                   attackerOwner,
+                                                                                   defenderOwner)
+            attacker !in attackerOwner.creatures       -> logAttackerNotOnOwnerSpots(uuidGenerator, attacker,
+                                                                                     attackerOwner)
+            defender !in defenderOwner.creatures       -> logDefenderNotOnOwnerSpots(uuidGenerator,
+                                                                                     attacker,
+                                                                                     defender,
+                                                                                     defenderOwner)
+            else                                       -> attacker.attack(AttackCreatureContext(uuidGenerator,
+                                                                                                this,
+                                                                                                attackerOwner,
+                                                                                                defender))
+        }
     }
 }

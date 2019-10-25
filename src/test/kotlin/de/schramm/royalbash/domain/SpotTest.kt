@@ -1,6 +1,6 @@
 package de.schramm.royalbash.domain
 
-import de.schramm.royalbash.domain.card.creature.CreatureMock
+import de.schramm.royalbash.domain.card.creature.NoOpCreature
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -10,7 +10,7 @@ class SpotTest {
     fun should_deliver_placed_creature() {
 
         // Given
-        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
+        val creature = NoOpCreature(id = "Id 1", instanceId = "InstanceId 1")
         val testee = Spot(id = "spot")
 
         // When
@@ -24,7 +24,7 @@ class SpotTest {
     fun should_update_creature() {
 
         // Given
-        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
+        val creature = NoOpCreature(id = "Id 1", instanceId = "InstanceId 1")
         val otherCreature = creature.copy(hitpoints = 15)
         val testee = Spot(id = "spot", creature = creature)
 
@@ -39,7 +39,7 @@ class SpotTest {
     fun should_not_update_creature() {
 
         // Given
-        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
+        val creature = NoOpCreature(id = "Id 1", instanceId = "InstanceId 1")
         val testee = Spot(id = "spot")
 
         // When
@@ -53,7 +53,7 @@ class SpotTest {
     fun should_remove_creature() {
 
         // Given
-        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
+        val creature = NoOpCreature(id = "Id 1", instanceId = "InstanceId 1")
         val testee = Spot(id = "spot", creature = creature)
 
         // When
@@ -67,8 +67,8 @@ class SpotTest {
     fun should_not_remove_creature() {
 
         // Given+ßjn0m
-        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
-        val otherCreature = CreatureMock("Id 2", instanceId = "InstanceId 2", hitpoints = 15)
+        val creature = NoOpCreature(id = "Id 1", instanceId = "InstanceId 1")
+        val otherCreature = NoOpCreature("Id 2", instanceId = "InstanceId 2", hitpoints = 15)
         val testee = Spot(id = "spot", creature = creature)
 
         // When

@@ -1,37 +1,31 @@
 package de.schramm.royalbash.domain.card.creature
 
-import de.schramm.royalbash.domain.*
-import de.schramm.royalbash.domain.card.*
+import de.schramm.royalbash.domain.AttackCreatureContext
+import de.schramm.royalbash.domain.AttackPlayerContext
+import de.schramm.royalbash.domain.AttackSpotContext
+import de.schramm.royalbash.domain.Game
 
-data class Boar(
-        override val id: String,
-        override val instanceId: String,
-        override val hitpoints: Int,
-        override val attack: Int,
-        override val cost: Int): Creature {
+data class Boar(override val id: String,
+                override val instanceId: String,
+                override val hitpoints: Int,
+                override val attack: Int,
+                override val cost: Int): CreatureBase(id, instanceId, hitpoints, attack, cost) {
 
     override val name = "Wild Boar"
     override val text = ""
     override val image = "FantasyCharacters_boar_bg.png"
 
-    override fun invoke(context: Context): Game = context.run {
-
-        val owner = game.findPlayer(ownerId)
-        val targetSpot = game.findSpot(targetSpotId)
-
-        return when {
-            owner == null               -> game.logOwnerMissing(uuidGenerator, this@Boar)
-            game.playerOnTurn != owner  -> game.logPlayerNotOnTurn(uuidGenerator, this@Boar, owner)
-            targetSpot == null          -> game.logTargetSpotMissing(uuidGenerator, this@Boar)
-            targetSpot.creature != null -> game.logTargetSpotOccupied(uuidGenerator, this@Boar)
-            owner.resources >= cost     -> game.logResourcesMissing(uuidGenerator, this@Boar)
-            else                        -> game.updatePlayer(owner to owner
-                    .reduceResourcesBy(cost)
-                    .removeHandcard(this@Boar)
-                    .updateSpot(targetSpot to targetSpot.place(this@Boar)))
-                    .logInvokationOnSpot(uuidGenerator, this@Boar, owner)
-        }
+    override fun attack(context: AttackPlayerContext): Game {
+        TODO("not implemented")
     }
 
-    override fun damage(amountOfDamage: Int) = copy(hitpoints = hitpoints - amountOfDamage)
+    override fun attack(context: AttackCreatureContext): Game {
+        TODO("not implemented")
+    }
+
+    override fun attack(context: AttackSpotContext): Game {
+        TODO("not implemented")
+    }
+
+    override fun reduceHitpointsBy(amountOfDamage: Int) = copy(hitpoints = hitpoints - amountOfDamage)
 }

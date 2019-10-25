@@ -1,18 +1,9 @@
 package de.schramm.royalbash.domain
 
-fun Spot.place(creature: Creature): Spot {
-    return if (!creature.placeableOnSpot) {
-        this
-    } else copy(creature = creature)
-}
+fun Spot.place(creature: Creature): Spot = copy(creature = creature)
 
-fun Spot.updateCreature(oldToNew: Pair<Creature, Creature>): Spot {
+fun Spot.updateCreature(oldToNew: Pair<Creature, Creature>) = copy(creature = creature?.let {
+    if (it.instanceId == oldToNew.old?.instanceId) oldToNew.new else it
+})
 
-    val updatedCreature = creature?.let { if (it == oldToNew.old) oldToNew.new else it }
-
-    return copy(creature = updatedCreature)
-}
-
-fun Spot.buryCreature(creature: Creature): Spot {
-    return copy(creature = if (creature == this.creature) null else this.creature)
-}
+fun Spot.buryCreature(creature: Creature) = copy(creature = if (creature == this.creature) null else this.creature)

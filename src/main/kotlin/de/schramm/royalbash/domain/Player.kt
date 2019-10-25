@@ -1,7 +1,5 @@
 package de.schramm.royalbash.domain
 
-const val NUMBER_OF_SPOTS = 5
-
 data class Player(val id: String,
                   val name: String = "Player",
                   val hitpoints: Int = 0,

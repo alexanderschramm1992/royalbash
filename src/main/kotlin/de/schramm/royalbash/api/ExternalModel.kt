@@ -27,7 +27,6 @@ sealed class ExternalModel {
             @ApiModelProperty(required = true) val name: String,
             @ApiModelProperty(required = true) val text: String,
             @ApiModelProperty(required = true) val cost: Int,
-            @ApiModelProperty(required = true) val placeableOnSpot: Boolean,
             @ApiModelProperty(required = false) val image: String): ExternalModel()
 
     data class Spot(

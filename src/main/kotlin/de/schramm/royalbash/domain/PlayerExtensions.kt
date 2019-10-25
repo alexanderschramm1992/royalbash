@@ -1,6 +1,18 @@
 package de.schramm.royalbash.domain
 
+val Player.creatures get() = spots.mapNotNull(Spot::creature)
+
 fun Player.withHitpoints(hitpoints: Int) = copy(hitpoints = hitpoints)
+
+fun Player.findSpot(spot: Spot): Spot? = spots.find { it == spot }
+
+fun Player.findSpot(spotId: String): Spot? = spots.find { it.id == spotId }
+
+fun Player.updateSpot(oldSpotId: String, transition: (spot: Spot) -> Spot): Player =
+        findSpot(oldSpotId)?.let { updateSpot(it, transition) } ?: this
+
+fun Player.updateSpot(oldSpot: Spot, transition: (spot: Spot) -> Spot): Player =
+        findSpot(oldSpot)?.let { updateSpot(it to transition(it)) } ?: this
 
 fun Player.updateSpot(oldToNew: Pair<Spot, Spot>): Player =
         copy(spots = this.spots.map { if (it == oldToNew.old) oldToNew.new else it })
@@ -8,6 +20,8 @@ fun Player.updateSpot(oldToNew: Pair<Spot, Spot>): Player =
 fun Player.increaseResourcesBy(amount: Int): Player = copy(resources = resources + amount)
 
 fun Player.reduceResourcesBy(amount: Int): Player = copy(resources = resources - amount)
+
+fun Player.reduceHitpointsBy(amount: Int): Player = copy(hitpoints = hitpoints - amount)
 
 fun Player.discardCards(amountOfCards: Int): Player {
 

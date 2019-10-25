@@ -9,8 +9,9 @@ interface Card {
     val cost: Int
     val image: String
 
-    val placeableOnSpot: Boolean
-        get() = false
+    operator fun invoke(context: InvokationOnSpotContext): Game
 
-    operator fun invoke(context: Context): Game
+    operator fun invoke(context: InvokationOnPlayerContext): Game
+
+    operator fun invoke(context: InvokationOnCreatureContext): Game
 }

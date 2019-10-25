@@ -1,18 +1,18 @@
 package de.schramm.royalbash.application.gameevent
 
-import de.schramm.royalbash.application.UUIDGenerator
 import de.schramm.royalbash.domain.*
 
-data class TurnEndedEventDTO(val playerId: String = ""): GameEventDTO {
+data class TurnEndedEventDTO(val playerId: String): GameEventDTO {
 
-    override fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game {
+    override fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game = game.run {
 
-        return game.findPlayer(playerId)
-                ?.takeIf { game.playerOnTurn == it }
-                ?.let { game.switchPlayerOnTurn() }
-                       ?.log(uuidGenerator.id(),
-                             "${game.opponentOf(
-                                     game.playerOnTurn).name} ended the turn, it is now ${game.playerOnTurn.name}'s turn")
-                ?: game
+        val player = findPlayer(playerId)
+
+        when {
+            player == null         -> logPlayerMissing(uuidGenerator)
+            player != playerOnTurn -> logNotTurnOfPlayer(uuidGenerator, player, playerOnTurn)
+            else                   -> switchPlayerOnTurn()
+                    .logTurnEnded(uuidGenerator, playerOnTurn, opponentOf(playerOnTurn))
+        }
     }
 }

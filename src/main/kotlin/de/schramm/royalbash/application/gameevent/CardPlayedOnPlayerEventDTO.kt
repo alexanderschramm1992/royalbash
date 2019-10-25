@@ -1,26 +1,27 @@
 package de.schramm.royalbash.application.gameevent
 
-import de.schramm.royalbash.application.UUIDGenerator
-import de.schramm.royalbash.domain.Game
-import de.schramm.royalbash.domain.findHandcard
-import de.schramm.royalbash.domain.findPlayer
-import de.schramm.royalbash.domain.playCard
+import de.schramm.royalbash.domain.*
+import de.schramm.royalbash.domain.card.logCardInstanceMissing
+import de.schramm.royalbash.domain.card.logCardNotInOwnerHandcards
+import de.schramm.royalbash.domain.card.logOwnerOfCardMissing
+import de.schramm.royalbash.domain.card.logTargetPlayerMissing
 
 data class CardPlayedOnPlayerEventDTO(val cardInstanceId: String,
                                       val ownerId: String,
-                                      val targetPlayerId: String) :
-        GameEventDTO {
+                                      val targetPlayerId: String): GameEventDTO {
 
-    override fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game {
+    override fun invoke(game: Game, uuidGenerator: UUIDGenerator): Game = game.run {
 
-        val owner = game.findPlayer(ownerId)
-        val card = owner?.findHandcard(cardInstanceId)
-        val targetPlayer = game.findPlayer(targetPlayerId)
+        val owner = findPlayer(ownerId)
+        val card = game.findHandcard(cardInstanceId)
+        val player = findPlayer(targetPlayerId)
 
-        return if (owner != null && card != null && targetPlayer != null)
-            game.playCard(card, owner, targetPlayer)
-                    ?.log(uuidGenerator.id(), "${owner.name} has played ${card.name} on ${targetPlayer.name}")
-                    ?: game
-        else game
+        return when {
+            card == null             -> game.logCardInstanceMissing(uuidGenerator)
+            owner == null            -> game.logOwnerOfCardMissing(uuidGenerator, card)
+            player == null           -> game.logTargetPlayerMissing(uuidGenerator, card)
+            card !in owner.handcards -> game.logCardNotInOwnerHandcards(uuidGenerator, card, owner)
+            else                     -> card(InvokationOnPlayerContext(uuidGenerator, game, owner, player))
+        }
     }
 }

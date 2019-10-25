@@ -1,30 +1,30 @@
 package de.schramm.royalbash.domain.card.spell
 
 import de.schramm.royalbash.domain.*
-import de.schramm.royalbash.domain.card.*
+import de.schramm.royalbash.domain.card.logDrawEffect
+import de.schramm.royalbash.domain.card.logInvokationOnPlayer
+import de.schramm.royalbash.domain.card.logResourcesMissing
+import de.schramm.royalbash.domain.card.logTargetPlayerNotOwner
 
 data class ByondInsight(
         override val id: String,
         override val instanceId: String,
-        override val cost: Int): Card {
+        override val cost: Int): SpellBase(id, instanceId, cost) {
 
     override val name = "Beyond Insight"
     override val text = "Draw two cards."
     override val image = "Tex_sight.PNG"
 
-    override fun invoke(context: Context): Game = context.run {
-
-        val owner = game.findPlayer(ownerId)
-
-        return when {
-            owner == null                         -> game.logOwnerMissing(uuidGenerator, this@ByondInsight)
-            game.playerOnTurn != owner            -> game.logPlayerNotOnTurn(uuidGenerator, this@ByondInsight, owner)
-            owner.resources <= cost               -> game.logResourcesMissing(uuidGenerator, this@ByondInsight)
-            this@ByondInsight !in owner.handcards -> game.logHandcardMissing(uuidGenerator, this@ByondInsight, owner)
-            else                                  -> game.updatePlayer(owner to owner
-                    .discardHandcard(this@ByondInsight)
-                    .drawCards(2))
+    override fun invoke(context: InvokationOnPlayerContext): Game = context.run {
+        when {
+            owner.resources <= cost -> game.logResourcesMissing(uuidGenerator, this@ByondInsight)
+            owner == target         -> game.logTargetPlayerNotOwner(uuidGenerator, this@ByondInsight, target, owner)
+            else                    -> game
+                    .updatePlayer(owner to owner
+                            .discardHandcard(this@ByondInsight)
+                            .drawCards(2))
                     .logDrawEffect(uuidGenerator, this@ByondInsight, owner, 2)
+                    .logInvokationOnPlayer(uuidGenerator, this@ByondInsight, owner)
         }
     }
 }

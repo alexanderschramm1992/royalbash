@@ -37,7 +37,7 @@ class GameService(
 
     fun commitGameEvent(gameId: String, gameEvent: GameEventDTO): ExternalModel.Game? {
         return retrieveDomainGame(gameId)
-                ?.let { gameEvent.invoke(it, uuidGenerator) }
+                ?.let { gameEvent(it, uuidGenerator) }
                 ?.also(games::save)
                 ?.toExternalModel()
     }

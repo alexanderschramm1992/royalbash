@@ -3,6 +3,7 @@ package de.schramm.royalbash.application
 import de.schramm.royalbash.application.gameevent.GameEventDTO
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
+import de.schramm.royalbash.domain.UUIDGenerator
 import de.schramm.royalbash.infrastructure.RandomUUIDGenerator
 import de.schramm.royalbash.infrastructure.database.GamePersistenceMapper
 import de.schramm.royalbash.infrastructure.database.InMemoryGamePersistenceOperations

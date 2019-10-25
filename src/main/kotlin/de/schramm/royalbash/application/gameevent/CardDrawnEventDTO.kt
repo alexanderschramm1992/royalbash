@@ -1,6 +1,5 @@
 package de.schramm.royalbash.application.gameevent
 
-import de.schramm.royalbash.application.UUIDGenerator
 import de.schramm.royalbash.domain.*
 
 data class CardDrawnEventDTO(val playerId: String,

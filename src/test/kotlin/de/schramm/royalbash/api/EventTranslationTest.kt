@@ -1,13 +1,13 @@
 package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameService
+import de.schramm.royalbash.application.gameevent.*
 import de.schramm.royalbash.application.toExternalModel
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
 import de.schramm.royalbash.infrastructure.JacksonConfig
 import de.schramm.royalbash.infrastructure.controller.GameController
-import de.schramm.royalbash.application.gameevent.*
 import de.schramm.royalbash.verifyThat
 import io.mockk.every
 import io.mockk.mockk
@@ -96,13 +96,13 @@ class EventTranslationTest {
         // Given
         val json = "{\"event\": {" +
                    "\"type\": \"CREATURE_ATTACKED\", " +
-                   "\"attackerId\": \"Attacker Id\", " +
-                   "\"defenderId\": \"Defender Id\", " +
+                   "\"attackerInstanceId\": \"Attacker InstanceId\", " +
+                   "\"defenderInstanceId\": \"Defender InstanceId\", " +
                    "\"ownerId\": \"Owner Id\"}" +
                    "}"
         val expectedEvent = CreatureAttackedEventDTO(
-                attackerId = "Attacker Id",
-                defenderId = "Defender Id",
+                attackerInstanceId = "Attacker InstanceId",
+                defenderInstanceId = "Defender InstanceId",
                 ownerId = "Owner Id")
 
         // When Then
@@ -129,10 +129,10 @@ class EventTranslationTest {
         // Given
         val json = """{"event": {
                            "type": "PLAYER_ATTACKED", 
-                           "creatureId": "Creature Id", 
+                           "creatureInstanceId": "Creature InstanceId", 
                            "ownerId": "Owner Id"
                       }}"""
-        val expectedEvent = PlayerAttackedEventDTO("Creature Id", "Owner Id")
+        val expectedEvent = PlayerAttackedEventDTO("Creature InstanceId", "Owner Id")
 
         // When Then
         test(json, expectedEvent)

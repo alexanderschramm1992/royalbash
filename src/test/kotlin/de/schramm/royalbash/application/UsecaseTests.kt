@@ -4,7 +4,8 @@ import de.schramm.royalbash.application.gameevent.CardPlayedOnSpotEventDTO
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.Spot
-import de.schramm.royalbash.domain.card.creature.CreatureMock
+import de.schramm.royalbash.domain.card.creature.NoOpCreature
+import de.schramm.royalbash.domain.printLog
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,7 +24,7 @@ class UsecaseTests {
     fun `As Player I want to play creature cards in order to power up my forces`() {
 
         // Given
-        val creature = CreatureMock(id = "creature",
+        val creature = NoOpCreature(id = "creature",
                                     instanceId = "creatureInstance",
                                     cost = 2)
         val spot = Spot(id = "spot")
@@ -44,8 +45,10 @@ class UsecaseTests {
         gameService.commitGameEvent(game.id, event)
         // Then
         val updatedGame = games.findById(game.id)
+        assertThat(updatedGame).isNotNull
+        updatedGame?.printLog()
         assertThat(updatedGame?.player1?.handcards).isEmpty()
-        assertThat(updatedGame?.player1?.resources).isEqualTo(2)
+        assertThat(updatedGame?.player1?.resources).isEqualTo(0)
         assertThat(updatedGame?.player1?.spots?.first()?.creature?.instanceId).isEqualTo(creature.instanceId)
     }
 }

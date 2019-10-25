@@ -1,32 +1,28 @@
 package de.schramm.royalbash.domain.card.spell
 
 import de.schramm.royalbash.domain.*
-import de.schramm.royalbash.domain.card.*
-import de.schramm.royalbash.domain.effect.DealDamageToPlayerEffect
+import de.schramm.royalbash.domain.card.logDamageOnPlayer
+import de.schramm.royalbash.domain.card.logInvokationOnPlayer
+import de.schramm.royalbash.domain.card.logResourcesMissing
+import de.schramm.royalbash.domain.card.logTargetPlayerIsOwner
 
 class Fireball(override val id: String,
                override val instanceId: String,
-               override val cost: Int): Card {
+               override val cost: Int): SpellBase(id, instanceId, cost) {
 
     override val name = "Fireball"
     override val text = "Deal 2 damage to your opponent."
     override val image = "Tex_fireball.PNG"
-    val effect = DealDamageToPlayerEffect(2)
 
-    override fun invoke(context: Context): Game = context.run {
-
-        val owner = game.findPlayer(ownerId)
-        val opponent = game.opponentOf(owner)
-
-        return when {
-            owner == null                     -> game.logOwnerMissing(uuidGenerator, this@Fireball)
-            game.playerOnTurn != owner        -> game.logPlayerNotOnTurn(uuidGenerator, this@Fireball, owner)
-            opponent == null                  -> game.logOpponentMissing(uuidGenerator, this@Fireball)
-            owner.resources <= cost           -> game.logResourcesMissing(uuidGenerator, this@Fireball)
-            this@Fireball !in owner.handcards -> game.logHandcardMissing(uuidGenerator, this@Fireball, owner)
-            else                              -> game.updatePlayer(owner to owner.discardHandcard(this@Fireball))
-                    .updatePlayer(opponent to opponent.damage(2))
-                    .logDamageOnPlayer(uuidGenerator, this@Fireball, opponent, 2)
+    override fun invoke(context: InvokationOnPlayerContext): Game = context.run {
+        when {
+            owner.resources <= cost -> game.logResourcesMissing(uuidGenerator, this@Fireball)
+            owner == target         -> game.logTargetPlayerIsOwner(uuidGenerator, this@Fireball, target)
+            else                    -> game
+                    .updatePlayer(owner to owner.discardHandcard(this@Fireball))
+                    .updatePlayer(target to target.damage(2))
+                    .logDamageOnPlayer(uuidGenerator, this@Fireball, target, 2)
+                    .logInvokationOnPlayer(uuidGenerator, this@Fireball, target)
         }
     }
 }

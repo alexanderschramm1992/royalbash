@@ -1,8 +1,8 @@
 package de.schramm.royalbash.domain
 
 import de.schramm.royalbash.domain.State.*
-import de.schramm.royalbash.domain.card.CardMock
-import de.schramm.royalbash.domain.card.creature.CreatureMock
+import de.schramm.royalbash.domain.card.creature.NoOpCreature
+import de.schramm.royalbash.domain.card.spell.NoOpSpell
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -117,30 +117,30 @@ class GameTest {
     fun `removes played card from handcards after played on player`() {
 
         // Given
-        val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")
+        val card = NoOpSpell(id = "Id 1", instanceId = "InstanceId 1")
         val player1 = Player("Id 2", handcards = listOf(card))
         val player2 = Player("Id 3")
         val testee = Game("Id 4", player1 = player1, player2 = player2)
 
         // When
-        val game = testee.playCard(card, player1, player2)
+        val game = card.invoke(InvokationOnPlayerContext(UUIDGeneratorMock, testee, player1, player2))
 
         // Then
-        assertThat(game?.player1?.handcards).isEmpty()
+        assertThat(game.player1.handcards).isEmpty()
     }
 
     @Test
     fun `removes played card from handcards after played on spot`() {
 
         // Given
-        val card = CardMock(id = "Id 1", instanceId = "InstanceId 1")
+        val card = NoOpSpell(id = "Id 1", instanceId = "InstanceId 1")
         val player1 = Player("Id 2", handcards = listOf(card))
         val player2 = Player("Id 3")
         val spot = Spot("Id 4")
         val testee = Game("Id 5", player1 = player1, player2 = player2)
 
         // When
-        val game = testee.playCard(card, player1, spot)
+        val game = card.invoke(InvokationOnSpotContext(UUIDGeneratorMock, testee, player1, spot))
 
         // Then
         assertThat(game.player1.handcards).isEmpty()
@@ -150,12 +150,12 @@ class GameTest {
     fun `removes dead creature after combat`() {
 
         // Given
-        val attacker = CreatureMock(
+        val attacker = NoOpCreature(
                 id = "Id 1",
                 instanceId = "Instance Id 1",
                 hitpoints = 2,
                 attack = 2)
-        val defender = CreatureMock(
+        val defender = NoOpCreature(
                 id = "Id 2",
                 instanceId = "Instance Id 2",
                 hitpoints = 1,
@@ -167,7 +167,7 @@ class GameTest {
         val testee = Game("Id 5", player1 = player1, player2 = player2)
 
         // When
-        val game = testee.combat(attacker, player1, defender)
+        val game = attacker.attack(AttackCreatureContext(UUIDGeneratorMock, testee, player1, defender))
 
         // Then
         val spotsOfPlayer2 = game.player2.spots
@@ -178,12 +178,12 @@ class GameTest {
     fun `deals damage to creature in combat`() {
 
         // Given
-        val attacker = CreatureMock(
+        val attacker = NoOpCreature(
                 id = "Id 1",
                 instanceId = "InstanceId 1",
                 hitpoints = 2,
                 attack = 2)
-        val defender = CreatureMock(
+        val defender = NoOpCreature(
                 id = "Id 2",
                 instanceId = "InstanceId 2",
                 hitpoints = 1,
@@ -195,7 +195,7 @@ class GameTest {
         val testee = Game("Id 5", player1 = player1, player2 = player2)
 
         // When
-        val game = testee.combat(attacker, player1, defender)
+        val game = attacker.attack(AttackCreatureContext(UUIDGeneratorMock, testee, player1, defender))
 
         // Then
         val spotsOfPlayer1 = game.player1.spots
@@ -209,7 +209,7 @@ class GameTest {
     fun `deals damage to player in combat`() {
 
         // Given
-        val creature = CreatureMock(id = "Id 1",
+        val creature = NoOpCreature(id = "Id 1",
                                     instanceId = "InstanceId 1",
                                     attack = 5)
         val spot = Spot(id = "spot", creature = creature)
@@ -218,7 +218,7 @@ class GameTest {
         val testee = Game("Id 4", player1 = player1, player2 = player2)
 
         // When
-        val game = testee.combat(creature, player1)
+        val game = creature.attack(AttackPlayerContext(UUIDGeneratorMock, testee, player1, player2))
 
         // Then
         assertThat(game.player2.hitpoints).isEqualTo(15)
@@ -228,14 +228,14 @@ class GameTest {
     fun `sets game state when player dies in combat`() {
 
         // Given
-        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId1", attack = 5)
+        val creature = NoOpCreature(id = "Id 1", instanceId = "InstanceId1", attack = 5)
         val spot = Spot(id = "spot", creature = creature)
         val player1 = Player("Id 2", hitpoints = 1, spots = listOf(spot))
         val player2 = Player("Id 3", hitpoints = 5)
         val testee = Game("Id 4", OPEN, player1 = player1, player2 = player2)
 
         // When
-        val game = testee.combat(creature, player1)
+        val game = creature.attack(AttackPlayerContext(UUIDGeneratorMock, testee, player1, player2))
 
         // Then
         assertThat(game.state).isEqualTo(PLAYER_1_WON)
@@ -277,14 +277,14 @@ class GameTest {
     fun `returns creature with given id`() {
 
         // Given
-        val creature = CreatureMock(id = "Id 1", instanceId = "InstanceId 1")
+        val creature = NoOpCreature(id = "Id 1", instanceId = "InstanceId 1")
         val spot = Spot(id = "spot", creature = creature)
         val player1 = Player("Id 2", spots = listOf(spot))
         val player2 = Player("Id 3")
         val testee = Game("Id 4", player1 = player1, player2 = player2)
 
         // When
-        val actualCreature = testee.findCreature("Id 1")
+        val actualCreature = testee.findCreature(creature.instanceId)
 
         // Then
         assertThat(actualCreature)

@@ -8,36 +8,30 @@ data class GoblinGuard(
         override val instanceId: String,
         override val hitpoints: Int,
         override val attack: Int,
-        override val cost: Int): Creature {
+        override val cost: Int): CreatureBase(id, instanceId, hitpoints, attack, cost) {
 
     override val name = "Goblin Guard"
-    override val text = "When Goblin Guard enters the battlefield, target player discards a card."
+    override val text = "When Goblin Guard is invoked, your opponent discards a card."
     override val image = "FantasyCharacters_guard_goblin_bg.png"
 
-    override fun invoke(context: Context): Game = context.run {
+    override fun invoke(context: InvokationOnSpotContext): Game = context.run {
 
-        val owner = game.findPlayer(ownerId)
         val opponent = game.opponentOf(owner)
-        val targetSpot = game.findSpot(targetSpotId)
 
-        return when {
-            owner == null                        -> game.logOwnerMissing(uuidGenerator, this@GoblinGuard)
-            owner != game.playerOnTurn           -> game.logPlayerNotOnTurn(uuidGenerator, this@GoblinGuard, owner)
-            opponent == null                     -> game.logOpponentMissing(uuidGenerator, this@GoblinGuard)
-            targetSpot == null                   -> game.logTargetSpotMissing(uuidGenerator, this@GoblinGuard)
-            targetSpot.creature != null          -> game.logTargetSpotOccupied(uuidGenerator, this@GoblinGuard)
-            owner.resources <= cost              -> game.logResourcesMissing(uuidGenerator, this@GoblinGuard)
-            this@GoblinGuard !in owner.handcards -> game.logHandcardMissing(uuidGenerator, this@GoblinGuard, owner)
-            else                                 -> game.updatePlayer(owner to owner
-                    .reduceResourcesBy(cost)
-                    .removeHandcard(this@GoblinGuard)
-                    .updateSpot(targetSpot to targetSpot.place(this@GoblinGuard)))
+        when {
+            opponent == null        -> game.logOpponentMissing(uuidGenerator, this@GoblinGuard)
+            target.creature != null -> game.logTargetSpotOccupied(uuidGenerator, this@GoblinGuard)
+            owner.resources < cost  -> game.logResourcesMissing(uuidGenerator, this@GoblinGuard)
+            else                    -> game
+                    .updatePlayer(owner to owner
+                            .reduceResourcesBy(cost)
+                            .removeHandcard(this@GoblinGuard)
+                            .updateSpot(target to target.place(this@GoblinGuard)))
                     .logInvokationOnSpot(uuidGenerator, this@GoblinGuard, owner)
-                    .updatePlayer(opponent to opponent.discardCards(1))
+                    .updatePlayer(opponent.id) { it.discardCards(1) }
                     .logDiscardEffect(uuidGenerator, this@GoblinGuard, opponent, 1)
         }
     }
 
-    override fun damage(amountOfDamage: Int): Creature =
-            this.copy(hitpoints = hitpoints - amountOfDamage)
+    override fun reduceHitpointsBy(amountOfDamage: Int) = copy(hitpoints = hitpoints - amountOfDamage)
 }

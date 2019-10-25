@@ -1,83 +1,20 @@
 package de.schramm.royalbash.domain
 
-import de.schramm.royalbash.application.UUIDGenerator
-
 fun Game.log(log: Log): Game = copy(logs = logs + log)
 
 fun Game.log(id: String, message: String): Game = log(Log(id, message))
 
 fun Game.log(uuidGenerator: UUIDGenerator, message: String): Game = log(uuidGenerator.id(), message)
 
-fun Game.playCard(card: Card, ownerId: String, targetPlayerId: String): Game? {
+fun Game.updatePlayer(oldPlayerId: String, transition: (player: Player) -> Player): Game =
+        findPlayer(oldPlayerId)?.let { updatePlayer(it, transition) } ?: this
 
-    val owner = findPlayer(ownerId)
+fun Game.updatePlayer(oldPlayer: Player, transition: (player: Player) -> Player): Game =
+        findPlayer(oldPlayer)?.let { updatePlayer(it to transition(it)) } ?: this
 
-    return if (owner != null) findPlayer(ownerId)
-            ?.takeIf { it.hasCard(card) }
-            ?.discardHandcard(card)
-            ?.let { updatePlayer(owner to it) }
-            ?.let { card.invoke(Context(it, ownerId, targetPlayerId = targetPlayerId)) }
-    else null
-}
-
-fun Game.playCard(card: Card, owner: Player, targetSpot: Spot): Game {
-    return players[owner]
-                   ?.takeIf { it.hasCard(card) }
-                   ?.removeHandcard(card)
-                   ?.let { updatePlayer(owner to it) }
-                   ?.let { card.invoke(Context(it, owner, targetSpot = targetSpot)) }
-           ?: this
-}
-
-fun Game.combat(attacker: Creature, owner: Player, defender: Creature): Game {
-
-    val opponent = opponentOf(owner)
-
-    val actualAttacker = owner.spots.mapNotNull(Spot::creature)
-            .firstOrNull { it == attacker }
-
-    val axctualDefender = opponent.spots.mapNotNull(Spot::creature)
-            .firstOrNull { it == defender }
-
-    val updatedAttacker = if (actualAttacker != null && axctualDefender != null)
-        actualAttacker.damage(axctualDefender.attack)
-    else attacker
-
-    val updatedDefender = if (actualAttacker != null && axctualDefender != null)
-        axctualDefender.damage(actualAttacker.attack)
-    else defender
-
-    val updatedOwner = if (updatedAttacker.isDead()) owner.buryCreature(attacker)
-    else owner.updateCreature(attacker to updatedAttacker)
-
-    val updatedOpponent = if (updatedDefender.isDead()) opponent.buryCreature(defender)
-    else opponent.updateCreature(defender to updatedDefender)
-
-    return this.updatePlayer(owner to updatedOwner)
-            .updatePlayer(opponent to updatedOpponent)
-}
-
-fun Game.combat(attacker: Creature, owner: Player): Game {
-
-    val opponent = opponentOf(owner)
-
-    val actualAttacker = owner.spots.mapNotNull(Spot::creature)
-            .firstOrNull { it == attacker }
-
-    val updatedOpponent = actualAttacker
-                                  ?.attack
-                                  ?.let { opponent.withHitpoints(opponent.hitpoints - it) }
-                          ?: opponent
-
-    val player1 = if (player1 == opponent) updatedOpponent else player1
-    val player2 = if (player2 == opponent) updatedOpponent else player2
-
-    return copy(player1 = player1, player2 = player2, state = evaluateState(player1, player2))
-}
-
-fun Game.updatePlayer(oldToNew: Pair<Player, Player>): Game = copy(
-        player1 = if (player1 == oldToNew.old) oldToNew.new else player1,
-        player2 = if (player2 == oldToNew.old) oldToNew.new else player2)
+fun Game.updatePlayer(oldToNew: Pair<Player?, Player>): Game = copy(
+        player1 = if (player1.id == oldToNew.old?.id) oldToNew.new else player1,
+        player2 = if (player2.id == oldToNew.old?.id) oldToNew.new else player2)
 
 fun Game.updateCreature(oldToNew: Pair<Creature, Creature>): Game = copy(
         player1 = player1.updateCreature(oldToNew),
@@ -86,6 +23,9 @@ fun Game.updateCreature(oldToNew: Pair<Creature, Creature>): Game = copy(
 fun Game.findPlayer(player: Player) = players.firstOrNull { player == it }
 
 fun Game.findPlayer(playerId: String?) = players.firstOrNull { it.id == playerId }
+
+fun Game.findHandcard(instanceId: String?) = players.flatMap { it.handcards }
+        .find { it.instanceId == instanceId }
 
 fun Game.findCreature(instanceId: String?) = players
         .flatMap { it.spots }
@@ -128,8 +68,17 @@ fun Game.reduceResourcesBy(amount: Int, player: Player): Game = when {
     else              -> this
 }
 
+fun Game.buryDeadCreatures(uuidGenerator: UUIDGenerator): Game = creatures
+        .filter { it.hitpoints <= 0 }
+        .fold(this) { game, creature ->
+            game.buryCreature(creature).logCreatureRemoved(uuidGenerator, creature)
+        }
+
 val Game.players: List<Player>
     get() = listOf(player1, player2)
+
+val Game.creatures: List<Creature>
+    get() = players.flatMap(Player::spots).mapNotNull(Spot::creature)
 
 private fun Game.evaluateState(player1: Player, player2: Player): State = when {
     player1.hitpoints <= 0 -> State.PLAYER_2_WON

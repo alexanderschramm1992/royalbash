@@ -28,7 +28,6 @@ fun Card.toExternalModel() = ExternalModel.Card(
         name = name,
         text = text,
         cost = cost,
-        placeableOnSpot = placeableOnSpot,
         image = image)
 
 fun Spot.toExternalModel() = ExternalModel.Spot(
