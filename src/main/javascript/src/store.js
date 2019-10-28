@@ -28,9 +28,9 @@ export default new Vuex.Store({
         [COMMIT_EVENT](state, event) {
             post(`/game/${state.game.id}/event`, { event: event },
                 response => state.game = response,
-                error => console.error(`Cannot commit 'placeCreature' to Backend due to ${error}`)
+                error => console.error(`Cannot commit '${event.type}' to Backend due to ${error}`)
             );
-        }
+        },
     },
     actions: { // asynchronous
     }

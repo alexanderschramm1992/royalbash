@@ -12,9 +12,9 @@
           <v-card-text>
             <v-list>
               <v-list-item
-                v-for="handcard in handcards"
-                :key="handcard.id"
-                @click="placeCreature(handcard.id)"
+                      v-for="handcard in handcards"
+                      :key="handcard.id"
+                      @click="placeCreature(handcard.instanceId)"
               >
                 <v-list-item-title>{{ handcard.name }}</v-list-item-title>
               </v-list-item>
@@ -27,10 +27,11 @@
 </template>
 
 <script>
-import {COMMIT_EVENT} from "../../MutationTypes.js";
-import Creature from "./Creature.vue";
+  import {COMMIT_EVENT} from "../../MutationTypes.js";
+  import {buildCardPlayedOnSpotEvent} from "../../util/EventBuilder.js"
+  import Creature from "./Creature.vue";
 
-export default {
+  export default {
   name: "spot",
   components: {
     Creature
@@ -47,13 +48,8 @@ export default {
     };
   },
   methods: {
-    placeCreature (cardId) {
-      this.$store.commit(COMMIT_EVENT, {
-        type: "CARD_PLAYED_ON_SPOT",
-        cardId: cardId,
-        ownerId: this.ownerId,
-        targetSpotId: this.spot.id
-      });
+    placeCreature(cardInstanceId) {
+      this.$store.commit(COMMIT_EVENT, buildCardPlayedOnSpotEvent(cardInstanceId, this.ownerId, this.spot.id));
       this.place_creature_dialog = false;
     }
   }

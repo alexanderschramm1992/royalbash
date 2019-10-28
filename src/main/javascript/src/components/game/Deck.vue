@@ -5,27 +5,18 @@
 </template>
 
 <script>
-import {post} from "./../../util/AjaxHandler.js";
+    import {buildCardDrawnEvent} from "../../util/EventBuilder.js";
+    import {COMMIT_EVENT} from "../../MutationTypes.js";
 
-export default {
+    export default {
     name: "deck",
     props: {
-        gameId: String,
         playerId: String,
         deck: Array
     },
     methods: {
-        drawCard: function () {
-            post(`/game/${this.gameId}/event`,
-                {
-                    "event": {
-                        "type": "CARD_DRAWN",
-                        "playerId": this.playerId,
-                        "amountOfCards": 1
-                    }
-                },
-                (response) => this.$root.$emit("updateState", response),
-                (error) => console.error(`Cannot commit 'drawCard' to Backend due to ${error}`));
+        drawCard() {
+            this.$store.commit(COMMIT_EVENT, buildCardDrawnEvent(this.playerId));
         }
     }
 }

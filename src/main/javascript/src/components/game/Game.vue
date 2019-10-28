@@ -2,10 +2,8 @@
 <div id="Board">
     <v-row justify="center">
         <v-col cols="10">
-            <v-container class="opponent-deck" fluid>
-                <deck v-bind:gameId="gameId"
-                      v-bind:playerId="opponent.id"
-                      v-bind:deck="opponentDeckcards"/>
+            <v-container class="opponent-hub" fluid>
+                <player-hub v-bind:player="opponent"/>
             </v-container>
             <v-container class="opponent-handcards" fluid>
                 <handcards v-bind:handcards="opponentHandcards"/>
@@ -25,10 +23,8 @@
             <v-container class="own-handcards" fluid>
                 <handcards v-bind:handcards="ownHandcards"/>
             </v-container>
-            <v-container class="own-deck" fluid>
-                <deck v-bind:gameId="gameId"
-                      v-bind:playerId="own.id"
-                      v-bind:deck="ownDeckcards"/>
+            <v-container class="own-hub" fluid>
+                <player-hub v-bind:player="own"/>
             </v-container>
         </v-col>
         <v-col cols="2">
@@ -42,19 +38,19 @@
 <script>
     import {opponent, own} from "./../../util/GameUtil.js";
     import DetailView from "./DetailView.vue";
+    import Logs from "./Logs.vue";
+    import PlayerHub from "./PlayerHub.vue";
     import Handcards from "./Handcards.vue";
     import Spots from "./Spots.vue";
-    import Deck from "./Deck.vue";
-    import Logs from "./Logs";
 
     export default {
     name: "game",
     components: {
         DetailView,
         Logs,
+        PlayerHub,
         Handcards,
-        Spots,
-        Deck
+        Spots
     },
     computed: {
         game() { return this.$store.state.game },
