@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        name: "DetailView",
+        name: "detail-view",
         computed: {
             focus () { return this.$store.state.focus }
         }

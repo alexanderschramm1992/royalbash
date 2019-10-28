@@ -1,10 +1,6 @@
 <template>
     <v-container>
         <v-card class="pa-2 d-flex justify-space-between">
-            <div>
-                <deck :playerId="player.playerId"
-                      :deck="player.deck"/>
-            </div>
             <v-text-field class="pa-2"
                           :value="player.hitpoints"
                           label="Hitpoints"
@@ -20,20 +16,11 @@
 </template>
 
 <script>
-    import Deck from "./Deck";
 
     export default {
-        name: "player-hub",
-        components: {
-            Deck
-        },
+        name: "opponent-hub",
         props: {
             player: Object
         },
-
     }
 </script>
-
-<style scoped>
-
-</style>

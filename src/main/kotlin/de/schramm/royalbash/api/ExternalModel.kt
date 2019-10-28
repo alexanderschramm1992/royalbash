@@ -21,12 +21,27 @@ sealed class ExternalModel {
             @ApiModelProperty(required = true) val handcards: List<Card> = listOf(),
             @ApiModelProperty(required = true) val spots: List<Spot> = listOf()): ExternalModel()
 
+    data class OpponentPlayer(
+            @ApiModelProperty(required = true) val id: String,
+            @ApiModelProperty(required = true) val name: String,
+            @ApiModelProperty(required = true) val hitpoints: Int,
+            @ApiModelProperty(required = true) val resources: Int,
+            @ApiModelProperty(required = true) val deckcards: List<OpponentCard> = listOf(),
+            @ApiModelProperty(required = true) val handcards: List<OpponentCard> = listOf(),
+            @ApiModelProperty(required = true) val spots: List<Spot> = listOf()): ExternalModel()
+
     data class Card(
             @ApiModelProperty(required = true) val id: String,
             @ApiModelProperty(required = true) val instanceId: String,
             @ApiModelProperty(required = true) val name: String,
             @ApiModelProperty(required = true) val text: String,
             @ApiModelProperty(required = true) val cost: Int,
+            @ApiModelProperty(required = false) val hitpoints: Int? = null,
+            @ApiModelProperty(required = false) val attack: Int? = null,
+            @ApiModelProperty(required = false) val image: String): ExternalModel()
+
+    data class OpponentCard(
+            @ApiModelProperty(required = true) val instanceId: String,
             @ApiModelProperty(required = false) val image: String): ExternalModel()
 
     data class Spot(

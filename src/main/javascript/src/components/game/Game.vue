@@ -3,33 +3,36 @@
     <v-row justify="center">
         <v-col cols="10">
             <v-container class="opponent-hub" fluid>
-                <player-hub v-bind:player="opponent"/>
+                <opponent-hub :player="opponent"/>
             </v-container>
             <v-container class="opponent-handcards" fluid>
-                <handcards v-bind:handcards="opponentHandcards"/>
+                <handcards :handcards="opponentHandcards"
+                           :hidden="true"/>
             </v-container>
             <v-container class="opponent-spots" fluid>
-                <spots v-bind:gameId="gameId"
-                       v-bind:ownerId="opponent.id"
-                       v-bind:spots="opponentSpots"
-                       v-bind:handcards="opponentHandcards"/>
+                <v-card class="pa-2">
+                    <opponent-spots :spots="opponentSpots"/>
+                </v-card>
             </v-container>
             <v-container class="own-spots" fluid>
-                <spots v-bind:gameId="gameId"
-                       v-bind:ownerId="own.id"
-                       v-bind:spots="ownSpots"
-                       v-bind:handcards="ownHandcards"/>
+                <v-card class="pa-2">
+                    <spots :gameId="gameId"
+                           :ownerId="own.id"
+                           :spots="ownSpots"
+                           :handcards="ownHandcards"/>
+                </v-card>
             </v-container>
             <v-container class="own-handcards" fluid>
-                <handcards v-bind:handcards="ownHandcards"/>
+                <handcards :handcards="ownHandcards"
+                           :hidden="false"/>
             </v-container>
             <v-container class="own-hub" fluid>
-                <player-hub v-bind:player="own"/>
+                <player-hub :player="own"/>
             </v-container>
         </v-col>
         <v-col cols="2">
-            <Logs :logs="logs"/>
-            <DetailView/>
+            <logs :logs="logs"/>
+            <detail-view/>
         </v-col>
     </v-row>
 </div>
@@ -40,8 +43,10 @@
     import DetailView from "./DetailView.vue";
     import Logs from "./Logs.vue";
     import PlayerHub from "./PlayerHub.vue";
+    import OpponentHub from "./OpponentHub.vue";
     import Handcards from "./Handcards.vue";
     import Spots from "./Spots.vue";
+    import OpponentSpots from "./OpponentSpots.vue";
 
     export default {
     name: "game",
@@ -49,8 +54,10 @@
         DetailView,
         Logs,
         PlayerHub,
+        OpponentHub,
         Handcards,
-        Spots
+        Spots,
+        OpponentSpots
     },
     computed: {
         game() { return this.$store.state.game },

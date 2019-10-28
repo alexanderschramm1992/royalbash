@@ -14,7 +14,7 @@
 </template>
 <script>
     export default {
-        name: 'Logs',
+        name: 'logs',
         props: {
             logs: Array
         }

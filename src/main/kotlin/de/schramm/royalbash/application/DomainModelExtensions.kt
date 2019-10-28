@@ -28,6 +28,8 @@ fun Card.toExternalModel() = ExternalModel.Card(
         name = name,
         text = text,
         cost = cost,
+        attack = if (this is Creature) attack else null,
+        hitpoints = if (this is Creature) hitpoints else null,
         image = image)
 
 fun Spot.toExternalModel() = ExternalModel.Spot(

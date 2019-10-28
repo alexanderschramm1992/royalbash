@@ -1,0 +1,7 @@
+const CARD_RATIO = 13/20;
+const CARD_IMAGE_RATIO = 13/20;
+
+export {
+    CARD_RATIO,
+    CARD_IMAGE_RATIO
+}

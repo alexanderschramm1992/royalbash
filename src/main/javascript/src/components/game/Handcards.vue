@@ -2,7 +2,8 @@
     <div class="d-flex justify-space-around">
         <card v-for="handcard of handcards"
               :key="handcard.instanceId"
-              :card="handcard"/>
+              :card="handcard"
+              :hidden="hidden"/>
     </div>
 </template>
 
@@ -13,7 +14,8 @@
         name: "handcards",
         components: { Card },
         props: {
-            handcards: Array
+            handcards: Array,
+            hidden: Boolean
         }
     }
 </script>
