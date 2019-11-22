@@ -12,7 +12,7 @@ class Fireball(override val id: String,
 
     override val name = "Fireball"
     override val text = "Deal 2 damage to your opponent."
-    override val image = "Tex_fireball.PNG"
+    override val image = "fireball-card.png"
 
     override fun invoke(context: InvokationOnPlayerContext): Game = context.run {
         when {
