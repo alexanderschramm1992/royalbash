@@ -14,7 +14,7 @@ data class HumanScout(override val id: String,
 
     override val name = "Human Scout"
     override val text = "When Human Scout is invoked, draw 2 cards."
-    override val image = "FantasyCharacters_h_scout_male_bg.png"
+    override val image = "human-scout-card.png"
 
     override fun invoke(context: InvokationOnSpotContext): Game = context.run {
         when {

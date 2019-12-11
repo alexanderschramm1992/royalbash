@@ -13,7 +13,7 @@ data class Boar(override val id: String,
 
     override val name = "Wild Boar"
     override val text = ""
-    override val image = "FantasyCharacters_boar_bg.png"
+    override val image = "boar-card.png"
 
     override fun attack(context: AttackPlayerContext): Game {
         TODO("not implemented")

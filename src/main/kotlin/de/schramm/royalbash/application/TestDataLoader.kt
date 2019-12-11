@@ -4,6 +4,7 @@ import de.schramm.royalbash.domain.*
 import de.schramm.royalbash.domain.card.creature.Boar
 import de.schramm.royalbash.domain.card.creature.GoblinGuard
 import de.schramm.royalbash.domain.card.creature.HumanMiner
+import de.schramm.royalbash.domain.card.creature.HumanScout
 import de.schramm.royalbash.domain.card.spell.ByondInsight
 import de.schramm.royalbash.domain.card.spell.Fireball
 import de.schramm.royalbash.domain.card.spell.LightningBolt
@@ -35,6 +36,12 @@ class TestDataLoader @Autowired constructor(private val repository: Games) {
                 cost = 4,
                 attack = 2,
                 hitpoints = 3)
+        val humanScout = HumanScout(
+                id = "humanScout",
+                instanceId = "humanScout_Instance1",
+                cost = 3,
+                attack = 4,
+                hitpoints = 2)
         val fireball = Fireball(id = "fireball",
                                 instanceId = "fireball_instance1",
                                 cost = 2)
@@ -52,10 +59,10 @@ class TestDataLoader @Autowired constructor(private val repository: Games) {
                 handcards = listOf(boar, fireball, humanMiner, byondInsight, lightningBolt),
                 spots = listOf(Spot(id = "spot1", creature = boar),
                                Spot(id = "spot2", creature = goblinGuard),
-                               Spot(id = "spot3"),
+                               Spot(id = "spot3", creature = humanScout),
                                Spot(id = "spot4"),
                                Spot(id = "spot5")),
-                deckcards = listOf(byondInsight),
+                deckcards = listOf(byondInsight, humanMiner),
                 depositcards = listOf(lightningBolt))
         val player2 = Player(
                 id = "player2",

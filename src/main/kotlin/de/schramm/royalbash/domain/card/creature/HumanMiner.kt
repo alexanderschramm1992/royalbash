@@ -14,7 +14,7 @@ data class HumanMiner(override val id: String,
 
     override val name = "Human Miner"
     override val text = "When Human Miner is invoked, gain 3 resources."
-    override val image = "FantasyCharacters_h_miner_male_bg.png"
+    override val image = "human-miner-card.png"
 
     override fun invoke(context: InvokationOnSpotContext): Game = context.run {
         when {

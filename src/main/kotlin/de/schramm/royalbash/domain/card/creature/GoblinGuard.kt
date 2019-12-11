@@ -12,7 +12,7 @@ data class GoblinGuard(
 
     override val name = "Goblin Guard"
     override val text = "When Goblin Guard is invoked, your opponent discards a card."
-    override val image = "FantasyCharacters_guard_goblin_bg.png"
+    override val image = "goblin-guard-card.png"
 
     override fun invoke(context: InvokationOnSpotContext): Game = context.run {
 

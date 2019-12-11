@@ -13,7 +13,7 @@ data class ByondInsight(
 
     override val name = "Beyond Insight"
     override val text = "Draw two cards."
-    override val image = "Tex_sight.PNG"
+    override val image = "byond-insight-card.png"
 
     override fun invoke(context: InvokationOnPlayerContext): Game = context.run {
         when {
