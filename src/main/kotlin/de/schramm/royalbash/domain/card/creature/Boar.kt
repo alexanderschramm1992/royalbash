@@ -1,9 +1,7 @@
 package de.schramm.royalbash.domain.card.creature
 
-import de.schramm.royalbash.domain.AttackCreatureContext
-import de.schramm.royalbash.domain.AttackPlayerContext
-import de.schramm.royalbash.domain.AttackSpotContext
-import de.schramm.royalbash.domain.Game
+import de.schramm.royalbash.domain.*
+import de.schramm.royalbash.domain.card.creature.CreatureType.BEAST
 
 data class Boar(override val id: String,
                 override val instanceId: String,
@@ -11,6 +9,7 @@ data class Boar(override val id: String,
                 override val attack: Int,
                 override val cost: Int): CreatureBase(id, instanceId, hitpoints, attack, cost) {
 
+    override val type = BEAST
     override val name = "Wild Boar"
     override val text = ""
     override val image = "boar-card.png"
@@ -28,4 +27,6 @@ data class Boar(override val id: String,
     }
 
     override fun reduceHitpointsBy(amountOfDamage: Int) = copy(hitpoints = hitpoints - amountOfDamage)
+
+    override fun increaseAttackBy(amountOfAttack: Int) = copy(attack = attack + amountOfAttack)
 }

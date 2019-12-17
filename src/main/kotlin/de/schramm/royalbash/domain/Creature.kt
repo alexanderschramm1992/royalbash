@@ -1,9 +1,12 @@
 package de.schramm.royalbash.domain
 
+import de.schramm.royalbash.domain.card.creature.CreatureType
+
 interface Creature : Card {
 
     val hitpoints: Int
     val attack: Int
+    val type: CreatureType
 
     fun attack(context: AttackPlayerContext): Game
 
@@ -16,4 +19,6 @@ interface Creature : Card {
     }
 
     fun reduceHitpointsBy(amountOfDamage: Int): Creature
+
+    fun increaseAttackBy(amountOfAttack: Int): Creature
 }

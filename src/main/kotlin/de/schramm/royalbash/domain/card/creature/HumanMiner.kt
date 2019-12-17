@@ -1,6 +1,7 @@
 package de.schramm.royalbash.domain.card.creature
 
 import de.schramm.royalbash.domain.*
+import de.schramm.royalbash.domain.card.creature.CreatureType.*
 import de.schramm.royalbash.domain.card.logGainResourcesEffect
 import de.schramm.royalbash.domain.card.logInvokationOnSpot
 import de.schramm.royalbash.domain.card.logResourcesMissing
@@ -12,6 +13,7 @@ data class HumanMiner(override val id: String,
                       override val attack: Int,
                       override val cost: Int): CreatureBase(id, instanceId, hitpoints, attack, cost) {
 
+    override val type = HUMAN
     override val name = "Human Miner"
     override val text = "When Human Miner is invoked, gain 3 resources."
     override val image = "human-miner-card.png"
@@ -33,4 +35,6 @@ data class HumanMiner(override val id: String,
     }
 
     override fun reduceHitpointsBy(amountOfDamage: Int) = copy(hitpoints = hitpoints - amountOfDamage)
+
+    override fun increaseAttackBy(amountOfAttack: Int) = copy(attack = attack + amountOfAttack)
 }

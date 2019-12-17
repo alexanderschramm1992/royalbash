@@ -12,6 +12,7 @@ data class HumanScout(override val id: String,
                       override val attack: Int,
                       override val cost: Int): CreatureBase(id, instanceId, hitpoints, attack, cost) {
 
+    override val type = CreatureType.HUMAN
     override val name = "Human Scout"
     override val text = "When Human Scout is invoked, draw 2 cards."
     override val image = "human-scout-card.png"
@@ -33,4 +34,6 @@ data class HumanScout(override val id: String,
     }
 
     override fun reduceHitpointsBy(amountOfDamage: Int) = copy(hitpoints = hitpoints - amountOfDamage)
+
+    override fun increaseAttackBy(amountOfAttack: Int) = copy(attack = attack + amountOfAttack)
 }

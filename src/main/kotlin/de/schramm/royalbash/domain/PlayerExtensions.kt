@@ -1,8 +1,12 @@
 package de.schramm.royalbash.domain
 
+import de.schramm.royalbash.domain.card.creature.CreatureType
+
 val Player.creatures get() = spots.mapNotNull(Spot::creature)
 
 fun Player.withHitpoints(hitpoints: Int) = copy(hitpoints = hitpoints)
+
+fun Player.creaturesOfType(type: CreatureType) = spots.filter { it.creature?.type == type ?: false }
 
 fun Player.findSpot(spot: Spot): Spot? = spots.find { it == spot }
 
@@ -13,6 +17,9 @@ fun Player.updateSpot(oldSpotId: String, transition: (spot: Spot) -> Spot): Play
 
 fun Player.updateSpot(oldSpot: Spot, transition: (spot: Spot) -> Spot): Player =
         findSpot(oldSpot)?.let { updateSpot(it to transition(it)) } ?: this
+
+fun Player.updateCreatureOnSpot(spot: Spot, updateCreature: (Creature?) -> Creature?): Player =
+        updateSpot(spot to spot.copy(creature = updateCreature(spot.creature)))
 
 fun Player.updateSpot(oldToNew: Pair<Spot, Spot>): Player =
         copy(spots = this.spots.map { if (it == oldToNew.old) oldToNew.new else it })

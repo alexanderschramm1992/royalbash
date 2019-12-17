@@ -2,6 +2,7 @@ package de.schramm.royalbash.domain.card.creature
 
 import de.schramm.royalbash.domain.*
 import de.schramm.royalbash.domain.card.*
+import de.schramm.royalbash.domain.card.creature.CreatureType.*
 
 data class GoblinGuard(
         override val id: String,
@@ -10,6 +11,7 @@ data class GoblinGuard(
         override val attack: Int,
         override val cost: Int): CreatureBase(id, instanceId, hitpoints, attack, cost) {
 
+    override val type = GOBLIN
     override val name = "Goblin Guard"
     override val text = "When Goblin Guard is invoked, your opponent discards a card."
     override val image = "goblin-guard-card.png"
@@ -34,4 +36,6 @@ data class GoblinGuard(
     }
 
     override fun reduceHitpointsBy(amountOfDamage: Int) = copy(hitpoints = hitpoints - amountOfDamage)
+
+    override fun increaseAttackBy(amountOfAttack: Int) = copy(attack = attack + amountOfAttack)
 }
