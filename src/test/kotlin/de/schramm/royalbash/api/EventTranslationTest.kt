@@ -48,7 +48,6 @@ class EventTranslationTest {
         val game = Game(gameId,
                         player1 = Player("Id 2"),
                         player2 = Player("Id 3"),
-                        playerOnTurn = Player("Id 2"),
                         state = OPEN)
 
         every { gameService.commitGameEvent(any(), any()) } returns game.toExternalModel()

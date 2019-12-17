@@ -6,7 +6,7 @@ val Player.creatures get() = spots.mapNotNull(Spot::creature)
 
 fun Player.withHitpoints(hitpoints: Int) = copy(hitpoints = hitpoints)
 
-fun Player.creaturesOfType(type: CreatureType) = spots.filter { it.creature?.type == type ?: false }
+fun Player.creaturesOfType(type: CreatureType) = spots.filter { it.creature?.type == type }
 
 fun Player.findSpot(spot: Spot): Spot? = spots.find { it == spot }
 

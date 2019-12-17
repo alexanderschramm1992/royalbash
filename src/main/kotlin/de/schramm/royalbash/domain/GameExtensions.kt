@@ -47,8 +47,6 @@ fun Game.opponentOf(player: Player?): Player? = when (player) {
     else    -> null
 }
 
-fun Game.nextTurn(): Game = copy(playerOnTurn = if (playerOnTurn == player1) player2 else player1)
-
 fun Game.withState(state: State): Game = copy(state = state)
 
 fun Game.updateStateAccordingToWinConditions(): Game = withState(evaluateState(player1, player2))
@@ -74,11 +72,16 @@ fun Game.buryDeadCreatures(uuidGenerator: UUIDGenerator): Game = creatures
             game.buryCreature(creature).logCreatureRemoved(uuidGenerator, creature)
         }
 
+fun Game.appendTurn() = copy(turns = turns + Turn(if (playerOnTurn == player1) player2 else player1))
+
 val Game.players: List<Player>
     get() = listOf(player1, player2)
 
 val Game.creatures: List<Creature>
     get() = players.flatMap(Player::spots).mapNotNull(Spot::creature)
+
+val Game.playerOnTurn: Player
+    get() = turns.last().playerOnTurn
 
 private fun Game.evaluateState(player1: Player, player2: Player): State = when {
     player1.hitpoints <= 0 -> State.PLAYER_2_WON
@@ -87,4 +90,3 @@ private fun Game.evaluateState(player1: Player, player2: Player): State = when {
 }
 
 private operator fun List<Player>.get(player: Player) = this.firstOrNull { it == player }
-fun Game.switchPlayerOnTurn() = copy(playerOnTurn = if (playerOnTurn == player1) player2 else player1)

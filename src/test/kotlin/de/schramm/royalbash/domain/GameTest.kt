@@ -32,7 +32,7 @@ class GameTest {
         // Given
         val player1 = Player("Id 1")
         val player2 = Player("Id 2")
-        val testee = Game("Id 3", player1 = player1, player2 = player2, playerOnTurn = player1)
+        val testee = Game("Id 3", player1 = player1, player2 = player2)
 
         // When
         val playerOnTurn = testee.playerOnTurn
@@ -47,10 +47,10 @@ class GameTest {
         // Given
         val player1 = Player("Id 1")
         val player2 = Player("Id 2")
-        val testee = Game("Id 3", player1 = player1, player2 = player2, playerOnTurn = player1)
+        val testee = Game("Id 3", player1 = player1, player2 = player2)
 
         // When
-        val game = testee.nextTurn()
+        val game = testee.appendTurn()
 
         // Then
         assertThat(game.playerOnTurn).isEqualTo(player2)
@@ -62,10 +62,10 @@ class GameTest {
         // Given
         val player1 = Player("Id 1")
         val player2 = Player("Id 2")
-        val testee = Game("Id 3", player1 = player1, player2 = player2, playerOnTurn = player1)
+        val testee = Game("Id 3", player1 = player1, player2 = player2)
 
         // When
-        val game = testee.nextTurn().nextTurn()
+        val game = testee.appendTurn().appendTurn()
 
         // Then
         assertThat(game.playerOnTurn).isEqualTo(player1)

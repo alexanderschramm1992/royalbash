@@ -8,9 +8,13 @@ sealed class ExternalModel {
             @ApiModelProperty(required = true) val id: String,
             @ApiModelProperty(required = true) val player1: Player,
             @ApiModelProperty(required = true) val player2: Player,
-            @ApiModelProperty(required = true) val playerOnTurn: String,
             @ApiModelProperty(required = true) val state: String,
+            @ApiModelProperty(required = true) val turns: List<Turn>,
             @ApiModelProperty(required = true) val logs: List<Log>): ExternalModel()
+
+    data class Turn(
+            @ApiModelProperty(required = true) val playerOnTurn: String,
+            @ApiModelProperty(required = true) val cardDrawn: Boolean): ExternalModel()
 
     data class Player(
             @ApiModelProperty(required = true) val id: String,

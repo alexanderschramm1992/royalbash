@@ -77,8 +77,8 @@ class TestDataLoader @Autowired constructor(private val repository: Games) {
                 id = "1",
                 player1 = player1,
                 player2 = player2,
-                playerOnTurn = player1,
                 state = State.OPEN,
+                turns = listOf(Turn(player1)),
                 logs = listOf(Log("log1", "Started Match between ${player1.name} and ${player2.name}")))
 
         repository.save(game)

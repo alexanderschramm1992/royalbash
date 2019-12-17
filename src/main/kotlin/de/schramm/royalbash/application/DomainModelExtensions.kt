@@ -9,9 +9,13 @@ fun Game.toExternalModel() = ExternalModel.Game(
         id = id,
         player1 = player1.toExternalModel(),
         player2 = player2.toExternalModel(),
-        playerOnTurn = playerOnTurn.id,
         state = state.name,
+        turns = turns.map { it.toExternalModel() },
         logs = logs.map { it.toExternalModel() })
+
+fun Turn.toExternalModel() = ExternalModel.Turn(
+        playerOnTurn = playerOnTurn.id,
+        cardDrawn = cardDrawn)
 
 fun Player.toExternalModel() = ExternalModel.Player(
         id = id,

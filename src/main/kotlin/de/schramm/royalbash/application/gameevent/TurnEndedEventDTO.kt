@@ -11,7 +11,7 @@ data class TurnEndedEventDTO(val playerId: String): GameEventDTO {
         when {
             player == null         -> logPlayerMissing(uuidGenerator)
             player != playerOnTurn -> logNotTurnOfPlayer(uuidGenerator, player, playerOnTurn)
-            else                   -> switchPlayerOnTurn()
+            else                   -> appendTurn()
                     .logTurnEnded(uuidGenerator, playerOnTurn, opponentOf(playerOnTurn))
         }
     }

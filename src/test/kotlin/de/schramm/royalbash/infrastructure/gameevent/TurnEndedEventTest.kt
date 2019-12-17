@@ -1,9 +1,10 @@
 package de.schramm.royalbash.infrastructure.gameevent
 
+import de.schramm.royalbash.application.gameevent.TurnEndedEventDTO
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Log
 import de.schramm.royalbash.domain.Player
-import de.schramm.royalbash.application.gameevent.TurnEndedEventDTO
+import de.schramm.royalbash.domain.playerOnTurn
 import de.schramm.royalbash.infrastructure.gameevent.UUIDGeneratorMock.MOCK_ID
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -19,8 +20,7 @@ class TurnEndedEventTest {
         val game = Game(
                 "Id 3",
                 player1 = player1,
-                player2 = player2,
-                playerOnTurn = player1
+                player2 = player2
         )
         val testee = TurnEndedEventDTO("Id 1")
 

@@ -1,13 +1,14 @@
 package de.schramm.royalbash.api
 
 import de.schramm.royalbash.application.GameService
+import de.schramm.royalbash.application.gameevent.NoOpEventDTO
 import de.schramm.royalbash.application.toExternalModel
 import de.schramm.royalbash.domain.Game
 import de.schramm.royalbash.domain.Player
 import de.schramm.royalbash.domain.State.OPEN
-import de.schramm.royalbash.infrastructure.controller.GameController
-import de.schramm.royalbash.application.gameevent.NoOpEventDTO
+import de.schramm.royalbash.domain.Turn
 import de.schramm.royalbash.infrastructure.JacksonConfig
+import de.schramm.royalbash.infrastructure.controller.GameController
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -47,7 +48,7 @@ class GameControllerTest {
                 "1",
                 player1 = Player("Id 2"),
                 player2 = Player("Id 3"),
-                playerOnTurn = Player("Id 3"),
+                turns = listOf(Turn(Player("Id 3"))),
                 state = OPEN)
         every { gameService.retrieveGame("1") } returns game.toExternalModel()
 
@@ -66,7 +67,7 @@ class GameControllerTest {
                 "id": "1",
                 "player1": {"id": "Id 2"},
                 "player2": {"id": "Id 3"},
-                "playerOnTurn": "Id 3",
+                "turns": [{"playerOnTurn": "Id 3", "cardDrawn": false}],
                 "state": "OPEN"
             }""", result, false)
     }
@@ -98,7 +99,7 @@ class GameControllerTest {
                 "1",
                 player1 = Player("Id 2"),
                 player2 = Player("Id 3"),
-                playerOnTurn = Player("Id 3"),
+                turns = listOf(Turn(playerOnTurn = Player("Id 3"))),
                 state = OPEN)
         every { gameService.retrieveGames() } returns listOf(game.toExternalModel())
 
@@ -117,7 +118,7 @@ class GameControllerTest {
                 "id": "1",
                 "player1": {"id": "Id 2"},
                 "player2": {"id": "Id 3"},
-                "playerOnTurn": "Id 3",
+                "turns": [{"playerOnTurn": "Id 3", "cardDrawn": false}],
                 "state": "OPEN"
             }]""", result, false)
     }
@@ -151,7 +152,6 @@ class GameControllerTest {
                 "Id 1",
                 player1 = Player("Id 2", name = accountId1),
                 player2 = Player("Id 3", name = accountId2),
-                playerOnTurn = Player("Id 2"),
                 state = OPEN)
         every { gameService.createGame(accountId1, accountId2) } returns game.toExternalModel()
 
@@ -176,7 +176,7 @@ class GameControllerTest {
                     "id": "Id 1",
                     "player1": {"id": "Id 2", "name": "Account 1"},
                     "player2": {"id": "Id 3", "name": "Account 2"},
-                    "playerOnTurn": "Id 2",
+                    "turns": [{"playerOnTurn": "Id 2", "cardDrawn": false}],
                     "state": "OPEN"
                 }""",
                 result,
@@ -193,7 +193,6 @@ class GameControllerTest {
                 gameId,
                 player1 = Player("Id 2"),
                 player2 = Player("Id 3"),
-                playerOnTurn = Player("Id 2"),
                 state = OPEN)
         every { gameService.commitGameEvent(gameId,
                                             NoOpEventDTO()) } returns game.toExternalModel()
