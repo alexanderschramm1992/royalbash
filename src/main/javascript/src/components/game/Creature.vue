@@ -8,20 +8,20 @@
                              style="flex-direction: column; height: 100%">
                             <div class="d-flex justify-space-between">
                                 <div>
-                                    <div class="attack pt-1 pb-0 pl-6">
+                                    <div class="attack pt-1 pb-0 pl-4">
                                         {{ creature.attack }}
                                     </div>
-                                    <div class="hitpoints pl-6">
+                                    <div class="hitpoints pl-4">
                                         {{ creature.hitpoints }}
                                     </div>
                                 </div>
-                                <div class="cost pt-4 pr-6">
+                                <div class="cost pt-4 pr-4">
                                     {{ creature.cost }}
                                 </div>
                             </div>
                             <div class="flex-grow-1 d-flex align-end">
                             </div>
-                            <div class="label pt-2 pb-4">
+                            <div class="label pt-2 pb-3">
                                 {{ creature.name }}
                             </div>
                         </div>
@@ -63,14 +63,13 @@
         text-shadow: 0 0 3px black, 0 0 3px black;
         font-family: "Roboto", sans-serif;
         font-weight: 900;
-        font-size: 1.25rem;
-        line-height: 2rem;
+        font-size: 1rem;
+        line-height: 1.25rem;
         letter-spacing: 0.0125em;
     }
 
     .cost {
         color: #FFFFFF;
-        font-size: 1.5rem;
     }
 
     .attack {
@@ -83,7 +82,7 @@
 
     .label {
         color: #FFFFFF;
-        font-size: 1rem;
+        font-size: 0.75rem;
         width: 100%
     }
 </style>
