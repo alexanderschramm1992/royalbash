@@ -4,7 +4,6 @@
         <v-card v-else>
             <v-responsive :aspect-ratio="cardRatio" :width="cardWidth">
                 <v-img contain :aspect-ratio="cardImageRatio" src="images/empty-spot.png" class="d-flex">
-                    Empty Spot
                 </v-img>
             </v-responsive>
         </v-card>

@@ -1,36 +1,45 @@
 <template>
-    <v-container>
-        <v-card class="pa-2 d-flex justify-space-between">
+    <v-card class="pa-2 d-flex justify-space-between">
+        <v-container class="d-flex justify-center" fluid>
+                <handcards :handcards="player.handcards"
+                           :hidden="false"/>
+        </v-container>
+        <div class="d-flex justify-left">
+            <player-deck :playerId="player.playerId"
+                  :deck="player.deck"/>
             <div>
-                <deck :playerId="player.playerId"
-                      :deck="player.deck"/>
+                <v-text-field class="pa-2"
+                              :value="player.hitpoints"
+                              label="Hitpoints"
+                              outlined
+                              readonly/>
+                <v-text-field class="pa-2"
+                              :value="player.resources"
+                              label="Resources"
+                              outlined
+                              readonly/>
             </div>
-            <v-text-field class="pa-2"
-                          :value="player.hitpoints"
-                          label="Hitpoints"
-                          outlined
-                          readonly/>
-            <v-text-field class="pa-2"
-                          :value="player.resources"
-                          label="Resources"
-                          outlined
-                          readonly/>
-        </v-card>
-    </v-container>
+            <player-graveyard :playerId="player.playerId"
+                  :graveyardCards="[]"/>
+        </div>
+    </v-card>
 </template>
 
 <script>
-    import Deck from "./Deck";
+    import PlayerDeck from "./PlayerDeck";
+    import PlayerGraveyard from "./PlayerGraveyard";
+    import Handcards from "./Handcards";
 
     export default {
         name: "player-hub",
         components: {
-            Deck
+            PlayerDeck,
+            PlayerGraveyard,
+            Handcards
         },
         props: {
             player: Object
-        },
-
+        }
     }
 </script>
 

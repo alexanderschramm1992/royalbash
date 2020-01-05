@@ -7,7 +7,7 @@
                     <div class="d-flex justify-center flex-column" style="height: 100%;">
                         <v-dialog v-model="place_creature_dialog" scrollable>
                             <template v-slot:activator="{ on }">
-                                <v-btn v-on="on">Place Creature</v-btn>
+                                <v-btn v-on="on" class="ma-3 caption">Place Creature</v-btn>
                             </template>
                             <v-card>
                                 <v-card-title>Select Creature from Handcards</v-card-title>

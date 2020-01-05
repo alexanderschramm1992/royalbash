@@ -1,36 +1,16 @@
 <template>
 <div id="Board">
     <v-row justify="center">
-        <v-col cols="10">
-            <v-container class="opponent-hub" fluid>
-                <opponent-hub :player="opponent"/>
-            </v-container>
-            <v-container class="opponent-handcards" fluid>
-                <handcards :handcards="opponentHandcards"
-                           :hidden="true"/>
-            </v-container>
-            <v-container class="opponent-spots" fluid>
-                <v-card class="pa-2">
-                    <opponent-spots :spots="opponentSpots"/>
-                </v-card>
-            </v-container>
-            <v-container class="own-spots" fluid>
-                <v-card class="pa-2">
-                    <spots :gameId="gameId"
-                           :ownerId="own.id"
-                           :spots="ownSpots"
-                           :handcards="ownHandcards"/>
-                </v-card>
-            </v-container>
-            <v-container class="own-handcards" fluid>
-                <handcards :handcards="ownHandcards"
-                           :hidden="false"/>
-            </v-container>
-            <v-container class="own-hub" fluid>
-                <player-hub :player="own"/>
-            </v-container>
+        <v-col cols="10" class="ma-0 pa-0">
+            <opponent-hub :player="opponent"/>
+            <opponent-spots :spots="opponentSpots"/>
+            <spots :gameId="gameId"
+                   :ownerId="own.id"
+                   :spots="ownSpots"
+                   :handcards="ownHandcards"/>
+            <player-hub :player="own"/>
         </v-col>
-        <v-col cols="2">
+        <v-col cols="2" class="ma-0 pa-0">
             <logs :logs="logs"/>
             <detail-view/>
         </v-col>
