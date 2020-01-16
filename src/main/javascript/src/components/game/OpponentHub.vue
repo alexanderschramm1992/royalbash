@@ -1,5 +1,5 @@
 <template>
-    <v-card class="pa-2 d-flex justify-space-between">
+    <v-card class="ma-2 pa-2 d-flex justify-space-between">
         <div class="d-flex justify-left">
             <opponent-deck/>
             <div>

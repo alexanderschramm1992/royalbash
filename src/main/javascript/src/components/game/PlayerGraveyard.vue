@@ -1,28 +1,24 @@
 <template>
     <v-card>
         <v-responsive :aspect-ratio="cardRatio" :width="cardWidth">
-            <v-img contain :aspect-ratio="cardImageRatio" src="images/deck.png" class="d-flex">
-                <div class="d-flex justify-center flex-column" style="height: 100%;">
+            <v-img contain :aspect-ratio="cardImageRatio" src="images/deck.png" class="d-flex align-center">
                     <v-dialog v-model="show_graveyard_dialog" scrollable>
-                        <template v-slot:activator="{ on }">
-                            <v-btn v-on="on" class="ma-3 caption">Show Graveyard</v-btn>
-                        </template>
-                        <v-card>
-                            <v-card-title>Cards in Graveyard</v-card-title>
-                            <v-divider/>
-                            <v-card-text>
-                                <v-list>
-                                    <v-list-item
-                                            v-for="card in graveyardCards"
-                                            :key="card.id"
-                                    >
-                                        <v-list-item-title>{{ card.name }}</v-list-item-title>
-                                    </v-list-item>
-                                </v-list>
-                            </v-card-text>
-                        </v-card>
-                    </v-dialog>
-                </div>
+                    <template v-slot:activator="{ on }">
+                        <v-btn v-on="on" class="ma-3 caption">Show Graveyard</v-btn>
+                    </template>
+                    <v-card>
+                        <v-card-title>Cards in Graveyard</v-card-title>
+                        <v-divider/>
+                        <v-card-text>
+                            <v-list>
+                                <v-list-item v-for="card in graveyardCards"
+                                             :key="card.id">
+                                    <v-list-item-title>{{ card.name }}</v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-card-text>
+                    </v-card>
+                </v-dialog>
             </v-img>
         </v-responsive>
     </v-card>

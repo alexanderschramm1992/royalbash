@@ -4,6 +4,7 @@
         <v-col cols="10" class="ma-0 pa-0">
             <opponent-hub :player="opponent"/>
             <opponent-spots :spots="opponentSpots"/>
+            <v-divider/>
             <spots :gameId="gameId"
                    :ownerId="own.id"
                    :spots="ownSpots"

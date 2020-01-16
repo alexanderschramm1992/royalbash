@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-space-around">
+    <div class="ma-2 d-flex justify-space-around">
         <opponent-spot v-for="spot of spots"
               :key="spot.id"
               :spot="spot"/>

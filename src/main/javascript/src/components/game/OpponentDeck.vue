@@ -2,7 +2,7 @@
     <v-card>
         <v-responsive :aspect-ratio="cardRatio" :width="cardWidth">
             <v-img contain :aspect-ratio="cardImageRatio" src="images/deck.png" class="d-flex">
-                <div class="d-flex justify-center flex-column" style="height: 100%;">
+                <div class="d-flex justify-center flex-column">
                 </div>
             </v-img>
         </v-responsive>

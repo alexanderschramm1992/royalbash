@@ -33,9 +33,17 @@ function buildCardDrawnEvent(playerId) {
     }
 }
 
+function buildEndTurnEvent(playerId) {
+    return {
+        type: "TURN_ENDED",
+        playerId: playerId
+    }
+}
+
 export {
     buildCardPlayedOnSpotEvent,
     buildCardPlayedOnPlayerEvent,
     buildCreatureAttackedEvent,
-    buildCardDrawnEvent
+    buildCardDrawnEvent,
+    buildEndTurnEvent
 }
