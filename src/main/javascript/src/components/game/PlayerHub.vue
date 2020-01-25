@@ -19,7 +19,7 @@
                           outlined
                           readonly/>
             <v-btn class="caption"
-                   :on="endTurn">
+                   @click="endTurn()">
                 End Turn
             </v-btn>
         </div>
@@ -47,6 +47,7 @@
         },
         methods: {
             endTurn() {
+                console.log("commiting event to end turn");
                 this.$store.commit(COMMIT_EVENT, buildEndTurnEvent(this.player.id));
             }
         }
